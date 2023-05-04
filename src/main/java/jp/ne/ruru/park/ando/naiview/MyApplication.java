@@ -37,7 +37,7 @@ public class MyApplication  extends Application {
     public MyApplication() {
     }
 
-    public static final String PRIVACY_POLICY_URL = "https://example.com/";
+    public static final String PRIVACY_POLICY_URL = "https://github.com/Tand0/NovelAI_input_support_android/blob/main/README.md";
 
     @Override
     public void onCreate() {
