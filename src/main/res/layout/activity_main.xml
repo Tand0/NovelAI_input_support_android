@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fitsSystemWindows="true">
+
+        <!-- com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize" / -->
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/menu_display" />
+
+    <Button
+        android:id="@+id/action_settings"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:drawableLeft="@drawable/ic_prompt"
+        android:text="@string/action_settings"
+        tools:ignore="RtlHardcoded" />
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <Button
+            android:id="@+id/action_prompt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawableLeft="@drawable/ic_log"
+            android:text="@string/action_prompt"
+            tools:ignore="ButtonStyle,RtlHardcoded" />
+        <Button
+            android:id="@+id/action_uc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawableLeft="@drawable/ic_log"
+            android:text="@string/action_uc"
+            tools:ignore="ButtonStyle,RtlHardcoded" />
+    </LinearLayout>
+    <Button
+        android:id="@+id/action_tree"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:drawableLeft="@drawable/ic_tree"
+        android:text="@string/action_tree"
+        tools:ignore="RtlHardcoded" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/menu_nai" />
+
+    <Button
+        android:id="@+id/generate_image"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:drawableLeft="@drawable/ic_save"
+        android:text="@string/generate_image"
+        tools:ignore="RtlHardcoded" />
+    <Button
+        android:id="@+id/subscription"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:drawableLeft="@drawable/ic_subscription"
+        android:text="@string/subscription"
+        tools:ignore="RtlHardcoded" />
+    <Button
+        android:id="@+id/action_image"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:drawableLeft="@drawable/ic_image"
+        android:text="@string/action_image"
+        tools:ignore="RtlHardcoded" />
+
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/action_policy" />
+
+    <Button
+        android:id="@+id/action_policy"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:drawableLeft="@drawable/ic_policy"
+        android:text="@string/action_policy"
+        tools:ignore="DuplicateSpeakableTextCheck,RtlHardcoded" />
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <TextView
+            android:id="@+id/text_log"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            android:gravity="top|left"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="RtlHardcoded" />
+    </ScrollView>
+</LinearLayout>

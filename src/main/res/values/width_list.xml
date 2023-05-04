@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string-array name="width_list">
+        <item>512x768</item>
+        <item>768x512</item>
+        <item>640x640</item>
+        <item>832x1280</item>
+        <item>1280x832</item>
+        <item>1024x1024</item>
+        <item>1024x1536</item>
+        <item>1536x1024</item>
+    </string-array>
+    <string-array name="sampler_list">
+        <item>k_dpmpp_2m</item>
+        <item>k_euler_ancestral</item>
+    </string-array>
+</resources>

@@ -1,0 +1,24 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="jp.ne.ruru.park.ando.naiview.MainActivity">
+    <item
+        android:id="@+id/action_settings"
+        android:icon="@drawable/ic_prompt"
+        android:title="@string/action_settings" />
+    <item
+        android:id="@+id/action_prompt"
+        android:icon="@drawable/ic_log"
+        android:title="@string/action_prompt" />
+    <item
+        android:id="@+id/action_uc"
+        android:icon="@drawable/ic_log"
+        android:title="@string/action_uc" />
+    <item
+        android:id="@+id/action_tree"
+        android:icon="@drawable/ic_tree"
+        android:title="@string/action_tree" />
+    <item
+        android:id="@+id/action_policy"
+        android:icon="@drawable/ic_policy"
+        android:title="@string/action_policy" />
+</menu>

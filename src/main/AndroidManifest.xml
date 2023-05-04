@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+
+    <queries>
+        <intent>
+            <action android:name="android.intent.action.CREATE_DOCUMENT" />
+
+            <data android:mimeType="image/*" />
+        </intent>
+        <intent>
+            <action android:name="android.intent.action.OPEN_DOCUMENT" />
+
+            <data android:mimeType="image/*" />
+        </intent>
+    </queries>
+
+    <application
+        android:name=".MyApplication"
+        android:allowBackup="true"
+        android:dataExtractionRules="@xml/data_extraction_rules"
+        android:fullBackupContent="@xml/backup_rules"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.NAIView"
+        tools:targetApi="31">
+        <activity
+            android:name=".ImageActivity"
+            android:exported="false"
+            android:label="@string/title_activity_image"
+            android:theme="@style/Theme.NAIView" />
+        <activity
+            android:name=".TreeActivity"
+            android:exported="false"
+            android:label="@string/title_activity_tree"
+            android:theme="@style/Theme.NAIView" />
+        <activity
+            android:name=".SettingsActivity"
+            android:exported="true"
+            android:label="@string/title_activity_settings"
+            android:theme="@style/Theme.NAIView" />
+        <activity
+            android:name=".PromptActivity"
+            android:exported="true"
+            android:label="@string/title_activity_prompt"
+            android:theme="@style/Theme.NAIView" />
+        <activity
+            android:name=".UcActivity"
+            android:exported="true"
+            android:label="@string/title_activity_uc"
+            android:theme="@style/Theme.NAIView" />
+        <activity
+            android:name=".MainActivity"
+            android:exported="true"
+            android:theme="@style/Theme.NAIView">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+            <intent-filter android:icon="@drawable/ic_image">
+                <action android:name="android.intent.action.SEND" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+
+                <data android:mimeType="image/*" />
+            </intent-filter>
+        </activity>
+    </application>
+
+</manifest>

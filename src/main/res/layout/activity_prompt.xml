@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <Button
+            android:id="@+id/from_prompt_to_tree"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawableLeft="@drawable/ic_save"
+            android:text="@string/from_prompt_to_tree" />
+        <Button
+            android:id="@+id/from_tree_to_prompt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawableLeft="@drawable/ic_load"
+            android:text="@string/from_tree_to_prompt" />
+    </LinearLayout>
+    <EditText
+        android:id="@+id/text_prompt"
+        android:layout_width="match_parent"
+        android:layout_height="686dp"
+        android:autofillHints=""
+        android:contentDescription=""
+        android:hint=""
+        android:inputType="textMultiLine"
+        android:textSize="20sp"
+        android:gravity="top|left"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="ContentDescription,LabelFor,SpeakableTextPresentCheck,VisualLintTextFieldSize" />
+
+</LinearLayout>

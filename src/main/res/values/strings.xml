@@ -1,0 +1,78 @@
+<resources>
+    <string name="app_name">NAIView</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="img_description1">Image area</string>
+    <string name="title_activity_settings">SettingsActivity</string>
+    <string name="title_activity_prompt">PromptActivity</string>
+    <string name="title_activity_uc">UcActivity</string>
+
+    <!-- Preference Titles -->
+    <string name="messages_header">Messages</string>
+    <string name="sync_header">Sync</string>
+
+    <!-- Messages Preferences -->
+    <string name="signature_title">Your signature</string>
+    <string name="reply_title">Default reply action</string>
+
+    <!-- Sync Preferences -->
+    <string name="setting_login">Login setting</string>
+    <string name="setting_login_email">Login e-mail</string>
+    <string name="setting_login_password">Login password</string>
+
+    <string name="setting_device">Setting devices</string>
+    <string name="setting_use_tree">Use tree</string>
+    <string name="setting_width_x_height">Width X height</string>
+
+    <string name="setting_nai">Setting NAI</string>
+    <string name="prompt_scale">scale(default:11)</string>
+    <string name="prompt_steps">steps(default:28)</string>
+    <string name="prompt_sampler">sampler(default:k_dpmpp_2m)</string>
+    <string name="prompt_sm">sm</string>
+    <string name="prompt_sm_dyn">sm_dyn</string>
+
+    <!-- Menu Preferences -->
+    <string name="menu_display">Display</string>
+    <string name="action">Action</string>
+    <string name="action_settings">Display setting</string>
+    <string name="action_prompt">Display prompt</string>
+    <string name="action_uc">Display uc</string>
+    <string name="action_tree">Display tree</string>
+    <string name="action_image">Display image</string>
+    <string name="action_save">Save</string>
+    <string name="action_load">Load</string>
+    <string name="action_policy">Privacy Policy</string>
+
+    <string name="menu_move">Action</string>
+    <string name="from_image_to_prompt">Load image to prompt</string>
+    <string name="from_prompt_to_tree">To tree</string>
+    <string name="from_tree_to_prompt">From tree</string>
+    <string name="from_tree_to_file">Save tree</string>
+    <string name="from_file_to_tree">Load tree</string>
+
+    <string name="menu_nai">Use Novel AI REST API</string>
+    <string name="generate_image">/ai/generate-image</string>
+    <string name="subscription">/user/subscription</string>
+    <string name="title_activity_tree">TreeActivity</string>
+
+    <!-- tree tab information -->
+    <string name="menu_edit">Edit</string>
+    <string name="menu_cut">Cut</string>
+    <string name="menu_past">Past</string>
+    <string name="menu_add">Add</string>
+    <string name="menu_add_text">Insert text</string>
+    <string name="menu_tree">Insert tree</string>
+    <string name="menu_sequence">Insert sequence</string>
+    <string name="menu_select">Insert select</string>
+    <string name="menu_weight">Insert weight</string>
+    <string name="menu_decorate">Decorate</string>
+    <string name="menu_transform">Transform</string>
+    <string name="menu_ignore">Ignore</string>
+    <string name="menu_not_ignore">Not ignore</string>
+    <string name="menu_enhance">Enhance</string>
+    <string name="menu_not_enhance">Not enhance</string>
+
+    <!-- tree -->
+    <string name="input_word">Input word</string>
+    <string name="title_activity_image">ImageActivity</string>
+
+</resources>
