@@ -9,12 +9,22 @@ import jp.ne.ruru.park.ando.naiview.databinding.ActivityMainBinding;
 
 import android.view.View;
 import android.widget.Button;
-import android.widget.TextView;
 
+/** main activity
+ * @author foobar@em.boo.jp
+ */
 public class MainActivity extends AppCompatActivity {
 
+    /** binding */
     private ActivityMainBinding binding;
 
+    /**
+     * on create
+     * @param savedInstanceState If the activity is being re-initialized after
+     *     previously being shut down then this Bundle contains the data it most
+     *     recently supplied in {@link #onSaveInstanceState}.  <b><i>Note: Otherwise it is null.</i></b>
+     *
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,9 +55,12 @@ public class MainActivity extends AppCompatActivity {
                 handleSendImage(intent);
             }
         }
-
     }
 
+    /**
+     * click event for button
+     * @param v view
+     */
     public void myAction(View v) {
         MyApplication a = (MyApplication) this.getApplication();
         if (a.action(MainActivity.this,v.getId())) {
@@ -57,6 +70,11 @@ public class MainActivity extends AppCompatActivity {
             }
         }
     }
+
+    /**
+     * event for other application
+     * @param intent intent
+     */
     private void handleSendImage(Intent intent) {
         Uri imageUri = intent.getParcelableExtra(Intent.EXTRA_STREAM);
         String mime = intent.getType();
@@ -66,16 +84,21 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-
+    /**
+     * on resume
+     */
     @Override
     public void onResume() {
         super.onResume();
         this.onMyResume();
     }
-    public void onMyResume() {
-        TextView text = binding.textLog;
-        MyApplication application = (MyApplication) this.getApplication();
-        text.setText(application.getLog());
-    }
 
+    /**
+     * repaint data
+     */
+    public void onMyResume() {
+        MyApplication application = (MyApplication) this.getApplication();
+        binding.textLog.setText(application.getLog());
+        binding.scrollView.fullScroll(View.FOCUS_DOWN);
+    }
 }

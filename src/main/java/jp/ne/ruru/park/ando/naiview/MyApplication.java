@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Handler;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.preference.PreferenceManager;
@@ -30,26 +31,49 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 
+/** application
+ * @author foobar@em.boo.jp
+ */
 public class MyApplication  extends Application {
 
+    /**
+     * Prevent multiple events from running at the same time
+     */
     public final ReentrantLock lock = new ReentrantLock();
+
+    /** handle to return for android thread */
     public final Handler mHandler = new Handler();
+
+    /** this is constructor */
     public MyApplication() {
     }
 
+    /** privacy policy for google play console*/
     public static final String PRIVACY_POLICY_URL = "https://github.com/Tand0/NovelAI_input_support_android/blob/main/README.md";
 
+    /** on create */
     @Override
     public void onCreate() {
         super.onCreate();
     }
 
+    /** log area */
     private String log = "this is log.";
+
+    /** getter for log
+     * @return log
+     */
     public String getLog() {
         return this.log;
     }
+
+    /**
+     * append log
+     * @param context activity
+     * @param message message
+     */
     public void appendLog(Context context,String message) {
-        final int len = 10000;
+        final int len = 5000;
         this.log = this.log + "\n\n" + message;
         if (len < this.log.length()) {
             this.log = this.log.substring(this.log.length() - len);
@@ -60,46 +84,174 @@ public class MyApplication  extends Application {
             }
         }
     }
+
+    /** prompt area */
     private String prompt = "";
+
+    /**
+     * getter for prompt
+     * @return prompt
+     */
     public String getPrompt() {
         return this.prompt;
     }
+
+    /**
+     * setter for prompt
+     * @param prompt prompt
+     */
     public void setPrompt(String prompt) {
         this.prompt = prompt;
     }
+
+    /** uc area */
     private String uc = "";
+
+    /**
+     * getter for prompt
+     * @return uc
+     */
     public String getUc() {
         return this.uc;
     }
+
+    /** setter for uc
+     * @param uc uc
+     */
     public void setUc(String uc) {
         this.uc = uc;
     }
 
+    /**
+     * top (root) of tree
+     */
     private JSONArray top = new JSONArray();
+
+    /**
+     * getter for top
+     * @return top
+     */
     public JSONArray getTop() {
         return this.top;
     }
+    /**
+     * setter for top
+     * @param top top
+     */
+    public void setTop(@NonNull JSONArray top) {
+        this.top = top;
+    }
+
+    /**
+     * image buffer area.
+     * Used by image activity
+     */
     private byte[] imageBuffer;
+
+    /**
+     * getter for image buffer
+     * @return image buffer
+     */
     public byte[] getImageBuffer() {
         return this.imageBuffer;
     }
+
+    /**
+     * setter for image buffer
+     * @param imageBuffer
+     */
     public void setImageBuffer(byte[] imageBuffer) {
         this.imageBuffer = imageBuffer;
     }
+
+    /**
+     * image mime type area.
+     * Used by image activity
+     */
     private String imageMimeType;
+
+    /**
+     * getter for image mime type
+     * @return image mime type
+     */
     public String getImageMimeType() {
         return this.imageMimeType;
     }
+
+    /**
+     * setter for image mime type
+     * @param imageMimeType image mime type
+     */
     public void setImageMimeType(String imageMimeType) {
         this.imageMimeType = imageMimeType;
     }
+
+    /**
+     * anlas area.
+     * Used by image activity
+     */
     public int anlas = -1;
+
+    /**
+     * getter for anlas
+     * @return anlas
+     */
     public int getAnlas() {
         return this.anlas;
     }
+
+    /**
+     * setter for anlas
+     * @param anlas anlas
+     */
     public void setAnlas(int anlas) {
         this.anlas = anlas;
     }
+
+    /**
+     * cut data area.
+     * Used by tree activity
+     */
+    private JSONObject cut;
+
+    /**
+     * getter for cut data
+     * @return cut data
+     */
+    public JSONObject getCut() {
+        return this.cut;
+    }
+
+    /**
+     * setter for cut data
+     * @param cut cut data
+     */
+    public void setCut(JSONObject cut) {
+        this.cut = cut;
+    }
+
+    /**
+     * Novel AI Support Interface area
+     */
+    private MyNASI myNASI = null;
+
+    /**
+     * getter for Novel AI Support Interface
+     * @return Novel AI Support Interface
+     */
+    public MyNASI getMyNASI() {
+        if (this.myNASI == null) {
+            this.myNASI = new MyNASI();
+        }
+        return this.myNASI;
+    }
+
+    /**
+     * get object for JSONObject used name
+     * @param object target JSONObject
+     * @param name dict name
+     * @return if in name then return result object, else return null (NOT JSONException)
+     */
     public JSONArray containJSONArray(Object object, String name) {
         if (!(object instanceof JSONObject)) {
             return null;
@@ -115,6 +267,12 @@ public class MyApplication  extends Application {
         }
         return (JSONArray)next;
     }
+    /**
+     * get object for JSONObject used name
+     * @param object target JSONObject
+     * @param name dict name
+     * @return if in name then return result object, else return null (NOT JSONException)
+     */
     public String containString(Object object,String name) {
         if (!(object instanceof JSONObject)) {
             return null;
@@ -130,6 +288,12 @@ public class MyApplication  extends Application {
         }
         return (String)next;
     }
+    /**
+     * get object for JSONObject used name
+     * @param object target JSONObject
+     * @param name dict name
+     * @return if in name then return result object, else return null (NOT JSONException)
+     */
     public Integer containInt(Object object,String name) {
         if (!(object instanceof JSONObject)) {
             return null;
@@ -142,6 +306,12 @@ public class MyApplication  extends Application {
         }
         return next;
     }
+    /**
+     * get object for JSONObject used name
+     * @param object target JSONObject
+     * @param name dict name
+     * @return if in name then return result object, else return null (NOT JSONException)
+     */
     public Boolean containBoolean(Object object,String name) {
         if (!(object instanceof JSONObject)) {
             return null;
@@ -154,23 +324,13 @@ public class MyApplication  extends Application {
         }
         return next;
     }
-    public void setTop(@NonNull JSONArray top) {
-        this.top = top;
-    }
-    private JSONObject cut;
-    public JSONObject getCut() {
-        return this.cut;
-    }
-    public void setCut(JSONObject cut) {
-        this.cut = cut;
-    }
-    private MyNASI myNASI = null;
-    public MyNASI getMyNASI() {
-        if (this.myNASI == null) {
-            this.myNASI = new MyNASI();
-        }
-        return this.myNASI;
-    }
+
+    /**
+     * click action for button
+     * @param context activity
+     * @param id button id
+     * @return if used then true
+     */
     public boolean action(Context context, int id) {
         if (id == R.id.action_settings) {
             Intent intent = new Intent(context, SettingsActivity.class);
@@ -206,10 +366,21 @@ public class MyApplication  extends Application {
         }
         return false;
     }
+
+    /**
+     * send data from prompt/uc to tree
+     * @param target prompt
+     * @param isPrompt if prompt then true, uc then false
+     */
     public void fromPromptToTree(String target,boolean isPrompt) {
         this.ignoreData(isPrompt);
         this.createData(target,isPrompt);
     }
+
+    /**
+     * send data from tree to prompt/uc
+     * @param isPrompt if prompt then true, uc then false
+     */
     public void fromTreeToPrompt(boolean isPrompt) {
         if (isPrompt) {
             this.setPrompt(fromTree(true));
@@ -217,6 +388,13 @@ public class MyApplication  extends Application {
             this.setUc(fromTree(false));
         }
     }
+
+    /**
+     * load data to prompt/uc and image view
+     * @param context activity
+     * @param imageUri image uri, if null then used resource
+     * @param mime mime type
+     */
     public void load(Context context,Uri imageUri,String mime) {
         final SharedPreferences.Editor editor = PreferenceManager.getDefaultSharedPreferences(context).edit();
         String file;
@@ -249,15 +427,15 @@ public class MyApplication  extends Application {
                         }
                         string = containString(item,"uc");
                         if (string != null) {
-                            this.setPrompt(string);
+                            this.setUc(string);
                         }
                         Integer integer = containInt(item,"steps");
                         if (integer != null) {
-                            editor.putInt("prompt_steps",integer);
+                            editor.putString("prompt_number_steps","" + integer);
                         }
                         integer = containInt(item,"scale");
                         if (integer != null) {
-                            editor.putInt("prompt_scale",integer);
+                            editor.putString("prompt_number_scale","" + integer);
                         }
                         string = containString(item,"sampler");
                         if (string != null) {
@@ -299,6 +477,13 @@ public class MyApplication  extends Application {
             context.startActivity(intent);
         }
     }
+
+    /**
+     * update image buffer from uri
+     * @param context activity
+     * @param imageUri image uri, if null then use resources
+     * @param mime mime type
+     */
     public void updateImageBuffer(Context context,Uri imageUri,String mime) {
         InputStream is = null;
         try {
@@ -332,21 +517,47 @@ public class MyApplication  extends Application {
         }
     }
 
+    /** dict name */
     public static final String TEXT = "text";
+
+    /** dict value */
     public static final String TEXT_IGNORE = "Ignore-";
+
+    /** dict value */
     public static final String TEXT_UC = "uc-";
+
+    /** dict value */
     public static final String TEXT_SEQUENCE = "Sequence";
+
+    /** dict value */
     public static final String TEXT_SELECT = "Select";
+
+    /** dict value */
     public static final String TEXT_WORD = "word";
+
+    /** dict value */
     public static final String TEXT_WEIGHT = "Weight";
+
+    /** dict name */
     public static final String VALUES = "values";
+
+    /** dict name */
     public static final String CHILD = "child";
+
+    /** dict name for tree activity */
     public static final String EXPAND = "expand";
+
+    /** dict name for tree activity  */
     public static final String LEVEL = "level";
+
+    /**
+     * Disable objects directly under root
+     * @param isPrompt if true then prompt else uc.
+     */
     public void ignoreData(boolean isPrompt) {
-        for (int i = 0 ; i < this.top.length() ; i++) {
+        for (int i = 0 ; i < this.getTop().length() ; i++) {
             try {
-                JSONObject item = (JSONObject)this.top.get(i);
+                JSONObject item = (JSONObject)this.getTop().get(i);
                 String text = containString(item,TEXT);
                 if (text != null) {
                     boolean isPromptTarget = ! text.contains(TEXT_UC);
@@ -355,6 +566,7 @@ public class MyApplication  extends Application {
                     }
                     if (! text.contains(TEXT_IGNORE)) {
                         item.put(TEXT,TEXT_IGNORE + text);
+                        item.put(EXPAND,false);
                     }
                 }
             } catch (JSONException e) {
@@ -362,6 +574,12 @@ public class MyApplication  extends Application {
             }
         }
     }
+
+    /**
+     * create dict from prompt/uc
+     * @param string prompt/uc data
+     * @param isPrompt if true then prompt else uc.
+     */
     public void createData(String string,boolean isPrompt) {
         string = string.replace("\"", ",")
                 .replace("_", " ")
@@ -385,7 +603,7 @@ public class MyApplication  extends Application {
             values = "uc";
         }
         JSONObject parent = new JSONObject();
-        top.put(parent);
+        this.getTop().put(parent);
         try {
             parent.put(TEXT,topText);
             parent.put(VALUES,values);
@@ -406,24 +624,30 @@ public class MyApplication  extends Application {
             // NONE
         }
     }
-    protected String createName(String name) {
-        name = name.trim();
-        name = name.replaceAll("\\s+", " ");
-        int posX = getEnhancePos(name);
-        name = getEnhanceText(name, posX);
-        String name_raw = name
+
+    /**
+     * create parse the characters
+     * @param word original word
+     * @return shaped word
+     */
+    protected String createName(String word) {
+        word = word.trim();
+        word = word.replaceAll("\\s+", " ");
+        int posX = getEnhancePos(word);
+        word = getEnhanceText(word, posX);
+        String wordRaw = word
                 .replace("{", "")
                 .replace("}", "")
                 .replace("[", "")
                 .replace("]", "")
                 .trim();
-        name_raw = name_raw.replaceAll("\\s+", " ").trim();
+        wordRaw = wordRaw.replaceAll("\\s+", " ").trim();
         Pattern pattern = Pattern.compile("(.*)\\s*[\\s:](\\d+(\\.\\d+)?)\\s*$");
-        Matcher result = pattern.matcher(name_raw);
+        Matcher result = pattern.matcher(wordRaw);
         if (result.find()) {
-            name = result.group(1);
-            if (name == null) {
-                name = name_raw;
+            word = result.group(1);
+            if (word == null) {
+                word = wordRaw;
             }
             String group2 = result.group(2);
             if (group2 != null) {
@@ -447,14 +671,19 @@ public class MyApplication  extends Application {
                         }
                     }
                 }
-                name = this.getEnhanceText(name,index);
+                word = this.getEnhanceText(word,index);
             }
         } else {
-            name = name.replace(":", " ").trim();
+            word = word.replace(":", " ").trim();
         }
-        return name;
+        return word;
     }
 
+    /**
+     * get enhance index from word
+     * @param string word
+     * @return enhance index
+     */
     public int getEnhancePos(String string) {
         int count = 0;
         for (int i = 0 ; i < string.length() ; i++) {
@@ -467,6 +696,13 @@ public class MyApplication  extends Application {
         }
         return count;
     }
+
+    /**
+     * enhance word
+     * @param string word
+     * @param index enhance index
+     * @return shaped word
+     */
     public String getEnhanceText(String string,int index) {
         string = string
                 .replace("{", "")
@@ -497,10 +733,15 @@ public class MyApplication  extends Application {
         return body.toString();
     }
 
-    public String fromTree(boolean notIgnore) {
+    /**
+     * get prompt/uc from tree
+     * @param isPrompt if true then prompt else uc.
+     * @return prompt/uc
+     */
+    public String fromTree(boolean isPrompt) {
         String ans = "";
         JSONArray data = new JSONArray();
-        this.deepCopyRemoveIgnore(data,top,notIgnore);
+        this.deepCopyRemoveIgnore(data,this.getTop(),isPrompt);
         LinkedList<String> result = new LinkedList<>();
         dictToList(result, data);
         if (0 < result.size()) {
@@ -516,7 +757,14 @@ public class MyApplication  extends Application {
         }
         return ans;
     }
-    public void deepCopyRemoveIgnore(JSONArray copy,JSONArray array, boolean notIgnore) {
+
+    /**
+     * get a deep copy of the data ignoring TEXT_IGNORE
+     * @param copy copy data
+     * @param array original data
+     * @param isPrompt if true then prompt else uc.
+     */
+    public void deepCopyRemoveIgnore(JSONArray copy,JSONArray array, boolean isPrompt) {
         try {
             for (int i = 0; i < array.length(); i++) {
                 Object object = array.get(i);
@@ -525,32 +773,40 @@ public class MyApplication  extends Application {
                 }
                 JSONObject jsonObject = (JSONObject) object;
                 String text = containString(jsonObject,TEXT);
-                if (text != null) {
-                    if (text.contains(TEXT_IGNORE)) {
-                        continue;
-                    }
-                    boolean flag = text.contains(TEXT_UC);
-                    if (flag == notIgnore) {
-                        continue;
-                    }
-                    JSONObject child = new JSONObject();
-                    copy.put(child);
-                    text = containString(jsonObject,TEXT);
-                    if (text != null) child.put(TEXT,text);
-                    String values = containString(jsonObject,TEXT);
-                    if (values != null) child.put(VALUES,values);
-                    JSONArray copyChildArray = new JSONArray();
-                    JSONArray childArray = containJSONArray(jsonObject,CHILD);
-                    if (childArray != null) {
-                        deepCopyRemoveIgnore(copyChildArray, childArray, notIgnore);
-                    }
-                    child.put(CHILD,childArray);
+                if (text == null) {
+                    continue;
                 }
+                if (text.contains(TEXT_IGNORE)) {
+                    continue;
+                }
+                boolean flag = text.contains(TEXT_UC);
+                if (flag == isPrompt) {
+                    continue;
+                }
+                JSONObject child = new JSONObject();
+                copy.put(child);
+                text = containString(jsonObject,TEXT);
+                if (text != null) child.put(TEXT,text);
+                String values = containString(jsonObject,VALUES);
+                if (values != null) child.put(VALUES,values);
+                JSONArray copyChildArray = new JSONArray();
+                JSONArray childArray = containJSONArray(jsonObject,CHILD);
+                if ((childArray != null) && (0 < childArray.length())) {
+                    deepCopyRemoveIgnore(copyChildArray, childArray, isPrompt);
+                }
+                child.put(CHILD,copyChildArray);
+
             }
         } catch (JSONException e) {
             // NONE
         }
     }
+
+    /**
+     * change tree to list
+     * @param list list
+     * @param object tree
+     */
     public void dictToList(LinkedList<String> list,Object object) {
         if (object == null) {
             return;
@@ -609,10 +865,22 @@ public class MyApplication  extends Application {
             // NONE
         }
     }
+
+    /** get subscription
+     * @param context activity
+     */
     public void subscription(Context context) {
         execution( context,MyNASI.TYPE.SUBSCRIPTION);
     }
+
+    /** send data fo Novel AI Support Interface
+     *
+     * @param context activity
+     * @param type execution type
+     */
     public void execution(Context context,MyNASI.TYPE type) {
+        String message = context.getResources().getString(R.string.generate_image);
+        Toast.makeText(this , message, Toast.LENGTH_LONG).show();
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
         boolean useTree = preferences.getBoolean("setting_use_tree",true);
         if (useTree) {
@@ -642,14 +910,14 @@ public class MyApplication  extends Application {
         }
         int scale;
         try {
-            String string =  preferences.getString("prompt_scale","11");
+            String string =  preferences.getString("prompt_number_scale","11");
             scale = Integer.parseInt(string);
         } catch (NumberFormatException e) {
             scale = 11;
         }
         int steps;
         try {
-            String string =  preferences.getString("prompt_steps","28");
+            String string =  preferences.getString("prompt_number_steps","28");
             steps = Integer.parseInt(string);
         } catch (NumberFormatException e) {
             steps = 28;
@@ -699,6 +967,11 @@ public class MyApplication  extends Application {
         };
         Executors.newSingleThreadExecutor().execute(runnable);
     }
+
+    /** call back from Novel AI Support Interface
+     * @param context activity
+     * @param res result data
+     */
     public void postSubscription(Context context,MyNASI.Allin1Response res) {
         StringBuilder buf = new StringBuilder();
         buf.append("code=").append(res.statusCode).append("\n")

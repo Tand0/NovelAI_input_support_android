@@ -1,7 +1,6 @@
 package jp.ne.ruru.park.ando.naiview;
 
 import android.content.Context;
-import android.net.Uri;
 
 import androidx.test.platform.app.InstrumentationRegistry;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
@@ -12,30 +11,40 @@ import org.junit.runner.RunWith;
 
 import static org.junit.Assert.*;
 
-import java.io.File;
 
 /**
  * Instrumented test, which will execute on an Android device.
- *
+ * @author foobar@em.boo.jp
  * @see <a href="http://d.android.com/tools/testing">Testing documentation</a>
  */
 @RunWith(AndroidJUnit4.class)
 public class ExampleInstrumentedTest {
 
+    /** activity */
     private static Context appContext;
 
+    /**
+     * set activity
+     */
     @Before
     public void before() {
         appContext = InstrumentationRegistry.getInstrumentation().getTargetContext();
         System.out.println(appContext.getClass().getName());
     }
 
+    /**
+     * test for useAppContext
+     */
     @Test
     public void useAppContext() {
         // Context of the app under test.
         System.out.println(appContext.getPackageName());
         assertEquals("jp.ne.ruru.park.ando.naiview", appContext.getPackageName());
     }
+
+    /**
+     * test load
+     */
     @Test
     public void load() {
         Context context = appContext.getApplicationContext();
@@ -46,6 +55,10 @@ public class ExampleInstrumentedTest {
         System.out.println("===========");
     }
 
+    /**
+     * test token.
+     * Check if external library works in android
+     */
     @Test
     public void tokenOk() {
         String email = "xxxx@yyyy.zzz";

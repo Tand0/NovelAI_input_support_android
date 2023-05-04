@@ -1,68 +1,58 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
+    <EditTextPreference
+        app:key="setting_login_email"
+        app:title="@string/setting_login_email"
+        app:defaultValue="xxx@yyy.zzz"
+        app:useSimpleSummaryProvider="true" />
+    <EditTextPreference
+        app:key="setting_login_password"
+        app:title="@string/setting_login_password"
+        android:inputType="textPassword"
+        app:defaultValue="" />
+    <SwitchPreferenceCompat
+        app:key="setting_use_tree"
+        app:title="@string/setting_use_tree" />
+    <ListPreference
+        android:key="setting_width_x_height"
+        android:title="@string/setting_width_x_height"
+        android:defaultValue="512x768"
+        android:summary="@string/setting_width_x_height"
+        android:dialogTitle="@string/setting_width_x_height"
+        android:entries="@array/width_list"
+        android:entryValues="@array/width_list" />
 
-    <PreferenceCategory app:title="@string/setting_login">
+    <EditTextPreference
+        app:key="prompt_number_scale"
+        app:title="@string/prompt_scale"
+        app:defaultValue="11"
+        android:inputType="number"
+        app:useSimpleSummaryProvider="true" />
 
-        <EditTextPreference
-            app:key="setting_login_email"
-            app:title="@string/setting_login_email"
-            app:defaultValue="xxx@yyy.zzz"
-            app:useSimpleSummaryProvider="true" />
+    <EditTextPreference
+        app:key="prompt_number_steps"
+        app:title="@string/prompt_steps"
+        app:defaultValue="28"
+        android:inputType="number"
+        app:useSimpleSummaryProvider="true" />
 
-        <EditTextPreference
-            app:key="setting_login_password"
-            app:title="@string/setting_login_password"
-            android:inputType="textPassword"
-            app:defaultValue="" />
-    </PreferenceCategory>
 
-    <PreferenceCategory app:title="@string/setting_device">
-
-        <SwitchPreferenceCompat
-            app:key="setting_use_tree"
-            app:title="@string/setting_use_tree" />
-
-    </PreferenceCategory>
-    <PreferenceCategory app:title="@string/setting_nai">
-        <ListPreference
-            android:key="setting_width_x_height"
-            android:title="@string/setting_width_x_height"
-            android:defaultValue="512x768"
-            android:summary="@string/setting_width_x_height"
-            android:dialogTitle="@string/setting_width_x_height"
-            android:entries="@array/width_list"
-            android:entryValues="@array/width_list" />
-        <EditTextPreference
-            app:key="prompt_scale"
-            app:title="@string/prompt_scale"
-            app:defaultValue="11"
-            android:inputType="number"
-            app:useSimpleSummaryProvider="true" />
-        <EditTextPreference
-            app:key="prompt_steps"
-            app:title="@string/prompt_steps"
-            app:defaultValue="28"
-            android:inputType="number"
-            app:useSimpleSummaryProvider="true" />
-        <ListPreference
-            android:key="prompt_sampler"
-            android:title="@string/prompt_sampler"
-            android:defaultValue="k_dpmpp_2m"
-            android:summary="@string/prompt_sampler"
-            android:dialogTitle="@string/prompt_sampler"
-            android:entries="@array/sampler_list"
-            android:entryValues="@array/sampler_list" />
-
-        <SwitchPreferenceCompat
-            app:key="prompt_sm"
-            app:defaultValue="true"
-            app:title="@string/prompt_sm" />
-        <SwitchPreferenceCompat
-            app:key="prompt_sm_dyn"
-            app:defaultValue="false"
-            app:title="@string/prompt_sm_dyn" />
-    </PreferenceCategory>
-
+    <ListPreference
+        android:key="prompt_sampler"
+        android:title="@string/prompt_sampler"
+        android:defaultValue="k_dpmpp_2m"
+        android:summary="@string/prompt_sampler"
+        android:dialogTitle="@string/prompt_sampler"
+        android:entries="@array/sampler_list"
+        android:entryValues="@array/sampler_list" />
+    <SwitchPreferenceCompat
+        app:key="prompt_sm"
+        app:defaultValue="true"
+        app:title="@string/prompt_sm" />
+    <SwitchPreferenceCompat
+        app:key="prompt_sm_dyn"
+        app:defaultValue="false"
+        app:title="@string/prompt_sm_dyn" />
 
 </PreferenceScreen>

@@ -26,11 +26,34 @@ import java.util.Locale;
 import jp.ne.ruru.park.ando.naiview.MyApplication;
 import jp.ne.ruru.park.ando.naiview.R;
 
+/**
+ * json list adapter
+ * @author foobar@em.boo.jp
+ * @param <T> for item
+ */
 public class JSONListAdapter<T extends JSONObject> extends ArrayAdapter<T> {
+
+    /**
+     * This is constructor.
+     * @param context activity object
+     * @param resource resource
+     */
     public JSONListAdapter(@NonNull Context context, int resource) {
         super(context, resource);
     }
 
+    /**
+     * @param position The position of the item within the adapter's data set of the item whose view
+     *        we want.
+     * @param view The old view to reuse, if possible. Note: You should check that this view
+     *        is non-null and of an appropriate type before using. If it is not possible to convert
+     *        this view to display the correct data, this method can create a new view.
+     *        Heterogeneous lists can specify their number of view types, so that this View is
+     *        always of the right type (see {@link #getViewTypeCount()} and
+     *        {@link #getItemViewType(int)}).
+     * @param parent The parent that this view will eventually be attached to
+     * @return view
+     */
     @Override
     public View getView(int position, View view, ViewGroup parent) {
         if (view == null) {
@@ -96,6 +119,11 @@ public class JSONListAdapter<T extends JSONObject> extends ArrayAdapter<T> {
         checkBox.setText(value.toString());
         return view;
     }
+
+    /**
+     * execute button
+     * @param view button view
+     */
     public void executeButton(View view) {
         Button button = (Button) view;
         int position = Integer.parseInt(button.getText().toString());
@@ -108,6 +136,13 @@ public class JSONListAdapter<T extends JSONObject> extends ArrayAdapter<T> {
             return executePopup(item.getItemId(),position);
         });
     }
+
+    /**
+     * press button
+     * @param itemId item id
+     * @param position position of list view
+     * @return if execution then true
+     */
     protected boolean executePopup(int itemId,int position) {
         MyApplication a =
                 ((MyApplication)((AppCompatActivity) this.getContext()).getApplication());
@@ -151,6 +186,13 @@ public class JSONListAdapter<T extends JSONObject> extends ArrayAdapter<T> {
         }
         return false;
     }
+
+    /**
+     * insert or change text to json object
+     * @param item json object
+     * @param text insert or change text
+     * @param position position
+     */
     public void addText(JSONObject item,String text,int position) {
         MyApplication a =
                 ((MyApplication)((AppCompatActivity) this.getContext()).getApplication());
@@ -190,6 +232,11 @@ public class JSONListAdapter<T extends JSONObject> extends ArrayAdapter<T> {
                 .setNeutralButton("Cancel",(dialog,which)-> {})
                 .show();
     }
+
+    /**
+     * add tree
+     * @param position position
+     */
     public void addTree(int position) {
         MyApplication a =
                 ((MyApplication)((AppCompatActivity) this.getContext()).getApplication());
@@ -218,6 +265,11 @@ public class JSONListAdapter<T extends JSONObject> extends ArrayAdapter<T> {
                 })
                 .show();
     }
+
+    /**
+     * change item
+     * @param item item
+     */
     public void transformTree(JSONObject item) {
         if (item == null) {
             return;
@@ -273,6 +325,11 @@ public class JSONListAdapter<T extends JSONObject> extends ArrayAdapter<T> {
                 .show();
 
     }
+
+    /**
+     * get top of tree
+     * @return top of tree
+     */
     public JSONArray getTop() {
         MyApplication application =
                 ((MyApplication)((AppCompatActivity) this.getContext()).getApplication());
@@ -307,6 +364,11 @@ public class JSONListAdapter<T extends JSONObject> extends ArrayAdapter<T> {
         }
     }
 
+    /**
+     * past tree
+     * @param position past position
+     * @return if changed then true
+     */
     public boolean pastJSONObject(int position) {
         MyApplication a =
                 ((MyApplication)((AppCompatActivity) this.getContext()).getApplication());
@@ -336,7 +398,7 @@ public class JSONListAdapter<T extends JSONObject> extends ArrayAdapter<T> {
                     child =new JSONArray();
                     cut.put(MyApplication.CHILD, child);
                 }
-                child.put(0, cut);
+                insertObject(child,cut,0);
                 flag = true;
             }
         } catch (JSONException e) {
@@ -348,6 +410,43 @@ public class JSONListAdapter<T extends JSONObject> extends ArrayAdapter<T> {
         }
         return flag;
     }
+
+    /**
+     *  insert object.
+     * Implemented because there is no insert in JSONArray
+     * @param child JSONArray object
+     * @param cut insert target
+     * @param index insert index
+     */
+    public void insertObject(JSONArray child,Object cut,int index) {
+        ArrayList<Object> list = new ArrayList<>();
+        try {
+            for (int i = 0 ; i < child.length() ; i++) {
+                list.add(child.get(i));
+
+            }
+            if (index < list.size()) {
+                list.add(index, cut);
+            } else {
+                list.add(cut);
+            }
+            while (0 < child.length()) {
+                child.remove(0);
+            }
+            for (int i = 0 ; i < list.size() ; i++) {
+                child.put(list.get(i));
+            }
+        } catch (JSONException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    /**
+     * past JSONObject
+     * @param top top of tree
+     * @param focusObject target
+     * @return if changed then true
+     */
     public boolean pastJSONObject(JSONArray top,JSONObject focusObject) {
         MyApplication a =
                 ((MyApplication)((AppCompatActivity) this.getContext()).getApplication());
@@ -363,15 +462,7 @@ public class JSONListAdapter<T extends JSONObject> extends ArrayAdapter<T> {
                 continue;
             }
             if (item == focusObject) {
-                try {
-                    if ((i + 1) == top.length()) {
-                        top.put(cut);
-                    } else {
-                        top.put(i + 1, cut);
-                    }
-                } catch (JSONException e) {
-                    // NONE
-                }
+                insertObject(top,cut,i + 1);
                 a.setCut(null);
                 return true;
             }
@@ -389,6 +480,12 @@ public class JSONListAdapter<T extends JSONObject> extends ArrayAdapter<T> {
         }
         return false;
     }
+
+    /**
+     * delete object from tree
+     * @param position position of list view
+     * @return  if changed then true
+     */
     public boolean cutJSONObject(int position) {
         if (position < 0) {
             return false;
@@ -405,7 +502,12 @@ public class JSONListAdapter<T extends JSONObject> extends ArrayAdapter<T> {
         return flag;
     }
 
-
+    /**
+     * delete object from tree
+     * @param top top of the tree
+     * @param jsonObject target object
+     * @return if changed then true
+     */
     public boolean removeJSONObject(JSONArray top,JSONObject jsonObject) {
         MyApplication a =
                 ((MyApplication)((AppCompatActivity) this.getContext()).getApplication());
@@ -432,6 +534,10 @@ public class JSONListAdapter<T extends JSONObject> extends ArrayAdapter<T> {
         }
         return false;
     }
+
+    /**
+     * create list view data from tree information
+     */
     public void updateJSONArray() {
         ListView listView = ((AppCompatActivity)this.getContext()).findViewById(R.id.list_view);
         int position = listView.getSelectedItemPosition();
@@ -450,6 +556,10 @@ public class JSONListAdapter<T extends JSONObject> extends ArrayAdapter<T> {
             listView.setSelection(position);
         }
     }
+
+    /**
+     * if top of tree is null then create default object
+     */
     public void createDefaultTree() {
         JSONArray top = this.getTop();
         JSONObject prompt = new JSONObject();
@@ -469,6 +579,14 @@ public class JSONListAdapter<T extends JSONObject> extends ArrayAdapter<T> {
             // NONE
         }
     }
+
+    /**
+     * if top of tree is null then create default object
+     * @param list list view data
+     * @param level level of tree
+     * @param target target object
+     * @param unusedFlag if unused then true
+     */
     @SuppressWarnings("unchecked")
     public void updateJSONArray(ArrayList<T> list, int level,Object target,Boolean unusedFlag) {
         MyApplication a =

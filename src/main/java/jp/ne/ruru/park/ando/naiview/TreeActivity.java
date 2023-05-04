@@ -27,11 +27,21 @@ import java.nio.charset.Charset;
 import jp.ne.ruru.park.ando.naiview.databinding.ActivityTreeBinding;
 import jp.ne.ruru.park.ando.naiview.tree.JSONListAdapter;
 
+/** tree activity
+ * @author foobar@em.boo.jp
+ */
 public class TreeActivity extends AppCompatActivity {
 
+    /** tree adapter */
     private JSONListAdapter<JSONObject> adapter;
 
+    /** save or load filename */
     private final String TITLE = "data.json";
+
+    /**
+     * intent call back method.
+     * Used by Storage Access Framework
+     */
     ActivityResultLauncher<Intent> resultLauncherLoad = registerForActivityResult(
             new ActivityResultContracts.StartActivityForResult(),
             result -> {
@@ -42,6 +52,11 @@ public class TreeActivity extends AppCompatActivity {
                     }
                 }
             });
+
+    /**
+     * intent call back method.
+     * Used by Storage Access Framework
+     */
     ActivityResultLauncher<Intent> resultLauncherSave = registerForActivityResult(
             new ActivityResultContracts.StartActivityForResult(),
             result -> {
@@ -56,6 +71,12 @@ public class TreeActivity extends AppCompatActivity {
                 }
             });
 
+    /** on create
+     * @param savedInstanceState If the activity is being re-initialized after
+     *     previously being shut down then this Bundle contains the data it most
+     *     recently supplied in {@link #onSaveInstanceState}.  <b><i>Note: Otherwise it is null.</i></b>
+     *
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -71,14 +92,24 @@ public class TreeActivity extends AppCompatActivity {
         ListView listView = binding.listView;
         listView.setAdapter(adapter);
     }
+
+    /**
+     * on resume
+     */
     @Override
     public void onResume() {
         super.onResume();
         onMyResume();
     }
+
+    /**
+     * repaint data
+     */
     public void onMyResume() {
         adapter.updateJSONArray();
     }
+
+    /** data load */
     public void load() {
         Intent load = new Intent(Intent.ACTION_OPEN_DOCUMENT)
         .addCategory(Intent.CATEGORY_OPENABLE)
@@ -86,6 +117,12 @@ public class TreeActivity extends AppCompatActivity {
         .putExtra(Intent.EXTRA_TITLE,TITLE);
         resultLauncherLoad.launch(load);
     }
+
+    /**
+     * intent call back method.
+     * Used by Storage Access Framework
+     * @param imageUri uri for image
+     */
     private void loadForASFResult(Uri imageUri) {
         MyApplication a = (MyApplication) this.getApplication();
         StringBuilder text = new StringBuilder();
@@ -120,6 +157,7 @@ public class TreeActivity extends AppCompatActivity {
         }
         a.appendLog(this,text.toString());
     }
+    /** save for callback */
     public void save() {
         Intent intent = new Intent(Intent.ACTION_CREATE_DOCUMENT)
                 .addCategory(Intent.CATEGORY_OPENABLE)
@@ -127,6 +165,11 @@ public class TreeActivity extends AppCompatActivity {
                 .putExtra(Intent.EXTRA_TITLE,TITLE);
         resultLauncherSave.launch(intent);
     }
+
+    /**
+     * intent call back method.
+     * Used by Storage Access Framework
+     */
     public void saveForASFResult(Uri uri) {
         MyApplication a = (MyApplication) this.getApplication();
         JSONArray array = a.getTop();

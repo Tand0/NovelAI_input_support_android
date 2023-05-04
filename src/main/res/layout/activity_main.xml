@@ -99,6 +99,7 @@
         android:text="@string/action_policy"
         tools:ignore="DuplicateSpeakableTextCheck,RtlHardcoded" />
     <ScrollView
+        android:id="@+id/scroll_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
         <TextView

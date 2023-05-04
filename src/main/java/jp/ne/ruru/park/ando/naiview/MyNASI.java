@@ -23,13 +23,38 @@ import java.util.zip.ZipInputStream;
 
 import javax.net.ssl.HttpsURLConnection;
 
+/** Novel AI support interface
+ * @author foobar@em.boo.jp
+ */
 public class MyNASI {
+
+    /** state machine */
     protected enum TYPE {
         LOGIN,
         IMAGE,
         SUBSCRIPTION
     }
+
+    /**
+     * all in 1 request data.
+     * To make it thread-safe, I've wrapped up the data
+     */
     public static class Allin1Request {
+        /**
+         * this is constructor
+         * @param type execution type
+         * @param email mail address (for login)
+         * @param password password (for login)
+         * @param input prompt
+         * @param width width
+         * @param height height
+         * @param scale scale
+         * @param steps steps
+         * @param sampler sampler
+         * @param sm sm
+         * @param sm_dyn sm_dyn
+         * @param negative_prompt uc
+         */
         Allin1Request(
                 TYPE type,
                 String email,
@@ -69,7 +94,20 @@ public class MyNASI {
         public final boolean sm_dyn;
         public final String negative_prompt;
     }
+
+    /**
+     * all in 1 result data.
+     * To make it thread-safe, I've wrapped up the data
+     */
     public static class Allin1Response {
+        /** this is constructor
+         * @param type execution type
+         * @param requestBody request body (for log)
+         * @param statusCode status code (for callback)
+         * @param mimeType mime type (for image activity)
+         * @param content result body (for log)
+         * @param imageData image data (for image activity)
+         */
         Allin1Response(
                 TYPE type,
                 String requestBody,
@@ -84,6 +122,13 @@ public class MyNASI {
             this.requestBody = requestBody;
             this.imageBuffer = imageData;
         }
+
+        /**
+         * setter for description (status code result)
+         * @see <a href="https://github.com/Aedial/novelai-api">Novel AI rest api</a>
+         * @param description description
+         * @return this
+         */
         private Allin1Response setDescription(String description) {
             this.description = description;
             return this;
@@ -96,6 +141,11 @@ public class MyNASI {
         public String description = "no description";
         public final byte[] imageBuffer;
 
+        /** set anlas
+         *
+         * @param anlas anlas
+         * @return this
+         */
         public Allin1Response setAnlas(int anlas) {
             this.anlas = anlas;
             return this;
@@ -103,17 +153,31 @@ public class MyNASI {
         public int anlas = -1;
     }
 
+    /** login url for rest api */
     public final String LOGIN_URL = "https://api.novelai.net/user/login";
+
+    /** image url for rest api */
     public final String IMAGE_URL = "https://api.novelai.net/ai/generate-image";
+
+    /** subscription url for rest api */
     public final String SUBSCRIPTION_URL = "https://api.novelai.net/user/subscription";
 
-
+    /** authorization key */
     private String authorizationKey = null;
 
+    /**
+     * check login
+     * @return if already login then true
+     */
     public boolean requireLogin() {
         return authorizationKey == null;
     }
 
+    /**
+     * login
+     * @param request all in 1 request
+     * @return all in 1 result
+     */
     public Allin1Response login(Allin1Request request) {
         final String aKey = getAKey(request.email, request.password);
         JSONObject object = new JSONObject();
@@ -167,6 +231,11 @@ public class MyNASI {
         return res;
     }
 
+    /**
+     * download image
+     * @param request all in 1 request
+     * @return all in 1 result
+     */
     public Allin1Response downloadImage(Allin1Request request) {
         //
         if (this.requireLogin()) {
@@ -238,6 +307,11 @@ public class MyNASI {
         return res;
     }
 
+    /**
+     * subscription
+     * @param request all in 1 request
+     * @return all in 1 result
+     */
     public Allin1Response subscription(Allin1Request request) {
         //
         if (this.requireLogin()) {
@@ -270,6 +344,11 @@ public class MyNASI {
         return res;
     }
 
+    /**
+     * get image extension from mime type
+     * @param mimeType mime type
+     * @return extension
+     */
     public String getImageExt(String mimeType) {
         String ext;
         if (mimeType.contains("image/png")) {
@@ -282,6 +361,14 @@ public class MyNASI {
         }
         return ext;
     }
+
+    /**
+     * Used rest api
+     * @param type execution type
+     * @param targetUrl uri for rest api
+     * @param requestBody request body
+     * @return all in 1 result
+     */
     protected Allin1Response getConnection(TYPE type,String targetUrl,String requestBody) {
         final String authorization = "Authorization";
         String content = "";
@@ -401,6 +488,13 @@ public class MyNASI {
         }
         return new Allin1Response(type, requestBody, statusCode, mime, content,result);
     }
+
+    /**
+     * get accesses key
+     * @param email email
+     * @param password password
+     * @return accesses key
+     */
     public String getAKey(String email,String password) {
         final int size = 64;
         final String domain = "novelai_data_access_key";
