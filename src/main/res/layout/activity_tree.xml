@@ -13,7 +13,6 @@
                     android:id="@+id/action_save_internal"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:drawableLeft="@drawable/ic_save"
                     android:text="@string/action_save_internal"
                     tools:ignore="ButtonStyle,RtlHardcoded" />
 
@@ -21,7 +20,6 @@
                     android:id="@+id/action_save_external"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:drawableLeft="@drawable/ic_save"
                     android:text="@string/action_save_external"
                     tools:ignore="ButtonStyle,RtlHardcoded" />
 
@@ -29,7 +27,6 @@
                     android:id="@+id/action_load"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:drawableLeft="@drawable/ic_load"
                     android:text="@string/action_load"
                     tools:ignore="ButtonStyle,RtlHardcoded" />
         </LinearLayout>

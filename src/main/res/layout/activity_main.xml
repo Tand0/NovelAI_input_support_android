@@ -27,7 +27,6 @@
         android:id="@+id/action_settings"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:drawableLeft="@drawable/ic_prompt"
         android:text="@string/action_settings"
         tools:ignore="RtlHardcoded" />
 
@@ -39,14 +38,12 @@
             android:id="@+id/action_prompt"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:drawableLeft="@drawable/ic_log"
             android:text="@string/action_prompt"
             tools:ignore="ButtonStyle,RtlHardcoded" />
         <Button
             android:id="@+id/action_uc"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:drawableLeft="@drawable/ic_log"
             android:text="@string/action_uc"
             tools:ignore="ButtonStyle,RtlHardcoded" />
     </LinearLayout>
@@ -54,7 +51,6 @@
         android:id="@+id/action_tree"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:drawableLeft="@drawable/ic_tree"
         android:text="@string/action_tree"
         tools:ignore="RtlHardcoded" />
 
@@ -71,22 +67,19 @@
             android:id="@+id/generate_image"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:drawableLeft="@drawable/ic_save"
             android:text="@string/generate_image"
-            tools:ignore="RtlHardcoded" />
+            tools:ignore="ButtonStyle,RtlHardcoded" />
         <Button
             android:id="@+id/action_image"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:drawableLeft="@drawable/ic_image"
             android:text="@string/action_image"
-            tools:ignore="RtlHardcoded" />
+            tools:ignore="ButtonStyle,RtlHardcoded" />
     </LinearLayout>
     <Button
         android:id="@+id/subscription"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:drawableLeft="@drawable/ic_subscription"
         android:text="@string/subscription"
         tools:ignore="RtlHardcoded" />
 
@@ -95,13 +88,12 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/action_policy" />
+        android:text="@string/action_connect_to" />
 
     <Button
         android:id="@+id/action_policy"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:drawableLeft="@drawable/ic_policy"
         android:text="@string/action_policy"
         tools:ignore="DuplicateSpeakableTextCheck,RtlHardcoded" />
     <ScrollView

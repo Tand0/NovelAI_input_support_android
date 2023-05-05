@@ -16,8 +16,10 @@
 
     <!-- Sync Preferences -->
     <string name="setting_login">Login setting</string>
+    <string name="setting_login_email_hint">Login e-mail for Novel AI REST API</string>
     <string name="setting_login_email">Login e-mail</string>
     <string name="setting_login_password">Login password</string>
+    <string name="setting_login_password_hint">Login password for Novel AI REST API</string>
 
     <string name="setting_device">Setting devices</string>
     <string name="setting_use_tree">Use tree</string>
@@ -31,6 +33,9 @@
     <string name="prompt_sm">sm</string>
     <string name="prompt_sm_dyn">sm_dyn</string>
 
+    <!-- Prompt activiti -->
+    <string name="text_prompt_hint">Please input prompt or uc</string>
+
     <!-- Menu Preferences -->
     <string name="menu_display">Display</string>
     <string name="action">Action</string>
@@ -42,6 +47,7 @@
     <string name="action_save_internal">Save internal</string>
     <string name="action_save_external">Save</string>
     <string name="action_load">Load</string>
+    <string name="action_connect_to">Connect to The Internet</string>
     <string name="action_policy">Privacy Policy</string>
 
     <string name="menu_move">Action</string>

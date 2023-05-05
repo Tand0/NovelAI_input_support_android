@@ -73,6 +73,7 @@ public class JSONListAdapter<T extends JSONObject> extends ArrayAdapter<T> {
             if (expandBoolean != null) {
                 expand = expandBoolean;
             }
+            value.append(String.format(Locale.getDefault(),"(%04d)", position));
             Integer level = a.containInt(item,MyApplication.LEVEL);
             if (level != null) {
                 for (int i = 0 ; i < level ; i++) {
@@ -84,7 +85,7 @@ public class JSONListAdapter<T extends JSONObject> extends ArrayAdapter<T> {
                 if (text.contains(MyApplication.TEXT_WORD)) {
                     isNotWord = false;
                 } else {
-                    value.append("(").append(text).append(") ");
+                    value.append("+(").append(text).append(") ");
                 }
                 isUc = text.contains(MyApplication.TEXT_UC);
                 isIgnore = text.contains(MyApplication.TEXT_IGNORE);
@@ -107,12 +108,16 @@ public class JSONListAdapter<T extends JSONObject> extends ArrayAdapter<T> {
         if (! isIgnore) {
             checkBox.setBackgroundColor(Color.parseColor("#FFFFFF"));
         } else {
-            checkBox.setBackgroundColor(Color.parseColor("#808080"));
+            checkBox.setBackgroundColor(Color.parseColor("#F0F0F0"));
         }
         if (isUc) {
-            checkBox.setTextColor(Color.parseColor("#00FF00"));
+            if (isNotWord) {
+                checkBox.setTextColor(Color.parseColor("#008000"));
+            } else {
+                checkBox.setTextColor(Color.parseColor("#004000"));
+            }
         } else if (isNotWord) {
-            checkBox.setTextColor(Color.parseColor("#0000FF"));
+            checkBox.setTextColor(Color.parseColor("#000080"));
         } else {
             checkBox.setTextColor(Color.parseColor("#000000"));
         }
