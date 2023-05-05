@@ -39,7 +39,8 @@
     <string name="action_uc">Display uc</string>
     <string name="action_tree">Display tree</string>
     <string name="action_image">Display image</string>
-    <string name="action_save">Save</string>
+    <string name="action_save_internal">Save internal</string>
+    <string name="action_save_external">Save</string>
     <string name="action_load">Load</string>
     <string name="action_policy">Privacy Policy</string>
 

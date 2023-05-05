@@ -86,7 +86,7 @@ public class MyApplication  extends Application {
     }
 
     /** prompt area */
-    private String prompt = "";
+    private String prompt = "girl";
 
     /**
      * getter for prompt
@@ -517,6 +517,35 @@ public class MyApplication  extends Application {
         }
     }
 
+    /** key for preferences */
+    private final String KEY_PROMPT = "prompt";
+    /**
+     * save from the top
+     * @param context activity
+     */
+    public void saveInternal(Context context) {
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
+        String topString = this.getTop().toString();
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.putString(KEY_PROMPT,topString);
+        editor.apply();
+    }
+
+    /**
+     * load to the top
+     * @param context activity
+     */
+    public void loadInternal(Context context) {
+        try {
+            SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
+            String topString = preferences.getString(KEY_PROMPT,"");
+            JSONArray top = new JSONArray(topString);
+            this.setTop(top);
+            preferences.edit().apply();
+        } catch (JSONException e) {
+            appendLog(context,"Internal save data not fond");
+        }
+    }
     /** dict name */
     public static final String TEXT = "text";
 
@@ -884,8 +913,13 @@ public class MyApplication  extends Application {
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
         boolean useTree = preferences.getBoolean("setting_use_tree",true);
         if (useTree) {
-            this.setPrompt(fromTree(true));
-            this.setUc(fromTree(false));
+            if (0 < this.getTop().length()) {
+                this.setPrompt(fromTree(true));
+                this.setUc(fromTree(false));
+            } else {
+                fromPromptToTree(getPrompt(),true);
+                fromPromptToTree(getUc(),false);
+            }
         }
         String prompt = this.getPrompt();
         String uc = this.getUc();
@@ -897,7 +931,7 @@ public class MyApplication  extends Application {
         try {
             String string =  preferences.getString("setting_width_x_height","512x768");
             int index = string.indexOf('x');
-            if (0<index) {
+            if (0 < index) {
                 String widthString = string.substring(0,index);
                 String heightString = string.substring(index + 1);
                 width = Integer.parseInt(widthString);

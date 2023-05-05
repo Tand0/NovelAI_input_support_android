@@ -11,6 +11,7 @@ import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.widget.ListView;
+import android.widget.Toast;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -84,7 +85,8 @@ public class TreeActivity extends AppCompatActivity {
         ActivityTreeBinding binding = ActivityTreeBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         //
-        binding.actionSave.setOnClickListener(v->save());
+        binding.actionSaveInternal.setOnClickListener(v->saveInternal());
+        binding.actionSaveExternal.setOnClickListener(v->save());
         binding.actionLoad.setOnClickListener(v->load());
         //
         adapter = new JSONListAdapter<>(this, android.R.layout.simple_list_item_1);
@@ -157,6 +159,15 @@ public class TreeActivity extends AppCompatActivity {
         }
         a.appendLog(this,text.toString());
     }
+
+    /** save for callback */
+    public void saveInternal() {
+        MyApplication a = (MyApplication) this.getApplication();
+        a.saveInternal(this);
+        String message = this.getResources().getString(R.string.action_save_internal);
+        Toast.makeText(this , message, Toast.LENGTH_LONG).show();
+    }
+
     /** save for callback */
     public void save() {
         Intent intent = new Intent(Intent.ACTION_CREATE_DOCUMENT)

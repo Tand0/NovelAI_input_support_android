@@ -32,6 +32,11 @@ public class MainActivity extends AppCompatActivity {
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
+        //
+        // load to the top
+        MyApplication a = (MyApplication) this.getApplication();
+        a.loadInternal(this);
+
         // Get intent, action and MIME type
         Intent intent = getIntent();
         String action = intent.getAction();

@@ -119,7 +119,7 @@ public class ImageActivity extends AppCompatActivity {
             final String[] items = {
                     ImageActivity.this.getResources().getString(R.string.generate_image),
                     ImageActivity.this.getResources().getString(R.string.action_load),
-                    ImageActivity.this.getResources().getString(R.string.action_save),
+                    ImageActivity.this.getResources().getString(R.string.action_save_external),
                     "Cancel"
             };
             new AlertDialog.Builder(ImageActivity.this)

@@ -10,19 +10,28 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
                 <Button
-                    android:id="@+id/action_save"
+                    android:id="@+id/action_save_internal"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:drawableLeft="@drawable/ic_save"
-                    android:text="@string/action_save"
-                    tools:ignore="RtlHardcoded" />
+                    android:text="@string/action_save_internal"
+                    tools:ignore="ButtonStyle,RtlHardcoded" />
+
+                <Button
+                    android:id="@+id/action_save_external"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:drawableLeft="@drawable/ic_save"
+                    android:text="@string/action_save_external"
+                    tools:ignore="ButtonStyle,RtlHardcoded" />
+
                 <Button
                     android:id="@+id/action_load"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:drawableLeft="@drawable/ic_load"
                     android:text="@string/action_load"
-                    tools:ignore="RtlHardcoded" />
+                    tools:ignore="ButtonStyle,RtlHardcoded" />
         </LinearLayout>
         <ListView
             android:id="@+id/list_view"
