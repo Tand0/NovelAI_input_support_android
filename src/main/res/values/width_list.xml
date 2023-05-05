@@ -15,4 +15,9 @@
         <item>k_dpmpp_2m</item>
         <item>k_euler_ancestral</item>
     </string-array>
+    <string-array name="model_list">
+        <item>safe-diffusion</item>
+        <item>nai-diffusion</item>
+        <item>nai-diffusion-furry</item>
+    </string-array>
 </resources>

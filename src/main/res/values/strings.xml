@@ -24,6 +24,7 @@
     <string name="setting_width_x_height">Width X height</string>
 
     <string name="setting_nai">Setting NAI</string>
+    <string name="prompt_model">model</string>
     <string name="prompt_scale">scale(default:11)</string>
     <string name="prompt_steps">steps(default:28)</string>
     <string name="prompt_sampler">sampler(default:k_dpmpp_2m)</string>

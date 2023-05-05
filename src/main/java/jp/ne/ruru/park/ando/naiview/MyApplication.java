@@ -105,7 +105,7 @@ public class MyApplication  extends Application {
     }
 
     /** uc area */
-    private String uc = "";
+    private String uc = "lowres, bad anatomy, bad hands, text, error, missing fingers, extra digit, fewer digits, cropped, worst quality, low quality, normal quality, jpeg artifacts, signature, watermark, username, blurry";
 
     /**
      * getter for prompt
@@ -158,7 +158,7 @@ public class MyApplication  extends Application {
 
     /**
      * setter for image buffer
-     * @param imageBuffer
+     * @param imageBuffer image buffer
      */
     public void setImageBuffer(byte[] imageBuffer) {
         this.imageBuffer = imageBuffer;
@@ -891,6 +891,7 @@ public class MyApplication  extends Application {
         String uc = this.getUc();
         String email = preferences.getString("setting_login_email","").trim();
         String password = preferences.getString("setting_login_password","").trim();
+        String model = preferences.getString("prompt_model","safe-diffusion").trim();
         int width;
         int height;
         try {
@@ -939,6 +940,7 @@ public class MyApplication  extends Application {
                 type,
                 email,
                 password,
+                model,
                 prompt,
                 width,
                 height,

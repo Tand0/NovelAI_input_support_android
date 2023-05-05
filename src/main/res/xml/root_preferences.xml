@@ -14,6 +14,7 @@
     <SwitchPreferenceCompat
         app:key="setting_use_tree"
         app:title="@string/setting_use_tree" />
+
     <ListPreference
         android:key="setting_width_x_height"
         android:title="@string/setting_width_x_height"
@@ -22,6 +23,15 @@
         android:dialogTitle="@string/setting_width_x_height"
         android:entries="@array/width_list"
         android:entryValues="@array/width_list" />
+
+    <ListPreference
+        android:key="prompt_model"
+        android:title="@string/prompt_model"
+        android:defaultValue="safe-diffusion"
+        android:summary="@string/prompt_model"
+        android:dialogTitle="@string/prompt_model"
+        android:entries="@array/model_list"
+        android:entryValues="@array/model_list" />
 
     <EditTextPreference
         app:key="prompt_number_scale"

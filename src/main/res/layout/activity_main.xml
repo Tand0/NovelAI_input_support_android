@@ -63,13 +63,25 @@
         android:layout_height="wrap_content"
         android:text="@string/menu_nai" />
 
-    <Button
-        android:id="@+id/generate_image"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:drawableLeft="@drawable/ic_save"
-        android:text="@string/generate_image"
-        tools:ignore="RtlHardcoded" />
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <Button
+            android:id="@+id/generate_image"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawableLeft="@drawable/ic_save"
+            android:text="@string/generate_image"
+            tools:ignore="RtlHardcoded" />
+        <Button
+            android:id="@+id/action_image"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawableLeft="@drawable/ic_image"
+            android:text="@string/action_image"
+            tools:ignore="RtlHardcoded" />
+    </LinearLayout>
     <Button
         android:id="@+id/subscription"
         android:layout_width="wrap_content"
@@ -77,13 +89,7 @@
         android:drawableLeft="@drawable/ic_subscription"
         android:text="@string/subscription"
         tools:ignore="RtlHardcoded" />
-    <Button
-        android:id="@+id/action_image"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:drawableLeft="@drawable/ic_image"
-        android:text="@string/action_image"
-        tools:ignore="RtlHardcoded" />
+
 
 
     <TextView

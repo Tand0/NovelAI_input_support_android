@@ -45,6 +45,7 @@ public class MyNASI {
          * @param type execution type
          * @param email mail address (for login)
          * @param password password (for login)
+         * @param model model
          * @param input prompt
          * @param width width
          * @param height height
@@ -59,6 +60,7 @@ public class MyNASI {
                 TYPE type,
                 String email,
                 String password,
+                String model,
                 String input,
                 int width,
                 int height,
@@ -71,6 +73,7 @@ public class MyNASI {
             this.type = type;
             this.email = email;
             this.password = password;
+            this.model = model;
             this.input = input;
             this.width = width;
             this.height = height;
@@ -84,6 +87,7 @@ public class MyNASI {
         public final TYPE type;
         public final String email;
         public final String password;
+        public final String model;
         public final String input;
         public final int width;
         public final int height;
@@ -275,7 +279,7 @@ public class MyNASI {
                 input = request.input;
             }
             m.put("input",input);
-            m.put("model","nai-diffusion");
+            m.put("model",request.model);
             m.put("action","generate");
             m.put("parameters",p);
             //
