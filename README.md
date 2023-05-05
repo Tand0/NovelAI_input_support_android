@@ -12,7 +12,7 @@ https://user-images.githubusercontent.com/17945245/236509035-0770d007-b372-4175-
 ## This privacy policy
   - Free (GNU LESSER GENERAL PUBLIC LICENSE)
     - Use this software at your own risk.
-  - Novel AI REST API used.
+  - Uses Novel AI REST API.
     - https://api.novelai.net/docs/
   - Requires e-mail and password for access to NOVEL AI.
     - https://novelai.net/
