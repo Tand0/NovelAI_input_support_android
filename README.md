@@ -5,9 +5,6 @@
 
 https://user-images.githubusercontent.com/17945245/236509035-0770d007-b372-4175-9d4e-f83ead8c4238.mp4
 
-## Internal Test now!
-  - https://play.google.com/apps/internaltest/4701474126737820068
-  - Up to 100 testers can participate in an internal test.
 
 ## This privacy policy
   - Free (GNU LESSER GENERAL PUBLIC LICENSE)

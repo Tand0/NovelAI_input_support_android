@@ -12,6 +12,7 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.PopupMenu;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -61,32 +62,35 @@ public class JSONListAdapter<T extends JSONObject> extends ArrayAdapter<T> {
             view = inflater.inflate(R.layout.raw, parent, false);
         }
         JSONObject item = this.getItem(position);
-        boolean expand = false;
+        boolean expand;
         StringBuilder value = new StringBuilder();
+        StringBuilder folderString = new StringBuilder();
         boolean isNotWord = true;
         boolean isUc = true;
         boolean isIgnore = true;
         MyApplication a =
                 ((MyApplication)((AppCompatActivity) this.getContext()).getApplication());
         if (item != null) {
-            Boolean expandBoolean = a.containBoolean(item,MyApplication.EXPAND);
+
+            Boolean expandBoolean = a.containBoolean(item, MyApplication.EXPAND);
             if (expandBoolean != null) {
                 expand = expandBoolean;
+            } else {
+                expand = false;
             }
             value.append(String.format(Locale.getDefault(),"(%04d)", position));
             Integer level = a.containInt(item,MyApplication.LEVEL);
             if (level != null) {
                 for (int i = 0 ; i < level ; i++) {
-                    value.append(" | ");
+                    folderString.append("    |");
                 }
             }
             String text = a.containString(item,MyApplication.TEXT);
             if (text != null) {
                 if (text.contains(MyApplication.TEXT_WORD)) {
                     isNotWord = false;
-                } else {
-                    value.append("+(").append(text).append(") ");
                 }
+                value.append("(").append(text).append(") ");
                 isUc = text.contains(MyApplication.TEXT_UC);
                 isIgnore = text.contains(MyApplication.TEXT_IGNORE);
             }
@@ -94,34 +98,44 @@ public class JSONListAdapter<T extends JSONObject> extends ArrayAdapter<T> {
             if (values != null) {
                 value.append(values);
             }
+        } else {
+            expand = false;
         }
         Button button = view.findViewById(R.id.button_cheese);
-        button.setText(String.format(Locale.ENGLISH,"%d",position));
-        button.setOnClickListener(this::executeButton);
+        if (button != null) {
+            button.setText(String.format(Locale.ENGLISH, "%d", position));
+            button.setOnClickListener(this::executeButton);
+        }
+        TextView textView = view.findViewById(R.id.folder_cheese);
+        if (textView != null) {
+            textView.setText(folderString);
+        }
         CheckBox checkBox = view.findViewById(R.id.checkbox_cheese);
-        checkBox.setOnCheckedChangeListener(null);
-        checkBox.setChecked(expand);
-        checkBox.setOnCheckedChangeListener((buttonView,isChecked)->expand());
-        checkBox.setEnabled(isNotWord);
-        //
-
-        if (! isIgnore) {
-            checkBox.setBackgroundColor(Color.parseColor("#FFFFFF"));
-        } else {
-            checkBox.setBackgroundColor(Color.parseColor("#F0F0F0"));
-        }
-        if (isUc) {
-            if (isNotWord) {
-                checkBox.setTextColor(Color.parseColor("#008000"));
-            } else {
-                checkBox.setTextColor(Color.parseColor("#004000"));
+        if (checkBox != null) {
+            if (checkBox.isChecked() != expand) {
+                checkBox.setOnCheckedChangeListener(null);
+                checkBox.setChecked(expand);
             }
-        } else if (isNotWord) {
-            checkBox.setTextColor(Color.parseColor("#000080"));
-        } else {
-            checkBox.setTextColor(Color.parseColor("#000000"));
+            checkBox.setOnCheckedChangeListener((buttonView, isChecked) -> expand(position,isChecked));
+            checkBox.setEnabled(isNotWord);
+            if (! isIgnore) {
+                checkBox.setBackgroundColor(Color.parseColor("#FFFFFF"));
+            } else {
+                checkBox.setBackgroundColor(Color.parseColor("#F0F0F0"));
+            }
+            if (isUc) {
+                if (isNotWord) {
+                    checkBox.setTextColor(Color.parseColor("#008000"));
+                } else {
+                    checkBox.setTextColor(Color.parseColor("#004000"));
+                }
+            } else if (isNotWord) {
+                checkBox.setTextColor(Color.parseColor("#000080"));
+            } else {
+                checkBox.setTextColor(Color.parseColor("#000000"));
+            }
+            checkBox.setText(value.toString());
         }
-        checkBox.setText(value.toString());
         return view;
     }
 
@@ -136,8 +150,13 @@ public class JSONListAdapter<T extends JSONObject> extends ArrayAdapter<T> {
         popup.getMenuInflater().inflate(R.menu.menu_tree, popup.getMenu());
         popup.show();
         popup.setOnMenuItemClickListener(item -> {
-            ListView listView = ((AppCompatActivity) this.getContext()).findViewById(R.id.list_view);
-            listView.setSelection(position);
+            AppCompatActivity appCompatActivity = (AppCompatActivity)this.getContext();
+            if (appCompatActivity != null) {
+                ListView listView = appCompatActivity.findViewById(R.id.list_view);
+                if (listView != null) {
+                    listView.setSelection(position);
+                }
+            }
             return executePopup(item.getItemId(),position);
         });
     }
@@ -148,7 +167,7 @@ public class JSONListAdapter<T extends JSONObject> extends ArrayAdapter<T> {
      * @param position position of list view
      * @return if execution then true
      */
-    protected boolean executePopup(int itemId,int position) {
+    protected boolean executePopup(int itemId,final int position) {
         MyApplication a =
                 ((MyApplication)((AppCompatActivity) this.getContext()).getApplication());
         String textRaw;
@@ -203,7 +222,13 @@ public class JSONListAdapter<T extends JSONObject> extends ArrayAdapter<T> {
                 ((MyApplication)((AppCompatActivity) this.getContext()).getApplication());
         LayoutInflater inflater = LayoutInflater.from(this.getContext());
         final View dialog_view = inflater.inflate(R.layout.input_daialog, null);
+        if (dialog_view == null) {
+            return;
+        }
         EditText editText = dialog_view.findViewById(R.id.word_edit_text);
+        if (editText == null) {
+            return;
+        }
         editText.setText(text);
         new AlertDialog.Builder(this.getContext())
                 .setView(dialog_view)
@@ -340,31 +365,31 @@ public class JSONListAdapter<T extends JSONObject> extends ArrayAdapter<T> {
                 ((MyApplication)((AppCompatActivity) this.getContext()).getApplication());
         return application.getTop();
     }
-    public void expand() {
-        ListView listView = ((AppCompatActivity)this.getContext()).findViewById(R.id.list_view);
-        MyApplication a =
-                ((MyApplication)((AppCompatActivity) this.getContext()).getApplication());
-        int count = listView.getCount();
-        for (int position = 0; position < count; position++) {
-            CheckBox checkBox = listView.getChildAt(position).findViewById(R.id.checkbox_cheese);
-            boolean isChecked = checkBox.isChecked();
-            JSONObject item = this.getItem(position);
-            boolean expand;
-            Boolean expandBoolean = a.containBoolean(item,MyApplication.EXPAND);
-            if (expandBoolean != null) {
-                expand = expandBoolean;
-            } else {
-                expand = false;
-            }
-            if (expand != isChecked) {
-                try {
-                    item.put(MyApplication.EXPAND,isChecked);
-                    listView.setSelection(position);
-                    updateJSONArray();
-                    break;
-                } catch (JSONException e) {
-                    // NONE
-                }
+    public void expand(int position,boolean isChecked) {
+        AppCompatActivity appCompatActivity = (AppCompatActivity)this.getContext();
+        if (appCompatActivity == null) {
+            return;
+        }
+        ListView listView = appCompatActivity.findViewById(R.id.list_view);
+        if (listView == null) {
+            return;
+        }
+        MyApplication a = (MyApplication)appCompatActivity.getApplication();
+        JSONObject item = this.getItem(position);
+        boolean expand;
+        Boolean expandBoolean = a.containBoolean(item,MyApplication.EXPAND);
+        if (expandBoolean != null) {
+            expand = expandBoolean;
+        } else {
+            expand = false;
+        }
+        if (expand != isChecked) {
+            try {
+                item.put(MyApplication.EXPAND,isChecked);
+                listView.setSelection(position);
+                updateJSONArray();
+            } catch (JSONException e) {
+                // NONE
             }
         }
     }
@@ -544,7 +569,14 @@ public class JSONListAdapter<T extends JSONObject> extends ArrayAdapter<T> {
      * create list view data from tree information
      */
     public void updateJSONArray() {
-        ListView listView = ((AppCompatActivity)this.getContext()).findViewById(R.id.list_view);
+        AppCompatActivity appCompatActivity= (AppCompatActivity)this.getContext();
+        if (appCompatActivity == null) {
+            return;
+        }
+        ListView listView = appCompatActivity.findViewById(R.id.list_view);
+        if (listView == null) {
+            return;
+        }
         int position = listView.getSelectedItemPosition();
         //
         ArrayList<T> list = new ArrayList<>();

@@ -231,8 +231,7 @@ public class MyNASI {
         } else {
             description = "Unknown stats code.";
         }
-        res.setDescription(description);
-        return res;
+        return res.setDescription(description);
     }
 
     /**
@@ -248,11 +247,7 @@ public class MyNASI {
                 return res;
             }
         }
-        Allin1Response res = this.subscription(request);
-        if (res.statusCode != 200) {
-            return res;
-        }
-        int anlas = res.anlas;
+
         //
         JSONObject m = new JSONObject();
         String requestBody;
@@ -295,20 +290,26 @@ public class MyNASI {
                     null)
                     .setDescription("request fail");
         }
-        res = this.getConnection(request.type,IMAGE_URL,requestBody)
-                .setAnlas(anlas);
+        Allin1Response res = this.getConnection(request.type,IMAGE_URL,requestBody);
         //
         int status_code = res.statusCode;
+        String description;
+        int anlas = -1;
         if (status_code == 200) {
-            res.setDescription("The request has been accepted and the output is generating");
+            description = "The request has been accepted and the output is generating";
+            Allin1Response subscriptionResponse = this.subscription(request);
+            if (subscriptionResponse.statusCode != 200) {
+                return subscriptionResponse;
+            }
+            anlas = subscriptionResponse.anlas;
         } else if (status_code == 401) {
-            res.setDescription("Access Key is incorrect.");
+            description = "Access Key is incorrect.";
         } else if (status_code == 501) {
-            res.setDescription("An unknown error occurred.");
+            description = "An unknown error occurred.";
         } else {
-            res.setDescription("Unknown stats code.");
+            description = "Unknown stats code.";
         }
-        return res;
+        return res.setDescription(description).setAnlas(anlas);
     }
 
     /**
@@ -328,8 +329,9 @@ public class MyNASI {
         Allin1Response res = this.getConnection(request.type,SUBSCRIPTION_URL,null);
         //
         int status_code = res.statusCode;
+        String description;
         if (status_code == 200) {
-            res.setDescription("Current subscription, date of expiry and perks.");
+            description = "Current subscription, date of expiry and perks.";
             try {
                 JSONObject item = new JSONObject(res.content);
                 item = item.getJSONObject("trainingStepsLeft");
@@ -339,13 +341,13 @@ public class MyNASI {
                 // NONE
             }
         } else if (status_code == 401) {
-            res.setDescription("Access Key is incorrect.");
+            description = "Access Key is incorrect.";
         } else if (status_code == 501) {
-            res.setDescription("An unknown error occurred.");
+            description = "An unknown error occurred.";
         } else {
-            res.setDescription("Unknown stats code.");
+            description = "Unknown stats code.";
         }
-        return res;
+        return res.setDescription(description);
     }
 
     /**

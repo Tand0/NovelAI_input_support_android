@@ -39,6 +39,7 @@
     <!-- Menu Preferences -->
     <string name="menu_display">Display</string>
     <string name="action">Action</string>
+    <string name="action_folder">Folder</string>
     <string name="action_settings">Display setting</string>
     <string name="action_prompt">Display prompt</string>
     <string name="action_uc">Display uc</string>
