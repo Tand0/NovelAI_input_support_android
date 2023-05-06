@@ -120,19 +120,20 @@ public class JSONListAdapter<T extends JSONObject> extends ArrayAdapter<T> {
             checkBox.setEnabled(isNotWord);
             if (! isIgnore) {
                 checkBox.setBackgroundColor(Color.parseColor("#FFFFFF"));
-            } else {
-                checkBox.setBackgroundColor(Color.parseColor("#F0F0F0"));
-            }
-            if (isUc) {
-                if (isNotWord) {
-                    checkBox.setTextColor(Color.parseColor("#008000"));
+                if (isUc) {
+                    if (isNotWord) {
+                        checkBox.setTextColor(Color.parseColor("#008000"));
+                    } else {
+                        checkBox.setTextColor(Color.parseColor("#004000"));
+                    }
+                } else if (isNotWord) {
+                    checkBox.setTextColor(Color.parseColor("#000080"));
                 } else {
-                    checkBox.setTextColor(Color.parseColor("#004000"));
+                    checkBox.setTextColor(Color.parseColor("#000000"));
                 }
-            } else if (isNotWord) {
-                checkBox.setTextColor(Color.parseColor("#000080"));
             } else {
-                checkBox.setTextColor(Color.parseColor("#000000"));
+                checkBox.setBackgroundColor(Color.parseColor("#000000"));
+                checkBox.setTextColor(Color.parseColor("#F8F8F8"));
             }
             checkBox.setText(value.toString());
         }

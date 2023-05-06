@@ -40,6 +40,7 @@
     <string name="menu_display">Display</string>
     <string name="action">Action</string>
     <string name="action_folder">Folder</string>
+    <string name="action_checkbox">CheckBox</string>
     <string name="action_settings">Display setting</string>
     <string name="action_prompt">Display prompt</string>
     <string name="action_uc">Display uc</string>
@@ -81,7 +82,8 @@
     <string name="menu_not_enhance">Not enhance</string>
 
     <!-- tree -->
-    <string name="input_word">Input word</string>
+    <string name="input_word">Input word for prompt/uc</string>
+    <string name="input_word_hint">Please input word for prompt/uc</string>
     <string name="title_activity_image">ImageActivity</string>
 
 </resources>

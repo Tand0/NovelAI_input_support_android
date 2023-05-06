@@ -10,7 +10,7 @@
     <EditTextPreference
         app:key="setting_login_password"
         app:title="@string/setting_login_password"
-        android:hint="@string/setting_login_email_hint"
+        android:hint="@string/setting_login_password_hint"
         android:inputType="textPassword"
         app:defaultValue="" />
     <SwitchPreferenceCompat
