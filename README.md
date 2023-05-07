@@ -6,6 +6,8 @@
 
 [![](https://img.youtube.com/vi/j5mdzIkD48M/0.jpg)](https://www.youtube.com/watch?v=j5mdzIkD48M)
 
+## Google play site
+https://play.google.com/store/apps/details?id=jp.ne.ruru.park.ando.naiview
 
 ## This privacy policy
   - Free (GNU LESSER GENERAL PUBLIC LICENSE)
@@ -21,4 +23,7 @@
   - No ads.
   - Personal information other than the above is not used.
 
+## Reference
+- data.json can also be created on Windows
+  - https://github.com/Tand0/NovelAI_input_support_tool
 
