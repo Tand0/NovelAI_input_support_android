@@ -24,14 +24,18 @@
     <string name="setting_device">Setting devices</string>
     <string name="setting_use_tree">Use tree</string>
     <string name="setting_width_x_height">Width X height</string>
+    <string name="setting_width_x_height_summary">Size</string>
 
     <string name="setting_nai">Setting NAI</string>
-    <string name="prompt_model">model</string>
+    <string name="prompt_model">model(default:safe-diffusion)</string>
+    <string name="prompt_model_summary">model data</string>
     <string name="prompt_scale">scale(default:11)</string>
     <string name="prompt_steps">steps(default:28)</string>
     <string name="prompt_sampler">sampler(default:k_dpmpp_2m)</string>
+    <string name="prompt_sampler_summary">sampler data</string>
     <string name="prompt_sm">sm</string>
     <string name="prompt_sm_dyn">sm_dyn</string>
+    <string name="prompt_fixed_seed">fixed seed</string>
 
     <!-- Prompt activiti -->
     <string name="text_prompt_hint">Please input prompt or uc</string>

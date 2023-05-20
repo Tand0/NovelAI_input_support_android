@@ -78,7 +78,6 @@ public class JSONListAdapter<T extends JSONObject> extends ArrayAdapter<T> {
             } else {
                 expand = false;
             }
-            value.append(String.format(Locale.getDefault(),"(%04d)", position));
             Integer level = a.containInt(item,MyApplication.LEVEL);
             if (level != null) {
                 for (int i = 0 ; i < level ; i++) {
@@ -136,6 +135,17 @@ public class JSONListAdapter<T extends JSONObject> extends ArrayAdapter<T> {
                 checkBox.setTextColor(Color.parseColor("#F8F8F8"));
             }
             checkBox.setText(value.toString());
+            checkBox.setHint(String.format(Locale.ENGLISH, "%d - expand", position));
+        }
+        checkBox = view.findViewById(R.id.ignore_cheese);
+        if (checkBox != null) {
+            if (checkBox.isChecked() != isIgnore) {
+                checkBox.setOnCheckedChangeListener(null);
+                checkBox.setChecked(isIgnore);
+            }
+            checkBox.setText("");
+            checkBox.setHint("");
+            checkBox.setOnCheckedChangeListener((buttonView, isChecked) -> ignoreButton(position,isChecked));
         }
         return view;
     }
@@ -395,6 +405,40 @@ public class JSONListAdapter<T extends JSONObject> extends ArrayAdapter<T> {
         }
     }
 
+    /**
+     * ignore button
+     * @param position position
+     * @param isChecked isChecked
+     */
+    public void ignoreButton(int position,boolean isChecked) {
+        JSONObject item = this.getItem(position);
+        MyApplication a =
+                ((MyApplication)((AppCompatActivity) this.getContext()).getApplication());
+        String text = a.containString(item,MyApplication.TEXT);
+        if (text == null) {
+            return;
+        }
+        boolean falg = false;
+        if (isChecked) {
+            if (!text.contains(MyApplication.TEXT_IGNORE)) {
+                text = MyApplication.TEXT_IGNORE + text;
+                falg = true;
+            }
+        } else {
+            if (text.contains(MyApplication.TEXT_IGNORE)) {
+                text = text.replace(MyApplication.TEXT_IGNORE, "");
+                falg = true;
+            }
+        }
+        if (falg) {
+            try {
+                item.put(MyApplication.TEXT, text);
+                this.updateJSONArray();
+            } catch (JSONException e) {
+                // NONE
+            }
+        }
+    }
     /**
      * past tree
      * @param position past position

@@ -21,8 +21,8 @@
         android:key="setting_width_x_height"
         android:title="@string/setting_width_x_height"
         android:defaultValue="512x768"
-        android:summary="@string/setting_width_x_height"
-        android:dialogTitle="@string/setting_width_x_height"
+        android:summary="@string/setting_width_x_height_summary"
+        android:dialogTitle="@string/setting_width_x_height_summary"
         android:entries="@array/width_list"
         android:entryValues="@array/width_list" />
 
@@ -30,8 +30,8 @@
         android:key="prompt_model"
         android:title="@string/prompt_model"
         android:defaultValue="safe-diffusion"
-        android:summary="@string/prompt_model"
-        android:dialogTitle="@string/prompt_model"
+        android:summary="@string/prompt_model_summary"
+        android:dialogTitle="@string/prompt_model_summary"
         android:entries="@array/model_list"
         android:entryValues="@array/model_list" />
 
@@ -54,8 +54,8 @@
         android:key="prompt_sampler"
         android:title="@string/prompt_sampler"
         android:defaultValue="k_dpmpp_2m"
-        android:summary="@string/prompt_sampler"
-        android:dialogTitle="@string/prompt_sampler"
+        android:summary="@string/prompt_sampler_summary"
+        android:dialogTitle="@string/prompt_sampler_summary"
         android:entries="@array/sampler_list"
         android:entryValues="@array/sampler_list" />
     <SwitchPreferenceCompat
@@ -66,5 +66,8 @@
         app:key="prompt_sm_dyn"
         app:defaultValue="false"
         app:title="@string/prompt_sm_dyn" />
-
+    <SwitchPreferenceCompat
+        app:key="prompt_fixed_seed"
+        app:defaultValue="false"
+        app:title="@string/prompt_fixed_seed" />
 </PreferenceScreen>

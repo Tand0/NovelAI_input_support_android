@@ -55,6 +55,7 @@ public class MyNASI {
          * @param sm sm
          * @param sm_dyn sm_dyn
          * @param negative_prompt uc
+         * @param seed seed
          */
         Allin1Request(
                 TYPE type,
@@ -69,7 +70,8 @@ public class MyNASI {
                 String sampler,
                 boolean sm,
                 boolean sm_dyn,
-                String negative_prompt) {
+                String negative_prompt,
+                int seed) {
             this.type = type;
             this.email = email;
             this.password = password;
@@ -83,6 +85,7 @@ public class MyNASI {
             this.sm = sm;
             this.sm_dyn = sm_dyn;
             this.negative_prompt = negative_prompt;
+            this.seed = seed;
         }
         public final TYPE type;
         public final String email;
@@ -97,6 +100,8 @@ public class MyNASI {
         public final boolean sm;
         public final boolean sm_dyn;
         public final String negative_prompt;
+
+        public final int seed;
     }
 
     /**
@@ -266,7 +271,7 @@ public class MyNASI {
             p.put("dynamic_thresholding",false);
             p.put("controlnet_strength",1);
             p.put("legacy",false);
-            p.put("seed",(new java.util.Random().nextInt(Integer.MAX_VALUE - 1) + 1));
+            p.put("seed",request.seed);
             p.put("negative_prompt",request.negative_prompt);
             //
             String input = "girl";

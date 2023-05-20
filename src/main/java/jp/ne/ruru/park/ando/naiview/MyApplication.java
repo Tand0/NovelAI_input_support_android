@@ -231,6 +231,50 @@ public class MyApplication  extends Application {
     }
 
     /**
+     * seed data area.
+     * Used by tree activity
+     */
+    private int seed;
+
+    /**
+     * getter for seed data
+     * @return seed data
+     */
+    public int getSeed() {
+        return this.seed;
+    }
+
+    /**
+     * setter for seed data
+     * @param seed seed data
+     */
+    public void setSeed(int seed) {
+        this.seed = seed;
+    }
+
+    /**
+     * imagePosition data area.
+     * Used by tree activity
+     */
+    private int imagePosition;
+
+    /**
+     * getter for imagePosition data
+     * @return imagePosition data
+     */
+    public int getImagePosition() {
+        return this.imagePosition;
+    }
+
+    /**
+     * setter for imagePosition data
+     * @param imagePosition imagePosition data
+     */
+    public void setImagePosition(int imagePosition) {
+        this.imagePosition = imagePosition;
+    }
+
+    /**
      * Novel AI Support Interface area
      */
     private MyNASI myNASI = null;
@@ -449,6 +493,10 @@ public class MyApplication  extends Application {
                         if (targetBoolean != null) {
                             editor.putBoolean("prompt_sm_dyn",targetBoolean);
                         }
+                        integer = containInt(item,"seed");
+                        if (integer != null) {
+                            this.setSeed(integer);
+                        }
                         editor.apply();
                     } catch (JSONException e) {
                         text.append(e.getMessage());
@@ -505,7 +553,10 @@ public class MyApplication  extends Application {
                 this.setImageMimeType(mime);
             }
         } catch (IOException e) {
-            // NONE
+            String text = e.getClass().getName() +
+                    "\n" +
+                    e.getMessage();
+            appendLog(context, text);
         } finally {
             if (is != null) {
                 try {
@@ -970,6 +1021,17 @@ public class MyApplication  extends Application {
         } catch (ClassCastException e) {
             sm_dyn = true;
         }
+        boolean fixed_seed;
+        try {
+            fixed_seed = preferences.getBoolean("prompt_fixed_seed",false);
+        } catch (ClassCastException e) {
+            fixed_seed = false;
+        }
+        int seed = this.getSeed();
+        if ((!fixed_seed) || (seed == 0)) {
+            seed = new java.util.Random().nextInt(Integer.MAX_VALUE - 1) + 1;
+            this.setSeed(seed);
+        }
         MyNASI.Allin1Request request = new MyNASI.Allin1Request(
                 type,
                 email,
@@ -983,7 +1045,8 @@ public class MyApplication  extends Application {
                 sampler,
                 sm,
                 sm_dyn,
-                uc);
+                uc,
+                seed);
         Runnable runnable = () -> {
             if (lock.tryLock()) {
                 try {
