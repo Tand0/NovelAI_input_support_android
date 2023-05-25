@@ -29,16 +29,20 @@
         android:layout_height="wrap_content">
         <Button
             android:id="@+id/action_settings"
+            android:drawableLeft="@drawable/ic_log"
+            android:drawableTint="?android:attr/textColorPrimaryInverse"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/action_settings"
-            tools:ignore="RtlHardcoded" />
+            tools:ignore="ButtonStyle,RtlHardcoded" />
         <Button
             android:id="@+id/action_policy"
+            android:drawableLeft="@drawable/ic_policy"
+            android:drawableTint="?android:attr/textColorPrimaryInverse"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/action_policy"
-            tools:ignore="DuplicateSpeakableTextCheck,RtlHardcoded" />
+            tools:ignore="ButtonStyle,DuplicateSpeakableTextCheck,RtlHardcoded" />
     </LinearLayout>
 
     <LinearLayout
@@ -60,6 +64,8 @@
     </LinearLayout>
     <Button
         android:id="@+id/action_tree"
+        android:drawableLeft="@drawable/ic_tree"
+        android:drawableTint="?android:attr/textColorPrimaryInverse"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/action_tree"
@@ -76,6 +82,8 @@
         android:layout_height="wrap_content">
         <Button
             android:id="@+id/generate_image"
+            android:drawableLeft="@drawable/ic_image"
+            android:drawableTint="?android:attr/textColorPrimaryInverse"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/generate_image"
@@ -89,6 +97,8 @@
     </LinearLayout>
     <Button
         android:id="@+id/subscription"
+        android:drawableLeft="@drawable/ic_subscription"
+        android:drawableTint="?android:attr/textColorPrimaryInverse"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/subscription"
