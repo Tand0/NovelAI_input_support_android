@@ -35,7 +35,7 @@ public class PromptActivity extends AppCompatActivity {
             a.setPrompt(binding.textPrompt.getText().toString());
             a.fromPromptToTree(getText(),isPrompt());
             String message = "OK: To Tree";
-            Toast.makeText(this , message, Toast.LENGTH_LONG).show();
+            Toast.makeText(this , message, Toast.LENGTH_SHORT).show();
             a.appendLog(this,message);
         });
         binding.fromTreeToPrompt.setOnClickListener(view->{
@@ -43,7 +43,7 @@ public class PromptActivity extends AppCompatActivity {
             a.fromTreeToPrompt(isPrompt());
             binding.textPrompt.setText(getText());
             String message = "OK: From Tree";
-            Toast.makeText(this , message, Toast.LENGTH_LONG).show();
+            Toast.makeText(this , message, Toast.LENGTH_SHORT).show();
             a.appendLog(this,message);
         });
         binding.promptTitle.setText(getMyTitle());

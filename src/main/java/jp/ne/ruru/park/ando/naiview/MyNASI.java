@@ -8,14 +8,11 @@ import org.bouncycastle.crypto.params.Argon2Parameters;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.BufferedReader;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.net.URL;
 import java.nio.charset.Charset;
-import java.nio.charset.StandardCharsets;
 import java.util.Base64;
 import java.util.Locale;
 import java.util.zip.ZipEntry;
@@ -28,11 +25,14 @@ import javax.net.ssl.HttpsURLConnection;
  */
 public class MyNASI {
 
-    /** state machine */
+    /**
+     * state machine
+     */
     protected enum TYPE {
         LOGIN,
         IMAGE,
-        SUBSCRIPTION
+        SUBSCRIPTION,
+        UPSCALE
     }
 
     /**
@@ -42,22 +42,50 @@ public class MyNASI {
     public static class Allin1Request {
         /**
          * this is constructor
-         * @param type execution type
-         * @param email mail address (for login)
+         *
+         * @param type     execution type
+         * @param email    mail address (for login)
          * @param password password (for login)
-         * @param model model
-         * @param input prompt
-         * @param width width
-         * @param height height
-         * @param scale scale
-         * @param steps steps
-         * @param sampler sampler
-         * @param sm sm
-         * @param sm_dyn sm_dyn
-         * @param negative_prompt uc
-         * @param seed seed
          */
         Allin1Request(
+                TYPE type,
+                String email,
+                String password) {
+            this.type = type;
+            this.email = email;
+            this.password = password;
+        }
+
+        public final TYPE type;
+        public final String email;
+        public final String password;
+
+    }
+
+    /**
+     * all in 1 request data.
+     * To make it thread-safe, I've wrapped up the data
+     */
+    public static class Allin1RequestImage extends Allin1Request {
+        /**
+         * this is constructor
+         *
+         * @param type            execution type
+         * @param email           mail address (for login)
+         * @param password        password (for login)
+         * @param model           model
+         * @param input           prompt
+         * @param width           width
+         * @param height          height
+         * @param scale           scale
+         * @param steps           steps
+         * @param sampler         sampler
+         * @param sm              sm
+         * @param sm_dyn          sm_dyn
+         * @param negative_prompt uc
+         * @param seed            seed
+         */
+        Allin1RequestImage(
                 TYPE type,
                 String email,
                 String password,
@@ -72,24 +100,19 @@ public class MyNASI {
                 boolean sm_dyn,
                 String negative_prompt,
                 int seed) {
-            this.type = type;
-            this.email = email;
-            this.password = password;
-            this.model = model;
-            this.input = input;
-            this.width = width;
-            this.height = height;
-            this.scale = scale;
-            this.steps = steps;
-            this.sampler = sampler;
-            this.sm = sm;
-            this.sm_dyn = sm_dyn;
-            this.negative_prompt = negative_prompt;
-            this.seed = seed;
+            super(type,email,password);
+            this.model =model;
+            this.input =input;
+            this.width =width;
+            this.height =height;
+            this.scale =scale;
+            this.steps =steps;
+            this.sampler =sampler;
+            this.sm =sm;
+            this.sm_dyn =sm_dyn;
+            this.negative_prompt =negative_prompt;
+            this.seed =seed;
         }
-        public final TYPE type;
-        public final String email;
-        public final String password;
         public final String model;
         public final String input;
         public final int width;
@@ -103,7 +126,41 @@ public class MyNASI {
 
         public final int seed;
     }
-
+    /**
+     * all in 1 request data.
+     * To make it thread-safe, I've wrapped up the data
+     */
+    public static class Allin1RequestUpscale extends Allin1Request {
+        /**
+         * this is constructor
+         *
+         * @param type            execution type
+         * @param email           mail address (for login)
+         * @param password        password (for login)
+         * @param width           width
+         * @param height          height
+         * @param scale           scale
+         * @param imageBuffer          image data
+         */
+        Allin1RequestUpscale(
+                TYPE type,
+                String email,
+                String password,
+                int width,
+                int height,
+                int scale,
+                byte[] imageBuffer) {
+            super(type,email,password);
+            this.width =width;
+            this.height =height;
+            this.scale =scale;
+            this.imageBuffer = imageBuffer;
+        }
+        public final int width;
+        public final int height;
+        public final int scale;
+        public final byte[] imageBuffer;
+    }
     /**
      * all in 1 result data.
      * To make it thread-safe, I've wrapped up the data
@@ -167,6 +224,9 @@ public class MyNASI {
 
     /** image url for rest api */
     public final String IMAGE_URL = "https://api.novelai.net/ai/generate-image";
+
+    /** upscale url for rest api */
+    public final String UPSCALE_URL = "https://api.novelai.net/ai/upscale";
 
     /** subscription url for rest api */
     public final String SUBSCRIPTION_URL = "https://api.novelai.net/user/subscription";
@@ -244,7 +304,7 @@ public class MyNASI {
      * @param request all in 1 request
      * @return all in 1 result
      */
-    public Allin1Response downloadImage(Allin1Request request) {
+    public Allin1Response downloadImage(Allin1RequestImage request) {
         //
         if (this.requireLogin()) {
             Allin1Response res = login(request);
@@ -315,6 +375,49 @@ public class MyNASI {
             description = "Unknown stats code.";
         }
         return res.setDescription(description).setAnlas(anlas);
+    }
+
+    /**
+     * upscale image
+     * @param request all in 1 request
+     * @return all in 1 result
+     */
+    public Allin1Response upscale(Allin1RequestUpscale request) {
+        //
+        if (this.requireLogin()) {
+            Allin1Response res = login(request);
+            if (this.requireLogin()) {
+                return res;
+            }
+        }
+
+        //
+        String image = Base64.getEncoder().encodeToString(request.imageBuffer);
+        String requestBody = "{\"image\" : \"" + image + "\"," +
+                "\"width\" : " + request.width + "," +
+                "\"height\" : " + request.height + "," +
+                "\"scale\" : 4}";
+        Allin1Response res = this.getConnection(request.type,UPSCALE_URL, requestBody);
+        //
+        int status_code = res.statusCode;
+        String description;
+        if (status_code == 200) {
+            description = "The request has been accepted and the output is generating";
+        } else if (status_code == 400) {
+            description = "A validation error occurred.";
+        } else if (status_code == 401) {
+            description = "Access Key is incorrect.";
+        } else if (status_code == 402) {
+            description =
+                    "An active subscription is required to access this endpoint.";
+        } else if (status_code == 409) {
+            description = "A conflict error occurred.";
+        } else if (status_code == 500) {
+            description = "An unknown error occurred.";
+        } else {
+            description = "Unknown stats code.";
+        }
+        return res.setDescription(description).setAnlas(-1);
     }
 
     /**
@@ -426,27 +529,30 @@ public class MyNASI {
             mime = urlCon.getContentType();
             if (mime == null) {
                 mime = "";
-            } else {
-                mime = mime.toLowerCase();
+            }
+            mime = mime.toLowerCase();
+            InputStream is = null;
+            try {
+                try {
+                    is = urlCon.getInputStream();
+                } catch (IOException e) {
+                    is = urlCon.getErrorStream();
+                }
+                byte[] bByte = new byte[1024];
                 if (mime.contains("application/json")) {
                     //"application/json; charset=utf-8"
-                    try (InputStream is = urlCon.getInputStream();
-                         InputStreamReader isr = new InputStreamReader(is, StandardCharsets.UTF_8);
-                         BufferedReader bufferedReader = new BufferedReader(isr)) {
-                        StringBuilder buff = new StringBuilder();
-                        String data;
-                        while ((data = bufferedReader.readLine()) != null) {
-                            buff.append(data);
-                            buff.append("\n");
+                    try (ByteArrayOutputStream stream = new ByteArrayOutputStream()) {
+                        while (true) {
+                            int len = is.read(bByte);
+                            if (len <= 0) {
+                                break;
+                            }
+                            stream.write(bByte, 0, len);
                         }
-                        //
-                        content = buff.toString();
-                        //
+                        content = stream.toString();
                     }
                 } else if (mime.contains("image/")) {
-                    byte[] bByte = new byte[1024];
-                    try (InputStream is = urlCon.getInputStream();
-                         ByteArrayOutputStream stream = new ByteArrayOutputStream()) {
+                    try (ByteArrayOutputStream stream = new ByteArrayOutputStream()) {
                         while(true) {
                             int len = is.read(bByte);
                             if (len <= 0) {
@@ -457,8 +563,7 @@ public class MyNASI {
                         result = stream.toByteArray();
                     }
                 } else if (mime.contains("application/x-zip-compressed")) {
-                    try (InputStream is = urlCon.getInputStream();
-                         ZipInputStream zipInputStream = new ZipInputStream(is)) {
+                    try (ZipInputStream zipInputStream = new ZipInputStream(is)) {
                         while (true) {
                             ZipEntry zipEntry = zipInputStream.getNextEntry();
                             if (zipEntry == null) {
@@ -467,7 +572,6 @@ public class MyNASI {
                             if (zipEntry.isDirectory()) {
                                 continue;
                             }
-                            byte[] bByte = new byte[1024];
                             try (ByteArrayOutputStream stream = new ByteArrayOutputStream()) {
                                 while (true) {
                                     int len = zipInputStream.read(bByte);
@@ -482,6 +586,10 @@ public class MyNASI {
                             }
                         }
                     }
+                }
+            } finally {
+                if (is != null) {
+                    is.close();
                 }
             }
         } catch (IOException e) {

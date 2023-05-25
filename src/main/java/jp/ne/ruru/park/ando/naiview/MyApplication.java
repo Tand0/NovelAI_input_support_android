@@ -253,6 +253,28 @@ public class MyApplication  extends Application {
     }
 
     /**
+     * downladFlag data area.
+     * Used by tree activity
+     */
+    private boolean downloadFlag = false;
+
+    /**
+     * getter for downloadFlag data
+     * @return downloadFlag data
+     */
+    public boolean getDownloadFlag() {
+        return this.downloadFlag;
+    }
+
+    /**
+     * setter for downloadFlag data
+     * @param downloadFlag downloadFlag data
+     */
+    public void setDownloadFlag(boolean downloadFlag) {
+        this.downloadFlag = downloadFlag;
+    }
+
+    /**
      * imagePosition data area.
      * Used by tree activity
      */
@@ -402,7 +424,7 @@ public class MyApplication  extends Application {
             context.startActivity( intent );
             return true;
         } else if (id == R.id.generate_image) {
-            execution( context,MyNASI.TYPE.IMAGE);
+            execution(context,MyNASI.TYPE.IMAGE,-1,-1);
             return true;
         } else if (id == R.id.subscription) {
             subscription(context);
@@ -443,13 +465,19 @@ public class MyApplication  extends Application {
         final SharedPreferences.Editor editor = PreferenceManager.getDefaultSharedPreferences(context).edit();
         String file;
         StringBuilder text = new StringBuilder();
-        if ((mime== null) || (imageUri == null) || mime.contains("png")) {
+        if (mime == null) {
+            mime = "image/png";
+        }
+        if ((imageUri == null) || mime.contains("png")) {
             file = "x.png";
         } else {
             file = "x.jpg";
         }
         //
         updateImageBuffer(context,imageUri,mime);
+        if ((imageBuffer == null) || (imageBuffer.length == 0)) {
+            return;
+        }
         //
         try (InputStream is = new ByteArrayInputStream(this.getImageBuffer())) {
             ImageMetadata data = Imaging.getMetadata(is,file);
@@ -533,6 +561,7 @@ public class MyApplication  extends Application {
      * @param mime mime type
      */
     public void updateImageBuffer(Context context,Uri imageUri,String mime) {
+        //
         InputStream is = null;
         try {
             if (imageUri != null) {
@@ -826,14 +855,12 @@ public class MyApplication  extends Application {
         dictToList(result, data);
         if (0 < result.size()) {
             StringBuilder builder = new StringBuilder();
+            final String comma = ", ";
             for (String x : result) {
-                builder.append(", ");
+                builder.append(comma);
                 builder.append(x);
             }
-            ans = builder.toString();
-            if (0 < result.size()) {
-                ans = ans.substring(2);
-            }
+            ans = builder.substring(comma.length());
         }
         return ans;
     }
@@ -904,7 +931,10 @@ public class MyApplication  extends Application {
                     if (mode.contains(TEXT_WORD)) {
                         String values = containString(jsonObject, VALUES);
                         if (values != null) {
-                            list.add(values);
+                            values = values.replace(","," ").trim();
+                            if (! values.equals("")) {
+                                list.add(values);
+                            }
                         }
                     } else if (mode.contains(TEXT_SEQUENCE)) {
                         dictToList(list, containJSONArray(jsonObject, CHILD));
@@ -922,13 +952,12 @@ public class MyApplication  extends Application {
                         JSONArray childArray = containJSONArray(jsonObject, CHILD);
                         if (childArray != null) {
                             int max = childArray.length();
-                            if (max != 0) {
+                            if (0 < max) {
+                                Random rand = new Random();
                                 boolean flag = true;
                                 for (int i = 0; i < max; i++) {
-                                    Random rand = new Random();
-                                    int index = rand.nextInt(100);
-                                    if (index < 60) {
-                                        dictToList(list, childArray.get(index));
+                                    if (rand.nextInt(100) < 60) {
+                                        dictToList(list, childArray.get(i));
                                         flag = false;
                                         break;
                                     }
@@ -950,110 +979,133 @@ public class MyApplication  extends Application {
      * @param context activity
      */
     public void subscription(Context context) {
-        execution( context,MyNASI.TYPE.SUBSCRIPTION);
+        execution(context,MyNASI.TYPE.SUBSCRIPTION,-1,-1);
     }
 
     /** send data fo Novel AI Support Interface
      *
      * @param context activity
      * @param type execution type
+     * @param bitmapX display image width
+     * @param bitmapY display image height
      */
-    public void execution(Context context,MyNASI.TYPE type) {
-        String message = context.getResources().getString(R.string.generate_image);
-        Toast.makeText(this , message, Toast.LENGTH_LONG).show();
+    public void execution(Context context,MyNASI.TYPE type,int bitmapX,int bitmapY) {
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
-        boolean useTree = preferences.getBoolean("setting_use_tree",true);
-        if (useTree) {
-            if (0 < this.getTop().length()) {
-                this.setPrompt(fromTree(true));
-                this.setUc(fromTree(false));
-            } else {
-                fromPromptToTree(getPrompt(),true);
-                fromPromptToTree(getUc(),false);
-            }
-        }
-        String prompt = this.getPrompt();
-        String uc = this.getUc();
         String email = preferences.getString("setting_login_email","").trim();
         String password = preferences.getString("setting_login_password","").trim();
-        String model = preferences.getString("prompt_model","safe-diffusion").trim();
-        int width;
-        int height;
-        try {
-            String string =  preferences.getString("setting_width_x_height","512x768");
-            int index = string.indexOf('x');
-            if (0 < index) {
-                String widthString = string.substring(0,index);
-                String heightString = string.substring(index + 1);
-                width = Integer.parseInt(widthString);
-                height = Integer.parseInt(heightString);
-            } else {
-                throw new NumberFormatException("not number x number");
+        MyNASI.Allin1Request request;
+        if (type == MyNASI.TYPE.UPSCALE) {
+            String message = context.getResources().getString(R.string.upscale);
+            Toast.makeText(this , message, Toast.LENGTH_LONG).show();
+            request = new MyNASI.Allin1RequestUpscale(
+                    type,
+                    email,
+                    password,
+                    bitmapX,
+                    bitmapY,
+                    4,
+                    this.imageBuffer);
+        } else if (type == MyNASI.TYPE.IMAGE) {
+            String message = context.getResources().getString(R.string.generate_image);
+            Toast.makeText(this , message, Toast.LENGTH_LONG).show();
+            boolean useTree = preferences.getBoolean("setting_use_tree",true);
+            if (useTree) {
+                if (0 < this.getTop().length()) {
+                    this.setPrompt(fromTree(true));
+                    this.setUc(fromTree(false));
+                } else {
+                    fromPromptToTree(getPrompt(),true);
+                    fromPromptToTree(getUc(),false);
+                }
             }
-        } catch (NumberFormatException e) {
-            width = 512;
-            height = 768;
+            String prompt = this.getPrompt();
+            String uc = this.getUc();
+            String model = preferences.getString("prompt_model","safe-diffusion").trim();
+            int width;
+            int height;
+            try {
+                String string =  preferences.getString("setting_width_x_height","512x768");
+                int index = string.indexOf('x');
+                if (0 < index) {
+                    String widthString = string.substring(0,index);
+                    String heightString = string.substring(index + 1);
+                    width = Integer.parseInt(widthString);
+                    height = Integer.parseInt(heightString);
+                } else {
+                    throw new NumberFormatException("not number x number");
+                }
+            } catch (NumberFormatException e) {
+                width = 512;
+                height = 768;
+            }
+            int scale;
+            try {
+                String string =  preferences.getString("prompt_number_scale","11");
+                scale = Integer.parseInt(string);
+            } catch (NumberFormatException e) {
+                scale = 11;
+            }
+            int steps;
+            try {
+                String string =  preferences.getString("prompt_number_steps","28");
+                steps = Integer.parseInt(string);
+            } catch (NumberFormatException e) {
+                steps = 28;
+            }
+            String sampler =  preferences.getString("prompt_sampler","k_dpmpp_2m");
+            boolean sm;
+            try {
+                sm = preferences.getBoolean("prompt_sm",true);
+            } catch (ClassCastException e) {
+                sm = true;
+            }
+            boolean sm_dyn;
+            try {
+                sm_dyn = preferences.getBoolean("prompt_sm_dyn",true);
+            } catch (ClassCastException e) {
+                sm_dyn = true;
+            }
+            boolean fixed_seed;
+            try {
+                fixed_seed = preferences.getBoolean("prompt_fixed_seed",false);
+            } catch (ClassCastException e) {
+                fixed_seed = false;
+            }
+            int seed = this.getSeed();
+            if ((!fixed_seed) || (seed == 0)) {
+                seed = new java.util.Random().nextInt(Integer.MAX_VALUE - 1) + 1;
+                this.setSeed(seed);
+            }
+            request = new MyNASI.Allin1RequestImage(
+                    type,
+                    email,
+                    password,
+                    model,
+                    prompt,
+                    width,
+                    height,
+                    scale,
+                    steps,
+                    sampler,
+                    sm,
+                    sm_dyn,
+                    uc,
+                    seed);
+        } else {
+            request = new MyNASI.Allin1Request(
+                    type,
+                    email,
+                    password);
         }
-        int scale;
-        try {
-            String string =  preferences.getString("prompt_number_scale","11");
-            scale = Integer.parseInt(string);
-        } catch (NumberFormatException e) {
-            scale = 11;
-        }
-        int steps;
-        try {
-            String string =  preferences.getString("prompt_number_steps","28");
-            steps = Integer.parseInt(string);
-        } catch (NumberFormatException e) {
-            steps = 28;
-        }
-        String sampler =  preferences.getString("prompt_sampler","k_dpmpp_2m");
-        boolean sm;
-        try {
-            sm = preferences.getBoolean("prompt_sm",true);
-        } catch (ClassCastException e) {
-            sm = true;
-        }
-        boolean sm_dyn;
-        try {
-            sm_dyn = preferences.getBoolean("prompt_sm_dyn",true);
-        } catch (ClassCastException e) {
-            sm_dyn = true;
-        }
-        boolean fixed_seed;
-        try {
-            fixed_seed = preferences.getBoolean("prompt_fixed_seed",false);
-        } catch (ClassCastException e) {
-            fixed_seed = false;
-        }
-        int seed = this.getSeed();
-        if ((!fixed_seed) || (seed == 0)) {
-            seed = new java.util.Random().nextInt(Integer.MAX_VALUE - 1) + 1;
-            this.setSeed(seed);
-        }
-        MyNASI.Allin1Request request = new MyNASI.Allin1Request(
-                type,
-                email,
-                password,
-                model,
-                prompt,
-                width,
-                height,
-                scale,
-                steps,
-                sampler,
-                sm,
-                sm_dyn,
-                uc,
-                seed);
         Runnable runnable = () -> {
             if (lock.tryLock()) {
                 try {
                     final MyNASI.Allin1Response res;
                     MyNASI nasi = this.getMyNASI();
-                    if (request.type == MyNASI.TYPE.IMAGE) {
-                        res = nasi.downloadImage(request);
+                    if (request.type == MyNASI.TYPE.UPSCALE) {
+                        res = nasi.upscale((MyNASI.Allin1RequestUpscale)request);
+                    } else if (request.type == MyNASI.TYPE.IMAGE) {
+                        res = nasi.downloadImage((MyNASI.Allin1RequestImage)request);
                     } else {
                         res = nasi.subscription(request);
                     }
@@ -1081,12 +1133,16 @@ public class MyApplication  extends Application {
             if (res.statusCode != 200) {
                 buf.append("result=").append(res.content).append("\n");
             }
-        } else if (res.type == MyNASI.TYPE.IMAGE) {
-            buf.append("result=").append(res.content).append("\n")
-                    .append("request=").append(res.requestBody).append("\n");
+        } else if ((res.type == MyNASI.TYPE.IMAGE)
+            || (res.type == MyNASI.TYPE.UPSCALE)){
+            buf.append("result=").append(res.content).append("\n");
+            if (res.type == MyNASI.TYPE.IMAGE) {
+                buf.append("request=").append(res.requestBody).append("\n");
+            }
             if (res.statusCode == 200) {
                 setImageBuffer(res.imageBuffer);
                 setImageMimeType(res.mimeType);
+                setDownloadFlag(true);
                 setAnlas(res.anlas);
                 if (context instanceof ImageActivity) {
                     ((ImageActivity)context).onMyResume();
@@ -1094,6 +1150,11 @@ public class MyApplication  extends Application {
                     Intent intent = new Intent(context, ImageActivity.class);
                     context.startActivity( intent );
                 }
+                String message = "OK";
+                Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
+            } else {
+                String message = "NG";
+                Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
             }
         } else { // MyNASI.TYPE.SUBSCRIPTION
             setAnlas(res.anlas);

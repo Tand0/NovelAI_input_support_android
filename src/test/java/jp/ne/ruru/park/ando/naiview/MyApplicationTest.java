@@ -73,11 +73,5 @@ public class MyApplicationTest {
         Assert.assertEquals(result,"{aa}");
         result = a.getEnhanceText("[[aa",2);
         Assert.assertEquals(result,"{{aa}}");
-
-
-
     }
-
-
-
 }

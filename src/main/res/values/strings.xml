@@ -2,6 +2,7 @@
     <string name="app_name">NAIView</string>
     <!-- Strings used for fragments for navigation -->
     <string name="img_description1">Image area</string>
+    <string name="img_posittion">0/0</string>
     <string name="title_activity_settings">SettingsActivity</string>
     <string name="title_activity_prompt">PromptActivity</string>
     <string name="title_activity_uc">UcActivity</string>
@@ -57,6 +58,7 @@
     <string name="action_policy">Privacy Policy</string>
 
     <string name="menu_move">Action</string>
+    <string name="menu_save">Save this image?</string>
     <string name="from_image_to_prompt">Load image to prompt</string>
     <string name="from_prompt_to_tree">To tree</string>
     <string name="from_tree_to_prompt">From tree</string>
@@ -65,6 +67,7 @@
 
     <string name="menu_nai">Use Novel AI REST API</string>
     <string name="generate_image">/ai/generate-image</string>
+    <string name="upscale">/ai/upscale</string>
     <string name="subscription">/user/subscription</string>
     <string name="title_activity_tree">TreeActivity</string>
 

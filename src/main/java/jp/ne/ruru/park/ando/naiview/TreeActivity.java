@@ -165,7 +165,7 @@ public class TreeActivity extends AppCompatActivity {
         MyApplication a = (MyApplication) this.getApplication();
         a.saveInternal(this);
         String message = this.getResources().getString(R.string.action_save_internal);
-        Toast.makeText(this , message, Toast.LENGTH_LONG).show();
+        Toast.makeText(this , message, Toast.LENGTH_SHORT).show();
     }
 
     /** save for callback */

@@ -43,19 +43,6 @@ public class ExampleInstrumentedTest {
     }
 
     /**
-     * test load
-     */
-    @Test
-    public void load() {
-        Context context = appContext.getApplicationContext();
-        MyApplication application = (MyApplication) context;
-        application.load(context, null,null);
-        System.out.println("== log ====");
-        System.out.println(application.getLog());
-        System.out.println("===========");
-    }
-
-    /**
      * test token.
      * Check if external library works in android
      */
