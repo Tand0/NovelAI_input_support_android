@@ -41,26 +41,38 @@ public class MyApplication  extends Application {
      */
     public final ReentrantLock lock = new ReentrantLock();
 
-    /** handle to return for android thread */
+    /**
+     * handle to return for android thread
+     */
     public final Handler mHandler = new Handler();
 
-    /** this is constructor */
+    /**
+     * this is constructor
+     */
     public MyApplication() {
     }
 
-    /** privacy policy for google play console*/
+    /**
+     * privacy policy for google play console
+     */
     public static final String PRIVACY_POLICY_URL = "https://github.com/Tand0/NovelAI_input_support_android/blob/main/README.md";
 
-    /** on create */
+    /**
+     * on create
+     */
     @Override
     public void onCreate() {
         super.onCreate();
     }
 
-    /** log area */
+    /**
+     * log area
+     */
     private String log = "this is log.";
 
-    /** getter for log
+    /**
+     * getter for log
+     *
      * @return log
      */
     public String getLog() {
@@ -69,10 +81,11 @@ public class MyApplication  extends Application {
 
     /**
      * append log
+     *
      * @param context activity
      * @param message message
      */
-    public void appendLog(Context context,String message) {
+    public void appendLog(Context context, String message) {
         final int len = 5000;
         this.log = this.log + "\n\n" + message;
         if (len < this.log.length()) {
@@ -85,11 +98,14 @@ public class MyApplication  extends Application {
         }
     }
 
-    /** prompt area */
+    /**
+     * prompt area
+     */
     private String prompt = "girl";
 
     /**
      * getter for prompt
+     *
      * @return prompt
      */
     public String getPrompt() {
@@ -98,24 +114,30 @@ public class MyApplication  extends Application {
 
     /**
      * setter for prompt
+     *
      * @param prompt prompt
      */
     public void setPrompt(String prompt) {
         this.prompt = prompt;
     }
 
-    /** uc area */
+    /**
+     * uc area
+     */
     private String uc = "lowres, bad anatomy, bad hands, text, error, missing fingers, extra digit, fewer digits, cropped, worst quality, low quality, normal quality, jpeg artifacts, signature, watermark, username, blurry";
 
     /**
      * getter for prompt
+     *
      * @return uc
      */
     public String getUc() {
         return this.uc;
     }
 
-    /** setter for uc
+    /**
+     * setter for uc
+     *
      * @param uc uc
      */
     public void setUc(String uc) {
@@ -129,13 +151,16 @@ public class MyApplication  extends Application {
 
     /**
      * getter for top
+     *
      * @return top
      */
     public JSONArray getTop() {
         return this.top;
     }
+
     /**
      * setter for top
+     *
      * @param top top
      */
     public void setTop(@NonNull JSONArray top) {
@@ -150,6 +175,7 @@ public class MyApplication  extends Application {
 
     /**
      * getter for image buffer
+     *
      * @return image buffer
      */
     public byte[] getImageBuffer() {
@@ -158,6 +184,7 @@ public class MyApplication  extends Application {
 
     /**
      * setter for image buffer
+     *
      * @param imageBuffer image buffer
      */
     public void setImageBuffer(byte[] imageBuffer) {
@@ -172,6 +199,7 @@ public class MyApplication  extends Application {
 
     /**
      * getter for image mime type
+     *
      * @return image mime type
      */
     public String getImageMimeType() {
@@ -180,6 +208,7 @@ public class MyApplication  extends Application {
 
     /**
      * setter for image mime type
+     *
      * @param imageMimeType image mime type
      */
     public void setImageMimeType(String imageMimeType) {
@@ -194,6 +223,7 @@ public class MyApplication  extends Application {
 
     /**
      * getter for anlas
+     *
      * @return anlas
      */
     public int getAnlas() {
@@ -202,6 +232,7 @@ public class MyApplication  extends Application {
 
     /**
      * setter for anlas
+     *
      * @param anlas anlas
      */
     public void setAnlas(int anlas) {
@@ -216,6 +247,7 @@ public class MyApplication  extends Application {
 
     /**
      * getter for cut data
+     *
      * @return cut data
      */
     public JSONObject getCut() {
@@ -224,6 +256,7 @@ public class MyApplication  extends Application {
 
     /**
      * setter for cut data
+     *
      * @param cut cut data
      */
     public void setCut(JSONObject cut) {
@@ -238,6 +271,7 @@ public class MyApplication  extends Application {
 
     /**
      * getter for seed data
+     *
      * @return seed data
      */
     public int getSeed() {
@@ -246,6 +280,7 @@ public class MyApplication  extends Application {
 
     /**
      * setter for seed data
+     *
      * @param seed seed data
      */
     public void setSeed(int seed) {
@@ -260,6 +295,7 @@ public class MyApplication  extends Application {
 
     /**
      * getter for downloadFlag data
+     *
      * @return downloadFlag data
      */
     public boolean getDownloadFlag() {
@@ -268,6 +304,7 @@ public class MyApplication  extends Application {
 
     /**
      * setter for downloadFlag data
+     *
      * @param downloadFlag downloadFlag data
      */
     public void setDownloadFlag(boolean downloadFlag) {
@@ -282,6 +319,7 @@ public class MyApplication  extends Application {
 
     /**
      * getter for imagePosition data
+     *
      * @return imagePosition data
      */
     public int getImagePosition() {
@@ -290,10 +328,15 @@ public class MyApplication  extends Application {
 
     /**
      * setter for imagePosition data
+     *
      * @param imagePosition imagePosition data
      */
     public void setImagePosition(int imagePosition) {
         this.imagePosition = imagePosition;
+    }
+
+    public boolean isUseTree(SharedPreferences preferences) {
+        return preferences.getBoolean("setting_use_tree", true);
     }
 
     /**
@@ -1008,7 +1051,7 @@ public class MyApplication  extends Application {
         } else if (type == MyNASI.TYPE.IMAGE) {
             String message = context.getResources().getString(R.string.generate_image);
             Toast.makeText(this , message, Toast.LENGTH_LONG).show();
-            boolean useTree = preferences.getBoolean("setting_use_tree",true);
+            boolean useTree = isUseTree(preferences);
             if (useTree) {
                 if (0 < this.getTop().length()) {
                     this.setPrompt(fromTree(true));

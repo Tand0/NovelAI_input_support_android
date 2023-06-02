@@ -36,7 +36,7 @@
     <string name="prompt_sampler_summary">sampler data</string>
     <string name="prompt_sm">sm</string>
     <string name="prompt_sm_dyn">sm_dyn</string>
-    <string name="prompt_fixed_seed">fixed seed</string>
+    <string name="prompt_fixed_seed">Fixed seed</string>
 
     <!-- Prompt activiti -->
     <string name="text_prompt_hint">Please input prompt or uc</string>
@@ -46,11 +46,12 @@
     <string name="action">Action</string>
     <string name="action_folder">Folder</string>
     <string name="action_checkbox">CheckBox</string>
-    <string name="action_settings">Display setting</string>
-    <string name="action_prompt">Display prompt</string>
-    <string name="action_uc">Display uc</string>
-    <string name="action_tree">Display tree</string>
-    <string name="action_image">Display image</string>
+    <string name="menu_arrow">--&gt;</string>
+    <string name="action_settings">Settings</string>
+    <string name="action_prompt">Prompt</string>
+    <string name="action_uc">Uc</string>
+    <string name="action_tree">Tree</string>
+    <string name="action_image">Image</string>
     <string name="action_save_internal">Save internal</string>
     <string name="action_save_external">Save</string>
     <string name="action_load">Load</string>

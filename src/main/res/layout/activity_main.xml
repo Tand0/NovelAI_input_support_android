@@ -6,103 +6,147 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <com.google.android.material.appbar.AppBarLayout
+    <!-- com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:fitsSystemWindows="true">
 
-        <!-- com.google.android.material.appbar.MaterialToolbar
+        <com.google.android.material.appbar.MaterialToolbar
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize" / -->
+            android:layout_height="?attr/actionBarSize" />
 
-    </com.google.android.material.appbar.AppBarLayout>
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/menu_display" />
+    </com.google.android.material.appbar.AppBarLayout -->
 
     <LinearLayout
-        android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
         <Button
             android:id="@+id/action_settings"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
             android:drawableLeft="@drawable/ic_log"
             android:drawableTint="?android:attr/textColorPrimaryInverse"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
             android:text="@string/action_settings"
             tools:ignore="ButtonStyle,RtlHardcoded" />
-        <Button
-            android:id="@+id/action_policy"
-            android:drawableLeft="@drawable/ic_policy"
-            android:drawableTint="?android:attr/textColorPrimaryInverse"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/action_policy"
-            tools:ignore="ButtonStyle,DuplicateSpeakableTextCheck,RtlHardcoded" />
-    </LinearLayout>
 
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-        <Button
-            android:id="@+id/action_prompt"
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/action_prompt"
-            tools:ignore="ButtonStyle,RtlHardcoded" />
-        <Button
-            android:id="@+id/action_uc"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/action_uc"
-            tools:ignore="ButtonStyle,RtlHardcoded" />
+            android:layout_gravity="center_vertical"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:text="@string/menu_arrow"/>
+
+                <Button
+                    android:id="@+id/action_tree"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:drawableLeft="@drawable/ic_tree"
+                    android:drawableTint="?android:attr/textColorPrimaryInverse"
+                    android:text="@string/action_tree"
+                    tools:ignore="RtlHardcoded" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:text="@string/menu_arrow"/>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:orientation="vertical">
+
+                    <Button
+                        android:id="@+id/action_prompt"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/action_prompt"
+                        tools:ignore="ButtonStyle,RtlHardcoded" />
+
+                    <Button
+                        android:id="@+id/action_uc"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/action_uc"
+                        tools:ignore="ButtonStyle,RtlHardcoded" />
+                </LinearLayout>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:text="@string/menu_arrow"/>
+
+                <Button
+                    android:id="@+id/action_image"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:drawableLeft="@drawable/ic_image"
+                    android:drawableTint="?android:attr/textColorPrimaryInverse"
+                    android:text="@string/action_image"
+                    tools:ignore="ButtonStyle,RtlHardcoded" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:text="@string/menu_arrow"/>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:orientation="vertical">
+
+                    <Button
+                        android:id="@+id/generate_image"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:drawableLeft="@drawable/ic_image"
+                        android:drawableTint="?android:attr/textColorPrimaryInverse"
+                        android:text="@string/generate_image"
+                        tools:ignore="ButtonStyle,RtlHardcoded" />
+
+                    <Button
+                        android:id="@+id/subscription"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:drawableLeft="@drawable/ic_subscription"
+                        android:drawableTint="?android:attr/textColorPrimaryInverse"
+                        android:text="@string/subscription"
+                        tools:ignore="RtlHardcoded" />
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
     </LinearLayout>
     <Button
-        android:id="@+id/action_tree"
-        android:drawableLeft="@drawable/ic_tree"
+        android:id="@+id/action_policy"
+        android:drawableLeft="@drawable/ic_policy"
         android:drawableTint="?android:attr/textColorPrimaryInverse"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/action_tree"
-        tools:ignore="RtlHardcoded" />
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/menu_nai" />
-
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-        <Button
-            android:id="@+id/generate_image"
-            android:drawableLeft="@drawable/ic_image"
-            android:drawableTint="?android:attr/textColorPrimaryInverse"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/generate_image"
-            tools:ignore="ButtonStyle,RtlHardcoded" />
-        <Button
-            android:id="@+id/action_image"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/action_image"
-            tools:ignore="ButtonStyle,RtlHardcoded" />
-    </LinearLayout>
-    <Button
-        android:id="@+id/subscription"
-        android:drawableLeft="@drawable/ic_subscription"
-        android:drawableTint="?android:attr/textColorPrimaryInverse"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/subscription"
-        tools:ignore="RtlHardcoded" />
+        android:text="@string/action_policy"
+        tools:ignore="ButtonStyle,DuplicateSpeakableTextCheck,RtlHardcoded" />
 
     <ScrollView
         android:id="@+id/scroll_view"

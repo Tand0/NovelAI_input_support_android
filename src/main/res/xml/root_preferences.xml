@@ -18,7 +18,10 @@
     <SwitchPreferenceCompat
         app:key="setting_use_tree"
         app:title="@string/setting_use_tree" />
-
+    <SwitchPreferenceCompat
+        app:key="prompt_fixed_seed"
+        app:defaultValue="false"
+        app:title="@string/prompt_fixed_seed" />
     <ListPreference
         android:key="setting_width_x_height"
         android:title="@string/setting_width_x_height"
@@ -68,8 +71,5 @@
         app:key="prompt_sm_dyn"
         app:defaultValue="false"
         app:title="@string/prompt_sm_dyn" />
-    <SwitchPreferenceCompat
-        app:key="prompt_fixed_seed"
-        app:defaultValue="false"
-        app:title="@string/prompt_fixed_seed" />
+
 </PreferenceScreen>
