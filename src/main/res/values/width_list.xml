@@ -20,4 +20,14 @@
         <item>nai-diffusion</item>
         <item>nai-diffusion-furry</item>
     </string-array>
+    <string-array name="edit_type_list">
+        <item>Insert text</item>
+        <item>Insert sequence</item>
+        <item>Insert select</item>
+        <item>Insert weight</item>
+    </string-array>
+    <string-array name="word_edit_insert">
+        <item>Insert</item>
+        <item>Change</item>
+    </string-array>
 </resources>

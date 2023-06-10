@@ -16,8 +16,6 @@ import android.os.Bundle;
 import android.provider.MediaStore;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
-import android.view.View;
-import android.widget.SeekBar;
 import android.widget.Toast;
 
 import androidx.activity.result.ActivityResultLauncher;
@@ -25,14 +23,12 @@ import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
 
 import java.io.ByteArrayInputStream;
-import java.io.IOException;
 import java.io.InputStream;
-import java.io.OutputStream;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.LinkedList;
 import java.util.Locale;
 
+import jp.ne.ruru.park.ando.naiview.adapter.UriEtc;
 import jp.ne.ruru.park.ando.naiview.databinding.ActivityImageBinding;
 
 /** image activity
@@ -76,13 +72,20 @@ public class ImageActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding = ActivityImageBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-
         gestureDetector = new GestureDetector(this,listener);
-        //
-        binding.imageTop.setEnabled(false);
-        binding.imageTop.setVisibility(View.GONE);
     }
 
+    /**
+     * intent call back method.
+     * Used by Storage Access Framework
+     */
+    ActivityResultLauncher<Intent> resultLauncher = registerForActivityResult(
+            new ActivityResultContracts.StartActivityForResult(),
+            result -> {
+                if (result.getResultCode() == Activity.RESULT_OK) {
+                    loadForASFResult();
+                }
+            });
     /** on resume */
     @Override
     public void onResume() {
@@ -98,7 +101,7 @@ public class ImageActivity extends AppCompatActivity {
         MyApplication a =
                 ((MyApplication)ImageActivity.this.getApplication());
         if (a.getImageBuffer() == null) {
-            a.updateImageBuffer(this,null,"image/png");
+            a.updateImageBuffer(this,null,null);
         }
         try (InputStream stream = new ByteArrayInputStream(a.getImageBuffer())){
             Bitmap bitmap = BitmapFactory.decodeStream(stream);
@@ -131,7 +134,7 @@ public class ImageActivity extends AppCompatActivity {
         if ((bitmapX <= 768) && (bitmapY <= 768)) {
             final MyApplication a =
                     ((MyApplication)ImageActivity.this.getApplication());
-            a.execution(ImageActivity.this, MyNASI.TYPE.UPSCALE, bitmapX, bitmapY);
+            a.execution(ImageActivity.this, MyNASI.TYPE.UPSCALE, bitmapX, bitmapY,null);
         } else {
             String message = String.format(
                     Locale.ENGLISH, "already big(%dx%d)", bitmapX,bitmapY);
@@ -140,9 +143,6 @@ public class ImageActivity extends AppCompatActivity {
     }
 
     public void onSaveDialogMenu() {
-        binding.imageTop.setEnabled(false);
-        binding.imageTop.setVisibility(View.GONE);
-        //
         final MyApplication a =
                 ((MyApplication)ImageActivity.this.getApplication());
         String title = ImageActivity.this.getResources().getString(R.string.menu_move);
@@ -157,13 +157,13 @@ public class ImageActivity extends AppCompatActivity {
                 ImageActivity.this.getResources().getString(R.string.generate_image),
                 ImageActivity.this.getResources().getString(R.string.upscale),
                 ImageActivity.this.getResources().getString(R.string.action_save_external),
-                "Cancel"
+                ImageActivity.this.getResources().getString(R.string.menu_cancel)
         };
         new AlertDialog.Builder(ImageActivity.this)
                 .setTitle(title)
                 .setItems(items, (dialog,which)-> {
                     if (which == 0) {
-                        a.execution(ImageActivity.this,MyNASI.TYPE.IMAGE,bitmapX,bitmapY);
+                        a.execution(ImageActivity.this,MyNASI.TYPE.IMAGE,bitmapX,bitmapY,null);
                     } else if (which == 1) {
                         doUpscale();
                     } else if (which == 2) {
@@ -208,10 +208,6 @@ public class ImageActivity extends AppCompatActivity {
                 swipeFlag = 2;
                 onMyFling();
                 return true;
-            } else if (SWIPE_DISTANCE < e1.getY() - e2.getY()) {
-                swipeFlag = 3;
-                onMyFling();
-                return true;
             }
             return super.onFling(e1,e2,velocityX,velocityY);
         }
@@ -228,22 +224,7 @@ public class ImageActivity extends AppCompatActivity {
             onMyNextFling();
         }
     }
-    public static class UriEtc {
-        UriEtc(Uri uri,String mime) {
-            this.uri = uri;
-            this.mime = mime;
-        }
-        public Uri uri;
-        public String mime;
-        @Override
-        public boolean equals(Object o) {
-            if (o instanceof UriEtc) {
-                return this.uri.equals(((UriEtc) o).uri);
-            }
-            return super.equals(o);
-        }
-    }
-    public LinkedList<UriEtc> uriEtcList = new LinkedList<>();
+
     public int swipeFlag = -1;
     public void onMyNextFling() {
         final MyApplication a =
@@ -259,7 +240,7 @@ public class ImageActivity extends AppCompatActivity {
                 ((MyApplication)ImageActivity.this.getApplication());
         a.setDownloadFlag(false);
         //
-        if (uriEtcList.size() == 0) {
+        if (a.getUriEtcList().size() == 0) {
             ContentResolver cr = getContentResolver();
             Uri uri = MediaStore.Images.Media.EXTERNAL_CONTENT_URI;
             String[] projection = new String[]{
@@ -282,108 +263,35 @@ public class ImageActivity extends AppCompatActivity {
                     }
                     Uri contentUri = ContentUris.withAppendedId(uri, id);
                     UriEtc uriEtc = new UriEtc(contentUri, mime);
-                    if (!uriEtcList.contains(uriEtc)) {
-                        uriEtcList.add(uriEtc);
+                    if (!a.getUriEtcList().contains(uriEtc)) {
+                        a.getUriEtcList().add(uriEtc);
                     }
                 }
             }
         }
-        int max = uriEtcList.size() - 1;
+        int max = a.getUriEtcList().size() - 1;
         if (max < 0) {
             a.setImagePosition(-1);
             return;
         }
-        int index;
         if (a.getImagePosition() < 0) {
-            index = 0;
+            a.setImagePosition(0);
         } else if (swipeFlag == 0) {
-            index = Math.max(0, a.getImagePosition() - 1);
-        } else if (swipeFlag == 1) {
-            index = Math.min(max, a.getImagePosition() + 1);
-        } else {
-            index = Math.max(0,Math.min(max, a.getImagePosition()));
-        }
-        if (swipeFlag == 2) {
-            binding.imageTop.setEnabled(true);
-            binding.imageTop.setVisibility(View.VISIBLE);
-            binding.imageSeekbar.setMin(0);
-            binding.imageSeekbar.setMax(max);
-            binding.imageSeekbar.setOnSeekBarChangeListener(null);
-            binding.imageSeekbar.setProgress(index);
-            binding.imageSeekbar.setOnSeekBarChangeListener(seekListener);
-            setPositionText(index,max);
-            return;
-        } else if (swipeFlag == 3) {
-            binding.imageTop.setEnabled(false);
-            binding.imageTop.setVisibility(View.GONE);
-            return;
-        }
-        a.setImagePosition(index);
-        loadForASFResult();
-    }
-
-    /**
-     * display position
-     * @param index position
-     * @param max max
-     */
-    public void setPositionText(int index, int max) {
-        String text = "" + index + "/" + max;
-        binding.imagePosition.setText(text);
-    }
-    /**
-     * A SeekBar is an extension of ProgressBar that adds a draggable thumb. The user can touch
-     * the thumb and drag left or right to set the current progress level or use the arrow keys.
-     * Placing focusable widgets to the left or right of a SeekBar is discouraged.
-     */
-    public SeekBar.OnSeekBarChangeListener seekListener = new SeekBar.OnSeekBarChangeListener() {
-        /**
-         * Notification that the progress level has changed. Clients can use the fromUser parameter
-         * to distinguish user-initiated changes from those that occurred programmatically.
-         * @param seekBar The SeekBar whose progress has changed
-         * @param progress The current progress level. This will be in the range min..max where min
-         *                 and max were set by setMin(int) and
-         *                 setMax(int), respectively. (The default values for
-         *                 min is 0 and max is 100.)
-         * @param fromUser True if the progress change was initiated by the user.
-         */
-        @Override
-        public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-            setPositionText(seekBar.getProgress(),seekBar.getMax());
-        }
-
-        /**
-         * Notification that the user has started a touch gesture. Clients may want to use this
-         * to disable advancing the seekbar.
-         * @param seekBar The SeekBar in which the touch gesture began
-         */
-        @Override
-        public void onStartTrackingTouch(SeekBar seekBar) {
-            //NONE
-        }
-
-        /**
-         * Notification that the user has finished a touch gesture. Clients may want to use this
-         * to re-enable advancing the seekbar.
-         * @param seekBar The SeekBar in which the touch gesture began
-         */
-        @Override
-        public void onStopTrackingTouch(SeekBar seekBar) {
-            final MyApplication a =
-                    ((MyApplication)ImageActivity.this.getApplication());
-            int max = uriEtcList.size() - 1;
-            if (max < 0) {
-                a.setImagePosition(-1);
-                return;
-            }
-            int position = seekBar.getProgress();
-            if (uriEtcList.size() <= position) {
-                return;
-            }
-            a.setImagePosition(position);
+            int index = Math.max(0, a.getImagePosition() - 1);
+            a.setImagePosition(index);
             loadForASFResult();
+        } else if (swipeFlag == 1) {
+            int index = Math.min(max, a.getImagePosition() + 1);
+            a.setImagePosition(index);
+            loadForASFResult();
+        } else {
+            int index = Math.max(0,Math.min(max, a.getImagePosition()));
+            a.setImagePosition(index);
+            a.appendLog(this,"Action: ImageList");
+            Intent intent = new Intent(this, ImageListActivity.class);
+            resultLauncher.launch(intent);
         }
-    };
+    }
     ActivityResultLauncher<String> readImagesPermissionLauncher = registerForActivityResult(
             new ActivityResultContracts.RequestPermission(),
             result -> {
@@ -412,12 +320,11 @@ public class ImageActivity extends AppCompatActivity {
         final MyApplication a =
                 ((MyApplication)ImageActivity.this.getApplication());
         int position = a.getImagePosition();
-        int max = uriEtcList.size() - 1;
+        int max = a.getUriEtcList().size() - 1;
         if ((max <= 0) || (max < position)) {
             return;
         }
-        UriEtc uriEtc = uriEtcList.get(position);
-
+        UriEtc uriEtc = a.getUriEtcList().get(position);
         MyApplication application = (MyApplication) this.getApplication();
         application.load(this,uriEtc.uri,uriEtc.mime);
         onMyResume();
@@ -447,15 +354,10 @@ public class ImageActivity extends AppCompatActivity {
      */
     public void saveForASFResult(Uri uri) {
         MyApplication a = (MyApplication) this.getApplication();
-        try (OutputStream os = getContentResolver().openOutputStream(uri)) {
-            os.write(a.getImageBuffer());
-            //
-            a.setImagePosition(0);
-            this.uriEtcList.clear();
-            a.setDownloadFlag(false);
-            //
-        } catch (IOException e) {
-            // NONE
-        }
+        a.savingImageBuffer(this,uri);
+        a.setImagePosition(0);
+        a.getUriEtcList().clear();
+        a.setDownloadFlag(false);
+
     }
 }

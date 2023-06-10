@@ -63,6 +63,7 @@
     <string name="from_image_to_prompt">Load image to prompt</string>
     <string name="from_prompt_to_tree">To tree</string>
     <string name="from_tree_to_prompt">From tree</string>
+    <string name="to_suggest">To suggest</string>
     <string name="from_tree_to_file">Save tree</string>
     <string name="from_file_to_tree">Load tree</string>
 
@@ -70,7 +71,9 @@
     <string name="generate_image">/ai/generate-image</string>
     <string name="upscale">/ai/upscale</string>
     <string name="subscription">/user/subscription</string>
+    <string name="suggest_tags">/ai/generate-image/suggest-tags</string>
     <string name="title_activity_tree">TreeActivity</string>
+    <string name="title_activity_suggest">SuggestActivity</string>
 
     <!-- tree tab information -->
     <string name="menu_edit">Edit</string>
@@ -88,6 +91,9 @@
     <string name="menu_not_ignore">Not ignore</string>
     <string name="menu_enhance">Enhance</string>
     <string name="menu_not_enhance">Not enhance</string>
+    <string name="menu_update">Update</string>
+    <string name="menu_image_list">Image list</string>
+    <string name="menu_cancel">Cancel</string>
 
     <!-- tree -->
     <string name="input_word">Input word for prompt/uc</string>

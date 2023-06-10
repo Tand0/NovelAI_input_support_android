@@ -26,7 +26,7 @@ import java.io.OutputStream;
 import java.nio.charset.Charset;
 
 import jp.ne.ruru.park.ando.naiview.databinding.ActivityTreeBinding;
-import jp.ne.ruru.park.ando.naiview.tree.JSONListAdapter;
+import jp.ne.ruru.park.ando.naiview.adapter.JSONListAdapter;
 
 /** tree activity
  * @author foobar@em.boo.jp

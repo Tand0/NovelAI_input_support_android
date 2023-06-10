@@ -23,12 +23,16 @@ import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.OutputStream;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Random;
 import java.util.concurrent.Executors;
 import java.util.concurrent.locks.ReentrantLock;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import jp.ne.ruru.park.ando.naiview.adapter.UriEtc;
 
 
 /** application
@@ -288,7 +292,7 @@ public class MyApplication  extends Application {
     }
 
     /**
-     * downladFlag data area.
+     * download Flag data area.
      * Used by tree activity
      */
     private boolean downloadFlag = false;
@@ -326,6 +330,10 @@ public class MyApplication  extends Application {
         return this.imagePosition;
     }
 
+    private LinkedList<UriEtc> uriEtcList = new LinkedList<>();
+    public LinkedList<UriEtc> getUriEtcList() {
+        return uriEtcList;
+    }
     /**
      * setter for imagePosition data
      *
@@ -433,7 +441,24 @@ public class MyApplication  extends Application {
         }
         return next;
     }
-
+    /**
+     * get object for JSONObject used name
+     * @param object target JSONObject
+     * @param name dict name
+     * @return if in name then return result object, else return null (NOT JSONException)
+     */
+    public Double containDouble(Object object,String name) {
+        if (!(object instanceof JSONObject)) {
+            return null;
+        }
+        double next;
+        try {
+            next = ((JSONObject)object).getDouble(name);
+        } catch (JSONException e) {
+            return null;
+        }
+        return next;
+    }
     /**
      * click action for button
      * @param context activity
@@ -467,7 +492,7 @@ public class MyApplication  extends Application {
             context.startActivity( intent );
             return true;
         } else if (id == R.id.generate_image) {
-            execution(context,MyNASI.TYPE.IMAGE,-1,-1);
+            execution(context,MyNASI.TYPE.IMAGE,-1,-1,null);
             return true;
         } else if (id == R.id.subscription) {
             subscription(context);
@@ -603,7 +628,10 @@ public class MyApplication  extends Application {
      * @param imageUri image uri, if null then use resources
      * @param mime mime type
      */
-    public void updateImageBuffer(Context context,Uri imageUri,String mime) {
+    protected void updateImageBuffer(Context context,Uri imageUri,String mime) {
+        if (mime == null) {
+            mime = "image/png";
+        }
         //
         InputStream is = null;
         try {
@@ -638,6 +666,18 @@ public class MyApplication  extends Application {
                 }
             }
         }
+    }
+
+    public void savingImageBuffer(Context context,Uri uri) {
+        String text = "Save\n";
+        try (OutputStream os = getContentResolver().openOutputStream(uri)) {
+            os.write(this.getImageBuffer());
+        } catch (IOException e) {
+            text = e.getClass().getName() +
+                    "\n" +
+                    e.getMessage();
+        }
+        appendLog(context, text);
     }
 
     /** key for preferences */
@@ -891,11 +931,8 @@ public class MyApplication  extends Application {
      * @return prompt/uc
      */
     public String fromTree(boolean isPrompt) {
+        List<String> result = fromTreeList(isPrompt);
         String ans = "";
-        JSONArray data = new JSONArray();
-        this.deepCopyRemoveIgnore(data,this.getTop(),isPrompt);
-        LinkedList<String> result = new LinkedList<>();
-        dictToList(result, data);
         if (0 < result.size()) {
             StringBuilder builder = new StringBuilder();
             final String comma = ", ";
@@ -908,6 +945,18 @@ public class MyApplication  extends Application {
         return ans;
     }
 
+    /**
+     * get prompt/uc from tree
+     * @param isPrompt if true then prompt else uc.
+     * @return prompt/uc
+     */
+    public List<String> fromTreeList(boolean isPrompt) {
+        JSONArray data = new JSONArray();
+        this.deepCopyRemoveIgnore(data,this.getTop(),isPrompt);
+        LinkedList<String> result = new LinkedList<>();
+        dictToList(result, data);
+        return result;
+    }
     /**
      * get a deep copy of the data ignoring TEXT_IGNORE
      * @param copy copy data
@@ -1022,7 +1071,7 @@ public class MyApplication  extends Application {
      * @param context activity
      */
     public void subscription(Context context) {
-        execution(context,MyNASI.TYPE.SUBSCRIPTION,-1,-1);
+        execution(context,MyNASI.TYPE.SUBSCRIPTION,-1,-1,null);
     }
 
     /** send data fo Novel AI Support Interface
@@ -1031,8 +1080,9 @@ public class MyApplication  extends Application {
      * @param type execution type
      * @param bitmapX display image width
      * @param bitmapY display image height
+     * @param option option
      */
-    public void execution(Context context,MyNASI.TYPE type,int bitmapX,int bitmapY) {
+    public void execution(Context context,MyNASI.TYPE type,int bitmapX,int bitmapY,Object option) {
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
         String email = preferences.getString("setting_login_email","").trim();
         String password = preferences.getString("setting_login_password","").trim();
@@ -1050,27 +1100,27 @@ public class MyApplication  extends Application {
                     this.imageBuffer);
         } else if (type == MyNASI.TYPE.IMAGE) {
             String message = context.getResources().getString(R.string.generate_image);
-            Toast.makeText(this , message, Toast.LENGTH_LONG).show();
+            Toast.makeText(this, message, Toast.LENGTH_LONG).show();
             boolean useTree = isUseTree(preferences);
             if (useTree) {
                 if (0 < this.getTop().length()) {
                     this.setPrompt(fromTree(true));
                     this.setUc(fromTree(false));
                 } else {
-                    fromPromptToTree(getPrompt(),true);
-                    fromPromptToTree(getUc(),false);
+                    fromPromptToTree(getPrompt(), true);
+                    fromPromptToTree(getUc(), false);
                 }
             }
             String prompt = this.getPrompt();
             String uc = this.getUc();
-            String model = preferences.getString("prompt_model","safe-diffusion").trim();
+            String model = preferences.getString("prompt_model", "safe-diffusion").trim();
             int width;
             int height;
             try {
-                String string =  preferences.getString("setting_width_x_height","512x768");
+                String string = preferences.getString("setting_width_x_height", "512x768");
                 int index = string.indexOf('x');
                 if (0 < index) {
-                    String widthString = string.substring(0,index);
+                    String widthString = string.substring(0, index);
                     String heightString = string.substring(index + 1);
                     width = Integer.parseInt(widthString);
                     height = Integer.parseInt(heightString);
@@ -1083,34 +1133,34 @@ public class MyApplication  extends Application {
             }
             int scale;
             try {
-                String string =  preferences.getString("prompt_number_scale","11");
+                String string = preferences.getString("prompt_number_scale", "11");
                 scale = Integer.parseInt(string);
             } catch (NumberFormatException e) {
                 scale = 11;
             }
             int steps;
             try {
-                String string =  preferences.getString("prompt_number_steps","28");
+                String string = preferences.getString("prompt_number_steps", "28");
                 steps = Integer.parseInt(string);
             } catch (NumberFormatException e) {
                 steps = 28;
             }
-            String sampler =  preferences.getString("prompt_sampler","k_dpmpp_2m");
+            String sampler = preferences.getString("prompt_sampler", "k_dpmpp_2m");
             boolean sm;
             try {
-                sm = preferences.getBoolean("prompt_sm",true);
+                sm = preferences.getBoolean("prompt_sm", true);
             } catch (ClassCastException e) {
                 sm = true;
             }
             boolean sm_dyn;
             try {
-                sm_dyn = preferences.getBoolean("prompt_sm_dyn",true);
+                sm_dyn = preferences.getBoolean("prompt_sm_dyn", true);
             } catch (ClassCastException e) {
                 sm_dyn = true;
             }
             boolean fixed_seed;
             try {
-                fixed_seed = preferences.getBoolean("prompt_fixed_seed",false);
+                fixed_seed = preferences.getBoolean("prompt_fixed_seed", false);
             } catch (ClassCastException e) {
                 fixed_seed = false;
             }
@@ -1134,7 +1184,17 @@ public class MyApplication  extends Application {
                     sm_dyn,
                     uc,
                     seed);
-        } else {
+        } else if (type == MyNASI.TYPE.SUGGEST_TAGS) {
+            String model = preferences.getString("prompt_model", "safe-diffusion").trim();
+            String target = (String) option;
+            //
+            request = new MyNASI.Allin1RequestSuggestTags(
+                    type,
+                    email,
+                    password,
+                    model,
+                    target);
+         } else {
             request = new MyNASI.Allin1Request(
                     type,
                     email,
@@ -1149,6 +1209,8 @@ public class MyApplication  extends Application {
                         res = nasi.upscale((MyNASI.Allin1RequestUpscale)request);
                     } else if (request.type == MyNASI.TYPE.IMAGE) {
                         res = nasi.downloadImage((MyNASI.Allin1RequestImage)request);
+                    } else if (request.type == MyNASI.TYPE.SUGGEST_TAGS) {
+                        res = nasi.suggestTags((MyNASI.Allin1RequestSuggestTags)request);
                     } else {
                         res = nasi.subscription(request);
                     }
@@ -1177,7 +1239,7 @@ public class MyApplication  extends Application {
                 buf.append("result=").append(res.content).append("\n");
             }
         } else if ((res.type == MyNASI.TYPE.IMAGE)
-            || (res.type == MyNASI.TYPE.UPSCALE)){
+            || (res.type == MyNASI.TYPE.UPSCALE)) {
             buf.append("result=").append(res.content).append("\n");
             if (res.type == MyNASI.TYPE.IMAGE) {
                 buf.append("request=").append(res.requestBody).append("\n");
@@ -1188,10 +1250,10 @@ public class MyApplication  extends Application {
                 setDownloadFlag(true);
                 setAnlas(res.anlas);
                 if (context instanceof ImageActivity) {
-                    ((ImageActivity)context).onMyResume();
+                    ((ImageActivity) context).onMyResume();
                 } else {
                     Intent intent = new Intent(context, ImageActivity.class);
-                    context.startActivity( intent );
+                    context.startActivity(intent);
                 }
                 String message = "OK";
                 Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
@@ -1199,6 +1261,13 @@ public class MyApplication  extends Application {
                 String message = "NG";
                 Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
             }
+        } else if (res.type == MyNASI.TYPE.SUGGEST_TAGS) {
+            if (res.statusCode == 200) {
+                if (context instanceof SuggestActivity) {
+                    ((SuggestActivity) context).suggestTagsResponse(res.content);
+                }
+            }
+            buf.append("content=").append(res.content).append("\n");
         } else { // MyNASI.TYPE.SUBSCRIPTION
             setAnlas(res.anlas);
             buf.append("anlas=").append(res.anlas).append("\n");

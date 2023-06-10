@@ -26,12 +26,18 @@
             android:layout_height="wrap_content"
             android:text="@string/from_tree_to_prompt"
             tools:ignore="ButtonStyle,RtlHardcoded" />
+        <Button
+            android:id="@+id/to_suggest"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/to_suggest"
+            tools:ignore="ButtonStyle,RtlHardcoded" />
     </LinearLayout>
 
     <EditText
         android:id="@+id/text_prompt"
         android:layout_width="match_parent"
-        android:layout_height="686dp"
+        android:layout_height="match_parent"
         android:autofillHints=""
         android:contentDescription=""
         android:gravity="top|left"

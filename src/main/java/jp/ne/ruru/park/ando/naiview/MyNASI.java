@@ -11,7 +11,9 @@ import org.json.JSONObject;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.UnsupportedEncodingException;
 import java.net.URL;
+import java.net.URLEncoder;
 import java.nio.charset.Charset;
 import java.util.Base64;
 import java.util.Locale;
@@ -32,7 +34,8 @@ public class MyNASI {
         LOGIN,
         IMAGE,
         SUBSCRIPTION,
-        UPSCALE
+        UPSCALE,
+        SUGGEST_TAGS
     }
 
     /**
@@ -140,7 +143,7 @@ public class MyNASI {
          * @param width           width
          * @param height          height
          * @param scale           scale
-         * @param imageBuffer          image data
+         * @param imageBuffer     image data
          */
         Allin1RequestUpscale(
                 TYPE type,
@@ -161,6 +164,34 @@ public class MyNASI {
         public final int scale;
         public final byte[] imageBuffer;
     }
+
+    /**
+     * all in 1 request data.
+     * To make it thread-safe, I've wrapped up the data
+     */
+    public static class Allin1RequestSuggestTags extends Allin1Request {
+        /**
+         * this is constructor
+         *
+         * @param type            execution type
+         * @param email           mail address (for login)
+         * @param model           model
+         * @param prompt          prompt
+         */
+        Allin1RequestSuggestTags(
+                TYPE type,
+                String email,
+                String password,
+                String model,
+                String prompt) {
+            super(type,email,password);
+            this.model =model;
+            this.prompt =prompt;
+        }
+        public final String model;
+        public final String prompt;
+    }
+
     /**
      * all in 1 result data.
      * To make it thread-safe, I've wrapped up the data
@@ -188,7 +219,6 @@ public class MyNASI {
             this.requestBody = requestBody;
             this.imageBuffer = imageData;
         }
-
         /**
          * setter for description (status code result)
          * @see <a href="https://github.com/Aedial/novelai-api">Novel AI rest api</a>
@@ -203,6 +233,7 @@ public class MyNASI {
         public final String requestBody;
         public final int statusCode;
         public final String mimeType;
+
         public final String content;
         public String description = "no description";
         public final byte[] imageBuffer;
@@ -227,6 +258,8 @@ public class MyNASI {
 
     /** upscale url for rest api */
     public final String UPSCALE_URL = "https://api.novelai.net/ai/upscale";
+    /** suggest tags url for rest api */
+    public final String SUGGEST_TAGS_URL = "https://api.novelai.net/ai/generate-image/suggest-tags";
 
     /** subscription url for rest api */
     public final String SUBSCRIPTION_URL = "https://api.novelai.net/user/subscription";
@@ -419,7 +452,46 @@ public class MyNASI {
         }
         return res.setDescription(description).setAnlas(-1);
     }
-
+    /**
+     * generate-image/suggest-tags
+     * @param request all in 1 request
+     * @return all in 1 result
+     */
+    public Allin1Response suggestTags(Allin1RequestSuggestTags request) {
+        //
+        if (this.requireLogin()) {
+            Allin1Response res = login(request);
+            if (this.requireLogin()) {
+                return res;
+            }
+        }
+        //
+        String url = SUGGEST_TAGS_URL;
+        try {
+            url = url + "?model=" + URLEncoder.encode(request.model,"utf-8");
+        } catch (UnsupportedEncodingException e) {
+            url = url + "?model=" + request.model;
+        }
+        try {
+            url = url + "&prompt=" + URLEncoder.encode(request.prompt,"utf-8");
+        } catch (UnsupportedEncodingException e) {
+            url = url + "&prompt=" + request.prompt;
+        }
+        Allin1Response res = this.getConnection(request.type,url, null);
+        //
+        int status_code = res.statusCode;
+        String description;
+        if (status_code == 200) {
+            description = "The request has been accepted and the output is generating";
+        } else if (status_code == 401) {
+            description = "Access Token is incorrect.";
+        } else if (status_code == 500) {
+            description = "An unknown error occurred.";
+        } else {
+            description = "Unknown stats code.";
+        }
+        return res.setDescription(description);
+    }
     /**
      * subscription
      * @param request all in 1 request
@@ -483,7 +555,7 @@ public class MyNASI {
      * @param requestBody request body
      * @return all in 1 result
      */
-    protected Allin1Response getConnection(TYPE type,String targetUrl,String requestBody) {
+    protected Allin1Response getConnection(TYPE type, String targetUrl, String requestBody) {
         final String authorization = "Authorization";
         String content = "";
         HttpsURLConnection urlCon = null;

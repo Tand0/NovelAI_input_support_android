@@ -1,9 +1,13 @@
 package jp.ne.ruru.park.ando.naiview;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
 
 import jp.ne.ruru.park.ando.naiview.databinding.ActivityPromptBinding;
@@ -46,8 +50,70 @@ public class PromptActivity extends AppCompatActivity {
             Toast.makeText(this , message, Toast.LENGTH_SHORT).show();
             a.appendLog(this,message);
         });
+
+        binding.toSuggest.setOnClickListener(view->{
+            MyApplication a = (MyApplication) this.getApplication();
+            a.appendLog(this,"Action: Suggest");
+            Intent intent = new Intent(this, SuggestActivity.class);
+            int start = binding.textPrompt.getSelectionStart();
+            String target = "";
+            if (0 <= start) {
+                int end = binding.textPrompt.getSelectionEnd();
+                target = binding.textPrompt.getText().subSequence(start, end).toString();
+            }
+            intent.putExtra(SuggestActivity.TYPE,-1);
+            intent.putExtra(SuggestActivity.TEXT,target);
+            resultLauncher.launch(intent);
+        });
         binding.promptTitle.setText(getMyTitle());
+
     }
+
+    /**
+     * intent call back method.
+     * Used by Storage Access Framework
+     */
+    ActivityResultLauncher<Intent> resultLauncher = registerForActivityResult(
+            new ActivityResultContracts.StartActivityForResult(),
+            result -> {
+                if (result.getResultCode() == Activity.RESULT_OK) {
+                    Intent resultData  = result.getData();
+                    if (resultData == null) {
+                        return;
+                    }
+                    String text = resultData.getStringExtra(SuggestActivity.TEXT);
+                    if (text.equals("")) {
+                        return;
+                    }
+                    String value = binding.textPrompt.getText().toString();
+                    int start = binding.textPrompt.getSelectionStart();
+                    int end = binding.textPrompt.getSelectionEnd();
+                    String targetStart;
+                    String targetEnd;
+                    if (0 <= start) {
+                        targetStart = value.subSequence(0,start).toString();
+                        if (start < end) {
+                            targetEnd = value.subSequence(end,value.length()).toString();
+                        } else {
+                            targetEnd = value.subSequence(start,value.length()).toString();
+                        }
+                    } else {
+                        targetStart = value;
+                        targetEnd = "";
+                    }
+                    targetStart = targetStart.trim().replaceFirst(",$","").trim();
+                    targetEnd = targetEnd.trim().replaceFirst("^,","").trim();
+                    if (!targetStart.equals("")) {
+                        text = targetStart + ", " + text;
+                    }
+                    if (!targetEnd.equals("")) {
+                        text = text + ", " + targetEnd;
+                    }
+                    PromptActivity.this.setText(text);
+                }
+            });
+
+
 
     /**
      * on resume
