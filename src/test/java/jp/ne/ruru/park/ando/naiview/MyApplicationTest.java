@@ -41,9 +41,9 @@ public class MyApplicationTest {
         //
         Assert.assertEquals(2,a.getTop().length());
         //
-        result = a.fromTree(true);
+        result = a.fromTree(a.getTop(),true);
         Assert.assertEquals(result,"prompt test, aaa");
-        result = a.fromTree(false);
+        result = a.fromTree(a.getTop(),false);
         Assert.assertEquals(result,"uc test");
         //
         result = a.createName("[[aaa:1.6]]");

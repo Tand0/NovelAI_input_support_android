@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/word_edit_insert"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:text="@string/menu_insert"
+            tools:ignore="ButtonStyle,RtlHardcoded" />
+        <Button
+            android:id="@+id/word_edit_change"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:text="@string/menu_change"
+            tools:ignore="ButtonStyle,RtlHardcoded" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/word_edit_enhance"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:text="@string/menu_enhance"
+            tools:ignore="ButtonStyle,RtlHardcoded" />
+        <Button
+            android:id="@+id/word_edit_not_enhance"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:text="@string/menu_not_enhance"
+            tools:ignore="ButtonStyle,RtlHardcoded" />
+        <Button
+            android:id="@+id/word_edit_from_tree"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/from_tree_to_prompt"
+            tools:ignore="ButtonStyle,RtlHardcoded" />
+    </LinearLayout>
+
+
+    <Spinner
+        android:id="@+id/word_edit_spinner"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:entries="@array/edit_type_list"
+        android:minHeight="48dp"
+        tools:ignore="ObsoleteLayoutParam,RtlHardcoded,DuplicateSpeakableTextCheck" />
+
+
+    <EditText
+        android:id="@+id/word_edit_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:autofillHints=""
+        android:contentDescription=""
+        android:gravity="top|left"
+        android:hint="@string/input_word_hint"
+        android:textColorHint="#A1887F"
+        android:textSize="24sp"
+        android:singleLine="true"
+        android:inputType="textAutoComplete"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="ContentDescription,RtlHardcoded,VisualLintTextFieldSize" />
+
+    <Button
+        android:id="@+id/suggest_tags"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:text="@string/suggest_tags"
+        tools:ignore="ButtonStyle,RtlHardcoded" />
+
+    <ListView
+        android:id="@+id/suggest_list_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+</LinearLayout>

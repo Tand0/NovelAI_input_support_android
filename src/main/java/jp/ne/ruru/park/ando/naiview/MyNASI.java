@@ -26,6 +26,10 @@ import javax.net.ssl.HttpsURLConnection;
  * @author foobar@em.boo.jp
  */
 public class MyNASI {
+    /** mime type gif */
+    public static final String IMAGE_PNG = "image/png";
+    /** mime type png */
+    public static final String IMAGE_GIF = "image/gif";
 
     /**
      * state machine
@@ -537,9 +541,9 @@ public class MyNASI {
      */
     public String getImageExt(String mimeType) {
         String ext;
-        if (mimeType.contains("image/png")) {
+        if (mimeType.contains(IMAGE_PNG)) {
             ext = ".png";
-        } else if (mimeType.contains("image/gif")) {
+        } else if (mimeType.contains(IMAGE_GIF)) {
             ext = ".gif";
         } else {
             //"image/jpeg" or jpg
@@ -652,7 +656,7 @@ public class MyNASI {
                                     }
                                     stream.write(bByte, 0, len);
                                 }
-                                mime = "image/png";
+                                mime = IMAGE_PNG;
                                 result = stream.toByteArray();
                                 break;
                             }

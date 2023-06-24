@@ -91,9 +91,11 @@
     <string name="menu_not_ignore">Not ignore</string>
     <string name="menu_enhance">Enhance</string>
     <string name="menu_not_enhance">Not enhance</string>
-    <string name="menu_update">Update</string>
+    <string name="menu_insert">Insert</string>
+    <string name="menu_change">Change</string>
     <string name="menu_image_list">Image list</string>
     <string name="menu_cancel">Cancel</string>
+    <string name="menu_change_part">Changed part</string>
 
     <!-- tree -->
     <string name="input_word">Input word for prompt/uc</string>

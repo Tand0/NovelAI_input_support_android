@@ -65,6 +65,11 @@ public class PromptActivity extends AppCompatActivity {
             intent.putExtra(SuggestActivity.TEXT,target);
             resultLauncher.launch(intent);
         });
+
+        binding.actionImage.setOnClickListener(view->{
+            MyApplication a = (MyApplication) this.getApplication();
+            a.action(this,R.id.action_image);
+        });
         binding.promptTitle.setText(getMyTitle());
 
     }
@@ -101,8 +106,8 @@ public class PromptActivity extends AppCompatActivity {
                         targetStart = value;
                         targetEnd = "";
                     }
-                    targetStart = targetStart.trim().replaceFirst(",$","").trim();
-                    targetEnd = targetEnd.trim().replaceFirst("^,","").trim();
+                    targetStart = targetStart.replaceFirst("[}{)(,\\[\\]\\s]+$","");
+                    targetEnd = targetEnd.replaceFirst("^[}{)(,\\[\\]\\s]+","");
                     if (!targetStart.equals("")) {
                         text = targetStart + ", " + text;
                     }

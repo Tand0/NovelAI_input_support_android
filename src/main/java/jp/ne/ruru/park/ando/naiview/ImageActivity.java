@@ -5,6 +5,7 @@ import android.app.AlertDialog;
 import android.content.ContentResolver;
 import android.content.ContentUris;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.graphics.Bitmap;
@@ -16,11 +17,14 @@ import android.os.Bundle;
 import android.provider.MediaStore;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
+import android.view.View;
 import android.widget.Toast;
 
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.SwitchCompat;
+import androidx.preference.PreferenceManager;
 
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
@@ -155,23 +159,28 @@ public class ImageActivity extends AppCompatActivity {
         }
         final String[] items = new String[] {
                 ImageActivity.this.getResources().getString(R.string.generate_image),
-                ImageActivity.this.getResources().getString(R.string.upscale),
-                ImageActivity.this.getResources().getString(R.string.action_save_external),
-                ImageActivity.this.getResources().getString(R.string.menu_cancel)
+                ImageActivity.this.getResources().getString(R.string.upscale)
         };
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
+        View dialogView = this.getLayoutInflater().inflate(R.layout.raw_switch, null);
+        SwitchCompat isUseTree = dialogView.findViewById(R.id.setting_use_tree);
+        isUseTree.setChecked(a.isUseTree(preferences));
+        isUseTree.setOnCheckedChangeListener((v,checked)-> a.setUseTree(preferences,checked));
+        SwitchCompat isPromptFixedSeed = dialogView.findViewById(R.id.prompt_fixed_seed);
+        isPromptFixedSeed.setChecked(a.isPromptFixedSeed(preferences));
+        isPromptFixedSeed.setOnCheckedChangeListener((v,checked)-> a.setPromptFixedSeed(preferences,checked));
         new AlertDialog.Builder(ImageActivity.this)
                 .setTitle(title)
+                .setView(dialogView)
                 .setItems(items, (dialog,which)-> {
                     if (which == 0) {
                         a.execution(ImageActivity.this,MyNASI.TYPE.IMAGE,bitmapX,bitmapY,null);
                     } else if (which == 1) {
                         doUpscale();
-                    } else if (which == 2) {
-                        saveForASF();
-                    } else if (which == 3) {
-                        a.setDownloadFlag(false);
                     }
                 })
+                .setPositiveButton(R.string.action_save_external,(dialog,which)-> saveForASF())
+                .setNeutralButton(R.string.menu_cancel,(dialog,which)-> a.setDownloadFlag(false))
                 .show();
     }
 
@@ -241,6 +250,7 @@ public class ImageActivity extends AppCompatActivity {
         a.setDownloadFlag(false);
         //
         if (a.getUriEtcList().size() == 0) {
+            //
             ContentResolver cr = getContentResolver();
             Uri uri = MediaStore.Images.Media.EXTERNAL_CONTENT_URI;
             String[] projection = new String[]{
@@ -267,6 +277,8 @@ public class ImageActivity extends AppCompatActivity {
                         a.getUriEtcList().add(uriEtc);
                     }
                 }
+            } catch (IllegalArgumentException e) {
+                // NONE
             }
         }
         int max = a.getUriEtcList().size() - 1;

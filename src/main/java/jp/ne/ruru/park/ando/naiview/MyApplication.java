@@ -330,7 +330,7 @@ public class MyApplication  extends Application {
         return this.imagePosition;
     }
 
-    private LinkedList<UriEtc> uriEtcList = new LinkedList<>();
+    private final LinkedList<UriEtc> uriEtcList = new LinkedList<>();
     public LinkedList<UriEtc> getUriEtcList() {
         return uriEtcList;
     }
@@ -346,7 +346,19 @@ public class MyApplication  extends Application {
     public boolean isUseTree(SharedPreferences preferences) {
         return preferences.getBoolean("setting_use_tree", true);
     }
-
+    public void setUseTree(SharedPreferences preferences,boolean flag) {
+        final SharedPreferences.Editor editor = preferences.edit();
+        editor.putBoolean("setting_use_tree", flag);
+        editor.apply();
+    }
+    public boolean isPromptFixedSeed(SharedPreferences preferences) {
+        return preferences.getBoolean("prompt_fixed_seed", false);
+    }
+    public void setPromptFixedSeed(SharedPreferences preferences,boolean flag) {
+        final SharedPreferences.Editor editor = preferences.edit();
+        editor.putBoolean("prompt_fixed_seed", flag);
+        editor.apply();
+    }
     /**
      * Novel AI Support Interface area
      */
@@ -517,9 +529,9 @@ public class MyApplication  extends Application {
      */
     public void fromTreeToPrompt(boolean isPrompt) {
         if (isPrompt) {
-            this.setPrompt(fromTree(true));
+            this.setPrompt(fromTree(getTop(),true));
         } else {
-            this.setUc(fromTree(false));
+            this.setUc(fromTree(getTop(),false));
         }
     }
 
@@ -534,7 +546,7 @@ public class MyApplication  extends Application {
         String file;
         StringBuilder text = new StringBuilder();
         if (mime == null) {
-            mime = "image/png";
+            mime = MyNASI.IMAGE_PNG;
         }
         if ((imageUri == null) || mime.contains("png")) {
             file = "x.png";
@@ -630,7 +642,7 @@ public class MyApplication  extends Application {
      */
     protected void updateImageBuffer(Context context,Uri imageUri,String mime) {
         if (mime == null) {
-            mime = "image/png";
+            mime = MyNASI.IMAGE_PNG;
         }
         //
         InputStream is = null;
@@ -927,11 +939,12 @@ public class MyApplication  extends Application {
 
     /**
      * get prompt/uc from tree
+     * @param array original data
      * @param isPrompt if true then prompt else uc.
      * @return prompt/uc
      */
-    public String fromTree(boolean isPrompt) {
-        List<String> result = fromTreeList(isPrompt);
+    public String fromTree(JSONArray array,boolean isPrompt) {
+        List<String> result = fromTreeList(array,isPrompt);
         String ans = "";
         if (0 < result.size()) {
             StringBuilder builder = new StringBuilder();
@@ -947,12 +960,13 @@ public class MyApplication  extends Application {
 
     /**
      * get prompt/uc from tree
+     * @param array original data
      * @param isPrompt if true then prompt else uc.
      * @return prompt/uc
      */
-    public List<String> fromTreeList(boolean isPrompt) {
+    public List<String> fromTreeList(JSONArray array,boolean isPrompt) {
         JSONArray data = new JSONArray();
-        this.deepCopyRemoveIgnore(data,this.getTop(),isPrompt);
+        this.deepCopyRemoveIgnore(data,array,isPrompt);
         LinkedList<String> result = new LinkedList<>();
         dictToList(result, data);
         return result;
@@ -994,7 +1008,6 @@ public class MyApplication  extends Application {
                     deepCopyRemoveIgnore(copyChildArray, childArray, isPrompt);
                 }
                 child.put(CHILD,copyChildArray);
-
             }
         } catch (JSONException e) {
             // NONE
@@ -1066,6 +1079,75 @@ public class MyApplication  extends Application {
             // NONE
         }
     }
+    public void changePart(Context context,JSONObject item) {
+        Boolean isPrompt = containBoolean(item,TEXT_UC);
+        if (isPrompt == null) {
+            isPrompt = Boolean.FALSE;
+        }
+        isPrompt = !isPrompt;
+        //
+        JSONArray dummyTop = new JSONArray();
+        dummyTop.put(item);
+        String answer = fromTree(dummyTop,isPrompt);
+        String target;
+        if (isPrompt) {
+            target = this.getPrompt();
+        } else {
+            target = this.getUc();
+        }
+        target = deleteTextFromItem(target,item);
+        target = target
+                .replaceAll("[{}\\[\\]\\s]+"," ")
+                .replaceAll(",(\\s*,)+",",")
+                .replaceAll("\\s*,\\s*$","")
+                .replaceAll("^\\s*,\\s*","")
+                .replaceAll("\\s+"," ");
+        if (!target.equals("") && !answer.equals("")) {
+            target = target + ", ";
+        }
+        target = target + answer;
+        if (isPrompt) {
+            this.setPrompt(target);
+        } else {
+            this.setUc(target);
+        }
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
+        setUseTree(preferences,false);
+        if (isPrompt) {
+            action(context,R.id.action_prompt);
+        } else {
+            action(context,R.id.action_uc);
+        }
+    }
+    protected String deleteTextFromItem(String target,Object object) {
+        if (object == null) {
+            return target;
+        }
+        if (object instanceof JSONArray) {
+            JSONArray array = (JSONArray)object;
+            for (int i = 0 ; i < array.length() ; i++) {
+                try {
+                    target = deleteTextFromItem(target,array.get(i));
+                } catch (JSONException e) {
+                    // NONE
+                }
+            }
+        } else if (object instanceof JSONObject) {
+            String type = containString(object,TEXT);
+            if ((type != null) && type.contains(TEXT_WORD)) {
+                String key = containString(object,VALUES);
+                if (key != null) {
+                    key = key
+                            .replaceAll("[{}\\[\\]]","")
+                            .replaceAll("\\s+"," ");
+                    target = target.replaceAll(key,"");
+                }
+            }
+            target = deleteTextFromItem(target,containJSONArray(object,CHILD));
+        }
+        return target;
+    }
+
 
     /** get subscription
      * @param context activity
@@ -1104,8 +1186,8 @@ public class MyApplication  extends Application {
             boolean useTree = isUseTree(preferences);
             if (useTree) {
                 if (0 < this.getTop().length()) {
-                    this.setPrompt(fromTree(true));
-                    this.setUc(fromTree(false));
+                    this.setPrompt(fromTree(getTop(),true));
+                    this.setUc(fromTree(getTop(),false));
                 } else {
                     fromPromptToTree(getPrompt(), true);
                     fromPromptToTree(getUc(), false);
@@ -1160,7 +1242,7 @@ public class MyApplication  extends Application {
             }
             boolean fixed_seed;
             try {
-                fixed_seed = preferences.getBoolean("prompt_fixed_seed", false);
+                fixed_seed = isPromptFixedSeed(preferences);
             } catch (ClassCastException e) {
                 fixed_seed = false;
             }
