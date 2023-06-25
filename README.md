@@ -4,7 +4,7 @@
 ## Ovierview
 
 
-[![](https://img.youtube.com/vi/j5mdzIkD48M/0.jpg)](https://www.youtube.com/watch?v=j5mdzIkD48M)
+[![](https://img.youtube.com/vi/_Bzngg0TtX0/mqdefault.jpg)](https://youtu.be/_Bzngg0TtX0)
 
 ## Google play site
 https://play.google.com/store/apps/details?id=jp.ne.ruru.park.ando.naiview
@@ -26,4 +26,5 @@ https://play.google.com/store/apps/details?id=jp.ne.ruru.park.ando.naiview
 ## Reference
 - data.json can also be created on Windows
   - https://github.com/Tand0/NovelAI_input_support_tool
+
 

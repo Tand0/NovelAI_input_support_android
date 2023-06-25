@@ -574,8 +574,8 @@ public class MyNASI {
             //
             URL url = new URL(targetUrl);
             urlCon = (HttpsURLConnection) url.openConnection();
-            urlCon.setReadTimeout(10000);
-            urlCon.setConnectTimeout(20000);
+            urlCon.setReadTimeout(60 * 1000);
+            urlCon.setConnectTimeout(60 * 1000);
             if (requestBody != null) {
                 urlCon.setRequestMethod("POST");
             } else {
