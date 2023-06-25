@@ -1080,11 +1080,13 @@ public class MyApplication  extends Application {
         }
     }
     public void changePart(Context context,JSONObject item) {
-        Boolean isPrompt = containBoolean(item,TEXT_UC);
-        if (isPrompt == null) {
+        String key = containString(item,TEXT);
+        boolean isPrompt;
+        if (key == null) {
             isPrompt = Boolean.FALSE;
+        } else {
+            isPrompt = ! key.contains(TEXT_UC);
         }
-        isPrompt = !isPrompt;
         //
         JSONArray dummyTop = new JSONArray();
         dummyTop.put(item);
