@@ -8,6 +8,7 @@ import org.bouncycastle.crypto.params.Argon2Parameters;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -15,6 +16,7 @@ import java.io.UnsupportedEncodingException;
 import java.net.URL;
 import java.net.URLEncoder;
 import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 import java.util.Base64;
 import java.util.Locale;
 import java.util.zip.ZipEntry;
@@ -30,6 +32,9 @@ public class MyNASI {
     public static final String IMAGE_PNG = "image/png";
     /** mime type png */
     public static final String IMAGE_GIF = "image/gif";
+
+    /** data area */
+    protected final byte[] bByte = new byte[1024*8];
 
     /**
      * state machine
@@ -433,7 +438,7 @@ public class MyNASI {
         String requestBody = "{\"image\" : \"" + image + "\"," +
                 "\"width\" : " + request.width + "," +
                 "\"height\" : " + request.height + "," +
-                "\"scale\" : 4}";
+                "\"scale\" : " + request.scale + "}";
         Allin1Response res = this.getConnection(request.type,UPSCALE_URL, requestBody);
         //
         int status_code = res.statusCode;
@@ -567,6 +572,7 @@ public class MyNASI {
         String mime = "";
         byte[] result = null;
         Locale defaultLocale = null;
+        InputStream is = null;
         try {
             //
             defaultLocale = Locale.getDefault();
@@ -607,27 +613,15 @@ public class MyNASI {
                 mime = "";
             }
             mime = mime.toLowerCase();
-            InputStream is = null;
-            try {
                 try {
                     is = urlCon.getInputStream();
                 } catch (IOException e) {
                     is = urlCon.getErrorStream();
                 }
-                byte[] bByte = new byte[1024];
-                if (mime.contains("application/json")) {
-                    //"application/json; charset=utf-8"
-                    try (ByteArrayOutputStream stream = new ByteArrayOutputStream()) {
-                        while (true) {
-                            int len = is.read(bByte);
-                            if (len <= 0) {
-                                break;
-                            }
-                            stream.write(bByte, 0, len);
-                        }
-                        content = stream.toString();
-                    }
-                } else if (mime.contains("image/")) {
+                if (mime.contains("application/json")
+                        || mime.contains("text/")
+                        || mime.contains("image/")
+                        || mime.contains("application/x-zip-compressed")) {
                     try (ByteArrayOutputStream stream = new ByteArrayOutputStream()) {
                         while(true) {
                             int len = is.read(bByte);
@@ -638,47 +632,59 @@ public class MyNASI {
                         }
                         result = stream.toByteArray();
                     }
-                } else if (mime.contains("application/x-zip-compressed")) {
-                    try (ZipInputStream zipInputStream = new ZipInputStream(is)) {
-                        while (true) {
-                            ZipEntry zipEntry = zipInputStream.getNextEntry();
-                            if (zipEntry == null) {
-                                break;
-                            }
-                            if (zipEntry.isDirectory()) {
-                                continue;
-                            }
-                            try (ByteArrayOutputStream stream = new ByteArrayOutputStream()) {
-                                while (true) {
-                                    int len = zipInputStream.read(bByte);
-                                    if (len <= 0) {
-                                        break;
-                                    }
-                                    stream.write(bByte, 0, len);
-                                }
-                                mime = IMAGE_PNG;
-                                result = stream.toByteArray();
-                                break;
-                            }
-                        }
-                    }
                 }
-            } finally {
-                if (is != null) {
-                    is.close();
-                }
-            }
         } catch (IOException e) {
             content = content + "\n"
                     + e.getClass()+ "\n"
                     + e.getMessage() + "\n"
                     + e.getCause();
         } finally {
+            if (is != null) {
+                try {
+                    is.close();
+                } catch (IOException e) {
+                    // NONE
+                }
+            }
             if (urlCon != null) {
                 urlCon.disconnect();
             }
             if (defaultLocale != null) {
                 Locale.setDefault(defaultLocale);
+            }
+        }
+        if (result != null) {
+            if (mime.contains("application/json")
+                    || mime.contains("text/")) {
+                //"application/json; charset=utf-8"
+                content = new String(result, StandardCharsets.UTF_8);
+            } else if (mime.contains("application/x-zip-compressed")) {
+                try (InputStream ois = new ByteArrayInputStream(result);
+                     ZipInputStream zipInputStream = new ZipInputStream(ois)) {
+                    while (true) {
+                        ZipEntry zipEntry = zipInputStream.getNextEntry();
+                        if (zipEntry == null) {
+                            break;
+                        }
+                        if (zipEntry.isDirectory()) {
+                            continue;
+                        }
+                        try (ByteArrayOutputStream stream = new ByteArrayOutputStream()) {
+                            while (true) {
+                                int len = zipInputStream.read(bByte);
+                                if (len <= 0) {
+                                    break;
+                                }
+                                stream.write(bByte, 0, len);
+                            }
+                            mime = IMAGE_PNG;
+                            result = stream.toByteArray();
+                            break;
+                        }
+                    }
+                } catch (IOException e) {
+                    result = null;
+                }
             }
         }
         return new Allin1Response(type, requestBody, statusCode, mime, content,result);

@@ -70,6 +70,7 @@
     <string name="menu_nai">Use Novel AI REST API</string>
     <string name="generate_image">/ai/generate-image</string>
     <string name="upscale">/ai/upscale</string>
+    <string name="upscale_summary">/ai/upscale x2 or x4</string>
     <string name="subscription">/user/subscription</string>
     <string name="suggest_tags">/ai/generate-image/suggest-tags</string>
     <string name="title_activity_tree">TreeActivity</string>

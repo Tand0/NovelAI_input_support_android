@@ -359,6 +359,9 @@ public class MyApplication  extends Application {
         editor.putBoolean("prompt_fixed_seed", flag);
         editor.apply();
     }
+    public int getSettingScale(SharedPreferences preferences) {
+        return preferences.getBoolean("setting_scale", true) ? 4 : 2;
+    }
     /**
      * Novel AI Support Interface area
      */
@@ -583,11 +586,11 @@ public class MyApplication  extends Application {
                         }
                         Integer integer = containInt(item,"steps");
                         if (integer != null) {
-                            editor.putString("prompt_number_steps","" + integer);
+                            editor.putInt("prompt_int_number_steps",integer);
                         }
                         integer = containInt(item,"scale");
                         if (integer != null) {
-                            editor.putString("prompt_number_scale","" + integer);
+                            editor.putInt("prompt_int_number_scale",integer);
                         }
                         string = containString(item,"sampler");
                         if (string != null) {
@@ -1180,7 +1183,7 @@ public class MyApplication  extends Application {
                     password,
                     bitmapX,
                     bitmapY,
-                    4,
+                    getSettingScale(preferences),
                     this.imageBuffer);
         } else if (type == MyNASI.TYPE.IMAGE) {
             String message = context.getResources().getString(R.string.generate_image);
@@ -1215,20 +1218,8 @@ public class MyApplication  extends Application {
                 width = 512;
                 height = 768;
             }
-            int scale;
-            try {
-                String string = preferences.getString("prompt_number_scale", "11");
-                scale = Integer.parseInt(string);
-            } catch (NumberFormatException e) {
-                scale = 11;
-            }
-            int steps;
-            try {
-                String string = preferences.getString("prompt_number_steps", "28");
-                steps = Integer.parseInt(string);
-            } catch (NumberFormatException e) {
-                steps = 28;
-            }
+            int scale = preferences.getInt("prompt_int_number_scale", 11);
+            int steps = preferences.getInt("prompt_int_number_steps", 28);
             String sampler = preferences.getString("prompt_sampler", "k_dpmpp_2m");
             boolean sm;
             try {
@@ -1314,19 +1305,19 @@ public class MyApplication  extends Application {
      */
     public void postSubscription(Context context,MyNASI.Allin1Response res) {
         StringBuilder buf = new StringBuilder();
-        buf.append("code=").append(res.statusCode).append("\n")
+        buf.append("statusCode=").append(res.statusCode).append("\n")
                 .append("description=").append(res.description).append("\n")
                 .append("type=").append(res.type.name()).append("\n")
-                .append("type=").append(res.mimeType).append("\n");
+                .append("mimeType=").append(res.mimeType).append("\n");
+        if ((res.content != null) && (!res.content.equals(""))) {
+            buf.append("content=").append(res.content).append("\n");
+        }
         if (res.type == MyNASI.TYPE.LOGIN) {
-            if (res.statusCode != 200) {
-                buf.append("result=").append(res.content).append("\n");
-            }
+            buf.append("login\n");
         } else if ((res.type == MyNASI.TYPE.IMAGE)
             || (res.type == MyNASI.TYPE.UPSCALE)) {
-            buf.append("result=").append(res.content).append("\n");
             if (res.type == MyNASI.TYPE.IMAGE) {
-                buf.append("request=").append(res.requestBody).append("\n");
+                buf.append("requestBody=").append(res.requestBody).append("\n");
             }
             if (res.statusCode == 200) {
                 setImageBuffer(res.imageBuffer);
@@ -1351,11 +1342,9 @@ public class MyApplication  extends Application {
                     ((SuggestActivity) context).suggestTagsResponse(res.content);
                 }
             }
-            buf.append("content=").append(res.content).append("\n");
         } else { // MyNASI.TYPE.SUBSCRIPTION
             setAnlas(res.anlas);
             buf.append("anlas=").append(res.anlas).append("\n");
-            buf.append("content=").append(res.content).append("\n");
         }
         this.appendLog(context,buf.toString());
     }

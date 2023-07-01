@@ -40,19 +40,22 @@
         android:entries="@array/model_list"
         android:entryValues="@array/model_list" />
 
-    <EditTextPreference
-        app:key="prompt_number_scale"
+    <SeekBarPreference
+        app:key="prompt_int_number_scale"
         app:title="@string/prompt_scale"
         app:defaultValue="11"
-        android:inputType="number"
-        app:useSimpleSummaryProvider="true" />
-
-    <EditTextPreference
-        app:key="prompt_number_steps"
+        app:min="0"
+        android:max="25"
+        app:showSeekBarValue="true"
+        />
+    <SeekBarPreference
+        app:key="prompt_int_number_steps"
         app:title="@string/prompt_steps"
         app:defaultValue="28"
-        android:inputType="number"
-        app:useSimpleSummaryProvider="true" />
+        app:min="1"
+        android:max="50"
+        app:showSeekBarValue="true"
+        />
 
 
     <ListPreference
@@ -71,5 +74,11 @@
         app:key="prompt_sm_dyn"
         app:defaultValue="false"
         app:title="@string/prompt_sm_dyn" />
+
+    <SwitchPreferenceCompat
+        app:key="setting_scale"
+        app:defaultValue="true"
+        app:summary="@string/upscale_summary"
+        app:title="@string/upscale" />
 
 </PreferenceScreen>
