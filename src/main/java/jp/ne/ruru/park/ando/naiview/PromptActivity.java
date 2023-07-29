@@ -87,7 +87,7 @@ public class PromptActivity extends AppCompatActivity {
                         return;
                     }
                     String text = resultData.getStringExtra(SuggestActivity.TEXT);
-                    if (text.equals("")) {
+                    if ((text == null) || text.equals("")) {
                         return;
                     }
                     String value = binding.textPrompt.getText().toString();
@@ -106,8 +106,8 @@ public class PromptActivity extends AppCompatActivity {
                         targetStart = value;
                         targetEnd = "";
                     }
-                    targetStart = targetStart.replaceFirst("[}{)(,\\[\\]\\s]+$","");
-                    targetEnd = targetEnd.replaceFirst("^[}{)(,\\[\\]\\s]+","");
+                    targetStart = targetStart.replaceFirst("[{(\\[,\\s]+$","");
+                    targetEnd = targetEnd.replaceFirst("^[})\\],\\s]+","");
                     if (!targetStart.equals("")) {
                         text = targetStart + ", " + text;
                     }
