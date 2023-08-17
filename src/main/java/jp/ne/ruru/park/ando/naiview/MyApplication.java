@@ -655,17 +655,19 @@ public class MyApplication  extends Application {
             } else {
                 is = context.getResources().openRawResource(R.raw.solo);
             }
-            byte[] bByte = new byte[1024];
-            try (ByteArrayOutputStream stream = new ByteArrayOutputStream()) {
-                while(true) {
-                    int len = is.read(bByte);
-                    if (len <= 0) {
-                        break;
+            if (is != null) {
+                byte[] bByte = new byte[1024];
+                try (ByteArrayOutputStream stream = new ByteArrayOutputStream()) {
+                    while(true) {
+                        int len = is.read(bByte);
+                        if (len <= 0) {
+                            break;
+                        }
+                        stream.write(bByte,0,len);
                     }
-                    stream.write(bByte,0,len);
+                    this.setImageBuffer(stream.toByteArray());
+                    this.setImageMimeType(mime);
                 }
-                this.setImageBuffer(stream.toByteArray());
-                this.setImageMimeType(mime);
             }
         } catch (IOException e) {
             String text = e.getClass().getName() +
@@ -686,7 +688,9 @@ public class MyApplication  extends Application {
     public void savingImageBuffer(Context context,Uri uri) {
         String text = "Save\n";
         try (OutputStream os = getContentResolver().openOutputStream(uri)) {
-            os.write(this.getImageBuffer());
+            if (os != null) {
+                os.write(this.getImageBuffer());
+            }
         } catch (IOException e) {
             text = e.getClass().getName() +
                     "\n" +
@@ -1102,7 +1106,7 @@ public class MyApplication  extends Application {
         }
         target = deleteTextFromItem(target,item);
         target = target
-                .replaceAll("[{}\\[\\]\\s]+"," ")
+                .replaceAll("[{\\[]+\\s*[}\\]]+" ," ")
                 .replaceAll(",(\\s*,)+",",")
                 .replaceAll("\\s*,\\s*$","")
                 .replaceAll("^\\s*,\\s*","")

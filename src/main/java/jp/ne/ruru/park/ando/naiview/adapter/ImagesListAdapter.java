@@ -52,8 +52,9 @@ public class ImagesListAdapter<T extends UriEtc> extends ArrayAdapter<T> {
      * @param parent The parent that this view will eventually be attached to
      * @return view
      */
+    @NonNull
     @Override
-    public View getView(int position, View view, ViewGroup parent) {
+    public View getView(int position, View view, @NonNull ViewGroup parent) {
         if (view == null) {
             LayoutInflater inflater = (LayoutInflater) this.getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             view = inflater.inflate(R.layout.raw_images, parent, false);
@@ -61,65 +62,67 @@ public class ImagesListAdapter<T extends UriEtc> extends ArrayAdapter<T> {
         ContentResolver cr = this.getContext().getContentResolver();
         //
         UriEtc etc = this.getItem(position);
-        String[] projection = new String[]{
-                MediaStore.Images.Media._ID,
-                MediaStore.Images.Media.TITLE,
-                MediaStore.Images.Media.SIZE,
-                MediaStore.Images.Media.DATE_ADDED,
-                MediaStore.Images.Media.WIDTH,
-                MediaStore.Images.Media.HEIGHT
-        };
         Bitmap result = null;
         String title = "title";
         StringBuilder subTitle = new StringBuilder();
-        try (Cursor cursor = cr.query(etc.uri,projection,null,null,null)) {
-            if (cursor == null) {
-                throw new IllegalArgumentException();
-            }
-            while (cursor.moveToNext()) {
-                //
-                int dateColumn = cursor.getColumnIndex(MediaStore.Images.Media.DATE_ADDED);
-                if (0 < dateColumn) {
-                    long milliSeconds = cursor.getLong(dateColumn) * 1000L;
-                    DateFormat formatter = new SimpleDateFormat("yyyy/MM/dd HH:mm", Locale.getDefault());
-                    Calendar calendar = Calendar.getInstance();
-                    calendar.setTimeInMillis(milliSeconds);
-                    subTitle = new StringBuilder(formatter.format(calendar.getTime()));
+        if (etc != null) {
+            String[] projection = new String[]{
+                    MediaStore.Images.Media._ID,
+                    MediaStore.Images.Media.TITLE,
+                    MediaStore.Images.Media.SIZE,
+                    MediaStore.Images.Media.DATE_ADDED,
+                    MediaStore.Images.Media.WIDTH,
+                    MediaStore.Images.Media.HEIGHT
+            };
+            try (Cursor cursor = cr.query(etc.uri, projection, null, null, null)) {
+                if (cursor == null) {
+                    throw new IllegalArgumentException();
                 }
-                //
-                int sizeColumn = cursor.getColumnIndex(MediaStore.Images.Media.SIZE);
-                if (0 < sizeColumn) {
-                    long size = cursor.getLong(sizeColumn);
-                    subTitle.append(" / ").append(String.format(Locale.getDefault(), "%,d", size)).append("byte");
-                }
-                //
-                int widthColumn = cursor.getColumnIndex(MediaStore.Images.Media.WIDTH);
-                int heightColumn = cursor.getColumnIndex(MediaStore.Images.Media.HEIGHT);
-                if (0 < widthColumn) {
-                    long width = cursor.getLong(widthColumn);
-                    long height = cursor.getLong(heightColumn);
-                    subTitle.append(" / ").append(width).append("x").append(height);
-                }
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
-                    try {
-                        result = cr.loadThumbnail(etc.uri,new android.util.Size(96, 96),null);
-                    } catch (IOException e) {
-                        // NONE
+                while (cursor.moveToNext()) {
+                    //
+                    int dateColumn = cursor.getColumnIndex(MediaStore.Images.Media.DATE_ADDED);
+                    if (0 < dateColumn) {
+                        long milliSeconds = cursor.getLong(dateColumn) * 1000L;
+                        DateFormat formatter = new SimpleDateFormat("yyyy/MM/dd HH:mm", Locale.getDefault());
+                        Calendar calendar = Calendar.getInstance();
+                        calendar.setTimeInMillis(milliSeconds);
+                        subTitle = new StringBuilder(formatter.format(calendar.getTime()));
                     }
-                } else {
-                    int idColumn = cursor.getColumnIndex(MediaStore.Images.Media._ID);
-                    long id = idColumn < 0 ? -1 : cursor.getLong(idColumn);
-                    if (0 < id) {
-                        result = MediaStore.Images.Thumbnails.getThumbnail(cr, id, MediaStore.Images.Thumbnails.MICRO_KIND, null);
+                    //
+                    int sizeColumn = cursor.getColumnIndex(MediaStore.Images.Media.SIZE);
+                    if (0 < sizeColumn) {
+                        long size = cursor.getLong(sizeColumn);
+                        subTitle.append(" / ").append(String.format(Locale.getDefault(), "%,d", size)).append("byte");
                     }
+                    //
+                    int widthColumn = cursor.getColumnIndex(MediaStore.Images.Media.WIDTH);
+                    int heightColumn = cursor.getColumnIndex(MediaStore.Images.Media.HEIGHT);
+                    if (0 < widthColumn) {
+                        long width = cursor.getLong(widthColumn);
+                        long height = cursor.getLong(heightColumn);
+                        subTitle.append(" / ").append(width).append("x").append(height);
+                    }
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+                        try {
+                            result = cr.loadThumbnail(etc.uri, new android.util.Size(96, 96), null);
+                        } catch (IOException e) {
+                            // NONE
+                        }
+                    } else {
+                        int idColumn = cursor.getColumnIndex(MediaStore.Images.Media._ID);
+                        long id = idColumn < 0 ? -1 : cursor.getLong(idColumn);
+                        if (0 < id) {
+                            result = MediaStore.Images.Thumbnails.getThumbnail(cr, id, MediaStore.Images.Thumbnails.MICRO_KIND, null);
+                        }
+                    }
+                    //
+                    int titleColumn = cursor.getColumnIndex(MediaStore.Images.Media.TITLE);
+                    title = titleColumn < 0 ? "base image" : cursor.getString(titleColumn);
+                    //
                 }
-                //
-                int titleColumn = cursor.getColumnIndex(MediaStore.Images.Media.TITLE);
-                title = titleColumn < 0 ? "base image" : cursor.getString(titleColumn);
-                //
+            } catch (IllegalArgumentException e) {
+                // NONE
             }
-        } catch (IllegalArgumentException e) {
-            // NONE
         }
         //
         ImageView imageView = view.findViewById(R.id.thumbnail);

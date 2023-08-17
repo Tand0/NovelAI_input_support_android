@@ -63,8 +63,9 @@ public class JSONListAdapter<T extends JSONObject> extends ArrayAdapter<T> {
      * @param parent The parent that this view will eventually be attached to
      * @return view
      */
+    @NonNull
     @Override
-    public View getView(int position, View view, ViewGroup parent) {
+    public View getView(int position, View view, @NonNull ViewGroup parent) {
         if (view == null) {
             LayoutInflater inflater = (LayoutInflater) this.getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             view = inflater.inflate(R.layout.raw, parent, false);
@@ -170,11 +171,9 @@ public class JSONListAdapter<T extends JSONObject> extends ArrayAdapter<T> {
         popup.show();
         popup.setOnMenuItemClickListener(item -> {
             AppCompatActivity appCompatActivity = (AppCompatActivity)this.getContext();
-            if (appCompatActivity != null) {
-                ListView listView = appCompatActivity.findViewById(R.id.list_view);
-                if (listView != null) {
-                    listView.setSelection(position);
-                }
+            ListView listView = appCompatActivity.findViewById(R.id.list_view);
+            if (listView != null) {
+                listView.setSelection(position);
             }
             return executePopup(item.getItemId(),position);
         });
@@ -338,15 +337,15 @@ public class JSONListAdapter<T extends JSONObject> extends ArrayAdapter<T> {
     }
     public void expand(int position,boolean isChecked) {
         AppCompatActivity appCompatActivity = (AppCompatActivity)this.getContext();
-        if (appCompatActivity == null) {
-            return;
-        }
         ListView listView = appCompatActivity.findViewById(R.id.list_view);
         if (listView == null) {
             return;
         }
         MyApplication a = (MyApplication)appCompatActivity.getApplication();
         JSONObject item = this.getItem(position);
+        if (item == null) {
+            return;
+        }
         boolean expand;
         Boolean expandBoolean = a.containBoolean(item,MyApplication.EXPAND);
         if (expandBoolean != null) {
@@ -372,6 +371,9 @@ public class JSONListAdapter<T extends JSONObject> extends ArrayAdapter<T> {
      */
     public void ignoreButton(int position,boolean isChecked) {
         JSONObject item = this.getItem(position);
+        if (item == null) {
+            return;
+        }
         MyApplication a =
                 ((MyApplication)((AppCompatActivity) this.getContext()).getApplication());
         String text = a.containString(item,MyApplication.TEXT);
@@ -585,9 +587,6 @@ public class JSONListAdapter<T extends JSONObject> extends ArrayAdapter<T> {
      */
     public void updateJSONArray() {
         AppCompatActivity appCompatActivity= (AppCompatActivity)this.getContext();
-        if (appCompatActivity == null) {
-            return;
-        }
         ListView listView = appCompatActivity.findViewById(R.id.list_view);
         if (listView == null) {
             return;

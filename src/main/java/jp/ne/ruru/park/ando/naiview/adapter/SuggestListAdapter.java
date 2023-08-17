@@ -44,25 +44,30 @@ public class SuggestListAdapter<T extends SuggestList> extends ArrayAdapter<T> {
      * @param parent The parent that this view will eventually be attached to
      * @return view
      */
+    @NonNull
     @Override
-    public View getView(int position, View view, ViewGroup parent) {
+    public View getView(int position, View view, @NonNull ViewGroup parent) {
         if (view == null) {
             LayoutInflater inflater = (LayoutInflater) this.getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             view = inflater.inflate(R.layout.raw_suggest, parent, false);
         }
         TextView textView = view.findViewById(R.id.list_suggest_p1);
+        SuggestList suggestList = getItem(position);
+        if (suggestList == null) {
+            suggestList = new SuggestList("",0,0.0);
+        }
         if (textView != null) {
-            String format = String.format(Locale.getDefault(),"%5d ", getItem(position).count);
+            String format = String.format(Locale.getDefault(),"%5d ", suggestList.count);
             textView.setText(format);
         }
         textView = view.findViewById(R.id.list_suggest_p2);
         if (textView != null) {
-            String format = String.format(Locale.getDefault()," %1$.8f  ", getItem(position).confidence);
+            String format = String.format(Locale.getDefault()," %1$.8f  ", suggestList.confidence);
             textView.setText(format);
         }
         Button button = view.findViewById(R.id.list_suggest_p3);
         if (button != null) {
-            button.setText(getItem(position).tag);
+            button.setText(suggestList.tag);
             button.setOnClickListener(x->{
                 String text = ((TextView)x).getText().toString();
                 ((SuggestActivity)this.getContext()).update(text);
