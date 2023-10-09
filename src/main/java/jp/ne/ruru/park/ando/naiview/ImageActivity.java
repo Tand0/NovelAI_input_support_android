@@ -22,6 +22,7 @@ import android.widget.Toast;
 
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SwitchCompat;
 import androidx.preference.PreferenceManager;
@@ -150,6 +151,7 @@ public class ImageActivity extends AppCompatActivity {
         final MyApplication a =
                 ((MyApplication)ImageActivity.this.getApplication());
         String title = ImageActivity.this.getResources().getString(R.string.menu_move);
+        title = title + "(" + a.getImagePosition() + ")";
         if (0 < bitmapX) {
             title = String.format(Locale.ENGLISH, "%s(%dx%d)", title, bitmapX,bitmapY);
         }
@@ -187,7 +189,7 @@ public class ImageActivity extends AppCompatActivity {
     /** detector for click */
     public GestureDetector.SimpleOnGestureListener listener = new GestureDetector.SimpleOnGestureListener() {
         @Override
-        public boolean onSingleTapUp(MotionEvent event) {
+        public boolean onSingleTapUp(@NonNull MotionEvent event) {
             onSaveDialogMenu();
             return super.onSingleTapUp(event);
         }
@@ -202,10 +204,12 @@ public class ImageActivity extends AppCompatActivity {
          *              along the y axis.
          * @return if used then true
          */
-        public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX,
-                       float velocityY) {
-            int SWIPE_DISTANCE = 150;
-            if (e1.getX() - e2.getX() <  (- SWIPE_DISTANCE)) {
+        public boolean onFling(MotionEvent e1, @NonNull MotionEvent e2, float velocityX,
+                               float velocityY) {
+            int SWIPE_DISTANCE = 100;
+            if (e1 == null) {
+                return super.onFling(null,e2,velocityX,velocityY);
+            } else if (e1.getX() - e2.getX() <  (- SWIPE_DISTANCE)) {
                 swipeFlag = 0;
                 onMyFling();
                 return true;
@@ -261,7 +265,9 @@ public class ImageActivity extends AppCompatActivity {
             String sortOrder = MediaStore.Images.Media.DATE_ADDED + " DESC";// ASC or DESC;
             try (Cursor cursor = cr.query(
                     uri, projection, null, null, sortOrder)) {
-
+                if (cursor == null) {
+                    throw new IllegalArgumentException("");
+                }
                 int idColumn = cursor.getColumnIndexOrThrow(MediaStore.Images.Media._ID);
                 int mimeColumn =
                         cursor.getColumnIndexOrThrow(MediaStore.Images.Media.MIME_TYPE);
@@ -286,10 +292,8 @@ public class ImageActivity extends AppCompatActivity {
             a.setImagePosition(-1);
             return;
         }
-        if (a.getImagePosition() < 0) {
-            a.setImagePosition(0);
-        } else if (swipeFlag == 0) {
-            int index = Math.max(0, a.getImagePosition() - 1);
+        if (swipeFlag == 0) {
+            int index = a.getImagePosition() - 1;
             a.setImagePosition(index);
             loadForASFResult();
         } else if (swipeFlag == 1) {
@@ -332,6 +336,14 @@ public class ImageActivity extends AppCompatActivity {
         final MyApplication a =
                 ((MyApplication)ImageActivity.this.getApplication());
         int position = a.getImagePosition();
+        if (position == -1) {
+            a.setImageBuffer(null);
+            onMyResume();
+            return;
+        } else if (position < -1) {
+            finish();
+            return;
+        }
         int max = a.getUriEtcList().size() - 1;
         if ((max <= 0) || (max < position)) {
             return;

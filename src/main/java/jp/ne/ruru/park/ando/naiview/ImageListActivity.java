@@ -39,7 +39,7 @@ public class ImageListActivity extends AppCompatActivity {
                 ((MyApplication)this.getApplication());
         adapter.addAll(a.getUriEtcList());
         binding.imagesListView.setAdapter(adapter);
-        final int position = a.getImagePosition();
+        final int position = Math.max(0, a.getImagePosition());
         final int max = a.getUriEtcList().size();
 
         binding.imagesListView.setOnItemClickListener(

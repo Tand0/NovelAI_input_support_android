@@ -31,7 +31,7 @@
         android:roundIcon="@mipmap/ic_solo_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.NAIView"
-        tools:targetApi="31">
+        tools:targetApi="tiramisu">
         <activity
             android:name=".ImageActivity"
             android:exported="false"
@@ -72,7 +72,7 @@
         <activity
             android:name=".MainActivity"
             android:exported="true"
-            android:theme="@style/Theme.NAIView">
+            android:theme="@style/Theme.NAIView" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

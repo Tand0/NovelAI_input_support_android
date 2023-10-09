@@ -70,6 +70,7 @@ public class PromptActivity extends AppCompatActivity {
             MyApplication a = (MyApplication) this.getApplication();
             a.action(this,R.id.action_image);
         });
+        binding.actionBack.setOnClickListener(v->finish());
         binding.promptTitle.setText(getMyTitle());
 
     }

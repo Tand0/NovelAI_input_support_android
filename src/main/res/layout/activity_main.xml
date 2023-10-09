@@ -147,6 +147,14 @@
         android:layout_height="wrap_content"
         android:text="@string/action_policy"
         tools:ignore="ButtonStyle,DuplicateSpeakableTextCheck,RtlHardcoded" />
+    <Button
+        android:id="@+id/action_back"
+        android:drawableLeft="@drawable/ic_home_black_24dp"
+        android:drawableTint="?android:attr/textColorPrimaryInverse"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/action_back"
+        tools:ignore="ButtonStyle,DuplicateSpeakableTextCheck,RtlHardcoded" />
 
     <ScrollView
         android:id="@+id/scroll_view"

@@ -50,6 +50,7 @@ public class MainActivity extends AppCompatActivity {
         binding.actionTree.setOnClickListener(this::myAction);
         binding.actionPolicy.setOnClickListener(this::myAction);
         binding.actionImage.setOnClickListener(this::myAction);
+        binding.actionBack.setOnClickListener(this::myAction);
         //
         binding.generateImage.setOnClickListener(this::myAction);
         binding.subscription.setOnClickListener(this::myAction);

@@ -1,5 +1,6 @@
 package jp.ne.ruru.park.ando.naiview;
 
+import android.app.Activity;
 import android.app.Application;
 import android.content.Context;
 import android.content.Intent;
@@ -319,7 +320,7 @@ public class MyApplication  extends Application {
      * imagePosition data area.
      * Used by tree activity
      */
-    private int imagePosition;
+    private int imagePosition = -1;
 
     /**
      * getter for imagePosition data
@@ -502,9 +503,14 @@ public class MyApplication  extends Application {
             context.startActivity( intent );
             return true;
         } else if (id == R.id.action_policy) {
-            Intent intent = new Intent( Intent.ACTION_VIEW );
-            intent.setData( Uri.parse(PRIVACY_POLICY_URL) );
-            context.startActivity( intent );
+            Intent intent = new Intent(Intent.ACTION_VIEW);
+            intent.setData(Uri.parse(PRIVACY_POLICY_URL));
+            context.startActivity(intent);
+            return true;
+        } else if (id == R.id.action_back) {
+            if (context instanceof Activity) {
+                ((Activity) context).finish();
+            }
             return true;
         } else if (id == R.id.generate_image) {
             execution(context,MyNASI.TYPE.IMAGE,-1,-1,null);

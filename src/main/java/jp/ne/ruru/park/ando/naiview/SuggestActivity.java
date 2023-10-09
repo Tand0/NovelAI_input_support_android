@@ -70,6 +70,7 @@ public class SuggestActivity extends AppCompatActivity {
         });
         binding.wordEditInsert.setOnClickListener((v)->wordEditBack(true));
         binding.wordEditChange.setOnClickListener((v)->wordEditBack(false));
+        binding.actionBack.setOnClickListener((v)->finish());
         //
         Intent intent = getIntent();
         if (intent == null) {

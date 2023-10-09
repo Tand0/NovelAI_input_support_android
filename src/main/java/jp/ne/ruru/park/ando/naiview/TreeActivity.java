@@ -88,6 +88,7 @@ public class TreeActivity extends AppCompatActivity {
         binding.actionSaveInternal.setOnClickListener(v->saveInternal());
         binding.actionSaveExternal.setOnClickListener(v->save());
         binding.actionLoad.setOnClickListener(v->load());
+        binding.actionBack.setOnClickListener(v->finish());
         //
         adapter = new JSONListAdapter<>(this, android.R.layout.simple_list_item_1);
         //
@@ -194,7 +195,9 @@ public class TreeActivity extends AppCompatActivity {
             return;
         }
         try (OutputStream os = getContentResolver().openOutputStream(uri)) {
-            os.write(result.getBytes(Charset.defaultCharset()));
+            if (os != null) {
+                os.write(result.getBytes(Charset.defaultCharset()));
+            }
         } catch (IOException e) {
             String text = e.getClass().getName() +
                     "\n" +
