@@ -12,13 +12,15 @@
         <item>1536x1024</item>
     </string-array>
     <string-array name="sampler_list">
-        <item>k_dpmpp_2m</item>
         <item>k_euler_ancestral</item>
+        <item>k_dpmpp_2s_ancestral</item>
+        <item>k_dpmpp_2m</item>
     </string-array>
     <string-array name="model_list">
         <item>safe-diffusion</item>
         <item>nai-diffusion</item>
         <item>nai-diffusion-furry</item>
+        <item>nai-diffusion-2</item>
     </string-array>
     <string-array name="edit_type_list">
         <item>Insert text</item>

@@ -91,6 +91,7 @@ public class MyNASI {
          * @param height          height
          * @param scale           scale
          * @param steps           steps
+         * @param uncodeScale     uncodeScale
          * @param sampler         sampler
          * @param sm              sm
          * @param sm_dyn          sm_dyn
@@ -107,6 +108,7 @@ public class MyNASI {
                 int height,
                 int scale,
                 int steps,
+                int uncodeScale,
                 String sampler,
                 boolean sm,
                 boolean sm_dyn,
@@ -119,6 +121,7 @@ public class MyNASI {
             this.height =height;
             this.scale =scale;
             this.steps =steps;
+            this.uncodeScale =uncodeScale;
             this.sampler =sampler;
             this.sm =sm;
             this.sm_dyn =sm_dyn;
@@ -131,6 +134,7 @@ public class MyNASI {
         public final int height;
         public final int scale;
         public final int steps;
+        public final int uncodeScale;
         public final String sampler;
         public final boolean sm;
         public final boolean sm_dyn;
@@ -373,6 +377,7 @@ public class MyNASI {
             p.put("dynamic_thresholding",false);
             p.put("controlnet_strength",1);
             p.put("legacy",false);
+            p.put("uncode_scale",((double)request.uncodeScale)/100.0);
             p.put("seed",request.seed);
             p.put("negative_prompt",request.negative_prompt);
             //

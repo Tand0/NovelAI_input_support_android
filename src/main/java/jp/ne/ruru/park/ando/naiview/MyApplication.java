@@ -598,6 +598,10 @@ public class MyApplication  extends Application {
                         if (integer != null) {
                             editor.putInt("prompt_int_number_scale",integer);
                         }
+                        Double doubleX = containDouble(item,"uncode_scale");
+                        if (doubleX != null) {
+                            editor.putInt("prompt_int_uncode_scale",(int)(doubleX*100));
+                        }
                         string = containString(item,"sampler");
                         if (string != null) {
                             editor.putString("prompt_sampler",string);
@@ -1230,6 +1234,7 @@ public class MyApplication  extends Application {
             }
             int scale = preferences.getInt("prompt_int_number_scale", 11);
             int steps = preferences.getInt("prompt_int_number_steps", 28);
+            int uncodeScale = preferences.getInt("prompt_int_uncode_scale", 100);
             String sampler = preferences.getString("prompt_sampler", "k_dpmpp_2m");
             boolean sm;
             try {
@@ -1264,6 +1269,7 @@ public class MyApplication  extends Application {
                     height,
                     scale,
                     steps,
+                    uncodeScale,
                     sampler,
                     sm,
                     sm_dyn,

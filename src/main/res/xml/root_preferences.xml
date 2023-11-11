@@ -56,7 +56,14 @@
         android:max="50"
         app:showSeekBarValue="true"
         />
-
+    <SeekBarPreference
+        app:key="prompt_int_uncode_scale"
+        app:title="@string/prompt_uncond_scale"
+        app:defaultValue="100"
+        app:min="0"
+        android:max="150"
+        app:showSeekBarValue="true"
+        />
 
     <ListPreference
         android:key="prompt_sampler"

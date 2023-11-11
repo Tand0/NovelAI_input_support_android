@@ -1,0 +1,108 @@
+<resources>
+    <string name="app_name">NAIView</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="img_description1">画像エリア</string>
+    <string name="img_posittion">0/0</string>
+    <string name="title_activity_settings">設定</string>
+    <string name="title_activity_prompt">プロンプト</string>
+    <string name="title_activity_uc">ｘプロンプト</string>
+
+    <!-- Preference Titles -->
+    <string name="messages_header">メッセージ</string>
+    <string name="sync_header">同期</string>
+
+    <!-- Messages Preferences -->
+    <string name="signature_title">あなたのシグネチャ</string>
+    <string name="reply_title">デフォルトリプライアクション</string>
+
+    <!-- Sync Preferences -->
+    <string name="setting_login">ログイン設定</string>
+    <string name="setting_login_email_hint">Novel AIのメールアドレス</string>
+    <string name="setting_login_email">メール</string>
+    <string name="setting_login_password">パスワード</string>
+    <string name="setting_login_password_hint">Novel AIのパスワード</string>
+
+    <string name="setting_device">デバイス設定</string>
+    <string name="setting_use_tree">ツリーを使うか</string>
+    <string name="setting_width_x_height">幅 X 高さ</string>
+    <string name="setting_width_x_height_summary">サイズ</string>
+
+    <string name="setting_nai">NAIの設定</string>
+    <string name="prompt_model">モデル</string>
+    <string name="prompt_model_summary">モデル(default:safe-diffusion)</string>
+    <string name="prompt_scale">スケール(default:11)</string>
+    <string name="prompt_steps">スケール(default:28)</string>
+    <string name="prompt_uncond_scale">除去したい要素強さ(default 100％)</string>
+    <string name="prompt_sampler">サンプラー</string>
+    <string name="prompt_sampler_summary">サンプラーの種別</string>
+    <string name="prompt_sm">sm</string>
+    <string name="prompt_sm_dyn">sm_dyn</string>
+    <string name="prompt_fixed_seed">シード固定</string>
+
+    <!-- Prompt activiti -->
+    <string name="text_prompt_hint">プロンプトかｘプロンプトを入力</string>
+
+    <!-- Menu Preferences -->
+    <string name="menu_display">表示</string>
+    <string name="action">実行</string>
+    <string name="action_folder">フォルダ</string>
+    <string name="action_checkbox">チェック</string>
+    <string name="menu_arrow">--&gt;</string>
+    <string name="action_settings">設定</string>
+    <string name="action_prompt">プロンプト</string>
+    <string name="action_uc">ｘプロンプト</string>
+    <string name="action_tree">ツリー</string>
+    <string name="action_image">画像</string>
+    <string name="action_save_internal">内部にセーブ</string>
+    <string name="action_save_external">セーブ</string>
+    <string name="action_load">ロード</string>
+    <string name="action_connect_to">ネット接続</string>
+    <string name="action_policy">プライバシポリシー</string>
+    <string name="action_back">戻る</string>
+
+    <string name="menu_move">実行</string>
+    <string name="menu_save">画像を保存?</string>
+    <string name="from_image_to_prompt">画像からプロンプトをロード</string>
+    <string name="from_prompt_to_tree">ツリーへ</string>
+    <string name="from_tree_to_prompt">ツリーから</string>
+    <string name="to_suggest">入力予測へ</string>
+    <string name="from_tree_to_file">ツリーをセーブ</string>
+    <string name="from_file_to_tree">ツリーをロード</string>
+
+    <string name="menu_nai">Novel AI REST APIの使用</string>
+    <string name="generate_image">/ai/generate-image</string>
+    <string name="upscale">/ai/upscale</string>
+    <string name="upscale_summary">2倍or4倍</string>
+    <string name="subscription">/user/subscription</string>
+    <string name="suggest_tags">/ai/generate-image/suggest-tags</string>
+    <string name="title_activity_tree">ツリー</string>
+    <string name="title_activity_suggest">入力予測</string>
+
+    <!-- tree tab information -->
+    <string name="menu_edit">編集</string>
+    <string name="menu_cut">カット</string>
+    <string name="menu_past">ペースト</string>
+    <string name="menu_add">追加</string>
+    <string name="menu_add_text">テキスト挿入</string>
+    <string name="menu_tree">ツリー挿入</string>
+    <string name="menu_sequence">全部ツリーを挿入</string>
+    <string name="menu_select">選択ツリーを挿入</string>
+    <string name="menu_weight">前優先ツリーを挿入</string>
+    <string name="menu_decorate">修飾</string>
+    <string name="menu_transform">変更</string>
+    <string name="menu_ignore">無視</string>
+    <string name="menu_not_ignore">無視しない</string>
+    <string name="menu_enhance">強調</string>
+    <string name="menu_not_enhance">強調を弱める</string>
+    <string name="menu_insert">挿入</string>
+    <string name="menu_change">変更</string>
+    <string name="menu_image_list">画像リスト</string>
+    <string name="menu_cancel">キャンセル</string>
+    <string name="menu_change_part">一部変更</string>
+
+    <!-- tree -->
+    <string name="input_word">プロンプトかｘプロンプトを入力</string>
+    <string name="input_word_hint">プロンプトかｘプロンプトを入力してください</string>
+    <string name="title_activity_image">画像</string>
+
+</resources>

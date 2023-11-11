@@ -161,7 +161,8 @@ public class ImageActivity extends AppCompatActivity {
         }
         final String[] items = new String[] {
                 ImageActivity.this.getResources().getString(R.string.generate_image),
-                ImageActivity.this.getResources().getString(R.string.upscale)
+                ImageActivity.this.getResources().getString(R.string.upscale),
+                ImageActivity.this.getResources().getString(R.string.action_back)
         };
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
         View dialogView = this.getLayoutInflater().inflate(R.layout.raw_switch, null);
@@ -179,6 +180,8 @@ public class ImageActivity extends AppCompatActivity {
                         a.execution(ImageActivity.this,MyNASI.TYPE.IMAGE,bitmapX,bitmapY,null);
                     } else if (which == 1) {
                         doUpscale();
+                    } else if (which == 2) {
+                        finish();
                     }
                 })
                 .setPositiveButton(R.string.action_save_external,(dialog,which)-> saveForASF())
@@ -341,6 +344,7 @@ public class ImageActivity extends AppCompatActivity {
             onMyResume();
             return;
         } else if (position < -1) {
+            a.setImagePosition(-1);
             finish();
             return;
         }

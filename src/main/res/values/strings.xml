@@ -32,6 +32,7 @@
     <string name="prompt_model_summary">model data</string>
     <string name="prompt_scale">scale(default:11)</string>
     <string name="prompt_steps">steps(default:28)</string>
+    <string name="prompt_uncond_scale">uncond_scale(default:100)</string>
     <string name="prompt_sampler">sampler(default:k_dpmpp_2m)</string>
     <string name="prompt_sampler_summary">sampler data</string>
     <string name="prompt_sm">sm</string>
