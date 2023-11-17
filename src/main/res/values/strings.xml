@@ -38,6 +38,8 @@
     <string name="prompt_sm">sm</string>
     <string name="prompt_sm_dyn">sm_dyn</string>
     <string name="prompt_fixed_seed">Fixed seed</string>
+    <string name="prompt_noise_schedule">noise schedule</string>
+    <string name="prompt_noise_schedule_summary">noise schedule(default:native)</string>
 
     <!-- Prompt activiti -->
     <string name="text_prompt_hint">Please input prompt or uc</string>

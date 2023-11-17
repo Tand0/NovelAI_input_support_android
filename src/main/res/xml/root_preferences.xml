@@ -34,7 +34,7 @@
     <ListPreference
         android:key="prompt_model"
         android:title="@string/prompt_model"
-        android:defaultValue="safe-diffusion"
+        android:defaultValue="nai-diffusion-3"
         android:summary="@string/prompt_model_summary"
         android:dialogTitle="@string/prompt_model_summary"
         android:entries="@array/model_list"
@@ -88,4 +88,12 @@
         app:summary="@string/upscale_summary"
         app:title="@string/upscale" />
 
+    <ListPreference
+        android:key="prompt_noise_schedule"
+        android:title="@string/prompt_noise_schedule"
+        android:defaultValue="native"
+        android:summary="@string/prompt_noise_schedule_summary"
+        android:dialogTitle="@string/prompt_noise_schedule_summary"
+        android:entries="@array/noise_schedule_list"
+        android:entryValues="@array/noise_schedule_list" />
 </PreferenceScreen>

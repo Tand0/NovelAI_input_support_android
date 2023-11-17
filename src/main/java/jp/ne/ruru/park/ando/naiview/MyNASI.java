@@ -97,6 +97,7 @@ public class MyNASI {
          * @param sm_dyn          sm_dyn
          * @param negative_prompt uc
          * @param seed            seed
+         * @param noise_schedule   noise schedule
          */
         Allin1RequestImage(
                 TYPE type,
@@ -113,7 +114,8 @@ public class MyNASI {
                 boolean sm,
                 boolean sm_dyn,
                 String negative_prompt,
-                int seed) {
+                int seed,
+                String noise_schedule) {
             super(type,email,password);
             this.model =model;
             this.input =input;
@@ -127,6 +129,7 @@ public class MyNASI {
             this.sm_dyn =sm_dyn;
             this.negative_prompt =negative_prompt;
             this.seed =seed;
+            this.noise_schedule =noise_schedule;
         }
         public final String model;
         public final String input;
@@ -141,6 +144,8 @@ public class MyNASI {
         public final String negative_prompt;
 
         public final int seed;
+
+        public final String noise_schedule;
     }
     /**
      * all in 1 request data.
@@ -380,6 +385,7 @@ public class MyNASI {
             p.put("uncode_scale",((double)request.uncodeScale)/100.0);
             p.put("seed",request.seed);
             p.put("negative_prompt",request.negative_prompt);
+            p.put("noise_schedule",request.noise_schedule);
             //
             String input = "girl";
             if ((request.input != null) && (!request.input.equals(""))) {

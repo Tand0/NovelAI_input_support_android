@@ -23,21 +23,23 @@
     <string name="setting_login_password_hint">Novel AIのパスワード</string>
 
     <string name="setting_device">デバイス設定</string>
-    <string name="setting_use_tree">ツリーを使うか</string>
+    <string name="setting_use_tree">ツリーの使用</string>
     <string name="setting_width_x_height">幅 X 高さ</string>
     <string name="setting_width_x_height_summary">サイズ</string>
 
     <string name="setting_nai">NAIの設定</string>
     <string name="prompt_model">モデル</string>
-    <string name="prompt_model_summary">モデル(default:safe-diffusion)</string>
+    <string name="prompt_model_summary">モデル(default:nai-diffusion-3)</string>
     <string name="prompt_scale">スケール(default:11)</string>
-    <string name="prompt_steps">スケール(default:28)</string>
+    <string name="prompt_steps">ステップ(default:28)</string>
     <string name="prompt_uncond_scale">除去したい要素強さ(default 100％)</string>
     <string name="prompt_sampler">サンプラー</string>
     <string name="prompt_sampler_summary">サンプラーの種別</string>
     <string name="prompt_sm">sm</string>
     <string name="prompt_sm_dyn">sm_dyn</string>
     <string name="prompt_fixed_seed">シード固定</string>
+    <string name="prompt_noise_schedule">ノイズ設定</string>
+    <string name="prompt_noise_schedule_summary">ノイズ設定(default:native)</string>
 
     <!-- Prompt activiti -->
     <string name="text_prompt_hint">プロンプトかｘプロンプトを入力</string>
@@ -98,7 +100,7 @@
     <string name="menu_change">変更</string>
     <string name="menu_image_list">画像リスト</string>
     <string name="menu_cancel">キャンセル</string>
-    <string name="menu_change_part">一部変更</string>
+    <string name="menu_change_part">一部差替</string>
 
     <!-- tree -->
     <string name="input_word">プロンプトかｘプロンプトを入力</string>

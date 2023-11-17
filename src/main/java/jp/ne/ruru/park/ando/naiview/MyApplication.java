@@ -618,6 +618,10 @@ public class MyApplication  extends Application {
                         if (integer != null) {
                             this.setSeed(integer);
                         }
+                        string = containString(item,"noise_schedule");
+                        if (string != null) {
+                            editor.putString("noise_schedule",string);
+                        }
                         editor.apply();
                     } catch (JSONException e) {
                         text.append(e.getMessage());
@@ -1214,7 +1218,7 @@ public class MyApplication  extends Application {
             }
             String prompt = this.getPrompt();
             String uc = this.getUc();
-            String model = preferences.getString("prompt_model", "safe-diffusion").trim();
+            String model = preferences.getString("prompt_model", "nai-diffusion-3").trim();
             int width;
             int height;
             try {
@@ -1259,6 +1263,7 @@ public class MyApplication  extends Application {
                 seed = new java.util.Random().nextInt(Integer.MAX_VALUE - 1) + 1;
                 this.setSeed(seed);
             }
+            String noise_schedule = preferences.getString("prompt_noise_schedule", "native").trim();
             request = new MyNASI.Allin1RequestImage(
                     type,
                     email,
@@ -1274,9 +1279,10 @@ public class MyApplication  extends Application {
                     sm,
                     sm_dyn,
                     uc,
-                    seed);
+                    seed,
+                    noise_schedule);
         } else if (type == MyNASI.TYPE.SUGGEST_TAGS) {
-            String model = preferences.getString("prompt_model", "safe-diffusion").trim();
+            String model = preferences.getString("prompt_model", "nai-diffusion-3").trim();
             String target = (String) option;
             //
             request = new MyNASI.Allin1RequestSuggestTags(
