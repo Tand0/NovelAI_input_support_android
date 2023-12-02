@@ -3,9 +3,11 @@ package jp.ne.ruru.park.ando.naiview;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.widget.AbsListView;
 import android.widget.SeekBar;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.Locale;
@@ -32,6 +34,11 @@ public class ImageListActivity extends AppCompatActivity {
         //
         binding = ActivityImageListBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+        setSupportActionBar(binding.toolbar);
+        ActionBar actionBar = getSupportActionBar();
+        if (actionBar != null) {
+            actionBar.setDisplayHomeAsUpEnabled(true);
+        }
         //
         ImagesListAdapter<UriEtc> adapter = new ImagesListAdapter<>(this, android.R.layout.simple_list_item_1);
         //
@@ -84,12 +91,21 @@ public class ImageListActivity extends AppCompatActivity {
                         binding.imagesListView.setSelection(progress);
                     }
                 });
-        if ((0 <= position) && (position < max)) {
+        if (position < max) {
             binding.imagesListView.setSelection(position);
             binding.imagesListSeekbar.setProgress(position);
             setText(position,max - 1);
         }
         //
+    }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem menuButton){
+        int buttonId = menuButton.getItemId();
+        if (buttonId == android.R.id.home) {
+            finish();
+            return true;
+        }
+        return super.onOptionsItemSelected(menuButton);
     }
     public void setText(int progress,int max) {
         String str = String.format(Locale.US, "%d/%d",progress,max);

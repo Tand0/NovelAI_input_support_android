@@ -1,6 +1,5 @@
 package jp.ne.ruru.park.ando.naiview;
 
-import android.app.Activity;
 import android.app.Application;
 import android.content.Context;
 import android.content.Intent;
@@ -61,6 +60,11 @@ public class MyApplication  extends Application {
      * privacy policy for google play console
      */
     public static final String PRIVACY_POLICY_URL = "https://github.com/Tand0/NovelAI_input_support_android/blob/main/README.md";
+
+    /**
+     * novelai toppage
+     */
+    public static final String CREATE_ACCOUNT_URL = "https://novelai.net/";
 
     /**
      * on create
@@ -363,6 +367,11 @@ public class MyApplication  extends Application {
     public int getSettingScale(SharedPreferences preferences) {
         return preferences.getBoolean("setting_scale", true) ? 4 : 2;
     }
+
+    public String getSettingWidthXHeight(SharedPreferences preferences) {
+        return preferences.getString("setting_width_x_height", "512x768");
+    }
+
     /**
      * Novel AI Support Interface area
      */
@@ -490,10 +499,6 @@ public class MyApplication  extends Application {
             Intent intent = new Intent(context, PromptActivity.class);
             context.startActivity( intent );
             return true;
-        } else if (id == R.id.action_uc) {
-            Intent intent = new Intent(context, UcActivity.class);
-            context.startActivity( intent );
-            return true;
         } else if (id == R.id.action_tree) {
             Intent intent = new Intent(context, TreeActivity.class);
             context.startActivity( intent );
@@ -507,13 +512,10 @@ public class MyApplication  extends Application {
             intent.setData(Uri.parse(PRIVACY_POLICY_URL));
             context.startActivity(intent);
             return true;
-        } else if (id == R.id.action_back) {
-            if (context instanceof Activity) {
-                ((Activity) context).finish();
-            }
-            return true;
-        } else if (id == R.id.generate_image) {
-            execution(context,MyNASI.TYPE.IMAGE,-1,-1,null);
+        } else if (id == R.id.action_create_account) {
+            Intent intent = new Intent(Intent.ACTION_VIEW);
+            intent.setData(Uri.parse(CREATE_ACCOUNT_URL));
+            context.startActivity(intent);
             return true;
         } else if (id == R.id.subscription) {
             subscription(context);
@@ -1136,11 +1138,8 @@ public class MyApplication  extends Application {
         }
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
         setUseTree(preferences,false);
-        if (isPrompt) {
-            action(context,R.id.action_prompt);
-        } else {
-            action(context,R.id.action_uc);
-        }
+        //
+        action(context,R.id.action_prompt);
     }
     protected String deleteTextFromItem(String target,Object object) {
         if (object == null) {
@@ -1222,7 +1221,7 @@ public class MyApplication  extends Application {
             int width;
             int height;
             try {
-                String string = preferences.getString("setting_width_x_height", "512x768");
+                String string = getSettingWidthXHeight(preferences);
                 int index = string.indexOf('x');
                 if (0 < index) {
                     String widthString = string.substring(0, index);

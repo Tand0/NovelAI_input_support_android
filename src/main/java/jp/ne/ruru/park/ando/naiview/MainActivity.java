@@ -4,13 +4,13 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 
-import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import jp.ne.ruru.park.ando.naiview.databinding.ActivityMainBinding;
 
-import android.view.GestureDetector;
-import android.view.MotionEvent;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 
@@ -32,10 +32,14 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        //
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-
+        setSupportActionBar(binding.toolbar);
+        ActionBar actionBar = getSupportActionBar();
+        if (actionBar != null) {
+            actionBar.setDisplayHomeAsUpEnabled(true);
+        }
         //
         // load to the top
         MyApplication a = (MyApplication) this.getApplication();
@@ -49,14 +53,12 @@ public class MainActivity extends AppCompatActivity {
         //
         binding.actionSettings.setOnClickListener(this::myAction);
         binding.actionPrompt.setOnClickListener(this::myAction);
-        binding.actionUc.setOnClickListener(this::myAction);
         binding.actionTree.setOnClickListener(this::myAction);
         binding.actionPolicy.setOnClickListener(this::myAction);
         binding.actionImage.setOnClickListener(this::myAction);
-        binding.actionBack.setOnClickListener(this::myAction);
         //
-        binding.generateImage.setOnClickListener(this::myAction);
         binding.subscription.setOnClickListener(this::myAction);
+        binding.actionCreateAccount.setOnClickListener(this::myAction);
         //
         //
         if ((action != null) && (type != null)
@@ -66,6 +68,24 @@ public class MainActivity extends AppCompatActivity {
             }
         }
 
+    }
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+        return true;
+    }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem menuButton){
+        int buttonId = menuButton.getItemId();
+        if (buttonId == android.R.id.home) {
+            finish();
+            return true;
+        } else if (buttonId == R.id.action_settings) {
+            Intent intent = new Intent(this, SettingsActivity.class);
+            this.startActivity( intent );
+            return true;
+        }
+        return  super.onOptionsItemSelected(menuButton);
     }
 
     /**

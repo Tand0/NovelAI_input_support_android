@@ -8,8 +8,11 @@ import android.os.Bundle;
 
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.view.Menu;
+import android.view.MenuItem;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -84,11 +87,15 @@ public class TreeActivity extends AppCompatActivity {
 
         ActivityTreeBinding binding = ActivityTreeBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+        setSupportActionBar(binding.toolbar);
+        ActionBar actionBar = getSupportActionBar();
+        if (actionBar != null) {
+            actionBar.setDisplayHomeAsUpEnabled(true);
+        }
         //
         binding.actionSaveInternal.setOnClickListener(v->saveInternal());
         binding.actionSaveExternal.setOnClickListener(v->save());
         binding.actionLoad.setOnClickListener(v->load());
-        binding.actionBack.setOnClickListener(v->finish());
         //
         adapter = new JSONListAdapter<>(this, android.R.layout.simple_list_item_1);
         //
@@ -104,14 +111,30 @@ public class TreeActivity extends AppCompatActivity {
         super.onResume();
         onMyResume();
     }
-
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_menu_tree, menu);
+        return true;
+    }
     /**
      * repaint data
      */
     public void onMyResume() {
         adapter.updateJSONArray();
     }
-
+    @Override
+    public boolean onOptionsItemSelected(MenuItem menuButton){
+        int buttonId = menuButton.getItemId();
+        if (buttonId == android.R.id.home) {
+            finish();
+            return true;
+        } else if (buttonId == R.id.action_prompt) {
+            Intent intent = new Intent(this, PromptActivity.class);
+            this.startActivity( intent );
+            return true;
+        }
+        return super.onOptionsItemSelected(menuButton);
+    }
     /** data load */
     public void load() {
         Intent load = new Intent(Intent.ACTION_OPEN_DOCUMENT)

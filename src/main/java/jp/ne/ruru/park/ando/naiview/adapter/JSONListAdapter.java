@@ -3,7 +3,7 @@ package jp.ne.ruru.park.ando.naiview.adapter;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Color;
+import android.os.Build;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +13,7 @@ import android.widget.CheckBox;
 import android.widget.ListView;
 import android.widget.PopupMenu;
 import android.widget.TextView;
+import android.graphics.Color;
 
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
@@ -126,22 +127,48 @@ public class JSONListAdapter<T extends JSONObject> extends ArrayAdapter<T> {
             }
             checkBox.setOnCheckedChangeListener((buttonView, isChecked) -> expand(position,isChecked));
             checkBox.setEnabled(isNotWord);
+            boolean darkFlag = false;
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+                if (a.getResources().getConfiguration().isNightModeActive()) {
+                    darkFlag = true;
+                }
+            }
+            int backgroundColor;
+            int textColor;
+            int dirColor;
+            int textUcColor;
+            int dirUcColor;
+            if (!darkFlag) {
+                backgroundColor = Color.parseColor("#FFFFFF");
+                textColor =  Color.parseColor("#000000");
+                dirColor = Color.parseColor("#0000C0");
+                textUcColor =  Color.parseColor("#008000");
+                dirUcColor = Color.parseColor("#0080C0");
+            } else {
+                backgroundColor = Color.parseColor("#000000");
+                textColor = Color.parseColor("#FFFFFF");
+                dirColor = Color.parseColor( "#CFCFFF");
+                textUcColor = Color.parseColor("#FFCFFF");
+                dirUcColor = Color.parseColor("#FFCF3F");
+            }
             if (! isIgnore) {
-                checkBox.setBackgroundColor(Color.parseColor("#FFFFFF"));
-                if (isUc) {
+                checkBox.setBackgroundColor(backgroundColor);
+                if (!isUc) {
                     if (isNotWord) {
-                        checkBox.setTextColor(Color.parseColor("#008000"));
+                        checkBox.setTextColor(dirColor);
                     } else {
-                        checkBox.setTextColor(Color.parseColor("#004000"));
+                        checkBox.setTextColor(textColor);
                     }
-                } else if (isNotWord) {
-                    checkBox.setTextColor(Color.parseColor("#000080"));
                 } else {
-                    checkBox.setTextColor(Color.parseColor("#000000"));
+                    if (isNotWord) {
+                        checkBox.setTextColor(dirUcColor);
+                    } else {
+                        checkBox.setTextColor(textUcColor);
+                    }
                 }
             } else {
-                checkBox.setBackgroundColor(Color.parseColor("#000000"));
-                checkBox.setTextColor(Color.parseColor("#F8F8F8"));
+                checkBox.setBackgroundColor(textColor);
+                checkBox.setTextColor(backgroundColor);
             }
             checkBox.setText(value.toString());
             checkBox.setHint(String.format(Locale.ENGLISH, "%d - expand", position));

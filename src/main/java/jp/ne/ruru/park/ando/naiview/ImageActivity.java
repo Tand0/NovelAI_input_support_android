@@ -151,7 +151,7 @@ public class ImageActivity extends AppCompatActivity {
         final MyApplication a =
                 ((MyApplication)ImageActivity.this.getApplication());
         String title = ImageActivity.this.getResources().getString(R.string.menu_move);
-        title = title + "(" + a.getImagePosition() + ")";
+        title = title + "(No." + a.getImagePosition() + ")";
         if (0 < bitmapX) {
             title = String.format(Locale.ENGLISH, "%s(%dx%d)", title, bitmapX,bitmapY);
         }
@@ -159,12 +159,16 @@ public class ImageActivity extends AppCompatActivity {
         if (0 <= anlas) {
             title = String.format(Locale.ENGLISH, "%s (anlas: %d)", title, anlas);
         }
-        final String[] items = new String[] {
-                ImageActivity.this.getResources().getString(R.string.generate_image),
-                ImageActivity.this.getResources().getString(R.string.upscale),
-                ImageActivity.this.getResources().getString(R.string.action_back)
-        };
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
+        String imageText = ImageActivity.this.getResources().getString(R.string.generate_image)
+                + "  (" + a.getSettingWidthXHeight(preferences) + ")";
+        String upscaleText = ImageActivity.this.getResources().getString(R.string.upscale)
+                + "  (x" + a.getSettingScale(preferences) + ")";
+        final String[] items = new String[] {
+                ImageActivity.this.getResources().getString(R.string.action_back),
+                imageText,
+                upscaleText,
+        };
         View dialogView = this.getLayoutInflater().inflate(R.layout.raw_switch, null);
         SwitchCompat isUseTree = dialogView.findViewById(R.id.setting_use_tree);
         isUseTree.setChecked(a.isUseTree(preferences));
@@ -177,11 +181,11 @@ public class ImageActivity extends AppCompatActivity {
                 .setView(dialogView)
                 .setItems(items, (dialog,which)-> {
                     if (which == 0) {
-                        a.execution(ImageActivity.this,MyNASI.TYPE.IMAGE,bitmapX,bitmapY,null);
-                    } else if (which == 1) {
-                        doUpscale();
-                    } else if (which == 2) {
                         finish();
+                    } else if (which == 1) {
+                        a.execution(ImageActivity.this,MyNASI.TYPE.IMAGE,bitmapX,bitmapY,null);
+                    } else if (which == 2) {
+                        doUpscale();
                     }
                 })
                 .setPositiveButton(R.string.action_save_external,(dialog,which)-> saveForASF())
@@ -209,23 +213,30 @@ public class ImageActivity extends AppCompatActivity {
          */
         public boolean onFling(MotionEvent e1, @NonNull MotionEvent e2, float velocityX,
                                float velocityY) {
-            int SWIPE_DISTANCE = 100;
             if (e1 == null) {
-                return super.onFling(null,e2,velocityX,velocityY);
-            } else if (e1.getX() - e2.getX() <  (- SWIPE_DISTANCE)) {
-                swipeFlag = 0;
-                onMyFling();
-                return true;
-            } else if (SWIPE_DISTANCE < e1.getX() - e2.getX()) {
-                swipeFlag = 1;
-                onMyFling();
-                return true;
-            } else if (e1.getY() - e2.getY() <  (- SWIPE_DISTANCE)) {
+                return super.onFling(null, e2, velocityX, velocityY);
+            }
+            float dx = (e1.getX() - e2.getX());
+            dx = dx * dx;
+            float dy = e1.getY() - e2.getY();
+            dy = dy * dy;
+            final float SWIPE_DISTANCE = 40 * 40;
+            if ((dy < SWIPE_DISTANCE)
+                && (dx < SWIPE_DISTANCE)) {
+                return super.onFling(null, e2, velocityX, velocityY);
+            } else if (dx < dy) {
                 swipeFlag = 2;
                 onMyFling();
                 return true;
+            } else if (e1.getX() < e2.getX()) {
+                swipeFlag = 0;
+                onMyFling();
+                return true;
+            } else {
+                swipeFlag = 1;
+                onMyFling();
+                return true;
             }
-            return super.onFling(e1,e2,velocityX,velocityY);
         }
     };
     public void onMyFling() {

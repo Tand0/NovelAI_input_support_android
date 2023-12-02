@@ -8,20 +8,25 @@
         android:hint="@string/setting_login_email_hint"
         android:contentDescription="@string/setting_login_email_hint"
         app:useSimpleSummaryProvider="true" />
+
     <EditTextPreference
         app:key="setting_login_password"
         app:title="@string/setting_login_password"
         android:hint="@string/setting_login_password_hint"
         android:contentDescription="@string/setting_login_password_hint"
         android:inputType="textPassword"
-        app:defaultValue="" />
+        app:defaultValue=""
+        app:useSimpleSummaryProvider="false" />
+
     <SwitchPreferenceCompat
         app:key="setting_use_tree"
         app:title="@string/setting_use_tree" />
+
     <SwitchPreferenceCompat
         app:key="prompt_fixed_seed"
         app:defaultValue="false"
         app:title="@string/prompt_fixed_seed" />
+
     <ListPreference
         android:key="setting_width_x_height"
         android:title="@string/setting_width_x_height"
@@ -29,7 +34,8 @@
         android:summary="@string/setting_width_x_height_summary"
         android:dialogTitle="@string/setting_width_x_height_summary"
         android:entries="@array/width_list"
-        android:entryValues="@array/width_list" />
+        android:entryValues="@array/width_list"
+        app:useSimpleSummaryProvider="true" />
 
     <ListPreference
         android:key="prompt_model"
@@ -38,7 +44,8 @@
         android:summary="@string/prompt_model_summary"
         android:dialogTitle="@string/prompt_model_summary"
         android:entries="@array/model_list"
-        android:entryValues="@array/model_list" />
+        android:entryValues="@array/model_list"
+        app:useSimpleSummaryProvider="true" />
 
     <SeekBarPreference
         app:key="prompt_int_number_scale"
@@ -48,6 +55,7 @@
         android:max="25"
         app:showSeekBarValue="true"
         />
+
     <SeekBarPreference
         app:key="prompt_int_number_steps"
         app:title="@string/prompt_steps"
@@ -56,6 +64,7 @@
         android:max="50"
         app:showSeekBarValue="true"
         />
+
     <SeekBarPreference
         app:key="prompt_int_uncode_scale"
         app:title="@string/prompt_uncond_scale"
@@ -72,11 +81,14 @@
         android:summary="@string/prompt_sampler_summary"
         android:dialogTitle="@string/prompt_sampler_summary"
         android:entries="@array/sampler_list"
-        android:entryValues="@array/sampler_list" />
+        android:entryValues="@array/sampler_list"
+        app:useSimpleSummaryProvider="true" />
+
     <SwitchPreferenceCompat
         app:key="prompt_sm"
         app:defaultValue="true"
         app:title="@string/prompt_sm" />
+
     <SwitchPreferenceCompat
         app:key="prompt_sm_dyn"
         app:defaultValue="false"
@@ -95,5 +107,6 @@
         android:summary="@string/prompt_noise_schedule_summary"
         android:dialogTitle="@string/prompt_noise_schedule_summary"
         android:entries="@array/noise_schedule_list"
-        android:entryValues="@array/noise_schedule_list" />
+        android:entryValues="@array/noise_schedule_list"
+        app:useSimpleSummaryProvider="true" />
 </PreferenceScreen>

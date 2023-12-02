@@ -1,9 +1,16 @@
 package jp.ne.ruru.park.ando.naiview;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
+
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.preference.PreferenceFragmentCompat;
+
+import jp.ne.ruru.park.ando.naiview.databinding.ActivitySettingsBinding;
+
 
 /** setting activity
  * @author foobar@em.boo.jp
@@ -20,20 +27,40 @@ public class SettingsActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_settings);
+        //
+        ActivitySettingsBinding binding = ActivitySettingsBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
+        setSupportActionBar(binding.toolbar);
+        ActionBar actionBar = getSupportActionBar();
+        if (actionBar != null) {
+            actionBar.setDisplayHomeAsUpEnabled(true);
+        }
+        //
         if (savedInstanceState == null) {
             getSupportFragmentManager()
                     .beginTransaction()
                     .replace(R.id.settings, new SettingsFragment())
                     .commit();
         }
-        ActionBar actionBar = getSupportActionBar();
-        if (actionBar != null) {
-            actionBar.setDisplayHomeAsUpEnabled(true);
-        }
-
     }
-
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_setting, menu);
+        return true;
+    }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem menuButton) {
+        int buttonId = menuButton.getItemId();
+        if (buttonId == android.R.id.home) {
+            finish();
+            return true;
+        } else if (buttonId == R.id.action_tree) {
+            Intent intent = new Intent(this, TreeActivity.class);
+            this.startActivity( intent );
+            return true;
+        }
+        return super.onOptionsItemSelected(menuButton);
+    }
     /**
      * Settings fragment
      */

@@ -3,8 +3,10 @@ package jp.ne.ruru.park.ando.naiview;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import org.json.JSONArray;
@@ -43,6 +45,11 @@ public class SuggestActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding = ActivitySuggestBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+        setSupportActionBar(binding.toolbar);
+        ActionBar actionBar = getSupportActionBar();
+        if (actionBar != null) {
+            actionBar.setDisplayHomeAsUpEnabled(true);
+        }
         //
         MyApplication a =
                 ((MyApplication)this.getApplication());
@@ -70,8 +77,6 @@ public class SuggestActivity extends AppCompatActivity {
         });
         binding.wordEditInsert.setOnClickListener((v)->wordEditBack(true));
         binding.wordEditChange.setOnClickListener((v)->wordEditBack(false));
-        binding.actionBack.setOnClickListener((v)->finish());
-        //
         Intent intent = getIntent();
         if (intent == null) {
             return;
@@ -98,7 +103,15 @@ public class SuggestActivity extends AppCompatActivity {
         //
 
     }
-
+    @Override
+    public boolean onOptionsItemSelected(MenuItem menuButton){
+        int buttonId = menuButton.getItemId();
+        if (buttonId == android.R.id.home) {
+            finish();
+            return true;
+        }
+        return super.onOptionsItemSelected(menuButton);
+    }
     public void wordEditBack(boolean isInsert) {
         Intent intent = getIntent();
         intent.putExtra(TYPE,binding.wordEditSpinner.getSelectedItemPosition());

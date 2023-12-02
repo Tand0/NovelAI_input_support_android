@@ -42,24 +42,29 @@
     <string name="prompt_noise_schedule_summary">ノイズ設定(default:native)</string>
 
     <!-- Prompt activiti -->
-    <string name="text_prompt_hint">プロンプトかｘプロンプトを入力</string>
+    <string name="text_prompt_hint">プロンプトを入力</string>
+    <string name="text_prompt_uc_hint">ｘプロンプトを入力</string>
 
     <!-- Menu Preferences -->
     <string name="menu_display">表示</string>
     <string name="action">実行</string>
     <string name="action_folder">フォルダ</string>
     <string name="action_checkbox">チェック</string>
-    <string name="menu_arrow">--&gt;</string>
+    <string name="menu_arrow1">-&gt;</string>
+    <string name="menu_arrow2">----&gt;</string>
+    <string name="menu_arrow3">--------&gt;</string>
     <string name="action_settings">設定</string>
     <string name="action_prompt">プロンプト</string>
     <string name="action_uc">ｘプロンプト</string>
     <string name="action_tree">ツリー</string>
     <string name="action_image">画像</string>
+    <string name="action_image_list">画像リスト</string>
     <string name="action_save_internal">内部にセーブ</string>
     <string name="action_save_external">セーブ</string>
     <string name="action_load">ロード</string>
     <string name="action_connect_to">ネット接続</string>
     <string name="action_policy">プライバシポリシー</string>
+    <string name="action_create_account">アカウント作成</string>
     <string name="action_back">戻る</string>
 
     <string name="menu_move">実行</string>
