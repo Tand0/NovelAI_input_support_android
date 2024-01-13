@@ -110,7 +110,7 @@ public class MyApplication  extends Application {
     /**
      * prompt area
      */
-    private String prompt = "girl";
+    private String prompt = MyNASI.DEFAULT_PROMPT;
 
     /**
      * getter for prompt
@@ -1121,12 +1121,6 @@ public class MyApplication  extends Application {
             target = this.getUc();
         }
         target = deleteTextFromItem(target,item);
-        target = target
-                .replaceAll("[{\\[]+\\s*[}\\]]+" ," ")
-                .replaceAll(",(\\s*,)+",",")
-                .replaceAll("\\s*,\\s*$","")
-                .replaceAll("^\\s*,\\s*","")
-                .replaceAll("\\s+"," ");
         if (!target.equals("") && !answer.equals("")) {
             target = target + ", ";
         }
@@ -1141,15 +1135,47 @@ public class MyApplication  extends Application {
         //
         action(context,R.id.action_prompt);
     }
-    protected String deleteTextFromItem(String target,Object object) {
-        if (object == null) {
-            return target;
+
+    /**
+     * delete text from item
+     * @param targets original text
+     * @param object item
+     * @return change text
+     */
+    protected String deleteTextFromItem(String targets,Object object) {
+        List<String> keys = getDeleteTextList(object);
+        keys.sort((a,b)-> a.length() == b.length() ? b.compareTo(a) : b.length() - a.length());
+        String[] targetsArray = targets.split(",");
+        StringBuilder result = new StringBuilder();
+        boolean commaFlag = false;
+        for (String target : targetsArray) {
+            boolean notHit = true;
+            String targetBreak = changeBaseKey(target);
+            for (String key : keys) {
+                if (targetBreak.equals(key)) {
+                    notHit = false;
+                     break;
+                }
+            }
+            if (notHit) {
+                if (commaFlag) {
+                    result.append(", ");
+                }
+                commaFlag = true;
+                result.append(target.trim());
+            }
         }
-        if (object instanceof JSONArray) {
+        return result.toString();
+    }
+    protected List<String> getDeleteTextList(Object object) {
+        List<String> list = new java.util.ArrayList<>();
+        if (object == null) {
+            return list;
+        } else if (object instanceof JSONArray) {
             JSONArray array = (JSONArray)object;
             for (int i = 0 ; i < array.length() ; i++) {
                 try {
-                    target = deleteTextFromItem(target,array.get(i));
+                    list.addAll(getDeleteTextList(array.get(i)));
                 } catch (JSONException e) {
                     // NONE
                 }
@@ -1159,15 +1185,15 @@ public class MyApplication  extends Application {
             if ((type != null) && type.contains(TEXT_WORD)) {
                 String key = containString(object,VALUES);
                 if (key != null) {
-                    key = key
-                            .replaceAll("[{}\\[\\]]","")
-                            .replaceAll("\\s+"," ");
-                    target = target.replaceAll(key,"");
+                    list.add(changeBaseKey(key));
                 }
             }
-            target = deleteTextFromItem(target,containJSONArray(object,CHILD));
+            list.addAll(getDeleteTextList(containJSONArray(object,CHILD)));
         }
-        return target;
+        return list;
+    }
+    private String changeBaseKey(String key) {
+        return key.replaceAll("[{}\\[\\]]","").replaceAll("\\s+"," ").trim();
     }
 
 
@@ -1352,10 +1378,10 @@ public class MyApplication  extends Application {
                     context.startActivity(intent);
                 }
                 String message = "OK";
-                Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, message, Toast.LENGTH_LONG).show();
             } else {
                 String message = "NG";
-                Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, message, Toast.LENGTH_LONG).show();
             }
         } else if (res.type == MyNASI.TYPE.SUGGEST_TAGS) {
             if (res.statusCode == 200) {

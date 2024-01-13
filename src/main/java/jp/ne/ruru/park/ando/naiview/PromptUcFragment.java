@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 
@@ -21,6 +22,7 @@ public class PromptUcFragment extends PromptAbstractFragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         binding = FragmentPromptUcBinding.inflate(getLayoutInflater());
+        getTextPrompt().addTextChangedListener(super.myTextWatcher);
         super.onCreate(savedInstanceState);
     }
     @Override
@@ -44,7 +46,10 @@ public class PromptUcFragment extends PromptAbstractFragment {
     public EditText getTextPrompt() {
         return binding.textPromptUc;
     }
-
+    @Override
+    public TextView getTokenView() {
+        return binding.tokenView;
+    }
     /**
      * get prompt
      * @return prompt

@@ -175,6 +175,10 @@ public class SuggestActivity extends AppCompatActivity {
                 }
                 list.add(new SuggestList(tag,count,confidence));
             }
+            if (list.isEmpty()) {
+                // this is empty response
+                list.add(new SuggestList("null",0,0));
+            }
             updateAdapter(list);
         } catch (JSONException e) {
             a.appendLog(this,e.getMessage());

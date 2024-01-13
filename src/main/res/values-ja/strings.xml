@@ -73,6 +73,7 @@
     <string name="from_prompt_to_tree">ツリーへ</string>
     <string name="from_tree_to_prompt">ツリーから</string>
     <string name="to_suggest">入力予測へ</string>
+    <string name="token">トークン</string>
     <string name="from_tree_to_file">ツリーをセーブ</string>
     <string name="from_file_to_tree">ツリーをロード</string>
 
@@ -91,6 +92,10 @@
     <string name="menu_past">ペースト</string>
     <string name="menu_add">追加</string>
     <string name="menu_add_text">テキスト挿入</string>
+    <string name="menu_add_text_detail">word -- テキスト挿入</string>
+    <string name="menu_add_sequence_detail">sequence -- 順番フォルダ挿入</string>
+    <string name="menu_add_select_detail">select -- 選択フォルダ挿入</string>
+    <string name="menu_add_weight_detail">weight -- 前優先フォルダ挿入</string>
     <string name="menu_tree">ツリー挿入</string>
     <string name="menu_sequence">全部ツリーを挿入</string>
     <string name="menu_select">選択ツリーを挿入</string>
@@ -105,7 +110,7 @@
     <string name="menu_change">変更</string>
     <string name="menu_image_list">画像リスト</string>
     <string name="menu_cancel">キャンセル</string>
-    <string name="menu_change_part">一部差替</string>
+    <string name="menu_change_part">プロンプトを一部差替</string>
 
     <!-- tree -->
     <string name="input_word">プロンプトかｘプロンプトを入力</string>

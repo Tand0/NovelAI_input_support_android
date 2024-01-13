@@ -28,6 +28,11 @@ import javax.net.ssl.HttpsURLConnection;
  * @author foobar@em.boo.jp
  */
 public class MyNASI {
+    /**
+     * default prompt
+     */
+    public static final String DEFAULT_PROMPT= "1girl, best quality, amazing quality, very aesthetic, absurdres";
+
     /** mime type gif */
     public static final String IMAGE_PNG = "image/png";
     /** mime type png */
@@ -387,7 +392,7 @@ public class MyNASI {
             p.put("negative_prompt",request.negative_prompt);
             p.put("noise_schedule",request.noise_schedule);
             //
-            String input = "girl";
+            String input = DEFAULT_PROMPT;
             if ((request.input != null) && (!request.input.equals(""))) {
                 input = request.input;
             }
@@ -535,8 +540,19 @@ public class MyNASI {
             try {
                 JSONObject item = new JSONObject(res.content);
                 item = item.getJSONObject("trainingStepsLeft");
-                int fixedTrainingStepsLeft = item.getInt("fixedTrainingStepsLeft");
-                res.setAnlas(fixedTrainingStepsLeft);
+                int fixedTrainingStepsLeft;
+                try {
+                    fixedTrainingStepsLeft = item.getInt("fixedTrainingStepsLeft");
+                } catch (JSONException e) {
+                    fixedTrainingStepsLeft = 0;
+                }
+                int purchasedTrainingSteps;
+                try {
+                    purchasedTrainingSteps = item.getInt("purchasedTrainingSteps");
+                } catch (JSONException e) {
+                    purchasedTrainingSteps = 0;
+                }
+                res.setAnlas(fixedTrainingStepsLeft + purchasedTrainingSteps);
             } catch (JSONException e) {
                 // NONE
             }

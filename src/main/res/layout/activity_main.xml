@@ -22,7 +22,6 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
         android:drawableLeft="@drawable/ic_log"
-        android:drawableTint="?android:attr/textColorPrimaryInverse"
         android:text="@string/action_settings"
         tools:ignore="ButtonStyle,RtlHardcoded" />
 
@@ -33,7 +32,6 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
         android:drawableLeft="@drawable/ic_tree"
-        android:drawableTint="?android:attr/textColorPrimaryInverse"
         android:text="@string/action_tree"
         tools:ignore="RtlHardcoded" />
 
@@ -44,7 +42,6 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
         android:drawableLeft="@drawable/ic_prompt"
-        android:drawableTint="?android:attr/textColorPrimaryInverse"
         android:text="@string/action_prompt"
         tools:ignore="ButtonStyle,RtlHardcoded" />
     <Button
@@ -54,7 +51,6 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
         android:drawableLeft="@drawable/ic_image"
-        android:drawableTint="?android:attr/textColorPrimaryInverse"
         android:text="@string/action_image"
         tools:ignore="ButtonStyle,RtlHardcoded" />
     <Button
@@ -63,13 +59,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:drawableLeft="@drawable/ic_subscription"
-        android:drawableTint="?android:attr/textColorPrimaryInverse"
         android:text="@string/subscription"
         tools:ignore="RtlHardcoded" />
     <Button
         android:id="@+id/action_policy"
         android:drawableLeft="@drawable/ic_policy"
-        android:drawableTint="?android:attr/textColorPrimaryInverse"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/action_policy"
@@ -77,7 +71,6 @@
     <Button
         android:id="@+id/action_create_account"
         android:drawableLeft="@drawable/ic_home_black_24dp"
-        android:drawableTint="?android:attr/textColorPrimaryInverse"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/action_create_account"
@@ -104,3 +97,4 @@
             tools:ignore="RtlHardcoded" />
     </ScrollView>
 </LinearLayout>
+

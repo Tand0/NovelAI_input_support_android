@@ -21,6 +21,13 @@
                 android:layout_height="wrap_content"
                 android:text="@string/to_suggest"
                 tools:ignore="ButtonStyle,RtlHardcoded,TextContrastCheck" />
+            <TextView
+                android:layout_marginStart="5dp"
+                android:id="@+id/token_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/token"
+                android:gravity="start" />
         </LinearLayout>
         <LinearLayout
             android:orientation="horizontal"
@@ -37,7 +44,7 @@
                 android:id="@+id/from_tree_to_prompt"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/from_tree_to_prompt"
+                android:text="@string/setting_use_tree"
                 tools:ignore="ButtonStyle,RtlHardcoded" />
         </LinearLayout>
 

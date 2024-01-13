@@ -1,11 +1,14 @@
 package jp.ne.ruru.park.ando.naiview;
 import android.os.Bundle;
 
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 
@@ -23,6 +26,7 @@ public class PromptFragment extends PromptAbstractFragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         binding = jp.ne.ruru.park.ando.naiview.databinding.FragmentPromptBinding.inflate(getLayoutInflater());
+        getTextPrompt().addTextChangedListener(super.myTextWatcher);
         super.onCreate(savedInstanceState);
     }
     @Override
@@ -31,23 +35,26 @@ public class PromptFragment extends PromptAbstractFragment {
         return binding.getRoot();
     }
     @Override
-    public  Button getFromPromptToTree() {
+    public Button getFromPromptToTree() {
         return binding.fromPromptToTree;
     }
     @Override
-    public  Button getFromTreeToPrompt() {
+    public Button getFromTreeToPrompt() {
         return binding.fromTreeToPrompt;
     }
     @Override
-    public  Button getToSuggest() {
+    public Button getToSuggest() {
         return binding.toSuggest;
     }
 
     @Override
-    public  EditText getTextPrompt() {
+    public EditText getTextPrompt() {
         return binding.textPrompt;
     }
-
+    @Override
+    public TextView getTokenView() {
+        return binding.tokenView;
+    }
     /**
      * get prompt
      * @return prompt

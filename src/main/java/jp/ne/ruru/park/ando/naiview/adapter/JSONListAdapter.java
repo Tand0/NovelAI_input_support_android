@@ -254,10 +254,7 @@ public class JSONListAdapter<T extends JSONObject> extends ArrayAdapter<T> {
             }
             return true;
         } else if (itemId == R.id.menu_add_text) {
-            addText( item, text,0);
-            return true;
-        } else if (itemId == R.id.menu_tree) {
-            addText( item, text,ssIndex);
+            addText( item, text, ssIndex);
             return true;
         } else if (itemId == R.id.menu_change_part) {
             if (item != null) {

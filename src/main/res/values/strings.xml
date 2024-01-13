@@ -73,6 +73,7 @@
     <string name="from_prompt_to_tree">To tree</string>
     <string name="from_tree_to_prompt">From tree</string>
     <string name="to_suggest">To suggest</string>
+    <string name="token">token</string>
     <string name="from_tree_to_file">Save tree</string>
     <string name="from_file_to_tree">Load tree</string>
 
@@ -91,6 +92,10 @@
     <string name="menu_past">Past</string>
     <string name="menu_add">Add</string>
     <string name="menu_add_text">Insert text</string>
+    <string name="menu_add_text_detail">word -- Insert word</string>
+    <string name="menu_add_sequence_detail">sequence -- Insert sequence folder</string>
+    <string name="menu_add_select_detail">select -- Insert select folder</string>
+    <string name="menu_add_weight_detail">weight -- Insert weight folder</string>
     <string name="menu_tree">Insert tree</string>
     <string name="menu_sequence">Insert sequence</string>
     <string name="menu_select">Insert select</string>
@@ -105,7 +110,7 @@
     <string name="menu_change">Change</string>
     <string name="menu_image_list">Image list</string>
     <string name="menu_cancel">Cancel</string>
-    <string name="menu_change_part">Changed part</string>
+    <string name="menu_change_part">Changed part to prompt</string>
 
     <!-- tree -->
     <string name="input_word">Input word for prompt/uc</string>

@@ -3,6 +3,8 @@ package jp.ne.ruru.park.ando.naiview;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -148,6 +150,7 @@ public abstract class PromptAbstractFragment extends Fragment {
 
     public abstract EditText getTextPrompt();
 
+    public abstract TextView getTokenView();
     /**
      * get prompt
      * @return prompt
@@ -166,4 +169,24 @@ public abstract class PromptAbstractFragment extends Fragment {
      */
     public abstract boolean isPrompt();
 
+
+    protected final TextWatcher myTextWatcher = new TextWatcher() {
+
+        @Override
+        public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            //EMPTY
+        }
+
+        @Override
+        public void onTextChanged(CharSequence s, int start, int before, int count) {
+            //EMPTY
+        }
+
+        @Override
+        public void afterTextChanged(Editable s) {
+            String[] ans = s.toString().replaceAll("[^0-9a-zA-Z]"," ").split("\\s+");
+            String index = "token=" + ans.length + " / 255";
+            getTokenView().setText(index);
+        }
+    };
 }

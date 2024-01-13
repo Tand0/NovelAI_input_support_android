@@ -58,7 +58,7 @@
             android:id="@+id/word_edit_from_tree"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/from_tree_to_prompt"
+            android:text="@string/setting_use_tree"
             tools:ignore="ButtonStyle,RtlHardcoded" />
     </LinearLayout>
 
