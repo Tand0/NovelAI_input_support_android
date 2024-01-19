@@ -20,12 +20,14 @@
 
     <SwitchPreferenceCompat
         app:key="setting_use_tree"
-        app:title="@string/setting_use_tree" />
+        app:title="@string/setting_use_tree"
+        app:summary="@string/setting_use_tree_summary" />
 
     <SwitchPreferenceCompat
         app:key="prompt_fixed_seed"
         app:defaultValue="false"
-        app:title="@string/prompt_fixed_seed" />
+        app:title="@string/prompt_fixed_seed"
+        app:summary="@string/prompt_fixed_seed_summary" />
 
     <ListPreference
         android:key="setting_width_x_height"
@@ -109,4 +111,33 @@
         android:entries="@array/noise_schedule_list"
         android:entryValues="@array/noise_schedule_list"
         app:useSimpleSummaryProvider="true" />
+
+    <SwitchPreferenceCompat
+        app:key="setting_exif"
+        app:defaultValue="true"
+        app:summary="@string/exif_summary"
+        app:title="@string/exif" />
+
+    <SwitchPreferenceCompat
+        app:key="setting_i2i"
+        app:defaultValue="false"
+        app:summary="@string/i2i_summary"
+        app:title="@string/i2i" />
+
+    <SeekBarPreference
+        app:key="prompt_int_strength"
+        app:title="@string/prompt_strength"
+        app:defaultValue="10"
+        app:min="0"
+        android:max="99"
+        app:showSeekBarValue="true"
+        />
+    <SeekBarPreference
+        app:key="prompt_int_noise"
+        app:title="@string/prompt_noise"
+        app:defaultValue="0"
+        app:min="0"
+        android:max="99"
+        app:showSeekBarValue="true"
+        />
 </PreferenceScreen>

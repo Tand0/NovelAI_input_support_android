@@ -24,6 +24,7 @@
 
     <string name="setting_device">Setting devices</string>
     <string name="setting_use_tree">Use tree</string>
+    <string name="setting_use_tree_summary">Update prompt when generate image</string>
     <string name="setting_width_x_height">Width X height</string>
     <string name="setting_width_x_height_summary">Size</string>
 
@@ -38,8 +39,11 @@
     <string name="prompt_sm">sm</string>
     <string name="prompt_sm_dyn">sm_dyn</string>
     <string name="prompt_fixed_seed">Fixed seed</string>
+    <string name="prompt_fixed_seed_summary">Fixed seed when generate image</string>
     <string name="prompt_noise_schedule">noise schedule</string>
     <string name="prompt_noise_schedule_summary">noise schedule(default:native)</string>
+    <string name="prompt_strength">(i2i)strength(default:70%)</string>
+    <string name="prompt_noise">(i2i)noise(default:10%)</string>
 
     <!-- Prompt activiti -->
     <string name="text_prompt_hint">Please input prompt</string>
@@ -81,6 +85,10 @@
     <string name="generate_image">/ai/generate-image</string>
     <string name="upscale">/ai/upscale</string>
     <string name="upscale_summary">/ai/upscale x2 or x4</string>
+    <string name="exif">Update prompt</string>
+    <string name="exif_summary">Update prompt when loading image</string>
+    <string name="i2i">(i2i)Use Image2Image</string>
+    <string name="i2i_summary">Use image to image</string>
     <string name="subscription">/user/subscription</string>
     <string name="suggest_tags">/ai/generate-image/suggest-tags</string>
     <string name="title_activity_tree">TreeActivity</string>
@@ -92,10 +100,10 @@
     <string name="menu_past">Past</string>
     <string name="menu_add">Add</string>
     <string name="menu_add_text">Insert text</string>
-    <string name="menu_add_text_detail">word -- Insert word</string>
-    <string name="menu_add_sequence_detail">sequence -- Insert sequence folder</string>
-    <string name="menu_add_select_detail">select -- Insert select folder</string>
-    <string name="menu_add_weight_detail">weight -- Insert weight folder</string>
+    <string name="menu_add_text_detail">word - Insert word</string>
+    <string name="menu_add_sequence_detail">sequence - Insert sequence folder</string>
+    <string name="menu_add_select_detail">select - Insert select folder</string>
+    <string name="menu_add_weight_detail">weight - Insert weight folder</string>
     <string name="menu_tree">Insert tree</string>
     <string name="menu_sequence">Insert sequence</string>
     <string name="menu_select">Insert select</string>

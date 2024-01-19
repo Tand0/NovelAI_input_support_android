@@ -160,14 +160,19 @@ public class ImageActivity extends AppCompatActivity {
             title = String.format(Locale.ENGLISH, "%s (anlas: %d)", title, anlas);
         }
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
-        String imageText = ImageActivity.this.getResources().getString(R.string.generate_image)
-                + "  (" + a.getSettingWidthXHeight(preferences) + ")";
+        String addText;
+        if (a.isSettingI2i(preferences)) {
+            addText = "(i2i)";
+        } else {
+            addText = "(" + a.getSettingWidthXHeight(preferences) + ")";
+        }
+        String imageText = ImageActivity.this.getResources().getString(R.string.generate_image) + addText;
         String upscaleText = ImageActivity.this.getResources().getString(R.string.upscale)
-                + "  (x" + a.getSettingScale(preferences) + ")";
+                + "(x" + a.getSettingScale(preferences) + ")";
         final String[] items = new String[] {
                 ImageActivity.this.getResources().getString(R.string.action_back),
                 imageText,
-                upscaleText,
+                upscaleText
         };
         View dialogView = this.getLayoutInflater().inflate(R.layout.raw_switch, null);
         SwitchCompat isUseTree = dialogView.findViewById(R.id.setting_use_tree);
@@ -220,7 +225,7 @@ public class ImageActivity extends AppCompatActivity {
             dx = dx * dx;
             float dy = e1.getY() - e2.getY();
             dy = dy * dy;
-            final float SWIPE_DISTANCE = 40 * 40;
+            final float SWIPE_DISTANCE = 45 * 45;
             if ((dy < SWIPE_DISTANCE)
                 && (dx < SWIPE_DISTANCE)) {
                 return super.onFling(null, e2, velocityX, velocityY);

@@ -76,9 +76,7 @@ public class MyNASI {
         public final TYPE type;
         public final String email;
         public final String password;
-
     }
-
     /**
      * all in 1 request data.
      * To make it thread-safe, I've wrapped up the data
@@ -102,7 +100,10 @@ public class MyNASI {
          * @param sm_dyn          sm_dyn
          * @param negative_prompt uc
          * @param seed            seed
-         * @param noise_schedule   noise schedule
+         * @param noise_schedule  noise schedule
+         * @param imageBuffer     base image for image2image
+         * @param strength        strength for image2image
+         * @param noise           noise for image2image
          */
         Allin1RequestImage(
                 TYPE type,
@@ -120,25 +121,34 @@ public class MyNASI {
                 boolean sm_dyn,
                 String negative_prompt,
                 int seed,
-                String noise_schedule) {
+                String noise_schedule,
+                byte[] imageBuffer,
+                int strength,
+                int noise
+        ) {
             super(type,email,password);
-            this.model =model;
-            this.input =input;
-            this.width =width;
-            this.height =height;
-            this.scale =scale;
-            this.steps =steps;
-            this.uncodeScale =uncodeScale;
-            this.sampler =sampler;
-            this.sm =sm;
-            this.sm_dyn =sm_dyn;
-            this.negative_prompt =negative_prompt;
-            this.seed =seed;
-            this.noise_schedule =noise_schedule;
+            this.model = model;
+            this.input = input;
+            this.width = width;
+            this.height = height;
+            this.scale = scale;
+            this.steps = steps;
+            this.uncodeScale = uncodeScale;
+            this.sampler = sampler;
+            this.sm = sm;
+            this.sm_dyn = sm_dyn;
+            this.negative_prompt = negative_prompt;
+            this.seed = seed;
+            this.noise_schedule = noise_schedule;
+            this.imageBuffer = imageBuffer;
+            this.strength = strength;
+            this.noise = noise;
         }
         public final String model;
         public final String input;
+
         public final int width;
+
         public final int height;
         public final int scale;
         public final int steps;
@@ -151,6 +161,12 @@ public class MyNASI {
         public final int seed;
 
         public final String noise_schedule;
+
+        public final byte[] imageBuffer;
+
+        public final int strength;
+
+        public final int noise;
     }
     /**
      * all in 1 request data.
@@ -222,7 +238,7 @@ public class MyNASI {
     public static class Allin1Response {
         /** this is constructor
          * @param type execution type
-         * @param requestBody request body (for log)
+         * @param m request body (for log)
          * @param statusCode status code (for callback)
          * @param mimeType mime type (for image activity)
          * @param content result body (for log)
@@ -230,7 +246,7 @@ public class MyNASI {
          */
         Allin1Response(
                 TYPE type,
-                String requestBody,
+                JSONObject m,
                 int statusCode,
                 String mimeType,
                 String content,
@@ -239,7 +255,7 @@ public class MyNASI {
             this.statusCode = statusCode;
             this.mimeType = mimeType;
             this.content = content;
-            this.requestBody = requestBody;
+            this.m = m;
             this.imageBuffer = imageData;
         }
         /**
@@ -253,7 +269,7 @@ public class MyNASI {
             return this;
         }
         public final TYPE type;
-        public final String requestBody;
+        public final JSONObject m;
         public final int statusCode;
         public final String mimeType;
 
@@ -305,24 +321,23 @@ public class MyNASI {
      */
     public Allin1Response login(Allin1Request request) {
         final String aKey = getAKey(request.email, request.password);
-        JSONObject object = new JSONObject();
-        String requestBody;
+        Allin1Response res;
         try {
-            object.put("key", aKey);
-            requestBody = object.toString();
+            JSONObject m = new JSONObject();
+            m.put("key", aKey);
+            res = getConnection(
+                    TYPE.LOGIN,LOGIN_URL,m);
         } catch (JSONException e) {
             return new Allin1Response(
                     TYPE.LOGIN,
-                    "",
+                    null,
                     202,
                     "",
-                    e.getMessage(),
+                    e.getClass().getName(),
                     null)
-                    .setDescription("Login fail");
+                    .setDescription(e.getMessage());
         }
         //
-        Allin1Response res = getConnection(
-                TYPE.LOGIN,LOGIN_URL,requestBody);
         //
         int status_code = res.statusCode;
         String description;
@@ -370,8 +385,7 @@ public class MyNASI {
         }
 
         //
-        JSONObject m = new JSONObject();
-        String requestBody;
+        Allin1Response res;
         try {
             JSONObject p = new JSONObject();
             p.put("width",request.width);
@@ -380,7 +394,6 @@ public class MyNASI {
             p.put("sampler",request.sampler);
             p.put("steps",request.steps);
             p.put("n_samples",1);
-            p.put("ucPreset",2);
             p.put("qualityToggle",false);
             p.put("sm",request.sm);
             p.put("sm_dyn",request.sm_dyn);
@@ -391,29 +404,50 @@ public class MyNASI {
             p.put("seed",request.seed);
             p.put("negative_prompt",request.negative_prompt);
             p.put("noise_schedule",request.noise_schedule);
+            if (request.imageBuffer != null) {
+                // for image2image
+                String image = Base64.getEncoder().encodeToString(request.imageBuffer);
+                p.put("image", image);
+                p.put("strength",((double) request.strength) / 100.0);
+                p.put("noise", ((double) request.noise) / 100.0);
+                p.put("ucPreset", 0);
+                p.put("add_original_image", false);
+                p.put("cfg_rescale", 0);
+                p.put("legacy_v3_extend", false);
+                p.put("params_version", 1);
+                p.put("extra_noise_seed",request.seed);
+            } else {
+                p.put("ucPreset", 2);
+            }
             //
             String input = DEFAULT_PROMPT;
             if ((request.input != null) && (!request.input.equals(""))) {
                 input = request.input;
             }
+            JSONObject m = new JSONObject();
             m.put("input",input);
             m.put("model",request.model);
-            m.put("action","generate");
+            if (request.imageBuffer == null) {
+                // for generate image
+                m.put("action", "generate");
+            } else {
+                // for img2img
+                m.put("action", "img2img");
+            }
             m.put("parameters",p);
             //
-            requestBody = m.toString(2);
+            res = this.getConnection(request.type,IMAGE_URL,m);
             //
         } catch (JSONException e) {
             return new Allin1Response(
-                    TYPE.IMAGE,
-                    "",
+                    request.type,
+                    null,
                     202,
                     "",
-                    e.getMessage(),
+                    e.getClass().getName(),
                     null)
-                    .setDescription("request fail");
+                    .setDescription(e.getMessage());
         }
-        Allin1Response res = this.getConnection(request.type,IMAGE_URL,requestBody);
         //
         int status_code = res.statusCode;
         String description;
@@ -451,11 +485,24 @@ public class MyNASI {
 
         //
         String image = Base64.getEncoder().encodeToString(request.imageBuffer);
-        String requestBody = "{\"image\" : \"" + image + "\"," +
-                "\"width\" : " + request.width + "," +
-                "\"height\" : " + request.height + "," +
-                "\"scale\" : " + request.scale + "}";
-        Allin1Response res = this.getConnection(request.type,UPSCALE_URL, requestBody);
+        Allin1Response res;
+        try {
+            JSONObject m = new JSONObject();
+            m.put("image", image);
+            m.put("width",request.width);
+            m.put("height",request.height);
+            m.put("scale",request.scale);
+            res = this.getConnection(request.type,UPSCALE_URL, m);
+        } catch (JSONException e) {
+            return new Allin1Response(
+                    request.type,
+                    null,
+                    202,
+                    "",
+                    e.getClass().getName(),
+                    null)
+                    .setDescription(e.getMessage());
+        }
         //
         int status_code = res.statusCode;
         String description;
@@ -502,7 +549,19 @@ public class MyNASI {
         } catch (UnsupportedEncodingException e) {
             url = url + "&prompt=" + request.prompt;
         }
-        Allin1Response res = this.getConnection(request.type,url, null);
+        Allin1Response res;
+        try {
+            res = this.getConnection(request.type,url, null);
+        } catch (JSONException e) {
+            return new Allin1Response(
+                    request.type,
+                    null,
+                    202,
+                    "",
+                    e.getClass().getName(),
+                    null)
+                    .setDescription(e.getMessage());
+        }
         //
         int status_code = res.statusCode;
         String description;
@@ -531,7 +590,19 @@ public class MyNASI {
             }
         }
         //
-        Allin1Response res = this.getConnection(request.type,SUBSCRIPTION_URL,null);
+        Allin1Response res;
+        try {
+            res = this.getConnection(request.type,SUBSCRIPTION_URL,null);
+        } catch (JSONException e) {
+            return new Allin1Response(
+                    request.type,
+                    null,
+                    202,
+                    "",
+                    e.getClass().getName(),
+                    null)
+                    .setDescription(e.getMessage());
+        }
         //
         int status_code = res.statusCode;
         String description;
@@ -588,10 +659,18 @@ public class MyNASI {
      * Used rest api
      * @param type execution type
      * @param targetUrl uri for rest api
-     * @param requestBody request body
+     * @param m request body
      * @return all in 1 result
      */
-    protected Allin1Response getConnection(TYPE type, String targetUrl, String requestBody) {
+    protected Allin1Response getConnection(TYPE type, String targetUrl, JSONObject m) throws JSONException{
+        //
+        String requestBody;
+        if (m == null) {
+            requestBody = null;
+        } else {
+            requestBody = m.toString(2);
+        }
+        //
         final String authorization = "Authorization";
         String content = "";
         HttpsURLConnection urlCon = null;
@@ -714,7 +793,7 @@ public class MyNASI {
                 }
             }
         }
-        return new Allin1Response(type, requestBody, statusCode, mime, content,result);
+        return new Allin1Response(type, m, statusCode, mime, content,result);
     }
 
     /**

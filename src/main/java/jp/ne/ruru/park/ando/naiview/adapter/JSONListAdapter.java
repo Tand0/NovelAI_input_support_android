@@ -229,8 +229,8 @@ public class JSONListAdapter<T extends JSONObject> extends ArrayAdapter<T> {
                 int i = 0;
                 for (String s: SS) {
                     if (textKey.equals(s)) {
-                       ssIndex = i;
-                       break;
+                        ssIndex = i;
+                        break;
                     }
                     i++;
                 }
@@ -334,7 +334,7 @@ public class JSONListAdapter<T extends JSONObject> extends ArrayAdapter<T> {
                     try {
                         String key = a.containString(suggestPosition,MyApplication.TEXT);
                         if ((key != null) && (!key.contains(MyApplication.TEXT_WORD))
-                            && (selectedItemPosition != 0)) {
+                                && (selectedItemPosition != 0)) {
                             for (String s: SS) {
                                 key = key.replace(s,"");
                             }
@@ -459,8 +459,8 @@ public class JSONListAdapter<T extends JSONObject> extends ArrayAdapter<T> {
         try {
             Boolean expand = a.containBoolean(item,MyApplication.EXPAND);
             if (text.contains(MyApplication.TEXT_WORD)
-                || (expand == null)
-                || (!expand)) {
+                    || (expand == null)
+                    || (!expand)) {
                 flag = this.pastJSONObject(top,item);
             } else {
                 item.put(MyApplication.EXPAND,true);

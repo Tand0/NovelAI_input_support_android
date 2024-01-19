@@ -4,6 +4,8 @@ import android.app.Application;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Handler;
 import android.widget.Toast;
@@ -24,6 +26,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Random;
@@ -367,11 +370,41 @@ public class MyApplication  extends Application {
     public int getSettingScale(SharedPreferences preferences) {
         return preferences.getBoolean("setting_scale", true) ? 4 : 2;
     }
-
+    public boolean getSettingExif(SharedPreferences preferences) {
+        return preferences.getBoolean("setting_exif", true);
+    }
     public String getSettingWidthXHeight(SharedPreferences preferences) {
         return preferences.getString("setting_width_x_height", "512x768");
     }
-
+    public int getSettingWidth(SharedPreferences preferences) {
+        return getSettingWidthOrHeight(preferences, true);
+    }
+    public int getSettingHeight(SharedPreferences preferences) {
+        return getSettingWidthOrHeight(preferences, false);
+    }
+    protected int getSettingWidthOrHeight(SharedPreferences preferences, boolean isWidth) {
+        int width;
+        int height;
+        try {
+            String string = getSettingWidthXHeight(preferences);
+            int index = string.indexOf('x');
+            if (0 < index) {
+                String widthString = string.substring(0, index);
+                String heightString = string.substring(index + 1);
+                width = Integer.parseInt(widthString);
+                height = Integer.parseInt(heightString);
+            } else {
+                throw new NumberFormatException("not number x number");
+            }
+        } catch (NumberFormatException e) {
+            width = 512;
+            height = 768;
+        }
+        return isWidth ? width : height;
+    }
+    public boolean isSettingI2i(SharedPreferences preferences) {
+        return preferences.getBoolean("setting_i2i", false);
+    }
     /**
      * Novel AI Support Interface area
      */
@@ -553,7 +586,8 @@ public class MyApplication  extends Application {
      * @param mime mime type
      */
     public void load(Context context,Uri imageUri,String mime) {
-        final SharedPreferences.Editor editor = PreferenceManager.getDefaultSharedPreferences(context).edit();
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
+        final SharedPreferences.Editor editor = preferences.edit();
         String file;
         StringBuilder text = new StringBuilder();
         if (mime == null) {
@@ -569,83 +603,96 @@ public class MyApplication  extends Application {
         if ((imageBuffer == null) || (imageBuffer.length == 0)) {
             return;
         }
-        //
-        try (InputStream is = new ByteArrayInputStream(this.getImageBuffer())) {
-            ImageMetadata data = Imaging.getMetadata(is,file);
-            if (data == null) {
-                throw new ImageReadException("ImageMetadata null");
-            }
-            for(ImageMetadata.ImageMetadataItem x :data.getItems()) {
-                text.append(x.toString());
-                text.append("\n\n");
+        if (getSettingExif(preferences)) {
+            //
+            try (InputStream is = new ByteArrayInputStream(this.getImageBuffer())) {
+                ImageMetadata data = Imaging.getMetadata(is,file);
+                if (data == null) {
+                    throw new ImageReadException("ImageMetadata null");
+                }
+                boolean commentFlag = false;
                 final String COMMENT = "comment:";
                 final String PARAM = "parameters:";
-                if (x.toString().toLowerCase().startsWith(COMMENT)) {
-                    String comment = x.toString().substring(COMMENT.length());
-                    try {
-                        JSONObject item = new JSONObject(comment);
-                        String string = containString(item,"prompt");
-                        if (string != null) {
-                            this.setPrompt(string);
+                final String NEGATIVE_PARAM = "negative prompt:";
+                for(ImageMetadata.ImageMetadataItem x :data.getItems()) {
+                    text.append(x.toString());
+                    text.append("\n\n");
+                    if (x.toString().toLowerCase().startsWith(COMMENT)) {
+                        commentFlag = true;
+                        String comment = x.toString().substring(COMMENT.length());
+                        try {
+                            JSONObject item = new JSONObject(comment);
+                            String string = containString(item,"prompt");
+                            if (string != null) {
+                                this.setPrompt(string);
+                            }
+                            string = containString(item,"uc");
+                            if (string != null) {
+                                this.setUc(string);
+                            }
+                            Integer integer = containInt(item,"steps");
+                            if (integer != null) {
+                                editor.putInt("prompt_int_number_steps",integer);
+                            }
+                            integer = containInt(item,"scale");
+                            if (integer != null) {
+                                editor.putInt("prompt_int_number_scale",integer);
+                            }
+                            Double doubleX = containDouble(item,"uncode_scale");
+                            if (doubleX != null) {
+                                editor.putInt("prompt_int_uncode_scale",(int)(doubleX*100));
+                            }
+                            string = containString(item,"sampler");
+                            if (string != null) {
+                                editor.putString("prompt_sampler",string);
+                            }
+                            Boolean targetBoolean = containBoolean(item,"sm");
+                            if (targetBoolean != null) {
+                                editor.putBoolean("prompt_sm",targetBoolean);
+                            }
+                            targetBoolean = containBoolean(item,"sm_dyn");
+                            if (targetBoolean != null) {
+                                editor.putBoolean("prompt_sm_dyn",targetBoolean);
+                            }
+                            integer = containInt(item,"seed");
+                            if (integer != null) {
+                                this.setSeed(integer);
+                            }
+                            string = containString(item,"noise_schedule");
+                            if (string != null) {
+                                editor.putString("noise_schedule",string);
+                            }
+                            editor.apply();
+                        } catch (JSONException e) {
+                            text.append(e.getMessage());
                         }
-                        string = containString(item,"uc");
-                        if (string != null) {
-                            this.setUc(string);
+                    } else if (! commentFlag) {
+                        if (x.toString().toLowerCase().startsWith(PARAM)) {
+                            String prompt = x.toString();
+                            int index = prompt.indexOf(PARAM);
+                            if (0 <= index) {
+                                prompt = prompt.substring(0, index);
+                            }
+                            this.setPrompt(prompt);
+                        } else if (x.toString().toLowerCase().startsWith(NEGATIVE_PARAM)) {
+                            String uc = x.toString();
+                            int index = uc.indexOf(PARAM);
+                            if (0 <= index) {
+                                uc = uc.substring(0, index);
+                            }
+                            this.setUc(uc);
                         }
-                        Integer integer = containInt(item,"steps");
-                        if (integer != null) {
-                            editor.putInt("prompt_int_number_steps",integer);
-                        }
-                        integer = containInt(item,"scale");
-                        if (integer != null) {
-                            editor.putInt("prompt_int_number_scale",integer);
-                        }
-                        Double doubleX = containDouble(item,"uncode_scale");
-                        if (doubleX != null) {
-                            editor.putInt("prompt_int_uncode_scale",(int)(doubleX*100));
-                        }
-                        string = containString(item,"sampler");
-                        if (string != null) {
-                            editor.putString("prompt_sampler",string);
-                        }
-                        Boolean targetBoolean = containBoolean(item,"sm");
-                        if (targetBoolean != null) {
-                            editor.putBoolean("prompt_sm",targetBoolean);
-                        }
-                        targetBoolean = containBoolean(item,"sm_dyn");
-                        if (targetBoolean != null) {
-                            editor.putBoolean("prompt_sm_dyn",targetBoolean);
-                        }
-                        integer = containInt(item,"seed");
-                        if (integer != null) {
-                            this.setSeed(integer);
-                        }
-                        string = containString(item,"noise_schedule");
-                        if (string != null) {
-                            editor.putString("noise_schedule",string);
-                        }
-                        editor.apply();
-                    } catch (JSONException e) {
-                        text.append(e.getMessage());
                     }
-                } else if (x.toString().toLowerCase().startsWith(PARAM)) {
-                    String prompt = x.toString();
-                    String key = "Negative prompt: ";
-                    int index = prompt.indexOf(key);
-                    if (0 <= index) {
-                        prompt = prompt.substring(0,index);
-                    }
-                    this.setPrompt(prompt);
-                    this.ignoreData(true);
-                    this.fromPromptToTree(prompt,true);
                 }
+            } catch (ImageReadException | IOException e) {
+                text.append(e.getClass().getName());
+                text.append("\n");
+                text.append(e.getMessage());
             }
-        } catch (ImageReadException | IOException e) {
-            text.append(e.getClass().getName());
-            text.append("\n");
-            text.append(e.getMessage());
+            this.appendLog(context,text.toString());
+        } else {
+            this.appendLog(context,"Not update image prompt");
         }
-        this.appendLog(context,text.toString());
         //
         if (!(context instanceof ImageActivity)) {
             Intent intent = new Intent(context, ImageActivity.class);
@@ -1219,7 +1266,7 @@ public class MyApplication  extends Application {
         MyNASI.Allin1Request request;
         if (type == MyNASI.TYPE.UPSCALE) {
             String message = context.getResources().getString(R.string.upscale);
-            Toast.makeText(this , message, Toast.LENGTH_LONG).show();
+            Toast.makeText(this, message, Toast.LENGTH_LONG).show();
             request = new MyNASI.Allin1RequestUpscale(
                     type,
                     email,
@@ -1230,9 +1277,9 @@ public class MyApplication  extends Application {
                     this.imageBuffer);
         } else if (type == MyNASI.TYPE.IMAGE) {
             String message = context.getResources().getString(R.string.generate_image);
+            boolean isI2i = isSettingI2i(preferences);
             Toast.makeText(this, message, Toast.LENGTH_LONG).show();
-            boolean useTree = isUseTree(preferences);
-            if (useTree) {
+            if (isUseTree(preferences)) {
                 if (0 < this.getTop().length()) {
                     this.setPrompt(fromTree(getTop(),true));
                     this.setUc(fromTree(getTop(),false));
@@ -1241,25 +1288,41 @@ public class MyApplication  extends Application {
                     fromPromptToTree(getUc(), false);
                 }
             }
+
             String prompt = this.getPrompt();
             String uc = this.getUc();
             String model = preferences.getString("prompt_model", "nai-diffusion-3").trim();
             int width;
             int height;
-            try {
-                String string = getSettingWidthXHeight(preferences);
-                int index = string.indexOf('x');
-                if (0 < index) {
-                    String widthString = string.substring(0, index);
-                    String heightString = string.substring(index + 1);
-                    width = Integer.parseInt(widthString);
-                    height = Integer.parseInt(heightString);
-                } else {
-                    throw new NumberFormatException("not number x number");
+            byte[] targetBuffer;
+            int strength = preferences.getInt("prompt_int_strength", 70);
+            int noise = preferences.getInt("prompt_int_noise", 10);
+            if (isI2i) {
+                try (InputStream stream = new ByteArrayInputStream(this.imageBuffer)){
+                    Bitmap bitmap = BitmapFactory.decodeStream(stream);
+                    bitmapX = bitmap.getWidth();
+                    bitmapY = bitmap.getHeight();
+                    if (bitmapX < bitmapY) {
+                        width = 512;
+                        height = 512 * bitmapY / bitmapX;
+                    } else {
+                        width = 512 * bitmapX / bitmapY;
+                        height = 512;
+                    }
+                    bitmap = Bitmap.createScaledBitmap(bitmap, width, height,true);
+                    try (ByteArrayOutputStream baos = new ByteArrayOutputStream()) {
+                        bitmap.compress(Bitmap.CompressFormat.PNG, 100, baos);
+                        targetBuffer = baos.toByteArray();
+                    }
+                } catch (Exception e) {
+                    targetBuffer = this.imageBuffer;
+                    width = getSettingWidth(preferences);
+                    height = getSettingHeight(preferences);
                 }
-            } catch (NumberFormatException e) {
-                width = 512;
-                height = 768;
+            } else {
+                targetBuffer = null;
+                width = getSettingWidth(preferences);
+                height = getSettingHeight(preferences);
             }
             int scale = preferences.getInt("prompt_int_number_scale", 11);
             int steps = preferences.getInt("prompt_int_number_steps", 28);
@@ -1290,7 +1353,7 @@ public class MyApplication  extends Application {
             }
             String noise_schedule = preferences.getString("prompt_noise_schedule", "native").trim();
             request = new MyNASI.Allin1RequestImage(
-                    type,
+                    MyNASI.TYPE.IMAGE,
                     email,
                     password,
                     model,
@@ -1305,7 +1368,10 @@ public class MyApplication  extends Application {
                     sm_dyn,
                     uc,
                     seed,
-                    noise_schedule);
+                    noise_schedule,
+                    targetBuffer,
+                    strength,
+                    noise);
         } else if (type == MyNASI.TYPE.SUGGEST_TAGS) {
             String model = preferences.getString("prompt_model", "nai-diffusion-3").trim();
             String target = (String) option;
@@ -1316,7 +1382,7 @@ public class MyApplication  extends Application {
                     password,
                     model,
                     target);
-         } else {
+        } else {
             request = new MyNASI.Allin1Request(
                     type,
                     email,
@@ -1346,6 +1412,50 @@ public class MyApplication  extends Application {
         Executors.newSingleThreadExecutor().execute(runnable);
     }
 
+    protected void appendJSONObject(StringBuilder buf,int index, Object m) {
+        if (m instanceof JSONObject) {
+            JSONObject obj = (JSONObject) m;
+            for (Iterator<String> it = obj.keys(); it.hasNext(); ) {
+                for (int i = 0 ; i < index ; i++) {
+                    buf.append(" ");
+                }
+                String key = it.next();
+                buf.append(key);
+                buf.append("=\n");
+                if (key.equals("image")) {
+                    appendJSONObject(buf, index + 2, "*image*");
+                } else {
+                    try {
+                        Object nextData = obj.get(key);
+                        appendJSONObject(buf, index + 2, nextData);
+                    } catch (JSONException e) {
+                        appendJSONObject(buf, index + 2, e.getMessage());
+                    }
+                }
+            }
+        } else if (m instanceof JSONArray) {
+            JSONArray array = (JSONArray)m;
+            for (int i = 0 ; i < index ; i++) {
+                buf.append(" ");
+            }
+            buf.append("[\n");
+            for (int i = 0 ; i < array.length() ; i++) {
+                try {
+                Object nextData = array.get(i);
+                    appendJSONObject(buf, index + 2, nextData);
+                } catch (JSONException e) {
+                    appendJSONObject(buf, index + 2, e.getMessage());
+                }
+            }
+        } else {
+            for (int i = 0 ; i < index ; i++) {
+                buf.append(" ");
+            }
+            buf.append(m.toString());
+            buf.append("\n");
+        }
+    }
+
     /** call back from Novel AI Support Interface
      * @param context activity
      * @param res result data
@@ -1363,8 +1473,12 @@ public class MyApplication  extends Application {
             buf.append("login\n");
         } else if ((res.type == MyNASI.TYPE.IMAGE)
             || (res.type == MyNASI.TYPE.UPSCALE)) {
-            if (res.type == MyNASI.TYPE.IMAGE) {
-                buf.append("requestBody=").append(res.requestBody).append("\n");
+            JSONObject m = res.m;
+            if (m == null) {
+                buf.append("requestBody=").append("null");
+            } else {
+                buf.append("requestBody=\n");
+                appendJSONObject(buf,2, m);
             }
             if (res.statusCode == 200) {
                 setImageBuffer(res.imageBuffer);

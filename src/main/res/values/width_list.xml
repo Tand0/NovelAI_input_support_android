@@ -32,9 +32,9 @@
     </string-array>
     <string-array name="edit_type_list">
         <item>@string/menu_add_text_detail</item>
-        <item>Insert sequence</item>
-        <item>Insert select</item>
-        <item>Insert weight</item>
+        <item>@string/menu_add_sequence_detail</item>
+        <item>@string/menu_add_select_detail</item>
+        <item>@string/menu_add_weight_detail</item>
     </string-array>
     <string-array name="word_edit_insert">
         <item>Insert</item>

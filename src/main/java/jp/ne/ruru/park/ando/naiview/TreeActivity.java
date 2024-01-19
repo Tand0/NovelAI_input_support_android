@@ -122,6 +122,7 @@ public class TreeActivity extends AppCompatActivity {
     public void onMyResume() {
         adapter.updateJSONArray();
     }
+
     @Override
     public boolean onOptionsItemSelected(MenuItem menuButton){
         int buttonId = menuButton.getItemId();
@@ -135,6 +136,7 @@ public class TreeActivity extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(menuButton);
     }
+
     /** data load */
     public void load() {
         Intent load = new Intent(Intent.ACTION_OPEN_DOCUMENT)
