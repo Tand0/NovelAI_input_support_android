@@ -13,7 +13,6 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.preference.PreferenceManager;
 
-
 import org.apache.commons.imaging.ImageReadException;
 import org.apache.commons.imaging.Imaging;
 import org.apache.commons.imaging.common.ImageMetadata;
@@ -98,7 +97,7 @@ public class MyApplication  extends Application {
      * @param message message
      */
     public void appendLog(Context context, String message) {
-        final int len = 5000;
+        final int len = 10000;
         this.log = this.log + "\n\n" + message;
         if (len < this.log.length()) {
             this.log = this.log.substring(this.log.length() - len);
@@ -579,6 +578,10 @@ public class MyApplication  extends Application {
         }
     }
 
+    public static final String COMMENT = "comment:";
+    public static final String PARAM = "parameters:";
+    public static final String NEGATIVE_PARAM = "negative prompt:";
+
     /**
      * load data to prompt/uc and image view
      * @param context activity
@@ -611,11 +614,10 @@ public class MyApplication  extends Application {
                     throw new ImageReadException("ImageMetadata null");
                 }
                 boolean commentFlag = false;
-                final String COMMENT = "comment:";
-                final String PARAM = "parameters:";
-                final String NEGATIVE_PARAM = "negative prompt:";
                 for(ImageMetadata.ImageMetadataItem x :data.getItems()) {
-                    text.append(x.toString());
+                    text.append(x.getClass().getName());
+                    text.append(" : ");
+                    text.append(x);
                     text.append("\n\n");
                     if (x.toString().toLowerCase().startsWith(COMMENT)) {
                         commentFlag = true;
@@ -1298,24 +1300,72 @@ public class MyApplication  extends Application {
             int strength = preferences.getInt("prompt_int_strength", 70);
             int noise = preferences.getInt("prompt_int_noise", 10);
             if (isI2i) {
-                try (InputStream stream = new ByteArrayInputStream(this.imageBuffer)){
+                try (InputStream stream = new ByteArrayInputStream(this.imageBuffer);
+                     ByteArrayOutputStream baos = new ByteArrayOutputStream()){
                     Bitmap bitmap = BitmapFactory.decodeStream(stream);
                     bitmapX = bitmap.getWidth();
                     bitmapY = bitmap.getHeight();
-                    if (bitmapX < bitmapY) {
-                        width = 512;
-                        height = 512 * bitmapY / bitmapX;
+                    if ((bitmapX <= 0) || (bitmapY <= 0)) {
+                        throw new IOException("bitmap size is 0");
+                    }
+                    final int max1 = 512;
+                    final int max2 = max1 * 3 / 2;
+                    if (bitmapX == bitmapY) {
+                        // re-scale (1:1)
+                        final int max3 = 640;
+                        bitmap = Bitmap.createScaledBitmap(bitmap, max3, max3, true);
                     } else {
-                        width = 512 * bitmapX / bitmapY;
-                        height = 512;
+                        int maxWidth;
+                        int maxHeight;
+                        int dx;
+                        int dy;
+                        int scaleX;
+                        int scaleY;
+                        if (bitmapY < bitmapX) {
+                            maxWidth = max2;
+                            maxHeight = max1;
+                            if (bitmapX < bitmapY * 3 / 2) {
+                                // base x, trimming y
+                                scaleX = maxWidth;
+                                scaleY = maxWidth * bitmapY / bitmapX;
+                                dx = 0;
+                                dy = (scaleY - maxHeight) / 2;
+                            } else {
+                                // base y, trimming x
+                                scaleX = maxHeight * bitmapX / bitmapY;
+                                scaleY = maxHeight;
+                                dx = (scaleX - maxWidth) / 2;
+                                dy = 0;
+                            }
+                        } else {
+                            maxWidth = max1;
+                            maxHeight = max2;
+                            if (bitmapY < bitmapX * 3 / 2) {
+                                // base y trimming x
+                                scaleX = maxHeight * bitmapX / bitmapY;
+                                scaleY = maxHeight;
+                                dx = (scaleX - maxWidth) / 2;
+                                dy = 0;
+                            } else {
+                                // base x trimming y
+                                scaleX = maxWidth;
+                                scaleY = maxWidth * bitmapY / bitmapX;
+                                dx = 0;
+                                dy = (scaleY - maxHeight) / 2;
+                            }
+                        }
+                        bitmap = Bitmap.createScaledBitmap(bitmap, scaleX, scaleY,true);
+                        bitmap = Bitmap.createBitmap(bitmap, dx, dy, maxWidth, maxHeight, null, true);
                     }
-                    bitmap = Bitmap.createScaledBitmap(bitmap, width, height,true);
-                    try (ByteArrayOutputStream baos = new ByteArrayOutputStream()) {
-                        bitmap.compress(Bitmap.CompressFormat.PNG, 100, baos);
-                        targetBuffer = baos.toByteArray();
-                    }
-                } catch (Exception e) {
-                    targetBuffer = this.imageBuffer;
+                    width = bitmap.getWidth();
+                    height = bitmap.getHeight();
+                    bitmap.compress(Bitmap.CompressFormat.PNG, 100, baos);
+                    targetBuffer = baos.toByteArray();
+                    this.imageBuffer = targetBuffer;
+                } catch (IllegalArgumentException | IOException e) {
+                    this.appendLog(context,"Changed i2i image exception");
+                    this.appendLog(context,e.getMessage());
+                    targetBuffer = null;
                     width = getSettingWidth(preferences);
                     height = getSettingHeight(preferences);
                 }

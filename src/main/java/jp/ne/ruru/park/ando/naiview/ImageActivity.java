@@ -28,6 +28,7 @@ import androidx.appcompat.widget.SwitchCompat;
 import androidx.preference.PreferenceManager;
 
 import java.io.ByteArrayInputStream;
+import java.io.IOException;
 import java.io.InputStream;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -128,7 +129,8 @@ public class ImageActivity extends AppCompatActivity {
             }
             binding.imageView.setImageBitmap(bitmap);
         } catch (Exception e) {
-            // NONE
+            a.appendLog(this, this.getClass().getName() + " onMyResume() failed");
+            a.appendLog(this, e.getMessage());
         }
     }
 

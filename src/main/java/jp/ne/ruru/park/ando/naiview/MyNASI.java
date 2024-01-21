@@ -412,7 +412,7 @@ public class MyNASI {
                 p.put("noise", ((double) request.noise) / 100.0);
                 p.put("ucPreset", 0);
                 p.put("add_original_image", false);
-                p.put("cfg_rescale", 0);
+                p.put("cfg_rescale", 0.0);
                 p.put("legacy_v3_extend", false);
                 p.put("params_version", 1);
                 p.put("extra_noise_seed",request.seed);
