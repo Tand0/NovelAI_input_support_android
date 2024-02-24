@@ -28,7 +28,6 @@ import androidx.appcompat.widget.SwitchCompat;
 import androidx.preference.PreferenceManager;
 
 import java.io.ByteArrayInputStream;
-import java.io.IOException;
 import java.io.InputStream;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -134,6 +133,13 @@ public class ImageActivity extends AppCompatActivity {
         }
     }
 
+    /** generate image */
+    public void generateImage() {
+        final MyApplication a =
+                ((MyApplication)ImageActivity.this.getApplication());
+        a.execution(ImageActivity.this,MyNASI.TYPE.IMAGE,bitmapX,bitmapY,null);
+    }
+
     /**
      * do upscale
      */
@@ -183,6 +189,7 @@ public class ImageActivity extends AppCompatActivity {
         SwitchCompat isPromptFixedSeed = dialogView.findViewById(R.id.prompt_fixed_seed);
         isPromptFixedSeed.setChecked(a.isPromptFixedSeed(preferences));
         isPromptFixedSeed.setOnCheckedChangeListener((v,checked)-> a.setPromptFixedSeed(preferences,checked));
+        a.appendLog(this, title);
         new AlertDialog.Builder(ImageActivity.this)
                 .setTitle(title)
                 .setView(dialogView)
@@ -190,7 +197,7 @@ public class ImageActivity extends AppCompatActivity {
                     if (which == 0) {
                         finish();
                     } else if (which == 1) {
-                        a.execution(ImageActivity.this,MyNASI.TYPE.IMAGE,bitmapX,bitmapY,null);
+                        generateImage();
                     } else if (which == 2) {
                         doUpscale();
                     }

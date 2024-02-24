@@ -1174,6 +1174,7 @@ public class MyApplication  extends Application {
             target = target + ", ";
         }
         target = target + answer;
+        target = target.replaceAll(",(\\s*,)+\\s*",", ");
         if (isPrompt) {
             this.setPrompt(target);
         } else {
@@ -1269,6 +1270,7 @@ public class MyApplication  extends Application {
         if (type == MyNASI.TYPE.UPSCALE) {
             String message = context.getResources().getString(R.string.upscale);
             Toast.makeText(this, message, Toast.LENGTH_LONG).show();
+            appendLog(context, message);
             request = new MyNASI.Allin1RequestUpscale(
                     type,
                     email,
@@ -1281,6 +1283,7 @@ public class MyApplication  extends Application {
             String message = context.getResources().getString(R.string.generate_image);
             boolean isI2i = isSettingI2i(preferences);
             Toast.makeText(this, message, Toast.LENGTH_LONG).show();
+            appendLog(context, message);
             if (isUseTree(preferences)) {
                 if (0 < this.getTop().length()) {
                     this.setPrompt(fromTree(getTop(),true));
@@ -1290,7 +1293,6 @@ public class MyApplication  extends Application {
                     fromPromptToTree(getUc(), false);
                 }
             }
-
             String prompt = this.getPrompt();
             String uc = this.getUc();
             String model = preferences.getString("prompt_model", "nai-diffusion-3").trim();

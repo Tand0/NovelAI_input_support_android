@@ -29,6 +29,12 @@
         app:title="@string/prompt_fixed_seed"
         app:summary="@string/prompt_fixed_seed_summary" />
 
+    <SwitchPreferenceCompat
+        app:key="setting_exif"
+        app:defaultValue="true"
+        app:summary="@string/exif_summary"
+        app:title="@string/exif" />
+
     <ListPreference
         android:key="setting_width_x_height"
         android:title="@string/setting_width_x_height"
@@ -111,12 +117,6 @@
         android:entries="@array/noise_schedule_list"
         android:entryValues="@array/noise_schedule_list"
         app:useSimpleSummaryProvider="true" />
-
-    <SwitchPreferenceCompat
-        app:key="setting_exif"
-        app:defaultValue="true"
-        app:summary="@string/exif_summary"
-        app:title="@string/exif" />
 
     <SwitchPreferenceCompat
         app:key="setting_i2i"
