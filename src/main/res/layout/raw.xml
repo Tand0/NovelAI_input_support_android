@@ -33,8 +33,10 @@
             android:focusable="false"
             android:focusableInTouchMode="false"
             android:gravity="start"
-            android:text="@string/action_checkbox"
-            tools:ignore="TouchTargetSizeCheck" />
+            android:minWidth="48dp"
+            android:minHeight="48dp"
+
+            android:text="@string/action_checkbox" />
     </LinearLayout>
 
     <CheckBox
@@ -43,7 +45,9 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
-        android:hint="@string/menu_ignore"
+        android:hint="@string/menu_ignore_hint"
         android:text="@string/menu_ignore"
+        android:minHeight="48dp"
+        android:minWidth="48dp"
         tools:ignore="RelativeOverlap" />
 </RelativeLayout>

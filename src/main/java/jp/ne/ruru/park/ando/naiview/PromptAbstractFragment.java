@@ -21,7 +21,8 @@ public abstract class PromptAbstractFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+    }
+    protected void onCreateNext(Bundle savedInstanceState) {
         getFromPromptToTree().setOnClickListener(view->{
             Activity activity = getActivity();
             if (activity == null) {
@@ -80,7 +81,7 @@ public abstract class PromptAbstractFragment extends Fragment {
                         return;
                     }
                     String text = resultData.getStringExtra(SuggestActivity.TEXT);
-                    if ((text == null) || text.equals("")) {
+                    if ((text == null) || text.isEmpty()) {
                         return;
                     }
                     String value = getTextPrompt().getText().toString();
@@ -101,10 +102,10 @@ public abstract class PromptAbstractFragment extends Fragment {
                     }
                     targetStart = targetStart.replaceFirst("[{(\\[,\\s]+$","");
                     targetEnd = targetEnd.replaceFirst("^[})\\],\\s]+","");
-                    if (!targetStart.equals("")) {
+                    if (!targetStart.isEmpty()) {
                         text = targetStart + ", " + text;
                     }
-                    if (!targetEnd.equals("")) {
+                    if (!targetEnd.isEmpty()) {
                         text = text + ", " + targetEnd;
                     }
                     Activity activity = getActivity();

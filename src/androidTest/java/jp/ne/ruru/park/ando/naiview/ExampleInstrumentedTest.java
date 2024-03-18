@@ -21,7 +21,7 @@ import java.util.Base64;
 
 /**
  * Instrumented test, which will execute on an Android device.
- * @author foobar@em.boo.jp
+ * @author T.Ando
  * @see <a href="http://d.android.com/tools/testing">Testing documentation</a>
  */
 @RunWith(AndroidJUnit4.class)

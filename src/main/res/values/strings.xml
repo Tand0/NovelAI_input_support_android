@@ -2,7 +2,7 @@
     <string name="app_name">NAIView</string>
     <!-- Strings used for fragments for navigation -->
     <string name="img_description1">Image area</string>
-    <string name="img_posittion">0/0</string>
+    <string name="img_position">0/0</string>
     <string name="title_activity_settings">SettingsActivity</string>
     <string name="title_activity_prompt">PromptActivity</string>
     <string name="title_activity_uc">UcActivity</string>
@@ -59,7 +59,9 @@
     <string name="menu_arrow3">--------&gt;</string>
     <string name="action_settings">Settings</string>
     <string name="action_prompt">Prompt</string>
-    <string name="action_uc">Uc Prompt</string>
+    <string name="action_prompt_layout">Prompt layout</string>
+    <string name="action_ok_prompt">-- prompt</string>
+    <string name="action_uc_prompt">Uc Prompt</string>
     <string name="action_tree">Tree</string>
     <string name="action_image">Image</string>
     <string name="action_image_list">Image list</string>
@@ -111,6 +113,7 @@
     <string name="menu_decorate">Decorate</string>
     <string name="menu_transform">Transform</string>
     <string name="menu_ignore">Ignore</string>
+    <string name="menu_ignore_hint">If true it will be ignored</string>
     <string name="menu_not_ignore">Not ignore</string>
     <string name="menu_enhance">Enhance</string>
     <string name="menu_not_enhance">Not enhance</string>

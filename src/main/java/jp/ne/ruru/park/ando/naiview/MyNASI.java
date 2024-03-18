@@ -1,6 +1,9 @@
 package jp.ne.ruru.park.ando.naiview;
 
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+
 import com.rfksystems.blake2b.Blake2b;
 
 import org.bouncycastle.crypto.generators.Argon2BytesGenerator;
@@ -25,7 +28,7 @@ import java.util.zip.ZipInputStream;
 import javax.net.ssl.HttpsURLConnection;
 
 /** Novel AI support interface
- * @author foobar@em.boo.jp
+ * @author T.Ando
  */
 public class MyNASI {
     /**
@@ -44,7 +47,7 @@ public class MyNASI {
     /**
      * state machine
      */
-    protected enum TYPE {
+    public enum TYPE {
         LOGIN,
         IMAGE,
         SUBSCRIPTION,
@@ -343,21 +346,7 @@ public class MyNASI {
         String description;
         if (status_code == 201) {
             description = "Login successful.";
-            String accessToken;
-            if (res.content == null) {
-                accessToken = null;
-            } else {
-                String authorizationHeader = "Bearer ";
-                String accessToken1 = "accessToken";
-                try {
-                    JSONObject jsonObject = new JSONObject(res.content);
-                    accessToken = jsonObject.getString(accessToken1);
-                    accessToken = authorizationHeader + accessToken;
-                } catch (JSONException e) {
-                    accessToken = null;
-                }
-            }
-            authorizationKey = accessToken;
+            authorizationKey = getAccessToken(res);
         } else if (status_code == 400) {
             description = "A validation error occurred.";
         } else if (status_code == 401) {
@@ -368,6 +357,23 @@ public class MyNASI {
             description = "Unknown stats code.";
         }
         return res.setDescription(description);
+    }
+
+    @Nullable
+    protected String getAccessToken(Allin1Response res) {
+        String accessToken = null;
+        if (res.content != null) {
+            String authorizationHeader = "Bearer ";
+            String accessToken1 = "accessToken";
+            try {
+                JSONObject jsonObject = new JSONObject(res.content);
+                accessToken = jsonObject.getString(accessToken1);
+                accessToken = authorizationHeader + accessToken;
+            } catch (JSONException e) {
+                // EMPTY
+            }
+        }
+        return accessToken;
     }
 
     /**
@@ -421,7 +427,7 @@ public class MyNASI {
             }
             //
             String input = DEFAULT_PROMPT;
-            if ((request.input != null) && (!request.input.equals(""))) {
+            if ((request.input != null) && (!request.input.isEmpty())) {
                 input = request.input;
             }
             JSONObject m = new JSONObject();
@@ -503,7 +509,13 @@ public class MyNASI {
                     null)
                     .setDescription(e.getMessage());
         }
-        //
+
+        String description = getDescriptionString(res);
+        return res.setDescription(description).setAnlas(-1);
+    }
+
+    @NonNull
+    protected String getDescriptionString(Allin1Response res) {
         int status_code = res.statusCode;
         String description;
         if (status_code == 200) {
@@ -522,8 +534,9 @@ public class MyNASI {
         } else {
             description = "Unknown stats code.";
         }
-        return res.setDescription(description).setAnlas(-1);
+        return description;
     }
+
     /**
      * generate-image/suggest-tags
      * @param request all in 1 request

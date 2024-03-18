@@ -2,7 +2,7 @@
     <string name="app_name">NAIView</string>
     <!-- Strings used for fragments for navigation -->
     <string name="img_description1">画像エリア</string>
-    <string name="img_posittion">0/0</string>
+    <string name="img_position">0/0</string>
     <string name="title_activity_settings">設定</string>
     <string name="title_activity_prompt">プロンプト</string>
     <string name="title_activity_uc">ｘプロンプト</string>
@@ -59,7 +59,9 @@
     <string name="menu_arrow3">--------&gt;</string>
     <string name="action_settings">設定</string>
     <string name="action_prompt">プロンプト</string>
-    <string name="action_uc">ｘプロンプト</string>
+    <string name="action_prompt_layout">プロンプトレイアウト</string>
+    <string name="action_ok_prompt">〇プロンプト</string>
+    <string name="action_uc_prompt">ｘプロンプト</string>
     <string name="action_tree">ツリー</string>
     <string name="action_image">画像</string>
     <string name="action_image_list">画像リスト</string>
@@ -111,6 +113,7 @@
     <string name="menu_decorate">修飾</string>
     <string name="menu_transform">変更</string>
     <string name="menu_ignore">無視</string>
+    <string name="menu_ignore_hint">真なら無視する</string>
     <string name="menu_not_ignore">無視しない</string>
     <string name="menu_enhance">強調</string>
     <string name="menu_not_enhance">強調を弱める</string>

@@ -17,7 +17,7 @@ import jp.ne.ruru.park.ando.naiview.adapter.UriEtc;
 import jp.ne.ruru.park.ando.naiview.databinding.ActivityImageListBinding;
 
 /** tree activity
- * @author foobar@em.boo.jp
+ * @author T.Ando
  */
 public class ImageListActivity extends AppCompatActivity {
 

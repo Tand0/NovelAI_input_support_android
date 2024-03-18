@@ -1,8 +1,6 @@
 package jp.ne.ruru.park.ando.naiview;
 import android.os.Bundle;
 
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,9 +23,10 @@ public class PromptFragment extends PromptAbstractFragment {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
-        binding = jp.ne.ruru.park.ando.naiview.databinding.FragmentPromptBinding.inflate(getLayoutInflater());
-        getTextPrompt().addTextChangedListener(super.myTextWatcher);
         super.onCreate(savedInstanceState);
+        binding = FragmentPromptBinding.inflate(getLayoutInflater());
+        getTextPrompt().addTextChangedListener(myTextWatcher);
+        super.onCreateNext(savedInstanceState);
     }
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
@@ -61,7 +60,7 @@ public class PromptFragment extends PromptAbstractFragment {
      */
     @Override
     public String getText(MyApplication a) {
-       return a.getPrompt();
+        return a.getPrompt();
     }
 
     /**

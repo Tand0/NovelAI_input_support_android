@@ -6,7 +6,6 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
 
-import jp.ne.ruru.park.ando.naiview.PromptAbstractFragment;
 import jp.ne.ruru.park.ando.naiview.PromptFragment;
 import jp.ne.ruru.park.ando.naiview.PromptUcFragment;
 

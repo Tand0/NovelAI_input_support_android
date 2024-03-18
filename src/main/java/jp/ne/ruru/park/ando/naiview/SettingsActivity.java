@@ -13,7 +13,7 @@ import jp.ne.ruru.park.ando.naiview.databinding.ActivitySettingsBinding;
 
 
 /** setting activity
- * @author foobar@em.boo.jp
+ * @author T.Ando
  */
 public class SettingsActivity extends AppCompatActivity {
 

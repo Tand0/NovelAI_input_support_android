@@ -25,7 +25,7 @@ import jp.ne.ruru.park.ando.naiview.R;
 
 /**
  * images list adapter
- * @author foobar@em.boo.jp
+ * @author T.Ando
  * @param <T> for item
  */
 public class ImagesListAdapter<T extends UriEtc> extends ArrayAdapter<T> {

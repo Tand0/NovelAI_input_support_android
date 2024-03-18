@@ -16,7 +16,7 @@ import jp.ne.ruru.park.ando.naiview.adapter.PromptFragmentAdapter;
 import jp.ne.ruru.park.ando.naiview.databinding.ActivityPromptBinding;
 
 /** prompt activity
- * @author foobar@em.boo.jp
+ * @author T.Ando
  */
 public class PromptActivity extends AppCompatActivity {
 
@@ -49,7 +49,7 @@ public class PromptActivity extends AppCompatActivity {
         new TabLayoutMediator(tabs, pager,
                 (tab, position) -> tab.setText(
                         position == 0 ? this.getResources().getString(R.string.action_prompt)
-                                : this.getResources().getString(R.string.action_uc))
+                                : this.getResources().getString(R.string.action_uc_prompt))
         ).attach();
 
     }

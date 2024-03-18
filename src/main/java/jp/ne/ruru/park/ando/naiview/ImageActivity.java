@@ -37,7 +37,7 @@ import jp.ne.ruru.park.ando.naiview.adapter.UriEtc;
 import jp.ne.ruru.park.ando.naiview.databinding.ActivityImageBinding;
 
 /** image activity
- * @author foobar@em.boo.jp
+ * @author T.Ando
  */
 public class ImageActivity extends AppCompatActivity {
 
@@ -281,7 +281,7 @@ public class ImageActivity extends AppCompatActivity {
                 ((MyApplication)ImageActivity.this.getApplication());
         a.setDownloadFlag(false);
         //
-        if (a.getUriEtcList().size() == 0) {
+        if (a.getUriEtcList().isEmpty()) {
             //
             ContentResolver cr = getContentResolver();
             Uri uri = MediaStore.Images.Media.EXTERNAL_CONTENT_URI;

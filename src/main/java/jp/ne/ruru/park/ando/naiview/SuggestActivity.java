@@ -21,7 +21,7 @@ import jp.ne.ruru.park.ando.naiview.adapter.SuggestList;
 import jp.ne.ruru.park.ando.naiview.adapter.SuggestListAdapter;
 
 /** tree activity
- * @author foobar@em.boo.jp
+ * @author T.Ando
  */
 public class SuggestActivity extends AppCompatActivity {
     /** tree adapter */
@@ -151,7 +151,7 @@ public class SuggestActivity extends AppCompatActivity {
                 .replace("]", "")
                 .trim()
                 .replaceFirst("\\s*:\\d+\\s*$","");
-        if (wordRaw.equals("")) {
+        if (wordRaw.isEmpty()) {
             a.appendLog(this,"suggest==null");
             return;
         }

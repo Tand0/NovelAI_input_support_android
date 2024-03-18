@@ -7,7 +7,7 @@ import org.junit.Test;
 import org.junit.Assert;
 
 /** test case for MyApplication
- * @author foobar@em.boo.jp
+ * @author T.Ando
  */
 public class MyApplicationTest {
 

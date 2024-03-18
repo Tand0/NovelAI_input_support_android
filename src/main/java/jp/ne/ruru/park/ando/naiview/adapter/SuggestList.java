@@ -2,7 +2,7 @@ package jp.ne.ruru.park.ando.naiview.adapter;
 
 /**
  * suggest list
- * @author foobar@em.boo.jp
+ * @author T.Ando
  */
 public class SuggestList {
     public SuggestList(String tag,int count,double confidence) {

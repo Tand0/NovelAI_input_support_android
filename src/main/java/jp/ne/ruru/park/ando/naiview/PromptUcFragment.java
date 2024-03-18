@@ -21,9 +21,10 @@ public class PromptUcFragment extends PromptAbstractFragment {
     }
     @Override
     public void onCreate(Bundle savedInstanceState) {
-        binding = FragmentPromptUcBinding.inflate(getLayoutInflater());
-        getTextPrompt().addTextChangedListener(super.myTextWatcher);
         super.onCreate(savedInstanceState);
+        binding = FragmentPromptUcBinding.inflate(getLayoutInflater());
+        getTextPrompt().addTextChangedListener(myTextWatcher);
+        super.onCreateNext(savedInstanceState);
     }
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,

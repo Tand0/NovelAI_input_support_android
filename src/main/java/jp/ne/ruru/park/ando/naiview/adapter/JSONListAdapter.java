@@ -34,7 +34,7 @@ import jp.ne.ruru.park.ando.naiview.TreeActivity;
 
 /**
  * json list adapter
- * @author foobar@em.boo.jp
+ * @author T.Ando
  * @param <T> for item
  */
 public class JSONListAdapter<T extends JSONObject> extends ArrayAdapter<T> {
@@ -143,7 +143,7 @@ public class JSONListAdapter<T extends JSONObject> extends ArrayAdapter<T> {
                 textColor =  Color.parseColor("#000000");
                 dirColor = Color.parseColor("#0000C0");
                 textUcColor =  Color.parseColor("#008000");
-                dirUcColor = Color.parseColor("#0080C0");
+                dirUcColor = Color.parseColor("#004060");
             } else {
                 backgroundColor = Color.parseColor("#000000");
                 textColor = Color.parseColor("#FFFFFF");

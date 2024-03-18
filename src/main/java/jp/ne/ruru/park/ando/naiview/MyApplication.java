@@ -38,7 +38,7 @@ import jp.ne.ruru.park.ando.naiview.adapter.UriEtc;
 
 
 /** application
- * @author foobar@em.boo.jp
+ * @author T.Ando
  */
 public class MyApplication  extends Application {
 
@@ -887,7 +887,7 @@ public class MyApplication  extends Application {
             parent.put(CHILD,childArray);
             for (String name : middle) {
                 name = this.createName(name);
-                if ((name == null) || (name.equals(""))) {
+                if ((name == null) || (name.isEmpty())) {
                     continue;
                 }
                 JSONObject child = new JSONObject();
@@ -1018,7 +1018,7 @@ public class MyApplication  extends Application {
     public String fromTree(JSONArray array,boolean isPrompt) {
         List<String> result = fromTreeList(array,isPrompt);
         String ans = "";
-        if (0 < result.size()) {
+        if (!result.isEmpty()) {
             StringBuilder builder = new StringBuilder();
             final String comma = ", ";
             for (String x : result) {
@@ -1109,7 +1109,7 @@ public class MyApplication  extends Application {
                         String values = containString(jsonObject, VALUES);
                         if (values != null) {
                             values = values.replace(","," ").trim();
-                            if (! values.equals("")) {
+                            if (!values.isEmpty()) {
                                 list.add(values);
                             }
                         }
@@ -1170,7 +1170,7 @@ public class MyApplication  extends Application {
             target = this.getUc();
         }
         target = deleteTextFromItem(target,item);
-        if (!target.equals("") && !answer.equals("")) {
+        if (!target.isEmpty() && !answer.isEmpty()) {
             target = target + ", ";
         }
         target = target + answer;
@@ -1518,7 +1518,7 @@ public class MyApplication  extends Application {
                 .append("description=").append(res.description).append("\n")
                 .append("type=").append(res.type.name()).append("\n")
                 .append("mimeType=").append(res.mimeType).append("\n");
-        if ((res.content != null) && (!res.content.equals(""))) {
+        if ((res.content != null) && (!res.content.isEmpty())) {
             buf.append("content=").append(res.content).append("\n");
         }
         if (res.type == MyNASI.TYPE.LOGIN) {

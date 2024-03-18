@@ -15,7 +15,7 @@ import android.view.View;
 import android.widget.Button;
 
 /** main activity
- * @author foobar@em.boo.jp
+ * @author T.Ando
  */
 public class MainActivity extends AppCompatActivity {
 

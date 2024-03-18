@@ -17,7 +17,7 @@ import jp.ne.ruru.park.ando.naiview.SuggestActivity;
 
 /**
  * suggest list adapter
- * @author foobar@em.boo.jp
+ * @author T.Ando
  * @param <T> for item
  */
 public class SuggestListAdapter<T extends SuggestList> extends ArrayAdapter<T> {

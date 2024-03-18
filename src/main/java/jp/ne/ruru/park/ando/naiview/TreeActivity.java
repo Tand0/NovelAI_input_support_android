@@ -32,7 +32,7 @@ import jp.ne.ruru.park.ando.naiview.databinding.ActivityTreeBinding;
 import jp.ne.ruru.park.ando.naiview.adapter.JSONListAdapter;
 
 /** tree activity
- * @author foobar@em.boo.jp
+ * @author T.Ando
  */
 public class TreeActivity extends AppCompatActivity {
 
