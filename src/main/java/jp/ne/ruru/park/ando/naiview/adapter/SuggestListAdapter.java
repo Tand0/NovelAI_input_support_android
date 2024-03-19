@@ -10,8 +10,6 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 
-import java.util.Locale;
-
 import jp.ne.ruru.park.ando.naiview.R;
 import jp.ne.ruru.park.ando.naiview.SuggestActivity;
 
@@ -54,16 +52,10 @@ public class SuggestListAdapter<T extends SuggestList> extends ArrayAdapter<T> {
         TextView textView = view.findViewById(R.id.list_suggest_p1);
         SuggestList suggestList = getItem(position);
         if (suggestList == null) {
-            suggestList = new SuggestList("",0,0.0);
+            suggestList = new SuggestList("",0,0.0, null, 0);
         }
         if (textView != null) {
-            String format = String.format(Locale.getDefault(),"%5d ", suggestList.count);
-            textView.setText(format);
-        }
-        textView = view.findViewById(R.id.list_suggest_p2);
-        if (textView != null) {
-            String format = String.format(Locale.getDefault()," %1$.8f  ", suggestList.confidence);
-            textView.setText(format);
+            textView.setText(suggestList.toTextString());
         }
         Button button = view.findViewById(R.id.list_suggest_p3);
         if (button != null) {

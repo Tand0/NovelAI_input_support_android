@@ -22,7 +22,7 @@ public abstract class PromptAbstractFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
     }
-    protected void onCreateNext(Bundle savedInstanceState) {
+    protected void onCreateNext() {
         getFromPromptToTree().setOnClickListener(view->{
             Activity activity = getActivity();
             if (activity == null) {

@@ -301,7 +301,7 @@ public class MyNASI {
     /** upscale url for rest api */
     public final String UPSCALE_URL = "https://api.novelai.net/ai/upscale";
     /** suggest tags url for rest api */
-    public final String SUGGEST_TAGS_URL = "https://api.novelai.net/ai/generate-image/suggest-tags";
+    public final String SUGGEST_TAGS_URL = "https://image.novelai.net/ai/generate-image/suggest-tags";
 
     /** subscription url for rest api */
     public final String SUBSCRIPTION_URL = "https://api.novelai.net/user/subscription";
@@ -551,17 +551,21 @@ public class MyNASI {
             }
         }
         //
-        String url = SUGGEST_TAGS_URL;
+        String model;
         try {
-            url = url + "?model=" + URLEncoder.encode(request.model,"utf-8");
+            model = URLEncoder.encode(request.model,"utf-8");
         } catch (UnsupportedEncodingException e) {
-            url = url + "?model=" + request.model;
+            model = request.model;
         }
+        String prompt;
         try {
-            url = url + "&prompt=" + URLEncoder.encode(request.prompt,"utf-8");
+            boolean isJp = containsJapanese(request.prompt);
+            prompt = URLEncoder.encode(request.prompt, "utf-8")
+                    + (isJp? "&lang=jp": "");
         } catch (UnsupportedEncodingException e) {
-            url = url + "&prompt=" + request.prompt;
+            prompt = request.prompt;
         }
+        String url = SUGGEST_TAGS_URL + "?model=" + model + "&prompt=" + prompt;
         Allin1Response res;
         try {
             res = this.getConnection(request.type,url, null);
@@ -588,6 +592,29 @@ public class MyNASI {
             description = "Unknown stats code.";
         }
         return res.setDescription(description);
+    }
+
+    public static boolean containsJapanese(String str) {
+        for(int i = 0 ; i < str.length() ; i++) {
+            char ch = str.charAt(i);
+            Character.UnicodeBlock unicodeBlock = Character.UnicodeBlock.of(ch);
+
+            if (Character.UnicodeBlock.HIRAGANA.equals(unicodeBlock))
+                return true;
+
+            if (Character.UnicodeBlock.KATAKANA.equals(unicodeBlock))
+                return true;
+
+            if (Character.UnicodeBlock.HALFWIDTH_AND_FULLWIDTH_FORMS.equals(unicodeBlock))
+                return true;
+
+            if (Character.UnicodeBlock.CJK_UNIFIED_IDEOGRAPHS.equals(unicodeBlock))
+                return true;
+
+            if (Character.UnicodeBlock.CJK_SYMBOLS_AND_PUNCTUATION.equals(unicodeBlock))
+                return true;
+        }
+        return false;
     }
     /**
      * subscription

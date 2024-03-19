@@ -71,7 +71,7 @@ public class SuggestActivity extends AppCompatActivity {
             List<String> listString  = a.fromTreeList(a.getTop(),true);
             List<SuggestList> list = new ArrayList<>();
             for (String string : listString) {
-                list.add(new SuggestList(string, 1, 0.0));
+                list.add(new SuggestList(string, 1, 0.0, null, 0));
             }
             updateAdapter(list);
         });
@@ -157,32 +157,48 @@ public class SuggestActivity extends AppCompatActivity {
         }
         a.execution(this, MyNASI.TYPE.SUGGEST_TAGS,0,0,wordRaw);
     }
-
     public void suggestTagsResponse(String string) {
         MyApplication a =
                 ((MyApplication)this.getApplication());
+
+        List<SuggestList> list = new ArrayList<>();
+
+        JSONArray array;
         try {
             JSONObject top = new JSONObject(string);
-            List<SuggestList> list = new ArrayList<>();
-            JSONArray array = a.containJSONArray(top,"tags");
-            for (int i = 0; i < array.length() ; i++) {
+            array = a.containJSONArray(top,"tags");
+        } catch (JSONException e) {
+            try {
+                array = new JSONArray(string);
+            } catch (JSONException ex) {
+                array = new JSONArray();
+                a.appendLog(this,"suggestTagsResponse parse error");
+                a.appendLog(this,ex.getMessage());
+            }
+        }
+        try {
+             for (int i = 0; i < array.length() ; i++) {
                 Object object = array.get(i);
                 String tag = a.containString(object,"tag");
                 Integer count = a.containInt(object,"count");
                 Double confidence = a.containDouble(object,"confidence");
-                if ((tag == null) || (count == null) || (confidence == null)) {
-                    continue;
+                String jpTag = a.containString(object,"jp_tag");
+                String enTag = a.containString(object,"en_tag");
+                Integer power = a.containInt(object,"power");
+                if ((tag != null) && (count != null) && (confidence != null)) {
+                    list.add(new SuggestList(tag,count,confidence, null, 0));
+                } else if ((jpTag != null) && (enTag != null) && (power != null)) {
+                    list.add(new SuggestList(enTag,0,0, jpTag, power));
                 }
-                list.add(new SuggestList(tag,count,confidence));
             }
-            if (list.isEmpty()) {
-                // this is empty response
-                list.add(new SuggestList("null",0,0));
-            }
-            updateAdapter(list);
         } catch (JSONException e) {
+            a.appendLog(this,"suggestTagsResponse parse get error");
             a.appendLog(this,e.getMessage());
         }
-
+        if (list.isEmpty()) {
+            // this is empty response
+            list.add(new SuggestList("null",0,0,null, 0));
+        }
+        updateAdapter(list);
     }
 }

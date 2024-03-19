@@ -31,9 +31,12 @@
     <string name="setting_nai">Setting NAI</string>
     <string name="prompt_model">model(default:safe-diffusion)</string>
     <string name="prompt_model_summary">model data</string>
-    <string name="prompt_scale">scale(default:11)</string>
+    <string name="prompt_scale">scale</string>
+    <string name="prompt_scale_summary">scale(default:11)</string>
     <string name="prompt_steps">steps(default:28)</string>
-    <string name="prompt_uncond_scale">uncond_scale(default:100)</string>
+    <string name="prompt_steps_summary">steps(default:28)</string>
+    <string name="prompt_uncond_scale">uncond_scale</string>
+    <string name="prompt_uncond_scale_summary">uncond_scale(default:100)</string>
     <string name="prompt_sampler">sampler(default:k_dpmpp_2m)</string>
     <string name="prompt_sampler_summary">sampler data</string>
     <string name="prompt_sm">sm</string>
@@ -43,7 +46,9 @@
     <string name="prompt_noise_schedule">noise schedule</string>
     <string name="prompt_noise_schedule_summary">noise schedule(default:native)</string>
     <string name="prompt_strength">(i2i)strength(default:70%)</string>
+    <string name="prompt_strength_summary">(i2i)strength(default:70%)</string>
     <string name="prompt_noise">(i2i)noise(default:10%)</string>
+    <string name="prompt_noise_summary">(i2i)noise(default:10%)</string>
 
     <!-- Prompt activiti -->
     <string name="text_prompt_hint">Please input prompt</string>

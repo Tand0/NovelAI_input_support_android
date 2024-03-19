@@ -58,7 +58,7 @@
     <SeekBarPreference
         app:key="prompt_int_number_scale"
         app:title="@string/prompt_scale"
-        app:summary="@string/prompt_scale"
+        app:summary="@string/prompt_scale_summary"
         app:defaultValue="11"
         app:min="0"
         android:max="25"
@@ -68,7 +68,7 @@
     <SeekBarPreference
         app:key="prompt_int_number_steps"
         app:title="@string/prompt_steps"
-        app:summary="@string/prompt_steps"
+        app:summary="@string/prompt_steps_summary"
         app:defaultValue="28"
         app:min="1"
         android:max="50"
@@ -78,7 +78,7 @@
     <SeekBarPreference
         app:key="prompt_int_uncode_scale"
         app:title="@string/prompt_uncond_scale"
-        app:summary="@string/prompt_uncond_scale"
+        app:summary="@string/prompt_uncond_scale_summary"
         app:defaultValue="100"
         app:min="0"
         android:max="150"
@@ -130,7 +130,7 @@
     <SeekBarPreference
         app:key="prompt_int_strength"
         app:title="@string/prompt_strength"
-        app:summary="@string/prompt_strength"
+        app:summary="@string/prompt_strength_summary"
         app:defaultValue="10"
         app:min="0"
         android:max="99"
@@ -139,7 +139,7 @@
     <SeekBarPreference
         app:key="prompt_int_noise"
         app:title="@string/prompt_noise"
-        app:summary="@string/prompt_noise"
+        app:summary="@string/prompt_noise_summary"
         app:defaultValue="0"
         app:min="0"
         android:max="99"
