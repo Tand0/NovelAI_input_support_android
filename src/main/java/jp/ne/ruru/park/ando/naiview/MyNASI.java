@@ -296,7 +296,7 @@ public class MyNASI {
     public final String LOGIN_URL = "https://api.novelai.net/user/login";
 
     /** image url for rest api */
-    public final String IMAGE_URL = "https://api.novelai.net/ai/generate-image";
+    public final String IMAGE_URL = "https://image.novelai.net/ai/generate-image";
 
     /** upscale url for rest api */
     public final String UPSCALE_URL = "https://api.novelai.net/ai/upscale";
@@ -767,6 +767,7 @@ public class MyNASI {
                 if (mime.contains("application/json")
                         || mime.contains("text/")
                         || mime.contains("image/")
+                        || mime.contains("binary/octet-stream")
                         || mime.contains("application/x-zip-compressed")) {
                     try (ByteArrayOutputStream stream = new ByteArrayOutputStream()) {
                         while(true) {
@@ -804,7 +805,8 @@ public class MyNASI {
                     || mime.contains("text/")) {
                 //"application/json; charset=utf-8"
                 content = new String(result, StandardCharsets.UTF_8);
-            } else if (mime.contains("application/x-zip-compressed")) {
+            } else if (mime.contains("application/x-zip-compressed")
+                    || mime.contains("binary/octet-stream")) {
                 try (InputStream ois = new ByteArrayInputStream(result);
                      ZipInputStream zipInputStream = new ZipInputStream(ois)) {
                     while (true) {
