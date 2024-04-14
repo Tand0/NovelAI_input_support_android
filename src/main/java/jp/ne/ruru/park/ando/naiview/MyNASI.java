@@ -755,31 +755,35 @@ public class MyNASI {
             //
             statusCode = urlCon.getResponseCode();
             mime = urlCon.getContentType();
-            if (mime == null) {
-                mime = "";
+            mime = (mime == null) ? "" : mime.toLowerCase();
+            String ContentDisposition = urlCon.getHeaderField("Content-Disposition");
+            ContentDisposition = (ContentDisposition == null) ? "" : ContentDisposition.toLowerCase();
+            try {
+                is = urlCon.getInputStream();
+            } catch (IOException e) {
+                is = urlCon.getErrorStream();
             }
-            mime = mime.toLowerCase();
-                try {
-                    is = urlCon.getInputStream();
-                } catch (IOException e) {
-                    is = urlCon.getErrorStream();
-                }
-                if (mime.contains("application/json")
-                        || mime.contains("text/")
-                        || mime.contains("image/")
-                        || mime.contains("binary/octet-stream")
-                        || mime.contains("application/x-zip-compressed")) {
-                    try (ByteArrayOutputStream stream = new ByteArrayOutputStream()) {
-                        while(true) {
-                            int len = is.read(bByte);
-                            if (len <= 0) {
-                                break;
-                            }
-                            stream.write(bByte,0,len);
+            if (mime.contains("application/json")
+                    || mime.contains("text/")
+                    || mime.contains("image/")
+                    || mime.contains("application/x-zip-compressed")
+                    // || mime.contains("binary/octet-stream")
+                    || ContentDisposition.contains(".zip")) {
+                try (ByteArrayOutputStream stream = new ByteArrayOutputStream()) {
+                    while (true) {
+                        int len = is.read(bByte);
+                        if (len <= 0) {
+                            break;
                         }
-                        result = stream.toByteArray();
+                        stream.write(bByte, 0, len);
                     }
+                    result = stream.toByteArray();
+                } catch (IOException e) {
+                    result = bByte;
                 }
+            } else if (mime.contains("binary/octet-stream")){
+                result = bByte;
+            }
         } catch (IOException e) {
             content = content + "\n"
                     + e.getClass()+ "\n"
