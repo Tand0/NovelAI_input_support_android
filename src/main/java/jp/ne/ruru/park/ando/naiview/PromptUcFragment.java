@@ -77,4 +77,9 @@ public class PromptUcFragment extends PromptAbstractFragment {
     public boolean isPrompt() {
         return false;
     }
+
+    @Override
+    public Button getToMenuChangePart() {
+        return binding.menuChangePart;
+    }
 }

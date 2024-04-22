@@ -12,7 +12,6 @@ import androidx.annotation.NonNull;
 
 import jp.ne.ruru.park.ando.naiview.databinding.FragmentPromptBinding;
 
-
 public class PromptFragment extends PromptAbstractFragment {
 
     /** binding */
@@ -33,6 +32,8 @@ public class PromptFragment extends PromptAbstractFragment {
                              Bundle savedInstanceState) {
         return binding.getRoot();
     }
+
+
     @Override
     public Button getFromPromptToTree() {
         return binding.fromPromptToTree;
@@ -81,4 +82,8 @@ public class PromptFragment extends PromptAbstractFragment {
         return true;
     }
 
+    @Override
+    public Button getToMenuChangePart() {
+        return binding.menuChangePart;
+    }
 }

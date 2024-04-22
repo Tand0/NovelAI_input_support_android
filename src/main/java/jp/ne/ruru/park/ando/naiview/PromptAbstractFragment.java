@@ -66,6 +66,16 @@ public abstract class PromptAbstractFragment extends Fragment {
             intent.putExtra(SuggestActivity.TEXT,target);
             resultLauncher.launch(intent);
         });
+
+        getToMenuChangePart().setOnClickListener(view->{
+            Activity activity = getActivity();
+            if (activity == null) {
+                return;
+            }
+            MyApplication a = (MyApplication) activity.getApplication();
+            a.changePart(activity);
+            getTextPrompt().setText(getText(a));
+        });
     }
 
     /**
@@ -128,8 +138,10 @@ public abstract class PromptAbstractFragment extends Fragment {
             return;
         }
         MyApplication a = (MyApplication) activity.getApplication();
-        TextView text = getTextPrompt();
-        text.setText(getText(a));
+        getTextPrompt().setText(getText(a));
+        //
+        Button menuChangePart = getToMenuChangePart();
+        menuChangePart.setEnabled(a.getChangePartItem() != null);
     }
     /**
      * on pause
@@ -148,6 +160,7 @@ public abstract class PromptAbstractFragment extends Fragment {
     public abstract Button getFromPromptToTree();
     public abstract Button getFromTreeToPrompt();
     public abstract Button getToSuggest();
+    public abstract Button getToMenuChangePart();
 
     public abstract EditText getTextPrompt();
 

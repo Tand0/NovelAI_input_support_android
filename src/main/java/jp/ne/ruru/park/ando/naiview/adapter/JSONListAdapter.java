@@ -259,6 +259,7 @@ public class JSONListAdapter<T extends JSONObject> extends ArrayAdapter<T> {
         } else if (itemId == R.id.menu_change_part) {
             if (item != null) {
                 a.changePart(this.getContext(),item);
+                a.action(this.getContext(),R.id.action_prompt);
             }
             return true;
         }

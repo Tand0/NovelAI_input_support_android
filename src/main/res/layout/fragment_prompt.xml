@@ -48,6 +48,13 @@
                 android:layout_height="wrap_content"
                 android:text="@string/setting_use_tree"
                 tools:ignore="ButtonStyle,RtlHardcoded,TextContrastCheck" />
+
+            <Button
+                android:id="@+id/menu_change_part"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/menu_change_part"
+                tools:ignore="ButtonStyle,RtlHardcoded,TextContrastCheck" />
         </LinearLayout>
 
         <EditText

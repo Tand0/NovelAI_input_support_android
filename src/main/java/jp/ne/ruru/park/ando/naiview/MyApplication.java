@@ -1151,7 +1151,19 @@ public class MyApplication  extends Application {
             // NONE
         }
     }
+    public JSONObject getChangePartItem() {
+        return changePartItem;
+    }
+    protected JSONObject changePartItem = null;
     public void changePart(Context context,JSONObject item) {
+        this.changePartItem = item;
+        this.changePart(context);
+    }
+    public void changePart(Context context) {
+        Object item = this.changePartItem;
+        if (item == null) {
+            item = this.getTop();
+        }
         String key = containString(item,TEXT);
         boolean isPrompt;
         if (key == null) {
@@ -1182,8 +1194,6 @@ public class MyApplication  extends Application {
         }
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
         setUseTree(preferences,false);
-        //
-        action(context,R.id.action_prompt);
     }
 
     /**
