@@ -22,6 +22,7 @@
         <item>nai-diffusion</item>
         <item>nai-diffusion-furry</item>
         <item>nai-diffusion-2</item>
+        <item>nai-diffusion-furry-3</item>
         <item>nai-diffusion-3</item>
     </string-array>
     <string-array name="noise_schedule_list">
