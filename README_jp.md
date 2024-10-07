@@ -26,17 +26,18 @@ https://play.google.com/store/apps/details?id=jp.ne.ruru.park.ando.naiview
 
 ## カンタンな使い方
 
-- Novel AI でアカウントを作成します。
+- Novel AI でアカウントを作成します
 - トップ画面の「設定」ボタンをクリックして表示される「NAIの設定」から「メール」と「パスワード」を入力します
-- 以下をダウンロードします
-  - https://github.com/Tand0/NovelAI_input_support_android/data_jp.json
+- 以下のプロンプト用データをダウンロードします
+  - https://github.com/Tand0/NovelAI_input_support_android/blob/main/data_jp.json
 - トップ画面の「ツリー」をクリックして表示される「ツリー」から「ロード」ボタンを押して data_jp.json を読み込みます
-- トップ画面の「画像」をクリックしてデフォルトの画面表示を出します。
-- タップするとメニューが出てくるので「ツリーの使用」をONに変更します。
-- 「/ai/generate-image 」 を押してしばらく待ちます。
-- 気に入ったら「/ai/upscale」を押します。
-- キャンセルで画面に戻ると左右スクロールで前後の画像が、上下スクロールで画像のリストがでます。
-- 画像がNovelAIの画像の場合、設定を読み込んでプロンプトに渡します。
+  - グレーアウト(ignore)されている項目は右側のチェックボタンで解除できます
+- トップ画面の「画像」をクリックしてデフォルトの画面表示を出します
+- タップするとメニューが出てくるので「ツリーの使用」をONに変更します
+- 「/ai/generate-image 」 を押してしばらく待ちます
+- 気に入ったら「/ai/upscale」を押します
+- キャンセルで画面に戻ると左右スクロールで前後の画像が、上下スクロールで画像のリストがでます
+- 画像がNovelAIの画像の場合、設定を読み込んでプロンプトに渡します
 - Enjoy!
 
 ## Reference
