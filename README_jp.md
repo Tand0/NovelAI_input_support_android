@@ -13,9 +13,9 @@ https://play.google.com/store/apps/details?id=jp.ne.ruru.park.ando.naiview
     - このソフトウェアの使用はご自身の責任において使用してください
 - Novel AI の REST API を使用しています
     - https://api.novelai.net/docs/
-- NOVEL AI に登録した e-メールアドレスとパスワードを使用しています
+- Novel AI に登録した e-メールアドレスとパスワードを使用しています
     - https://novelai.net/
-- 登録した e-mail とパスワードは api.novelai.net に暗号化して送信しています
+    - 登録した e-mail とパスワードは api.novelai.net に暗号化して送信しています
 - 画像への読み書きを行っています
 - 設定データの読み書きを行っています
 - カメラは使用していません
