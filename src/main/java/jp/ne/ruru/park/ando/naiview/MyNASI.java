@@ -8,6 +8,7 @@ import com.rfksystems.blake2b.Blake2b;
 
 import org.bouncycastle.crypto.generators.Argon2BytesGenerator;
 import org.bouncycastle.crypto.params.Argon2Parameters;
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -97,10 +98,11 @@ public class MyNASI {
          * @param height          height
          * @param scale           scale
          * @param steps           steps
-         * @param uncodeScale     uncodeScale
+         * @param cfgRescale      cfgRescale
          * @param sampler         sampler
          * @param sm              sm
          * @param sm_dyn          sm_dyn
+         * @param variety          variety
          * @param negative_prompt uc
          * @param seed            seed
          * @param noise_schedule  noise schedule
@@ -118,10 +120,11 @@ public class MyNASI {
                 int height,
                 int scale,
                 int steps,
-                int uncodeScale,
+                int cfgRescale,
                 String sampler,
                 boolean sm,
                 boolean sm_dyn,
+                boolean variety,
                 String negative_prompt,
                 int seed,
                 String noise_schedule,
@@ -136,10 +139,11 @@ public class MyNASI {
             this.height = height;
             this.scale = scale;
             this.steps = steps;
-            this.uncodeScale = uncodeScale;
+            this.cfgRescale = cfgRescale;
             this.sampler = sampler;
             this.sm = sm;
             this.sm_dyn = sm_dyn;
+            this.variety = variety;
             this.negative_prompt = negative_prompt;
             this.seed = seed;
             this.noise_schedule = noise_schedule;
@@ -155,10 +159,11 @@ public class MyNASI {
         public final int height;
         public final int scale;
         public final int steps;
-        public final int uncodeScale;
+        public final int cfgRescale;
         public final String sampler;
         public final boolean sm;
         public final boolean sm_dyn;
+        public final boolean variety;
         public final String negative_prompt;
 
         public final int seed;
@@ -394,36 +399,44 @@ public class MyNASI {
         Allin1Response res;
         try {
             JSONObject p = new JSONObject();
+            p.put("params_version",3);
             p.put("width",request.width);
             p.put("height",request.height);
             p.put("scale",request.scale);
             p.put("sampler",request.sampler);
             p.put("steps",request.steps);
+            p.put("seed",request.seed);
             p.put("n_samples",1);
-            p.put("qualityToggle",false);
+            p.put("ucPreset", 0);
+            p.put("qualityToggle",true);
             p.put("sm",request.sm);
             p.put("sm_dyn",request.sm_dyn);
             p.put("dynamic_thresholding",false);
             p.put("controlnet_strength",1);
             p.put("legacy",false);
-            p.put("uncode_scale",((double)request.uncodeScale)/100.0);
-            p.put("seed",request.seed);
-            p.put("negative_prompt",request.negative_prompt);
+            p.put("add_original_image",true);
+            p.put("cfg_rescale", ((double)request.cfgRescale)/100.0);
             p.put("noise_schedule",request.noise_schedule);
+            p.put("legacy_v3_extend", false);
+            if (request.variety) {
+                p.put("skip_cfg_above_sigma", 19);
+            } else {
+                p.put("skip_cfg_above_sigma", null);
+            }
+            p.put("negative_prompt",request.negative_prompt);
+            JSONArray noArray = new JSONArray();
+            p.put("reference_image_multiple",noArray);
+            p.put("reference_information_extracted_multiple",noArray);
+            p.put("reference_strength_multiple",noArray);
+            p.put("deliberate_euler_ancestral_bug",false);
+            p.put("prefer_brownian",true);
             if (request.imageBuffer != null) {
                 // for image2image
                 String image = Base64.getEncoder().encodeToString(request.imageBuffer);
                 p.put("image", image);
                 p.put("strength",((double) request.strength) / 100.0);
                 p.put("noise", ((double) request.noise) / 100.0);
-                p.put("ucPreset", 0);
-                p.put("add_original_image", false);
-                p.put("cfg_rescale", 0.0);
-                p.put("legacy_v3_extend", false);
-                p.put("params_version", 1);
                 p.put("extra_noise_seed",request.seed);
-            } else {
-                p.put("ucPreset", 2);
             }
             //
             String input = DEFAULT_PROMPT;

@@ -6,13 +6,16 @@
     android:orientation="vertical">
 
     <androidx.appcompat.widget.SwitchCompat
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
         android:id="@+id/setting_use_tree"
-        android:text="@string/setting_use_tree"/>
-    <androidx.appcompat.widget.SwitchCompat
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:minHeight="32dp"
+        android:text="@string/setting_use_tree" />
+
+    <androidx.appcompat.widget.SwitchCompat
         android:id="@+id/prompt_fixed_seed"
-        android:text="@string/prompt_fixed_seed"/>
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:minHeight="48dp"
+        android:text="@string/prompt_fixed_seed" />
 </LinearLayout>

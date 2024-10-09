@@ -31,6 +31,7 @@ import jp.ne.ruru.park.ando.naiview.MyApplication;
 import jp.ne.ruru.park.ando.naiview.R;
 import jp.ne.ruru.park.ando.naiview.SuggestActivity;
 import jp.ne.ruru.park.ando.naiview.TreeActivity;
+import jp.ne.ruru.park.ando.naiview.TextType;
 
 /**
  * json list adapter
@@ -38,11 +39,6 @@ import jp.ne.ruru.park.ando.naiview.TreeActivity;
  * @param <T> for item
  */
 public class JSONListAdapter<T extends JSONObject> extends ArrayAdapter<T> {
-    protected final String[] SS = {
-            MyApplication.TEXT_WORD,
-            MyApplication.TEXT_SEQUENCE,
-            MyApplication.TEXT_SELECT,
-            MyApplication.TEXT_WEIGHT};
     /**
      * This is constructor.
      * @param context activity object
@@ -67,6 +63,7 @@ public class JSONListAdapter<T extends JSONObject> extends ArrayAdapter<T> {
     @NonNull
     @Override
     public View getView(int position, View view, @NonNull ViewGroup parent) {
+        //
         if (view == null) {
             LayoutInflater inflater = (LayoutInflater) this.getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             view = inflater.inflate(R.layout.raw, parent, false);
@@ -80,8 +77,8 @@ public class JSONListAdapter<T extends JSONObject> extends ArrayAdapter<T> {
         boolean isIgnore = true;
         MyApplication a =
                 ((MyApplication)((AppCompatActivity) this.getContext()).getApplication());
+        //
         if (item != null) {
-
             Boolean expandBoolean = a.containBoolean(item, MyApplication.EXPAND);
             if (expandBoolean != null) {
                 expand = expandBoolean;
@@ -96,7 +93,7 @@ public class JSONListAdapter<T extends JSONObject> extends ArrayAdapter<T> {
             }
             String text = a.containString(item,MyApplication.TEXT);
             if (text != null) {
-                if (text.contains(MyApplication.TEXT_WORD)) {
+                if (text.contains(TextType.TEXT_WORD.toString())) {
                     isNotWord = false;
                 }
                 value.append("(").append(text).append(") ");
@@ -217,7 +214,7 @@ public class JSONListAdapter<T extends JSONObject> extends ArrayAdapter<T> {
                 ((MyApplication)((AppCompatActivity) this.getContext()).getApplication());
         String textRaw;
         final JSONObject item;
-        int ssIndex = 0;
+        TextType textType = TextType.TEXT_WORD;
         if (0 <= position) {
             item  = this.getItem(position);
             if (item != null) {
@@ -226,13 +223,11 @@ public class JSONListAdapter<T extends JSONObject> extends ArrayAdapter<T> {
                     textRaw = "";
                 }
                 String textKey = a.containString(item,MyApplication.TEXT);
-                int i = 0;
-                for (String s: SS) {
-                    if (textKey.equals(s)) {
-                        ssIndex = i;
+                for (TextType s: TextType.values()) {
+                    if (textKey.equals(s.toString())) {
+                        textType = s;
                         break;
                     }
-                    i++;
                 }
             } else {
                 textRaw = "";
@@ -253,8 +248,20 @@ public class JSONListAdapter<T extends JSONObject> extends ArrayAdapter<T> {
                 this.updateJSONArray();
             }
             return true;
-        } else if (itemId == R.id.menu_add_text) {
-            addText( item, text, ssIndex);
+        } else if (itemId == R.id.menu_edit) {
+            addText( item, text, textType);
+            return true;
+        } else if (itemId == R.id.menu_add_text_detail) {
+            addText( item, text, TextType.TEXT_WORD);
+            return true;
+        } else if (itemId == R.id.menu_add_sequence_detail) {
+            addText( item, text, TextType.TEXT_SEQUENCE);
+            return true;
+        } else if (itemId == R.id.menu_add_select_detail) {
+            addText( item, text, TextType.TEXT_SELECT);
+            return true;
+        } else if (itemId == R.id.menu_add_weight_detail) {
+            addText( item, text, TextType.TEXT_WEIGHT);
             return true;
         } else if (itemId == R.id.menu_change_part) {
             if (item != null) {
@@ -272,12 +279,12 @@ public class JSONListAdapter<T extends JSONObject> extends ArrayAdapter<T> {
      * @param text insert or change text
      * @param targetMenuItem if text then 0 else 1
      */
-    public void addText(JSONObject item,String text,int targetMenuItem) {
+    public void addText(JSONObject item,String text,TextType targetMenuItem) {
         TreeActivity ta = (TreeActivity)this.getContext();
         MyApplication a = (MyApplication) ta.getApplication();
         a.appendLog(ta,"Action: Suggest");
         Intent intent = new Intent(ta, SuggestActivity.class);
-        intent.putExtra(SuggestActivity.TYPE,targetMenuItem);
+        intent.putExtra(SuggestActivity.TYPE,targetMenuItem.toString());
         intent.putExtra(SuggestActivity.TEXT,text);
         resultLauncher.launch(intent);
         this.suggestPosition = item;
@@ -302,8 +309,8 @@ public class JSONListAdapter<T extends JSONObject> extends ArrayAdapter<T> {
                 }
                 String text = resultData.getStringExtra(SuggestActivity.TEXT);
                 boolean isInsert = resultData.getBooleanExtra(SuggestActivity.IS_INSERT,false);
-                int selectedItemPosition = resultData.getIntExtra(SuggestActivity.TYPE,-1);
-                if (selectedItemPosition < 0) {
+                String textType = resultData.getStringExtra(SuggestActivity.TYPE);
+                if ((textType == null) || (textType.equals(TextType.TEXT_OTHER.toString()))) {
                     return;
                 }
                 MyApplication a =
@@ -311,18 +318,10 @@ public class JSONListAdapter<T extends JSONObject> extends ArrayAdapter<T> {
                 if (isInsert) {
                     JSONObject target = new JSONObject();
                     try {
-                        target.put(MyApplication.TEXT, SS[selectedItemPosition]);
+                        target.put(MyApplication.TEXT, textType);
                         target.put(MyApplication.VALUES, text);
                         JSONArray array = new JSONArray();
                         target.put(MyApplication.CHILD,array);
-                        if (selectedItemPosition != 0) {
-                            target.put(MyApplication.EXPAND, true);
-                            JSONObject child = new JSONObject();
-                            array.put(child);
-                            child.put(MyApplication.TEXT, MyApplication.TEXT_WORD);
-                            child.put(MyApplication.VALUES, text);
-                            child.put(MyApplication.CHILD,new JSONArray());
-                        }
                         a.setCut(target);
                         this.pastJSONObject(suggestPosition);
                     } catch (JSONException e) {
@@ -334,13 +333,18 @@ public class JSONListAdapter<T extends JSONObject> extends ArrayAdapter<T> {
                     }
                     try {
                         String key = a.containString(suggestPosition,MyApplication.TEXT);
-                        if ((key != null) && (!key.contains(MyApplication.TEXT_WORD))
-                                && (selectedItemPosition != 0)) {
-                            for (String s: SS) {
-                                key = key.replace(s,"");
+                        for (TextType s: TextType.values()) {
+                            key = key.replace(s.toString(),"");
+                        }
+                        key = key + textType;
+                        suggestPosition.put(MyApplication.TEXT, key);
+                        if (key.contains(TextType.TEXT_WORD.toString())) {
+                            suggestPosition.put(MyApplication.CHILD,new JSONArray());
+                        } else {
+                            JSONArray array = a.containJSONArray(suggestPosition,MyApplication.CHILD);
+                            if (array == null) {
+                                suggestPosition.put(MyApplication.CHILD,new JSONArray());
                             }
-                            key = key + SS[selectedItemPosition];
-                            suggestPosition.put(MyApplication.TEXT, key);
                         }
                         suggestPosition.put(MyApplication.VALUES, text);
                     } catch (JSONException e) {
@@ -459,7 +463,7 @@ public class JSONListAdapter<T extends JSONObject> extends ArrayAdapter<T> {
         boolean flag;
         try {
             Boolean expand = a.containBoolean(item,MyApplication.EXPAND);
-            if (text.contains(MyApplication.TEXT_WORD)
+            if (text.contains(TextType.TEXT_WORD.toString())
                     || (expand == null)
                     || (!expand)) {
                 flag = this.pastJSONObject(top,item);
@@ -643,12 +647,12 @@ public class JSONListAdapter<T extends JSONObject> extends ArrayAdapter<T> {
         JSONObject uc = new JSONObject();
         top.put(uc);
         try {
-            prompt.put(MyApplication.TEXT,MyApplication.TEXT_SEQUENCE);
+            prompt.put(MyApplication.TEXT,TextType.TEXT_SEQUENCE.toString());
             prompt.put(MyApplication.VALUES,"default");
             prompt.put(MyApplication.EXPAND,true);
             prompt.put(MyApplication.CHILD,new JSONArray());
             //
-            uc.put(MyApplication.TEXT,MyApplication.TEXT_UC + MyApplication.TEXT_SEQUENCE);
+            uc.put(MyApplication.TEXT,MyApplication.TEXT_UC + TextType.TEXT_SEQUENCE);
             uc.put(MyApplication.VALUES,"default");
             uc.put(MyApplication.EXPAND,true);
             uc.put(MyApplication.CHILD,new JSONArray());

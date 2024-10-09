@@ -59,11 +59,6 @@ public class MyApplication  extends Application {
     }
 
     /**
-     * privacy policy for google play console
-     */
-    public static final String PRIVACY_POLICY_URL = "https://github.com/Tand0/NovelAI_input_support_android/blob/main/README.md";
-
-    /**
      * novelai toppage
      */
     public static final String CREATE_ACCOUNT_URL = "https://novelai.net/";
@@ -373,7 +368,7 @@ public class MyApplication  extends Application {
         return preferences.getBoolean("setting_exif", true);
     }
     public String getSettingWidthXHeight(SharedPreferences preferences) {
-        return preferences.getString("setting_width_x_height", "512x768");
+        return preferences.getString("setting_width_x_height", "832x1216");
     }
     public int getSettingWidth(SharedPreferences preferences) {
         return getSettingWidthOrHeight(preferences, true);
@@ -540,8 +535,9 @@ public class MyApplication  extends Application {
             context.startActivity( intent );
             return true;
         } else if (id == R.id.action_policy) {
+            String privacyPolicyUrl = this.getResources().getString(R.string.privacy_policy_url);
             Intent intent = new Intent(Intent.ACTION_VIEW);
-            intent.setData(Uri.parse(PRIVACY_POLICY_URL));
+            intent.setData(Uri.parse(privacyPolicyUrl));
             context.startActivity(intent);
             return true;
         } else if (id == R.id.action_create_account) {
@@ -568,13 +564,18 @@ public class MyApplication  extends Application {
 
     /**
      * send data from tree to prompt/uc
+     * @param context activity
      * @param isPrompt if prompt then true, uc then false
      */
-    public void fromTreeToPrompt(boolean isPrompt) {
-        if (isPrompt) {
-            this.setPrompt(fromTree(getTop(),true));
+    public void fromTreeToPrompt(Context context,boolean isPrompt) {
+        if (this.getChangePartItem() == null) {
+            if (isPrompt) {
+                this.setPrompt(fromTree(getTop(),true));
+            } else {
+                this.setUc(fromTree(getTop(),false));
+            }
         } else {
-            this.setUc(fromTree(getTop(),false));
+            this.changePart(context);
         }
     }
 
@@ -640,9 +641,9 @@ public class MyApplication  extends Application {
                             if (integer != null) {
                                 editor.putInt("prompt_int_number_scale",integer);
                             }
-                            Double doubleX = containDouble(item,"uncode_scale");
+                            Double doubleX = containDouble(item,"cfg_rescale");
                             if (doubleX != null) {
-                                editor.putInt("prompt_int_uncode_scale",(int)(doubleX*100));
+                                editor.putInt("prompt_int_cfg_rescale",(int)(doubleX*100));
                             }
                             string = containString(item,"sampler");
                             if (string != null) {
@@ -655,6 +656,10 @@ public class MyApplication  extends Application {
                             targetBoolean = containBoolean(item,"sm_dyn");
                             if (targetBoolean != null) {
                                 editor.putBoolean("prompt_sm_dyn",targetBoolean);
+                            }
+                            targetBoolean = containBoolean(item,"variety");
+                            if (targetBoolean != null) {
+                                editor.putBoolean("prompt_variety",targetBoolean);
                             }
                             integer = containInt(item,"seed");
                             if (integer != null) {
@@ -802,18 +807,6 @@ public class MyApplication  extends Application {
     /** dict value */
     public static final String TEXT_UC = "uc-";
 
-    /** dict value */
-    public static final String TEXT_SEQUENCE = "Sequence";
-
-    /** dict value */
-    public static final String TEXT_SELECT = "Select";
-
-    /** dict value */
-    public static final String TEXT_WORD = "word";
-
-    /** dict value */
-    public static final String TEXT_WEIGHT = "Weight";
-
     /** dict name */
     public static final String VALUES = "values";
 
@@ -870,12 +863,12 @@ public class MyApplication  extends Application {
         String wordText;
         String values;
         if (isPrompt) {
-            topText = TEXT_SEQUENCE;
-            wordText = TEXT_WORD;
+            topText = "" + TextType.TEXT_SEQUENCE;
+            wordText = "" + TextType.TEXT_WORD;
             values = "prompt";
         } else {
-            topText = TEXT_UC + TEXT_SEQUENCE;
-            wordText = TEXT_UC + TEXT_WORD;
+            topText = TEXT_UC + TextType.TEXT_SEQUENCE;
+            wordText = TEXT_UC + TextType.TEXT_WORD;
             values = "uc";
         }
         JSONObject parent = new JSONObject();
@@ -1105,7 +1098,7 @@ public class MyApplication  extends Application {
                 JSONObject jsonObject = (JSONObject) object;
                 String mode = containString(jsonObject, TEXT);
                 if (mode != null) {
-                    if (mode.contains(TEXT_WORD)) {
+                    if (mode.contains(TextType.TEXT_WORD.toString())) {
                         String values = containString(jsonObject, VALUES);
                         if (values != null) {
                             values = values.replace(","," ").trim();
@@ -1113,9 +1106,9 @@ public class MyApplication  extends Application {
                                 list.add(values);
                             }
                         }
-                    } else if (mode.contains(TEXT_SEQUENCE)) {
+                    } else if (mode.contains(TextType.TEXT_SEQUENCE.toString())) {
                         dictToList(list, containJSONArray(jsonObject, CHILD));
-                    } else if (mode.contains(TEXT_SELECT)) {
+                    } else if (mode.contains(TextType.TEXT_SELECT.toString())) {
                         JSONArray childArray = containJSONArray(jsonObject, CHILD);
                         if (childArray != null) {
                             int max = childArray.length();
@@ -1125,7 +1118,7 @@ public class MyApplication  extends Application {
                                 dictToList(list, childArray.get(index));
                             }
                         }
-                    } else if (mode.contains(TEXT_WEIGHT)) {
+                    } else if (mode.contains(TextType.TEXT_WEIGHT.toString())) {
                         JSONArray childArray = containJSONArray(jsonObject, CHILD);
                         if (childArray != null) {
                             int max = childArray.length();
@@ -1157,6 +1150,9 @@ public class MyApplication  extends Application {
     protected JSONObject changePartItem = null;
     public void changePart(Context context,JSONObject item) {
         this.changePartItem = item;
+        if (item == null) {
+            return;
+        }
         this.changePart(context);
     }
     public void changePart(Context context) {
@@ -1175,12 +1171,7 @@ public class MyApplication  extends Application {
         JSONArray dummyTop = new JSONArray();
         dummyTop.put(item);
         String answer = fromTree(dummyTop,isPrompt);
-        String target;
-        if (isPrompt) {
-            target = this.getPrompt();
-        } else {
-            target = this.getUc();
-        }
+        String target = isPrompt ? this.getPrompt() : this.getUc();
         target = deleteTextFromItem(target,item);
         if (!target.isEmpty() && !answer.isEmpty()) {
             target = target + ", ";
@@ -1242,7 +1233,7 @@ public class MyApplication  extends Application {
             }
         } else if (object instanceof JSONObject) {
             String type = containString(object,TEXT);
-            if ((type != null) && type.contains(TEXT_WORD)) {
+            if ((type != null) && type.contains(TextType.TEXT_WORD.toString())) {
                 String key = containString(object,VALUES);
                 if (key != null) {
                     list.add(changeBaseKey(key));
@@ -1295,12 +1286,16 @@ public class MyApplication  extends Application {
             Toast.makeText(this, message, Toast.LENGTH_LONG).show();
             appendLog(context, message);
             if (isUseTree(preferences)) {
-                if (0 < this.getTop().length()) {
-                    this.setPrompt(fromTree(getTop(),true));
-                    this.setUc(fromTree(getTop(),false));
+                if (this.getChangePartItem() == null) {
+                    if (0 < this.getTop().length()) {
+                        this.setPrompt(fromTree(getTop(), true));
+                        this.setUc(fromTree(getTop(), false));
+                    } else {
+                        this.fromPromptToTree(getPrompt(), true);
+                        this.fromPromptToTree(getUc(), false);
+                    }
                 } else {
-                    fromPromptToTree(getPrompt(), true);
-                    fromPromptToTree(getUc(), false);
+                    this.changePart(context);
                 }
             }
             String prompt = this.getPrompt();
@@ -1388,7 +1383,7 @@ public class MyApplication  extends Application {
             }
             int scale = preferences.getInt("prompt_int_number_scale", 11);
             int steps = preferences.getInt("prompt_int_number_steps", 28);
-            int uncodeScale = preferences.getInt("prompt_int_uncode_scale", 100);
+            int cfgRescale = preferences.getInt("prompt_int_cfg_rescale", 100);
             String sampler = preferences.getString("prompt_sampler", "k_dpmpp_2m");
             boolean sm;
             try {
@@ -1402,6 +1397,12 @@ public class MyApplication  extends Application {
             } catch (ClassCastException e) {
                 sm_dyn = true;
             }
+            boolean variety;
+            try {
+                variety = preferences.getBoolean("prompt_variety", false);
+            } catch (ClassCastException e) {
+                variety = false;
+            }
             boolean fixed_seed;
             try {
                 fixed_seed = isPromptFixedSeed(preferences);
@@ -1413,7 +1414,7 @@ public class MyApplication  extends Application {
                 seed = new java.util.Random().nextInt(Integer.MAX_VALUE - 1) + 1;
                 this.setSeed(seed);
             }
-            String noise_schedule = preferences.getString("prompt_noise_schedule", "native").trim();
+            String noise_schedule = preferences.getString("prompt_noise_schedule", "karras").trim();
             request = new MyNASI.Allin1RequestImage(
                     MyNASI.TYPE.IMAGE,
                     email,
@@ -1424,10 +1425,11 @@ public class MyApplication  extends Application {
                     height,
                     scale,
                     steps,
-                    uncodeScale,
+                    cfgRescale,
                     sampler,
                     sm,
                     sm_dyn,
+                    variety,
                     uc,
                     seed,
                     noise_schedule,

@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -35,18 +36,7 @@ public abstract class PromptAbstractFragment extends Fragment {
             Toast.makeText(getActivity() , message, Toast.LENGTH_SHORT).show();
             a.appendLog(getActivity(),message);
         });
-        getFromTreeToPrompt().setOnClickListener(view->{
-            Activity activity = getActivity();
-            if (activity == null) {
-                return;
-            }
-            MyApplication a = (MyApplication) activity.getApplication();
-            a.fromTreeToPrompt(isPrompt());
-            getTextPrompt().setText(getText(a));
-            String message = "OK: From Tree";
-            Toast.makeText(getActivity() , message, Toast.LENGTH_SHORT).show();
-            a.appendLog(getActivity(),message);
-        });
+        getFromTreeToPrompt().setOnClickListener(view-> actionFromTreeToPrompt());
 
         getToSuggest().setOnClickListener(view->{
             Activity activity = getActivity();
@@ -62,19 +52,26 @@ public abstract class PromptAbstractFragment extends Fragment {
                 int end = getTextPrompt().getSelectionEnd();
                 target = getTextPrompt().getText().subSequence(start, end).toString();
             }
-            intent.putExtra(SuggestActivity.TYPE,-1);
+            intent.putExtra(SuggestActivity.TYPE,TextType.TEXT_OTHER.toString());
             intent.putExtra(SuggestActivity.TEXT,target);
             resultLauncher.launch(intent);
         });
 
-        getToMenuChangePart().setOnClickListener(view->{
+        getToClear().setOnClickListener(view->{
             Activity activity = getActivity();
             if (activity == null) {
                 return;
             }
             MyApplication a = (MyApplication) activity.getApplication();
-            a.changePart(activity);
-            getTextPrompt().setText(getText(a));
+            if (a == null) {
+                return;
+            }
+            //
+            // clear
+            a.changePart(PromptAbstractFragment.this.getContext(),null);
+            //
+            // change button
+            onResumePart();
         });
     }
 
@@ -127,12 +124,32 @@ public abstract class PromptAbstractFragment extends Fragment {
                     getTextPrompt().setText(text);
                 }
             });
+
+    /**
+     * Action FromTreeToPrompt
+     */
+    public void actionFromTreeToPrompt() {
+        Activity activity = getActivity();
+        if (activity == null) {
+            return;
+        }
+        MyApplication a = (MyApplication) activity.getApplication();
+        //
+        // update application
+        setText(a,getTextPrompt().getText().toString());
+        a.fromTreeToPrompt(getContext(),isPrompt());
+        getTextPrompt().setText(getText(a));
+    }
+
     /**
      * on resume
      */
     @Override
     public void onResume() {
         super.onResume();
+        this.onResumePart();
+    }
+    public void onResumePart() {
         Activity activity = getActivity();
         if (activity == null) {
             return;
@@ -140,8 +157,17 @@ public abstract class PromptAbstractFragment extends Fragment {
         MyApplication a = (MyApplication) activity.getApplication();
         getTextPrompt().setText(getText(a));
         //
-        Button menuChangePart = getToMenuChangePart();
-        menuChangePart.setEnabled(a.getChangePartItem() != null);
+        Button treeToPrompt = this.getFromTreeToPrompt();
+        Button menuChangePart = this.getToClear();
+        if (a.getChangePartItem() == null) {
+            String text = PromptAbstractFragment.this.getResources().getString(R.string.setting_use_tree);
+            treeToPrompt.setText(text);
+            menuChangePart.setVisibility(View.GONE);
+        } else {
+            String text = PromptAbstractFragment.this.getResources().getString(R.string.menu_change_part);
+            treeToPrompt.setText(text);
+            menuChangePart.setVisibility(View.VISIBLE);
+        }
     }
     /**
      * on pause
@@ -160,19 +186,19 @@ public abstract class PromptAbstractFragment extends Fragment {
     public abstract Button getFromPromptToTree();
     public abstract Button getFromTreeToPrompt();
     public abstract Button getToSuggest();
-    public abstract Button getToMenuChangePart();
+    public abstract Button getToClear();
 
     public abstract EditText getTextPrompt();
 
     public abstract TextView getTokenView();
     /**
-     * get prompt
+     * get prompt from application
      * @return prompt
      */
     public abstract String getText(MyApplication a);
 
     /**
-     * set prompt
+     * set prompt to application
      * @param text prompt
      */
     public abstract void setText(MyApplication a, String text);

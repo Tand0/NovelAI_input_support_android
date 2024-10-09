@@ -6,6 +6,7 @@ import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.os.Build;
 import android.provider.MediaStore;
+import android.util.Size;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -72,7 +73,8 @@ public class ImagesListAdapter<T extends UriEtc> extends ArrayAdapter<T> {
                     MediaStore.Images.Media.SIZE,
                     MediaStore.Images.Media.DATE_ADDED,
                     MediaStore.Images.Media.WIDTH,
-                    MediaStore.Images.Media.HEIGHT
+                    MediaStore.Images.Media.HEIGHT,
+                    MediaStore.Images.Media.DATA
             };
             try (Cursor cursor = cr.query(etc.uri, projection, null, null, null)) {
                 if (cursor == null) {
@@ -104,7 +106,7 @@ public class ImagesListAdapter<T extends UriEtc> extends ArrayAdapter<T> {
                     }
                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
                         try {
-                            result = cr.loadThumbnail(etc.uri, new android.util.Size(96, 96), null);
+                            result = cr.loadThumbnail(etc.uri, new Size(96, 96), null);
                         } catch (IOException e) {
                             // NONE
                         }
@@ -115,9 +117,13 @@ public class ImagesListAdapter<T extends UriEtc> extends ArrayAdapter<T> {
                             result = MediaStore.Images.Thumbnails.getThumbnail(cr, id, MediaStore.Images.Thumbnails.MICRO_KIND, null);
                         }
                     }
-                    //
-                    int titleColumn = cursor.getColumnIndex(MediaStore.Images.Media.TITLE);
-                    title = titleColumn < 0 ? "base image" : cursor.getString(titleColumn);
+                    int dataColumn = cursor.getColumnIndex(MediaStore.Images.Media.DATA);
+                    if (dataColumn < 0) {
+                        int titleColumn = cursor.getColumnIndex(MediaStore.Images.Media.TITLE);
+                        title = titleColumn < 0 ? "base image" : cursor.getString(titleColumn);
+                    } else {
+                        title = cursor.getString(dataColumn);
+                    }
                     //
                 }
             } catch (IllegalArgumentException e) {

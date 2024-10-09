@@ -22,7 +22,7 @@ https://play.google.com/store/apps/details?id=jp.ne.ruru.park.ando.naiview
 - アプリ上に広告は掲載していません(今後は載せるかも)
 - 上記以外の個人情報は使用しておりません
 
-以上、Google play に書けと言われたプライバシーポリシーでした。
+以上、Google play に書けと言われたプライバシーポリシーです
 
 ## カンタンな使い方
 
@@ -38,7 +38,7 @@ https://play.google.com/store/apps/details?id=jp.ne.ruru.park.ando.naiview
 - 気に入ったら「/ai/upscale」を押してしばらく待ちます
 - さらに気に入ったらセーブで保存します
 - キャンセルで画面に戻ると左右スクロールで前後の画像が、上下スクロールで画像のリストがでます
-- 画像がNovelAIの画像の場合、設定を読み込んでプロンプトに渡します
+  - 画像がNovelAIの画像の場合、設定を読み込んでプロンプトに渡します
 - Enjoy!
 
 ## Reference

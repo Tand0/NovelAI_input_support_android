@@ -50,10 +50,10 @@
                 tools:ignore="ButtonStyle,RtlHardcoded,TextContrastCheck" />
 
             <Button
-                android:id="@+id/menu_change_part"
+                android:id="@+id/action_clear"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/menu_change_part"
+                android:text="@string/action_clear"
                 tools:ignore="ButtonStyle,RtlHardcoded,TextContrastCheck" />
         </LinearLayout>
 

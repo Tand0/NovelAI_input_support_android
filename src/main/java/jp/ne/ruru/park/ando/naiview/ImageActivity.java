@@ -158,8 +158,9 @@ public class ImageActivity extends AppCompatActivity {
     public void onSaveDialogMenu() {
         final MyApplication a =
                 ((MyApplication)ImageActivity.this.getApplication());
-        String title = ImageActivity.this.getResources().getString(R.string.menu_move);
-        title = title + "(No." + a.getImagePosition() + ")";
+        String title = (a.getDownloadFlag() ? "*" : "")
+                + ImageActivity.this.getResources().getString(R.string.menu_move)
+                + "(No." + a.getImagePosition() + ")";
         if (0 < bitmapX) {
             title = String.format(Locale.ENGLISH, "%s(%dx%d)", title, bitmapX,bitmapY);
         }
@@ -170,22 +171,29 @@ public class ImageActivity extends AppCompatActivity {
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
         String addText;
         if (a.isSettingI2i(preferences)) {
-            addText = "(i2i)";
+            addText = " (i2i)";
         } else {
-            addText = "(" + a.getSettingWidthXHeight(preferences) + ")";
+            addText = " (" + a.getSettingWidthXHeight(preferences) + ")";
         }
-        String imageText = ImageActivity.this.getResources().getString(R.string.generate_image) + addText;
+        String imageText =  ImageActivity.this.getResources().getString(R.string.generate_image) + addText;
         String upscaleText = ImageActivity.this.getResources().getString(R.string.upscale)
-                + "(x" + a.getSettingScale(preferences) + ")";
+                + " (x" + a.getSettingScale(preferences) + ")";
         final String[] items = new String[] {
                 ImageActivity.this.getResources().getString(R.string.action_back),
                 imageText,
                 upscaleText
         };
         View dialogView = this.getLayoutInflater().inflate(R.layout.raw_switch, null);
+        //
         SwitchCompat isUseTree = dialogView.findViewById(R.id.setting_use_tree);
+        if (a.getChangePartItem() != null) {
+            isUseTree.setText(this.getResources().getString(R.string.menu_change_part));
+        } else {
+            isUseTree.setText(this.getResources().getString(R.string.setting_use_tree));
+        }
         isUseTree.setChecked(a.isUseTree(preferences));
         isUseTree.setOnCheckedChangeListener((v,checked)-> a.setUseTree(preferences,checked));
+        //
         SwitchCompat isPromptFixedSeed = dialogView.findViewById(R.id.prompt_fixed_seed);
         isPromptFixedSeed.setChecked(a.isPromptFixedSeed(preferences));
         isPromptFixedSeed.setOnCheckedChangeListener((v,checked)-> a.setPromptFixedSeed(preferences,checked));
@@ -288,7 +296,8 @@ public class ImageActivity extends AppCompatActivity {
             String[] projection = new String[]{
                     MediaStore.Images.Media._ID,
                     MediaStore.Images.Media.MIME_TYPE,
-                    MediaStore.Images.Media.DATE_ADDED
+                    MediaStore.Images.Media.DATE_ADDED,
+                    MediaStore.Images.Media.DATA
             };
             String sortOrder = MediaStore.Images.Media.DATE_ADDED + " DESC";// ASC or DESC;
             try (Cursor cursor = cr.query(

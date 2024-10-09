@@ -5,11 +5,13 @@
         <item>512x768</item>
         <item>768x512</item>
         <item>640x640</item>
-        <item>832x1280</item>
-        <item>1280x832</item>
+        <item>832x1216</item>
+        <item>1216x832</item>
         <item>1024x1024</item>
         <item>1024x1536</item>
         <item>1536x1024</item>
+        <item>1088x1920</item>
+        <item>1920x1088</item>
     </string-array>
     <string-array name="sampler_list">
         <item>k_euler</item>
@@ -18,9 +20,6 @@
         <item>k_dpmpp_2m</item>
     </string-array>
     <string-array name="model_list">
-        <item>safe-diffusion</item>
-        <item>nai-diffusion</item>
-        <item>nai-diffusion-furry</item>
         <item>nai-diffusion-2</item>
         <item>nai-diffusion-furry-3</item>
         <item>nai-diffusion-3</item>

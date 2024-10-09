@@ -79,7 +79,7 @@ public class PromptUcFragment extends PromptAbstractFragment {
     }
 
     @Override
-    public Button getToMenuChangePart() {
-        return binding.menuChangePart;
+    public Button getToClear() {
+        return binding.actionClear;
     }
 }

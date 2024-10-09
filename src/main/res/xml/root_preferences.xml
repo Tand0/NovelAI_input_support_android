@@ -38,7 +38,7 @@
     <ListPreference
         android:key="setting_width_x_height"
         android:title="@string/setting_width_x_height"
-        android:defaultValue="512x768"
+        android:defaultValue="832x1216"
         android:summary="@string/setting_width_x_height_summary"
         android:dialogTitle="@string/setting_width_x_height_summary"
         android:entries="@array/width_list"
@@ -56,30 +56,30 @@
         app:useSimpleSummaryProvider="true" />
 
     <SeekBarPreference
-        app:key="prompt_int_number_scale"
-        app:title="@string/prompt_scale"
-        app:summary="@string/prompt_scale_summary"
-        app:defaultValue="11"
-        app:min="0"
-        android:max="25"
-        app:showSeekBarValue="true"
-        />
-
-    <SeekBarPreference
         app:key="prompt_int_number_steps"
         app:title="@string/prompt_steps"
         app:summary="@string/prompt_steps_summary"
-        app:defaultValue="28"
+        app:defaultValue="23"
         app:min="1"
         android:max="50"
         app:showSeekBarValue="true"
         />
 
     <SeekBarPreference
-        app:key="prompt_int_uncode_scale"
-        app:title="@string/prompt_uncond_scale"
-        app:summary="@string/prompt_uncond_scale_summary"
-        app:defaultValue="100"
+        app:key="prompt_int_number_scale"
+        app:title="@string/prompt_scale"
+        app:summary="@string/prompt_scale_summary"
+        app:defaultValue="5"
+        app:min="0"
+        android:max="25"
+        app:showSeekBarValue="true"
+        />
+
+    <SeekBarPreference
+        app:key="prompt_int_cfg_rescale"
+        app:title="@string/prompt_cfg_rescale"
+        app:summary="@string/prompt_cfg_rescale_summary"
+        app:defaultValue="0"
         app:min="0"
         android:max="150"
         app:showSeekBarValue="true"
@@ -106,6 +106,11 @@
         app:title="@string/prompt_sm_dyn" />
 
     <SwitchPreferenceCompat
+        app:key="prompt_variety"
+        app:defaultValue="false"
+        app:title="@string/prompt_variety" />
+
+    <SwitchPreferenceCompat
         app:key="setting_scale"
         app:defaultValue="true"
         app:summary="@string/upscale_summary"
@@ -114,7 +119,7 @@
     <ListPreference
         android:key="prompt_noise_schedule"
         android:title="@string/prompt_noise_schedule"
-        android:defaultValue="native"
+        android:defaultValue="karras"
         android:summary="@string/prompt_noise_schedule_summary"
         android:dialogTitle="@string/prompt_noise_schedule_summary"
         android:entries="@array/noise_schedule_list"
