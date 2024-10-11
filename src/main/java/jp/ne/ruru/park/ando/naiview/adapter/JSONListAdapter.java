@@ -28,6 +28,7 @@ import java.util.ArrayList;
 import java.util.Locale;
 
 import jp.ne.ruru.park.ando.naiview.MyApplication;
+import jp.ne.ruru.park.ando.naiview.MyNASI;
 import jp.ne.ruru.park.ando.naiview.R;
 import jp.ne.ruru.park.ando.naiview.SuggestActivity;
 import jp.ne.ruru.park.ando.naiview.TreeActivity;
@@ -223,12 +224,7 @@ public class JSONListAdapter<T extends JSONObject> extends ArrayAdapter<T> {
                     textRaw = "";
                 }
                 String textKey = a.containString(item,MyApplication.TEXT);
-                for (TextType s: TextType.values()) {
-                    if (textKey.equals(s.toString())) {
-                        textType = s;
-                        break;
-                    }
-                }
+                textType = TextType.getTextType(textKey);
             } else {
                 textRaw = "";
             }
@@ -277,7 +273,7 @@ public class JSONListAdapter<T extends JSONObject> extends ArrayAdapter<T> {
      * insert or change text to json object
      * @param item json object
      * @param text insert or change text
-     * @param targetMenuItem if text then 0 else 1
+     * @param targetMenuItem menu item
      */
     public void addText(JSONObject item,String text,TextType targetMenuItem) {
         TreeActivity ta = (TreeActivity)this.getContext();
@@ -309,8 +305,8 @@ public class JSONListAdapter<T extends JSONObject> extends ArrayAdapter<T> {
                 }
                 String text = resultData.getStringExtra(SuggestActivity.TEXT);
                 boolean isInsert = resultData.getBooleanExtra(SuggestActivity.IS_INSERT,false);
-                String textType = resultData.getStringExtra(SuggestActivity.TYPE);
-                if ((textType == null) || (textType.equals(TextType.TEXT_OTHER.toString()))) {
+                TextType textType = TextType.getTextType(resultData.getStringExtra(SuggestActivity.TYPE));
+                if (TextType.TEXT_OTHER.equals(textType)) {
                     return;
                 }
                 MyApplication a =
@@ -318,10 +314,14 @@ public class JSONListAdapter<T extends JSONObject> extends ArrayAdapter<T> {
                 if (isInsert) {
                     JSONObject target = new JSONObject();
                     try {
-                        target.put(MyApplication.TEXT, textType);
+                        target.put(MyApplication.TEXT, textType.toString());
                         target.put(MyApplication.VALUES, text);
                         JSONArray array = new JSONArray();
                         target.put(MyApplication.CHILD,array);
+                        if (! TextType.TEXT_WORD.equals(textType)) {
+                            // this is folder
+                            target.put(MyApplication.EXPAND, true);
+                        }
                         a.setCut(target);
                         this.pastJSONObject(suggestPosition);
                     } catch (JSONException e) {
@@ -338,7 +338,7 @@ public class JSONListAdapter<T extends JSONObject> extends ArrayAdapter<T> {
                         }
                         key = key + textType;
                         suggestPosition.put(MyApplication.TEXT, key);
-                        if (key.contains(TextType.TEXT_WORD.toString())) {
+                        if (TextType.TEXT_WORD.contains(key)) {
                             suggestPosition.put(MyApplication.CHILD,new JSONArray());
                         } else {
                             JSONArray array = a.containJSONArray(suggestPosition,MyApplication.CHILD);
@@ -463,7 +463,7 @@ public class JSONListAdapter<T extends JSONObject> extends ArrayAdapter<T> {
         boolean flag;
         try {
             Boolean expand = a.containBoolean(item,MyApplication.EXPAND);
-            if (text.contains(TextType.TEXT_WORD.toString())
+            if (TextType.TEXT_WORD.contains(text)
                     || (expand == null)
                     || (!expand)) {
                 flag = this.pastJSONObject(top,item);
@@ -623,9 +623,8 @@ public class JSONListAdapter<T extends JSONObject> extends ArrayAdapter<T> {
         int position = listView.getSelectedItemPosition();
         //
         ArrayList<T> list = new ArrayList<>();
-        if (this.getTop().length() == 0) {
-            createDefaultTree();
-        }
+        createDefaultTree();
+
         updateJSONArray(list, 0, this.getTop(),null);
         this.clear();
         this.addAll(list);
@@ -641,22 +640,62 @@ public class JSONListAdapter<T extends JSONObject> extends ArrayAdapter<T> {
      * if top of tree is null then create default object
      */
     public void createDefaultTree() {
-        JSONArray top = this.getTop();
-        JSONObject prompt = new JSONObject();
-        top.put(prompt);
-        JSONObject uc = new JSONObject();
-        top.put(uc);
         try {
-            prompt.put(MyApplication.TEXT,TextType.TEXT_SEQUENCE.toString());
-            prompt.put(MyApplication.VALUES,"default");
-            prompt.put(MyApplication.EXPAND,true);
-            prompt.put(MyApplication.CHILD,new JSONArray());
+            JSONArray top = this.getTop();
+            MyApplication a =
+                    ((MyApplication)((AppCompatActivity) this.getContext()).getApplication());
+            boolean flagOK = true;
+            boolean flagUC = true;
+            for (int i = 0 ; i < top.length() ; i++) {
+                JSONObject item = (JSONObject) top.get(i);
+                //
+                String text = a.containString(item,MyApplication.TEXT);
+                if (text == null) {
+                    continue;
+                }
+                boolean containUC = text.contains(MyApplication.TEXT_UC);
+                flagOK = flagOK & (containUC);
+                flagUC = flagUC & (!containUC);
+                if ((!flagOK) & (!flagUC)) {
+                    // this is not default
+                    return;
+                }
+            }
+            if (flagOK) {
+                JSONObject prompt = new JSONObject();
+                top.put(prompt);
+                prompt.put(MyApplication.TEXT, TextType.TEXT_SEQUENCE.toString());
+                prompt.put(MyApplication.VALUES, "default");
+                prompt.put(MyApplication.EXPAND, true);
+                JSONArray childArray = new JSONArray();
+                prompt.put(MyApplication.CHILD, childArray);
+                for (String split : MyNASI.DEFAULT_PROMPT.split(",")) {
+                    JSONObject child = new JSONObject();
+                    child.put(MyApplication.TEXT, TextType.TEXT_WORD.toString());
+                    child.put(MyApplication.VALUES, split.trim());
+                    child.put(MyApplication.EXPAND, false);
+                    child.put(MyApplication.CHILD, new JSONArray());
+                    childArray.put(child);
+                }
+            }
             //
-            uc.put(MyApplication.TEXT,MyApplication.TEXT_UC + TextType.TEXT_SEQUENCE);
-            uc.put(MyApplication.VALUES,"default");
-            uc.put(MyApplication.EXPAND,true);
-            uc.put(MyApplication.CHILD,new JSONArray());
-            //
+            if (flagUC) {
+                JSONObject uc = new JSONObject();
+                top.put(uc);
+                uc.put(MyApplication.TEXT, MyApplication.TEXT_UC + TextType.TEXT_SEQUENCE);
+                uc.put(MyApplication.VALUES, "default");
+                uc.put(MyApplication.EXPAND, false);
+                JSONArray childArray = new JSONArray();
+                uc.put(MyApplication.CHILD, childArray);
+                for (String split : MyNASI.DEFAULT_PROMPT_UC.split(",")) {
+                    JSONObject child = new JSONObject();
+                    child.put(MyApplication.TEXT, TextType.TEXT_WORD.toString());
+                    child.put(MyApplication.VALUES, split.trim());
+                    child.put(MyApplication.EXPAND, false);
+                    child.put(MyApplication.CHILD, new JSONArray());
+                    childArray.put(child);
+                }
+            }
         } catch (JSONException e) {
             // NONE
         }

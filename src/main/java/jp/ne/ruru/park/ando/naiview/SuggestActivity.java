@@ -81,11 +81,8 @@ public class SuggestActivity extends AppCompatActivity {
         if (intent == null) {
             return;
         }
-        String selectedItem = intent.getStringExtra(TYPE);
-        if (selectedItem == null) {
-            selectedItem = TextType.TEXT_OTHER.toString();
-        }
-        if (selectedItem.equals(TextType.TEXT_OTHER.toString())) {
+        TextType selectedItem = TextType.getTextType(intent.getStringExtra(TYPE));
+        if (TextType.TEXT_OTHER.equals(selectedItem)) {
             binding.wordEditSpinner.setEnabled(false);
             binding.wordEditSpinner.setVisibility(View.GONE);
             binding.wordEditChange.setEnabled(false);
@@ -93,17 +90,7 @@ public class SuggestActivity extends AppCompatActivity {
         } else {
             binding.wordEditSpinner.setEnabled(true);
             binding.wordEditSpinner.setVisibility(View.VISIBLE);
-            int index = 0;
-            for (TextType t : TextType.values()) {
-                if (t.toString().equals(selectedItem)) {
-                    break;
-                }
-                index++;
-            }
-            if (TextType.values().length - 1 < index) {
-                index = 0;
-            }
-            binding.wordEditSpinner.setSelection(index);
+            binding.wordEditSpinner.setSelection(selectedItem.getIndex());
             binding.wordEditChange.setEnabled(true);
             binding.wordEditChange.setVisibility(View.VISIBLE);
         }
@@ -128,6 +115,9 @@ public class SuggestActivity extends AppCompatActivity {
     public void wordEditBack(boolean isInsert) {
         Intent intent = getIntent();
         int position = binding.wordEditSpinner.getSelectedItemPosition();
+        if ((position < 0) || (TextType.values().length <= position)) {
+            position = 0;
+        }
         intent.putExtra(TYPE,TextType.values()[position].toString());
         intent.putExtra(IS_INSERT,isInsert);
         intent.putExtra(TEXT,getPrompt().trim());

@@ -37,6 +37,11 @@ public class MyNASI {
      */
     public static final String DEFAULT_PROMPT= "1girl, best quality, amazing quality, very aesthetic, absurdres";
 
+    /**
+     * default UC prompt
+     */
+    public static final String DEFAULT_PROMPT_UC = "lowres, bad anatomy, bad hands, text, error, missing fingers, extra digit, fewer digits, cropped, worst quality, low quality, normal quality, jpeg artifacts, signature, watermark, username, blurry";
+
     /** mime type gif */
     public static final String IMAGE_PNG = "image/png";
     /** mime type png */

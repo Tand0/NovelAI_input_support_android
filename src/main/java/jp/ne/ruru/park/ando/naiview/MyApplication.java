@@ -130,8 +130,7 @@ public class MyApplication  extends Application {
     /**
      * uc area
      */
-    private String uc = "lowres, bad anatomy, bad hands, text, error, missing fingers, extra digit, fewer digits, cropped, worst quality, low quality, normal quality, jpeg artifacts, signature, watermark, username, blurry";
-
+    private String uc = MyNASI.DEFAULT_PROMPT_UC;
     /**
      * getter for prompt
      *
@@ -862,13 +861,13 @@ public class MyApplication  extends Application {
         String topText;
         String wordText;
         String values;
+        topText = TextType.TEXT_SEQUENCE.toString();
+        wordText = TextType.TEXT_WORD.toString();
         if (isPrompt) {
-            topText = "" + TextType.TEXT_SEQUENCE;
-            wordText = "" + TextType.TEXT_WORD;
             values = "prompt";
         } else {
-            topText = TEXT_UC + TextType.TEXT_SEQUENCE;
-            wordText = TEXT_UC + TextType.TEXT_WORD;
+            topText = TEXT_UC + topText;
+            wordText = TEXT_UC + wordText;
             values = "uc";
         }
         JSONObject parent = new JSONObject();
@@ -1098,7 +1097,7 @@ public class MyApplication  extends Application {
                 JSONObject jsonObject = (JSONObject) object;
                 String mode = containString(jsonObject, TEXT);
                 if (mode != null) {
-                    if (mode.contains(TextType.TEXT_WORD.toString())) {
+                    if (TextType.TEXT_WORD.contains(mode)) {
                         String values = containString(jsonObject, VALUES);
                         if (values != null) {
                             values = values.replace(","," ").trim();
@@ -1106,9 +1105,9 @@ public class MyApplication  extends Application {
                                 list.add(values);
                             }
                         }
-                    } else if (mode.contains(TextType.TEXT_SEQUENCE.toString())) {
+                    } else if (TextType.TEXT_SEQUENCE.contains(mode)) {
                         dictToList(list, containJSONArray(jsonObject, CHILD));
-                    } else if (mode.contains(TextType.TEXT_SELECT.toString())) {
+                    } else if (TextType.TEXT_SELECT.contains(mode)) {
                         JSONArray childArray = containJSONArray(jsonObject, CHILD);
                         if (childArray != null) {
                             int max = childArray.length();
@@ -1118,7 +1117,7 @@ public class MyApplication  extends Application {
                                 dictToList(list, childArray.get(index));
                             }
                         }
-                    } else if (mode.contains(TextType.TEXT_WEIGHT.toString())) {
+                    } else if (TextType.TEXT_WEIGHT.contains(mode)) {
                         JSONArray childArray = containJSONArray(jsonObject, CHILD);
                         if (childArray != null) {
                             int max = childArray.length();
@@ -1233,7 +1232,7 @@ public class MyApplication  extends Application {
             }
         } else if (object instanceof JSONObject) {
             String type = containString(object,TEXT);
-            if ((type != null) && type.contains(TextType.TEXT_WORD.toString())) {
+            if (TextType.TEXT_WORD.contains(type)) {
                 String key = containString(object,VALUES);
                 if (key != null) {
                     list.add(changeBaseKey(key));
