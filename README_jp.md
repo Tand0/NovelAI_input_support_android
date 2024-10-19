@@ -41,8 +41,12 @@ https://play.google.com/store/apps/details?id=jp.ne.ruru.park.ando.naiview
   - 画像がNovelAIの画像の場合、設定を読み込んでプロンプトに渡します
 - Enjoy!
 
-## Reference
-- ウィンドウズ用のツールも用意しています
-  - https://github.com/Tand0/NovelAI_input_support_tool
+
+## もっと知りたい場合
+
+- こちらを参照してください。
+  - https://amzn.to/4f4QVje
+
+
 
 
