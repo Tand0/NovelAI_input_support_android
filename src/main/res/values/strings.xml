@@ -93,6 +93,7 @@
     <string name="from_file_to_tree">Load tree</string>
 
     <string name="menu_nai">Use Novel AI REST API</string>
+    <string name="menu_default">Default</string>
     <string name="generate_image">/ai/generate-image</string>
     <string name="upscale">/ai/upscale</string>
     <string name="upscale_summary">/ai/upscale x2 or x4</string>

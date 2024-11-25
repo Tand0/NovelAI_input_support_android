@@ -261,7 +261,7 @@ public class JSONListAdapter<T extends JSONObject> extends ArrayAdapter<T> {
             return true;
         } else if (itemId == R.id.menu_change_part) {
             if (item != null) {
-                a.changePart(this.getContext(),item);
+                a.changePart(item);
                 a.action(this.getContext(),R.id.action_prompt);
             }
             return true;
@@ -661,11 +661,13 @@ public class JSONListAdapter<T extends JSONObject> extends ArrayAdapter<T> {
                     return;
                 }
             }
+            String defaultString = this.getContext().getResources().getString(R.string.menu_default);
+
             if (flagOK) {
                 JSONObject prompt = new JSONObject();
                 top.put(prompt);
                 prompt.put(MyApplication.TEXT, TextType.TEXT_SEQUENCE.toString());
-                prompt.put(MyApplication.VALUES, "default");
+                prompt.put(MyApplication.VALUES, defaultString);
                 prompt.put(MyApplication.EXPAND, true);
                 JSONArray childArray = new JSONArray();
                 prompt.put(MyApplication.CHILD, childArray);
@@ -683,7 +685,7 @@ public class JSONListAdapter<T extends JSONObject> extends ArrayAdapter<T> {
                 JSONObject uc = new JSONObject();
                 top.put(uc);
                 uc.put(MyApplication.TEXT, MyApplication.TEXT_UC + TextType.TEXT_SEQUENCE);
-                uc.put(MyApplication.VALUES, "default");
+                uc.put(MyApplication.VALUES, defaultString);
                 uc.put(MyApplication.EXPAND, false);
                 JSONArray childArray = new JSONArray();
                 uc.put(MyApplication.CHILD, childArray);

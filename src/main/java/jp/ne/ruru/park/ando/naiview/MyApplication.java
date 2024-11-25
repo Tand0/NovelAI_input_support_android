@@ -563,10 +563,9 @@ public class MyApplication  extends Application {
 
     /**
      * send data from tree to prompt/uc
-     * @param context activity
      * @param isPrompt if prompt then true, uc then false
      */
-    public void fromTreeToPrompt(Context context,boolean isPrompt) {
+    public void fromTreeToPrompt(boolean isPrompt) {
         if (this.getChangePartItem() == null) {
             if (isPrompt) {
                 this.setPrompt(fromTree(getTop(),true));
@@ -574,7 +573,7 @@ public class MyApplication  extends Application {
                 this.setUc(fromTree(getTop(),false));
             }
         } else {
-            this.changePart(context);
+            this.changePart();
         }
     }
 
@@ -1147,14 +1146,14 @@ public class MyApplication  extends Application {
         return changePartItem;
     }
     protected JSONObject changePartItem = null;
-    public void changePart(Context context,JSONObject item) {
+    public void changePart(JSONObject item) {
         this.changePartItem = item;
         if (item == null) {
             return;
         }
-        this.changePart(context);
+        this.changePart();
     }
-    public void changePart(Context context) {
+    public void changePart() {
         Object item = this.changePartItem;
         if (item == null) {
             item = this.getTop();
@@ -1182,8 +1181,6 @@ public class MyApplication  extends Application {
         } else {
             this.setUc(target);
         }
-        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
-        setUseTree(preferences,false);
     }
 
     /**
@@ -1294,7 +1291,7 @@ public class MyApplication  extends Application {
                         this.fromPromptToTree(getUc(), false);
                     }
                 } else {
-                    this.changePart(context);
+                    this.changePart();
                 }
             }
             String prompt = this.getPrompt();

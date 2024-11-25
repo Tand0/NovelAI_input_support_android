@@ -1,354 +1,506 @@
 [
   {
-    "text": "Ignore-Select",
-    "values": "アーチスト名",
+    "text": "Ignore-Sequence",
+    "values": "版権",
     "child": [
       {
-        "text": "word",
-        "values": "Amagappa Shoujogun",
-        "child": [],
+        "text": "Select",
+        "values": "アーチスト名",
+        "child": [
+          {
+            "text": "word",
+            "values": "Amagappa Shoujogun",
+            "child": [],
+            "level": 2
+          },
+          {
+            "text": "word",
+            "values": "Airandou",
+            "child": [],
+            "level": 2
+          },
+          {
+            "text": "word",
+            "values": "akazawa red",
+            "child": [],
+            "level": 2
+          },
+          {
+            "text": "word",
+            "values": "artist:onineko",
+            "child": [],
+            "level": 2
+          },
+          {
+            "text": "word",
+            "values": "bosshi",
+            "child": [],
+            "level": 2
+          },
+          {
+            "text": "word",
+            "values": "blade_(galaxist)",
+            "child": [],
+            "level": 2
+          },
+          {
+            "text": "word",
+            "values": "egami",
+            "child": [],
+            "level": 2
+          },
+          {
+            "text": "word",
+            "values": "emily_(pure_dream)",
+            "child": [],
+            "level": 2
+          },
+          {
+            "text": "word",
+            "values": "fuzichoco",
+            "child": [],
+            "level": 2
+          },
+          {
+            "text": "word",
+            "values": "fujisaki_hikari",
+            "child": [],
+            "level": 2
+          },
+          {
+            "text": "word",
+            "values": "fujiyama",
+            "child": [],
+            "level": 2
+          },
+          {
+            "text": "word",
+            "values": "happoubi_jin",
+            "child": [],
+            "level": 2
+          },
+          {
+            "text": "word",
+            "values": "henreader",
+            "child": [],
+            "level": 2
+          },
+          {
+            "text": "word",
+            "values": "inugami_kira",
+            "child": [],
+            "level": 2
+          },
+          {
+            "text": "word",
+            "values": "ishikei",
+            "child": [],
+            "level": 2
+          },
+          {
+            "text": "word",
+            "values": "ito noizi",
+            "child": [],
+            "level": 2
+          },
+          {
+            "text": "word",
+            "values": "ixy",
+            "child": [],
+            "level": 2
+          },
+          {
+            "text": "word",
+            "values": "kanro_ame_(ameko)",
+            "child": [],
+            "level": 2
+          },
+          {
+            "text": "word",
+            "values": "kedama_milk",
+            "child": [],
+            "level": 2
+          },
+          {
+            "text": "word",
+            "values": "kiira",
+            "child": [],
+            "level": 2
+          },
+          {
+            "text": "word",
+            "values": "kikurage(crayon arts)",
+            "child": [],
+            "level": 2
+          },
+          {
+            "text": "word",
+            "values": "kino_(kino_konomi)",
+            "child": [],
+            "level": 2
+          },
+          {
+            "text": "word",
+            "values": "kyokucho",
+            "child": [],
+            "level": 2
+          },
+          {
+            "text": "word",
+            "values": "michiking",
+            "child": [],
+            "level": 2
+          },
+          {
+            "text": "word",
+            "values": "miya9",
+            "child": [],
+            "level": 2
+          },
+          {
+            "text": "word",
+            "values": "mizushima_sorahiko",
+            "child": [],
+            "level": 2
+          },
+          {
+            "text": "word",
+            "values": "mochi_(circle_rin)",
+            "child": [],
+            "level": 2
+          },
+          {
+            "text": "word",
+            "values": "nishi iori",
+            "child": [],
+            "level": 2
+          },
+          {
+            "text": "word",
+            "values": "oouso",
+            "child": [],
+            "level": 2
+          },
+          {
+            "text": "word",
+            "values": "oyari_ashito",
+            "child": [],
+            "level": 2
+          },
+          {
+            "text": "word",
+            "values": "ruroo",
+            "child": [],
+            "level": 2
+          },
+          {
+            "text": "word",
+            "values": "sakurazawa_izumi",
+            "child": [],
+            "level": 2
+          },
+          {
+            "text": "word",
+            "values": "sawayaka samehada",
+            "child": [],
+            "level": 2
+          },
+          {
+            "text": "word",
+            "values": "sanshoku_amido",
+            "child": [],
+            "level": 2
+          },
+          {
+            "text": "word",
+            "values": "sekiya_asami",
+            "child": [],
+            "level": 2
+          },
+          {
+            "text": "word",
+            "values": "sumiyao_(amam)",
+            "child": [],
+            "level": 2
+          },
+          {
+            "text": "word",
+            "values": "tsurusaki_takahiro",
+            "child": [],
+            "level": 2
+          },
+          {
+            "text": "word",
+            "values": "takashina_masato",
+            "child": [],
+            "level": 2
+          },
+          {
+            "text": "word",
+            "values": "yuizaki_kazuya",
+            "child": [],
+            "level": 2
+          },
+          {
+            "text": "word",
+            "values": "yabuki_kentarou",
+            "child": [],
+            "level": 2
+          }
+        ],
+        "expand": false,
         "level": 1
       },
       {
-        "text": "word",
-        "values": "Airandou",
-        "child": [],
-        "level": 1
-      },
-      {
-        "text": "word",
-        "values": "akazawa red",
-        "child": [],
-        "level": 1
-      },
-      {
-        "text": "word",
-        "values": "artist:onineko",
-        "child": [],
-        "level": 1
-      },
-      {
-        "text": "word",
-        "values": "bosshi",
-        "child": [],
-        "level": 1
-      },
-      {
-        "text": "word",
-        "values": "blade_(galaxist)",
-        "child": [],
-        "level": 1
-      },
-      {
-        "text": "word",
-        "values": "egami",
-        "child": [],
-        "level": 1
-      },
-      {
-        "text": "word",
-        "values": "happoubi_jin",
-        "child": [],
-        "level": 1
-      },
-      {
-        "text": "word",
-        "values": "inugami_kira",
-        "child": [],
-        "level": 1
-      },
-      {
-        "text": "word",
-        "values": "ishikei",
-        "child": [],
-        "level": 1
-      },
-      {
-        "text": "word",
-        "values": "ito noizi",
-        "child": [],
-        "level": 1
-      },
-      {
-        "text": "word",
-        "values": "ixy",
-        "child": [],
-        "level": 1
-      },
-      {
-        "text": "word",
-        "values": "kedama_milk",
-        "child": [],
-        "level": 1
-      },
-      {
-        "text": "word",
-        "values": "kiira",
-        "child": [],
-        "level": 1
-      },
-      {
-        "text": "word",
-        "values": "kikurage(crayon arts)",
-        "child": [],
-        "level": 1
-      },
-      {
-        "text": "word",
-        "values": "mizushima_sorahiko",
-        "child": [],
-        "level": 1
-      },
-      {
-        "text": "word",
-        "values": "nishi iori",
-        "child": [],
-        "level": 1
-      },
-      {
-        "text": "word",
-        "values": "oyari_ashito",
-        "child": [],
-        "level": 1
-      },
-      {
-        "text": "word",
-        "values": "ruroo",
-        "child": [],
-        "level": 1
-      },
-      {
-        "text": "word",
-        "values": "sakurazawa_izumi",
-        "child": [],
-        "level": 1
-      },
-      {
-        "text": "word",
-        "values": "sawayaka samehada",
-        "child": [],
-        "level": 1
-      },
-      {
-        "text": "word",
-        "values": "sanshoku_amido",
-        "child": [],
-        "level": 1
-      },
-      {
-        "text": "word",
-        "values": "tsurusaki_takahiro",
-        "child": [],
-        "level": 1
-      },
-      {
-        "text": "word",
-        "values": "takashina_masato",
-        "child": [],
-        "level": 1
-      },
-      {
-        "text": "word",
-        "values": "yuizaki_kazuya",
-        "child": [],
-        "level": 1
-      },
-      {
-        "text": "word",
-        "values": "yabuki_kentarou",
-        "child": [],
+        "text": "Select",
+        "values": "キャラクター名",
+        "child": [
+          {
+            "text": "word",
+            "values": "asuna (sao)",
+            "child": [],
+            "level": 2
+          },
+          {
+            "text": "word",
+            "values": "amae_koromo",
+            "child": [],
+            "level": 2
+          },
+          {
+            "text": "word",
+            "values": "atelier totori",
+            "child": [],
+            "level": 2
+          },
+          {
+            "text": "word",
+            "values": "cafe_stella_to_shinigami_no_chou",
+            "child": [],
+            "level": 2
+          },
+          {
+            "text": "word",
+            "values": "elaina (majo no tabitabi)",
+            "child": [],
+            "level": 2
+          },
+          {
+            "text": "word",
+            "values": "gokou ruri",
+            "child": [],
+            "level": 2
+          },
+          {
+            "text": "word",
+            "values": "hasegawa_kobato",
+            "child": [],
+            "level": 2
+          },
+          {
+            "text": "word",
+            "values": "hinatsuru ai",
+            "child": [],
+            "level": 2
+          },
+          {
+            "text": "word",
+            "values": "higuchi_madoka",
+            "child": [],
+            "level": 2
+          },
+          {
+            "text": "word",
+            "values": "hoshii_miki",
+            "child": [],
+            "level": 2
+          },
+          {
+            "text": "word",
+            "values": "hoshikawa sara",
+            "child": [],
+            "level": 2
+          },
+          {
+            "text": "word",
+            "values": "ichijo hotaru",
+            "child": [],
+            "level": 2
+          },
+          {
+            "text": "word",
+            "values": "kafuu chino",
+            "child": [],
+            "level": 2
+          },
+          {
+            "text": "word",
+            "values": "komeiji satori",
+            "child": [],
+            "level": 2
+          },
+          {
+            "text": "word",
+            "values": "koshimizu_sachiko",
+            "child": [],
+            "level": 2
+          },
+          {
+            "text": "word",
+            "values": "lillie_(pokemon)",
+            "child": [],
+            "level": 2
+          },
+          {
+            "text": "word",
+            "values": "hakui koyori",
+            "child": [],
+            "level": 2
+          },
+          {
+            "text": "word",
+            "values": "kuroyukihime",
+            "child": [],
+            "level": 2
+          },
+          {
+            "text": "word",
+            "values": "latifa_fleuranza",
+            "child": [],
+            "level": 2
+          },
+          {
+            "text": "word",
+            "values": "louise francoise le blanc de la valliere",
+            "child": [],
+            "level": 2
+          },
+          {
+            "text": "word",
+            "values": "madorosu tomita",
+            "child": [],
+            "level": 2
+          },
+          {
+            "text": "word",
+            "values": "mary stuart",
+            "child": [],
+            "level": 2
+          },
+          {
+            "text": "word",
+            "values": "mythra_(xenoblade)",
+            "child": [],
+            "level": 2
+          },
+          {
+            "text": "word",
+            "values": "nekopara",
+            "child": [],
+            "level": 2
+          },
+          {
+            "text": "word",
+            "values": "ninomiya asuka",
+            "child": [],
+            "level": 2
+          },
+          {
+            "text": "word",
+            "values": "murasaki_shion",
+            "child": [],
+            "level": 2
+          },
+          {
+            "text": "word",
+            "values": "priestess (goblin slayer!)",
+            "child": [],
+            "level": 2
+          },
+          {
+            "text": "word",
+            "values": "pyra_(xenoblade)",
+            "child": [],
+            "level": 2
+          },
+          {
+            "text": "word",
+            "values": "rice shower (umamusume)",
+            "child": [],
+            "level": 2
+          },
+          {
+            "text": "word",
+            "values": "rem_(re:zero)",
+            "child": [],
+            "level": 2
+          },
+          {
+            "text": "word",
+            "values": "sawamura_spencer_eriri",
+            "child": [],
+            "level": 2
+          },
+          {
+            "text": "word",
+            "values": "shiki_natsume",
+            "child": [],
+            "level": 2
+          },
+          {
+            "text": "word",
+            "values": "shakugan_no_shana",
+            "child": [],
+            "level": 2
+          },
+          {
+            "text": "word",
+            "values": "shibuya rin",
+            "child": [],
+            "level": 2
+          },
+          {
+            "text": "word",
+            "values": "sora ginko",
+            "child": [],
+            "level": 2
+          },
+          {
+            "text": "word",
+            "values": "saten ruiko",
+            "child": [],
+            "level": 2
+          },
+          {
+            "text": "word",
+            "values": "shokuhou misaki",
+            "child": [],
+            "level": 2
+          },
+          {
+            "text": "word",
+            "values": "tokoyami_towa",
+            "child": [],
+            "level": 2
+          },
+          {
+            "text": "word",
+            "values": "verxina_(umamusume)",
+            "child": [],
+            "level": 2
+          },
+          {
+            "text": "word",
+            "values": "wonder acute (umamusume)",
+            "child": [],
+            "level": 2
+          }
+        ],
+        "expand": false,
         "level": 1
       }
     ],
-    "expand": false,
-    "level": 0
-  },
-  {
-    "text": "Ignore-Select",
-    "values": "キャラクター名",
-    "child": [
-      {
-        "text": "word",
-        "values": "asuna (sao)",
-        "child": [],
-        "level": 1
-      },
-      {
-        "text": "word",
-        "values": "atelier totori",
-        "child": [],
-        "level": 1
-      },
-      {
-        "text": "word",
-        "values": "cafe_stella_to_shinigami_no_chou",
-        "child": [],
-        "level": 1
-      },
-      {
-        "text": "word",
-        "values": "elaina (majo no tabitabi)",
-        "child": [],
-        "level": 1
-      },
-      {
-        "text": "word",
-        "values": "gokou ruri",
-        "child": [],
-        "level": 1
-      },
-      {
-        "text": "word",
-        "values": "hinatsuru ai",
-        "child": [],
-        "level": 1
-      },
-      {
-        "text": "word",
-        "values": "hoshii_miki",
-        "child": [],
-        "level": 1
-      },
-      {
-        "text": "word",
-        "values": "hoshikawa sara",
-        "child": [],
-        "level": 1
-      },
-      {
-        "text": "word",
-        "values": "ichijo hotaru",
-        "child": [],
-        "level": 1
-      },
-      {
-        "text": "word",
-        "values": "kafuu chino",
-        "child": [],
-        "level": 1
-      },
-      {
-        "text": "word",
-        "values": "komeiji satori",
-        "child": [],
-        "level": 1
-      },
-      {
-        "text": "word",
-        "values": "hakui koyori",
-        "child": [],
-        "level": 1
-      },
-      {
-        "text": "word",
-        "values": "kuroyukihime",
-        "child": [],
-        "level": 1
-      },
-      {
-        "text": "word",
-        "values": "latifa_fleuranza",
-        "child": [],
-        "level": 1
-      },
-      {
-        "text": "word",
-        "values": "louise francoise le blanc de la valliere",
-        "child": [],
-        "level": 1
-      },
-      {
-        "text": "word",
-        "values": "madorosu tomita",
-        "child": [],
-        "level": 1
-      },
-      {
-        "text": "word",
-        "values": "nekopara",
-        "child": [],
-        "level": 1
-      },
-      {
-        "text": "word",
-        "values": "ninomiya asuka",
-        "child": [],
-        "level": 1
-      },
-      {
-        "text": "word",
-        "values": "murasaki_shion",
-        "child": [],
-        "level": 1
-      },
-      {
-        "text": "word",
-        "values": "priestess (goblin slayer!)",
-        "child": [],
-        "level": 1
-      },
-      {
-        "text": "word",
-        "values": "rice shower (umamusume)",
-        "child": [],
-        "level": 1
-      },
-      {
-        "text": "word",
-        "values": "rem_(re:zero)",
-        "child": [],
-        "level": 1
-      },
-      {
-        "text": "word",
-        "values": "sawamura_spencer_eriri",
-        "child": [],
-        "level": 1
-      },
-      {
-        "text": "word",
-        "values": "shiki_natsume",
-        "child": [],
-        "level": 1
-      },
-      {
-        "text": "word",
-        "values": "shakugan_no_shana",
-        "child": [],
-        "level": 1
-      },
-      {
-        "text": "word",
-        "values": "shibuya rin",
-        "child": [],
-        "level": 1
-      },
-      {
-        "text": "word",
-        "values": "sora ginko",
-        "child": [],
-        "level": 1
-      },
-      {
-        "text": "word",
-        "values": "saten ruiko",
-        "child": [],
-        "level": 1
-      },
-      {
-        "text": "word",
-        "values": "shokuhou misaki",
-        "child": [],
-        "level": 1
-      },
-      {
-        "text": "word",
-        "values": "wonder acute (umamusume)",
-        "child": [],
-        "level": 1
-      }
-    ],
-    "expand": false,
+    "expand": true,
     "level": 0
   },
   {
@@ -394,6 +546,12 @@
           {
             "text": "word",
             "values": "grin",
+            "child": [],
+            "level": 2
+          },
+          {
+            "text": "word",
+            "values": "sideways_glance",
             "child": [],
             "level": 2
           },
@@ -647,6 +805,12 @@
                         "child": [
                           {
                             "text": "word",
+                            "values": "sheet_grab",
+                            "child": [],
+                            "level": 6
+                          },
+                          {
+                            "text": "word",
                             "values": "hands on own chest",
                             "child": [],
                             "level": 6
@@ -671,7 +835,13 @@
                           }
                         ],
                         "level": 5,
-                        "expand": true
+                        "expand": false
+                      },
+                      {
+                        "text": "word",
+                        "values": "hands_grab",
+                        "child": [],
+                        "level": 5
                       },
                       {
                         "text": "word",
@@ -727,7 +897,7 @@
                   }
                 ],
                 "level": 3,
-                "expand": false
+                "expand": true
               }
             ],
             "level": 2,
@@ -914,6 +1084,12 @@
             "values": "座ってる",
             "child": [
               {
+                "text": "word",
+                "values": "squatting",
+                "child": [],
+                "level": 3
+              },
+              {
                 "text": "Sequence",
                 "values": "all fours",
                 "child": [
@@ -1011,7 +1187,7 @@
           }
         ],
         "level": 1,
-        "expand": true
+        "expand": false
       },
       {
         "text": "word",
@@ -1058,6 +1234,12 @@
           {
             "text": "word",
             "values": "see-through",
+            "child": [],
+            "level": 2
+          },
+          {
+            "text": "word",
+            "values": "swimsuit",
             "child": [],
             "level": 2
           },
@@ -1283,19 +1465,19 @@
                 "text": "word",
                 "values": "pleated skirt",
                 "child": [],
-                "level": 2
+                "level": 3
               },
               {
                 "text": "word",
                 "values": "white serafuk",
                 "child": [],
-                "level": 2
+                "level": 3
               },
               {
                 "text": "word",
                 "values": "white sailor collar",
                 "child": [],
-                "level": 2
+                "level": 3
               }
             ],
             "expand": false,
@@ -1325,23 +1507,23 @@
                     "text": "word",
                     "values": "black buruma",
                     "child": [],
-                    "level": 3
+                    "level": 4
                   },
                   {
                     "text": "Sequence",
                     "values": "",
                     "child": [],
-                    "level": 3
+                    "level": 4
                   }
                 ],
-                "level": 2,
+                "level": 3,
                 "expand": true
               },
               {
                 "text": "word",
                 "values": "gym uniform",
                 "child": [],
-                "level": 2
+                "level": 3
               }
             ],
             "level": 2,
@@ -1403,13 +1585,13 @@
                 "text": "word",
                 "values": "white lolita_fashion",
                 "child": [],
-                "level": 2
+                "level": 3
               },
               {
                 "text": "word",
                 "values": "white lolita_hairband",
                 "child": [],
-                "level": 2
+                "level": 3
               }
             ],
             "expand": false,
@@ -1507,55 +1689,55 @@
                 "text": "word",
                 "values": "{{{see-through}}}",
                 "child": [],
-                "level": 2
+                "level": 3
               },
               {
                 "text": "Ignore-word",
                 "values": "{sailor senshi uniform}",
                 "child": [],
-                "level": 2
+                "level": 3
               },
               {
                 "text": "word",
                 "values": "magical girl",
                 "child": [],
-                "level": 2
+                "level": 3
               },
               {
                 "text": "word",
                 "values": "white sheer leotard",
                 "child": [],
-                "level": 2
+                "level": 3
               },
               {
                 "text": "Ignore-word",
                 "values": "dress",
                 "child": [],
-                "level": 2
+                "level": 3
               },
               {
                 "text": "Ignore-word",
                 "values": "sailor collar",
                 "child": [],
-                "level": 2
+                "level": 3
               },
               {
                 "text": "Ignore-word",
                 "values": "frilled dress",
                 "child": [],
-                "level": 2
+                "level": 3
               },
               {
                 "text": "Ignore-word",
                 "values": "choker",
                 "child": [],
-                "level": 2
+                "level": 3
               },
               {
                 "text": "Ignore-word",
                 "values": "sleeveless",
                 "child": [],
-                "level": 2
+                "level": 3
               }
             ],
             "level": 2,
@@ -1569,25 +1751,25 @@
                 "text": "word",
                 "values": "yellow tie",
                 "child": [],
-                "level": 2
+                "level": 3
               },
               {
                 "text": "word",
                 "values": "{{clothing aside}}",
                 "child": [],
-                "level": 2
+                "level": 3
               },
               {
                 "text": "word",
                 "values": "white collared shirt",
                 "child": [],
-                "level": 2
+                "level": 3
               },
               {
                 "text": "word",
                 "values": "denim shorts",
                 "child": [],
-                "level": 2
+                "level": 3
               }
             ],
             "level": 2,
@@ -1716,7 +1898,7 @@
             "level": 3
           }
         ],
-        "level": 2,
+        "level": 1,
         "expand": false
       },
       {
@@ -1748,8 +1930,8 @@
             "level": 2
           }
         ],
-        "expand": false,
-        "level": 2
+        "expand": true,
+        "level": 1
       },
       {
         "text": "Select",
@@ -1759,107 +1941,107 @@
             "text": "word",
             "values": "ahoge",
             "child": [],
-            "level": 3
+            "level": 2
           },
           {
             "text": "word",
             "values": "hair_between_eyes",
             "child": [],
-            "level": 3
+            "level": 2
           },
           {
             "text": "word",
             "values": "long bangs",
             "child": [],
-            "level": 3
+            "level": 2
           },
           {
             "text": "word",
             "values": "hair over one eye",
             "child": [],
-            "level": 3
+            "level": 2
           },
           {
             "text": "word",
             "values": "curly hair",
             "child": [],
-            "level": 3
+            "level": 2
           },
           {
             "text": "word",
             "values": "straight hair",
             "child": [],
-            "level": 3
+            "level": 2
           },
           {
             "text": "word",
             "values": "twintails",
             "child": [],
-            "level": 3
+            "level": 2
           },
           {
             "text": "word",
             "values": "ponytail",
             "child": [],
-            "level": 3
+            "level": 2
           },
           {
             "text": "word",
             "values": "side ponytail",
             "child": [],
-            "level": 3
+            "level": 2
           },
           {
             "text": "word",
             "values": "messy hair",
             "child": [],
-            "level": 3
+            "level": 2
           },
           {
             "text": "word",
             "values": "wavy hair",
             "child": [],
-            "level": 3
+            "level": 2
           },
           {
             "text": "word",
             "values": "beautiful hair",
             "child": [],
-            "level": 3
+            "level": 2
           },
           {
             "text": "word",
             "values": "hair between eyes",
             "child": [],
-            "level": 3
+            "level": 2
           },
           {
             "text": "word",
             "values": "",
             "child": [],
-            "level": 3
+            "level": 2
           },
           {
             "text": "word",
             "values": "",
             "child": [],
-            "level": 3
+            "level": 2
           },
           {
             "text": "word",
             "values": "",
             "child": [],
-            "level": 3
+            "level": 2
           },
           {
             "text": "word",
             "values": "",
             "child": [],
-            "level": 3
+            "level": 2
           }
         ],
-        "level": 2,
-        "expand": false
+        "level": 1,
+        "expand": true
       }
     ],
     "level": 0,
@@ -1954,6 +2136,12 @@
           {
             "text": "word",
             "values": "motion lines",
+            "child": [],
+            "level": 2
+          },
+          {
+            "text": "word",
+            "values": "mesugaki",
             "child": [],
             "level": 2
           },

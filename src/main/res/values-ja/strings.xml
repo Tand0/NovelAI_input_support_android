@@ -93,6 +93,7 @@
     <string name="from_file_to_tree">ツリーをロード</string>
 
     <string name="menu_nai">Novel AI REST APIの使用</string>
+    <string name="menu_default">デフォルト</string>
     <string name="generate_image">/ai/generate-image</string>
     <string name="upscale">/ai/upscale</string>
     <string name="upscale_summary">2倍or4倍</string>

@@ -67,7 +67,7 @@ public class SuggestActivity extends AppCompatActivity {
             update(values);
         });
         binding.wordEditFromTree.setOnClickListener(view->{
-            a.fromTreeToPrompt(SuggestActivity.this.getBaseContext(),true);
+            a.fromTreeToPrompt(true);
             List<String> listString  = a.fromTreeList(a.getTop(),true);
             List<SuggestList> list = new ArrayList<>();
             for (String string : listString) {

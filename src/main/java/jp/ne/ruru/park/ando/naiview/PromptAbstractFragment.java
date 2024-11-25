@@ -68,7 +68,7 @@ public abstract class PromptAbstractFragment extends Fragment {
             }
             //
             // clear
-            a.changePart(PromptAbstractFragment.this.getContext(),null);
+            a.changePart(null);
             //
             // change button
             onResumePart();
@@ -137,7 +137,7 @@ public abstract class PromptAbstractFragment extends Fragment {
         //
         // update application
         setText(a,getTextPrompt().getText().toString());
-        a.fromTreeToPrompt(getContext(),isPrompt());
+        a.fromTreeToPrompt(isPrompt());
         getTextPrompt().setText(getText(a));
     }
 

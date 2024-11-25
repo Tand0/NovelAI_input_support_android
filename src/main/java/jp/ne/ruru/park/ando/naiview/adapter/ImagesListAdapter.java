@@ -60,13 +60,13 @@ public class ImagesListAdapter<T extends UriEtc> extends ArrayAdapter<T> {
             LayoutInflater inflater = (LayoutInflater) this.getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             view = inflater.inflate(R.layout.raw_images, parent, false);
         }
-        ContentResolver cr = this.getContext().getContentResolver();
         //
         UriEtc etc = this.getItem(position);
         Bitmap result = null;
         String title = "title";
         StringBuilder subTitle = new StringBuilder();
         if (etc != null) {
+            ContentResolver cr = this.getContext().getContentResolver();
             String[] projection = new String[]{
                     MediaStore.Images.Media._ID,
                     MediaStore.Images.Media.TITLE,
