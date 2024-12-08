@@ -14,14 +14,10 @@
                             android:title="@string/menu_add_select_detail" />
                         <item android:id="@+id/menu_add_weight_detail"
                             android:title="@string/menu_add_weight_detail" />
-                </menu>
-        </item>
-        <item android:title="@string/menu_change">
-                <menu>
                         <item android:id="@+id/menu_edit"
                             android:title="@string/menu_edit" />
-                        <item android:id="@+id/menu_cut" android:title="@string/menu_cut" />
-                        <item android:id="@+id/menu_past" android:title="@string/menu_past" />
                 </menu>
         </item>
+        <item android:id="@+id/menu_cut" android:title="@string/menu_cut" />
+        <item android:id="@+id/menu_past" android:title="@string/menu_past" />
 </menu>

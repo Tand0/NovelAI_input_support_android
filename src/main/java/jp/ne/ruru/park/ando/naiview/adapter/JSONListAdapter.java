@@ -5,6 +5,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
@@ -192,7 +194,14 @@ public class JSONListAdapter<T extends JSONObject> extends ArrayAdapter<T> {
         Button button = (Button) view;
         int position = Integer.parseInt(button.getText().toString());
         PopupMenu popup = new PopupMenu(this.getContext(), button);
-        popup.getMenuInflater().inflate(R.menu.menu_tree, popup.getMenu());
+        Menu menu = popup.getMenu();
+        popup.getMenuInflater().inflate(R.menu.menu_tree, menu);
+        //
+        MenuItem pastItem = menu.findItem(R.id.menu_past);
+        MyApplication a =
+                ((MyApplication) ((AppCompatActivity) this.getContext()).getApplication());
+        pastItem.setVisible(a.getCut() != null);
+        //
         popup.show();
         popup.setOnMenuItemClickListener(item -> {
             AppCompatActivity appCompatActivity = (AppCompatActivity)this.getContext();
