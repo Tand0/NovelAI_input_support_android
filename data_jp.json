@@ -383,6 +383,12 @@
           },
           {
             "text": "word",
+            "values": "frenda_seivelun",
+            "child": [],
+            "level": 2
+          },
+          {
+            "text": "word",
             "values": "gokou ruri",
             "child": [],
             "level": 2
@@ -630,6 +636,12 @@
           {
             "text": "word",
             "values": "shokuhou misaki",
+            "child": [],
+            "level": 2
+          },
+          {
+            "text": "word",
+            "values": "tokisaki_kurumi",
             "child": [],
             "level": 2
           },
@@ -957,6 +969,12 @@
                     "child": [
                       {
                         "text": "word",
+                        "values": "hand in panties",
+                        "child": [],
+                        "level": 5
+                      },
+                      {
+                        "text": "word",
                         "values": "covering mouth",
                         "child": [],
                         "level": 5
@@ -1052,9 +1070,15 @@
                         "values": "pov hands",
                         "child": [],
                         "level": 5
+                      },
+                      {
+                        "text": "word",
+                        "values": "arms_around_neck",
+                        "child": [],
+                        "level": 5
                       }
                     ],
-                    "expand": false,
+                    "expand": true,
                     "level": 4
                   }
                 ],
@@ -1107,7 +1131,7 @@
               },
               {
                 "text": "word",
-                "values": "{{{prone bone}}}",
+                "values": "prone bone",
                 "child": [],
                 "level": 3
               },
@@ -1398,18 +1422,82 @@
         "values": "服装の指定",
         "child": [
           {
-            "text": "word",
-            "values": "naked apron",
-            "child": [],
+            "text": "Sequence",
+            "values": "全裸待機",
+            "child": [
+              {
+                "text": "word",
+                "values": "completely nude",
+                "child": [],
+                "level": 3
+              }
+            ],
+            "level": 2,
+            "expand": false
+          },
+          {
+            "text": "Sequence",
+            "values": "タオル",
+            "child": [
+              {
+                "text": "word",
+                "values": "towel",
+                "child": [],
+                "level": 3
+              }
+            ],
+            "expand": false,
             "level": 2
           },
           {
             "text": "Sequence",
-            "values": "demon girl",
+            "values": "裸エプロン",
             "child": [
               {
                 "text": "word",
-                "values": "demon girl",
+                "values": "naked apron",
+                "child": [],
+                "level": 3
+              }
+            ],
+            "expand": false,
+            "level": 2
+          },
+          {
+            "text": "Sequence",
+            "values": "キャミソール",
+            "child": [
+              {
+                "text": "word",
+                "values": "camisole",
+                "child": [],
+                "level": 3
+              }
+            ],
+            "expand": false,
+            "level": 2
+          },
+          {
+            "text": "Sequence",
+            "values": "ランジェリー",
+            "child": [
+              {
+                "text": "word",
+                "values": "lingerie",
+                "child": [],
+                "level": 3
+              }
+            ],
+            "expand": false,
+            "level": 2
+          },
+          {
+            "text": "Sequence",
+            "values": "黒ブラ、ガーター",
+            "child": [
+              {
+                "text": "word",
+                "values": "garter_straps",
                 "child": [],
                 "level": 2
               },
@@ -1421,385 +1509,33 @@
               },
               {
                 "text": "word",
+                "values": "clothes pull",
+                "child": [],
+                "level": 2
+              }
+            ],
+            "expand": false,
+            "level": 2
+          },
+          {
+            "text": "Sequence",
+            "values": "悪魔っ子",
+            "child": [
+              {
+                "text": "word",
                 "values": "garter_straps",
                 "child": [],
-                "level": 2
-              }
-            ],
-            "expand": false,
-            "level": 2
-          },
-          {
-            "text": "word",
-            "values": "full_armor",
-            "child": [],
-            "level": 2
-          },
-          {
-            "text": "word",
-            "values": "see-through",
-            "child": [],
-            "level": 2
-          },
-          {
-            "text": "word",
-            "values": "swimsuit",
-            "child": [],
-            "level": 2
-          },
-          {
-            "text": "word",
-            "values": "volleyball uniform",
-            "child": [],
-            "level": 2
-          },
-          {
-            "text": "word",
-            "values": "playboy bunny",
-            "child": [],
-            "level": 2
-          },
-          {
-            "text": "word",
-            "values": "business suit",
-            "child": [],
-            "level": 2
-          },
-          {
-            "text": "Sequence",
-            "values": "witch",
-            "child": [
-              {
-                "text": "word",
-                "values": "witch",
-                "child": [],
-                "level": 2
+                "level": 3
               },
               {
                 "text": "word",
-                "values": "blue dress",
-                "child": [],
-                "level": 2
-              },
-              {
-                "text": "word",
-                "values": "boots",
-                "child": [],
-                "level": 2
-              },
-              {
-                "text": "Ignore-word",
-                "values": "broom",
-                "child": [],
-                "level": 2
-              }
-            ],
-            "expand": false,
-            "level": 2
-          },
-          {
-            "text": "word",
-            "values": "red japanese miko clothes",
-            "child": [],
-            "level": 2
-          },
-          {
-            "text": "Sequence",
-            "values": " japanese clothes",
-            "child": [
-              {
-                "text": "word",
-                "values": "white kimono",
-                "child": [],
-                "level": 2
-              },
-              {
-                "text": "word",
-                "values": "red skirt",
-                "child": [],
-                "level": 2
-              }
-            ],
-            "level": 2,
-            "expand": false
-          },
-          {
-            "text": "word",
-            "values": "police uniform",
-            "child": [],
-            "level": 2
-          },
-          {
-            "text": "word",
-            "values": "towel",
-            "child": [],
-            "level": 2
-          },
-          {
-            "text": "word",
-            "values": "ninja",
-            "child": [],
-            "level": 2
-          },
-          {
-            "text": "word",
-            "values": "lab coat",
-            "child": [],
-            "level": 2
-          },
-          {
-            "text": "word",
-            "values": "white coat",
-            "child": [],
-            "level": 2
-          },
-          {
-            "text": "word",
-            "values": "military uniform",
-            "child": [],
-            "level": 2
-          },
-          {
-            "text": "word",
-            "values": "kids kindergarten uniform",
-            "child": [],
-            "level": 2
-          },
-          {
-            "text": "word",
-            "values": "open cardigan",
-            "child": [],
-            "level": 2
-          },
-          {
-            "text": "Sequence",
-            "values": "blazer",
-            "child": [
-              {
-                "text": "word",
-                "values": "blazer",
-                "child": [],
-                "level": 2
-              },
-              {
-                "text": "Select",
-                "values": "skirt",
-                "child": [
-                  {
-                    "text": "word",
-                    "values": "garter_straps",
-                    "child": [],
-                    "level": 3
-                  },
-                  {
-                    "text": "word",
-                    "values": "red plaid skirt",
-                    "child": [],
-                    "level": 3
-                  },
-                  {
-                    "text": "word",
-                    "values": "white pleated skirt",
-                    "child": [],
-                    "level": 3
-                  }
-                ],
-                "expand": true,
-                "level": 2
-              }
-            ],
-            "level": 2,
-            "expand": false
-          },
-          {
-            "text": "word",
-            "values": "school swimsuit",
-            "child": [],
-            "level": 2
-          },
-          {
-            "text": "word",
-            "values": "school uniform",
-            "child": [],
-            "level": 2
-          },
-          {
-            "text": "word",
-            "values": "black school uniform",
-            "child": [],
-            "level": 2
-          },
-          {
-            "text": "Sequence",
-            "values": "school",
-            "child": [
-              {
-                "text": "word",
-                "values": "black sailor collar",
+                "values": "black bra",
                 "child": [],
                 "level": 3
               },
               {
                 "text": "word",
-                "values": "black serafuk",
-                "child": [],
-                "level": 3
-              },
-              {
-                "text": "word",
-                "values": "pleated skirt",
-                "child": [],
-                "level": 3
-              },
-              {
-                "text": "word",
-                "values": "long sleeves",
-                "child": [],
-                "level": 3
-              },
-              {
-                "text": "word",
-                "values": "hat",
-                "child": [],
-                "level": 3
-              }
-            ],
-            "level": 2,
-            "expand": false
-          },
-          {
-            "text": "Sequence",
-            "values": "white school",
-            "child": [
-              {
-                "text": "word",
-                "values": "pleated skirt",
-                "child": [],
-                "level": 3
-              },
-              {
-                "text": "word",
-                "values": "white serafuk",
-                "child": [],
-                "level": 3
-              },
-              {
-                "text": "word",
-                "values": "white sailor collar",
-                "child": [],
-                "level": 3
-              }
-            ],
-            "expand": false,
-            "level": 2
-          },
-          {
-            "text": "word",
-            "values": "sailer",
-            "child": [],
-            "level": 2
-          },
-          {
-            "text": "word",
-            "values": "cardigan",
-            "child": [],
-            "level": 2
-          },
-          {
-            "text": "Sequence",
-            "values": "gym",
-            "child": [
-              {
-                "text": "Select",
-                "values": "buruma",
-                "child": [
-                  {
-                    "text": "word",
-                    "values": "black buruma",
-                    "child": [],
-                    "level": 4
-                  },
-                  {
-                    "text": "Sequence",
-                    "values": "",
-                    "child": [],
-                    "level": 4
-                  }
-                ],
-                "level": 3,
-                "expand": true
-              },
-              {
-                "text": "word",
-                "values": "gym uniform",
-                "child": [],
-                "level": 3
-              }
-            ],
-            "level": 2,
-            "expand": false
-          },
-          {
-            "text": "word",
-            "values": "hoodie",
-            "child": [],
-            "level": 2
-          },
-          {
-            "text": "word",
-            "values": "sweater",
-            "child": [],
-            "level": 2
-          },
-          {
-            "text": "word",
-            "values": "nurse",
-            "child": [],
-            "level": 2
-          },
-          {
-            "text": "word",
-            "values": "cheerleader",
-            "child": [],
-            "level": 2
-          },
-          {
-            "text": "Sequence",
-            "values": "maid",
-            "child": [
-              {
-                "text": "word",
-                "values": "maid",
-                "child": []
-              }
-            ],
-            "level": 2
-          },
-          {
-            "text": "word",
-            "values": "gothic lolita",
-            "child": [],
-            "level": 2
-          },
-          {
-            "text": "word",
-            "values": "roswaal_mansion_maid_uniform",
-            "child": [],
-            "level": 2
-          },
-          {
-            "text": "Sequence",
-            "values": "lolita_fashion",
-            "child": [
-              {
-                "text": "word",
-                "values": "white lolita_fashion",
-                "child": [],
-                "level": 3
-              },
-              {
-                "text": "word",
-                "values": "white lolita_hairband",
+                "values": "demon girl",
                 "child": [],
                 "level": 3
               }
@@ -1809,51 +1545,21 @@
           },
           {
             "text": "Sequence",
-            "values": "Nun",
+            "values": "パジャマ",
             "child": [
               {
                 "text": "word",
-                "values": "Nun",
-                "child": []
-              }
-            ],
-            "level": 2
-          },
-          {
-            "text": "Sequence",
-            "values": "track jacke",
-            "child": [
-              {
-                "text": "word",
-                "values": "pink track jacke",
+                "values": "pajamas",
                 "child": [],
-                "level": 2
+                "level": 3
               }
             ],
-            "level": 2,
-            "expand": false
-          },
-          {
-            "text": "Sequence",
-            "values": "tennis uniform",
-            "child": [
-              {
-                "text": "word",
-                "values": "tennis uniform",
-                "child": []
-              }
-            ],
-            "level": 2
-          },
-          {
-            "text": "word",
-            "values": "camisole",
-            "child": [],
+            "expand": false,
             "level": 2
           },
           {
             "text": "Sequence",
-            "values": "straw hat,white dress",
+            "values": "麦わら帽子と白ドレス",
             "child": [
               {
                 "text": "word",
@@ -1893,7 +1599,35 @@
           },
           {
             "text": "Sequence",
-            "values": "white leotard",
+            "values": "ウェディングドレス",
+            "child": [
+              {
+                "text": "word",
+                "values": "wedding dress",
+                "child": [],
+                "level": 3
+              }
+            ],
+            "expand": false,
+            "level": 2
+          },
+          {
+            "text": "Sequence",
+            "values": "水着",
+            "child": [
+              {
+                "text": "word",
+                "values": "swimsuit",
+                "child": [],
+                "level": 3
+              }
+            ],
+            "expand": false,
+            "level": 2
+          },
+          {
+            "text": "Sequence",
+            "values": "白レオタード",
             "child": [
               {
                 "text": "word",
@@ -1955,7 +1689,21 @@
           },
           {
             "text": "Sequence",
-            "values": "denim shorts",
+            "values": "シースルー",
+            "child": [
+              {
+                "text": "word",
+                "values": "see-through",
+                "child": [],
+                "level": 3
+              }
+            ],
+            "expand": false,
+            "level": 2
+          },
+          {
+            "text": "Sequence",
+            "values": "デニムスカート",
             "child": [
               {
                 "text": "word",
@@ -1986,50 +1734,14 @@
             "expand": false
           },
           {
-            "text": "word",
-            "values": "wedding dress",
-            "child": [],
-            "level": 2
-          },
-          {
-            "text": "word",
-            "values": "pajamas",
-            "child": [],
-            "level": 2
-          },
-          {
-            "text": "word",
-            "values": "lingerie",
-            "child": [],
-            "level": 2
-          },
-          {
-            "text": "word",
-            "values": "loincloth",
-            "child": [],
-            "level": 2
-          },
-          {
             "text": "Sequence",
-            "values": "black bra, clothes pull, garter_straps",
+            "values": "バレーボール",
             "child": [
               {
                 "text": "word",
-                "values": "garter_straps",
+                "values": "volleyball uniform",
                 "child": [],
-                "level": 2
-              },
-              {
-                "text": "word",
-                "values": "black bra",
-                "child": [],
-                "level": 2
-              },
-              {
-                "text": "word",
-                "values": "clothes pull",
-                "child": [],
-                "level": 2
+                "level": 3
               }
             ],
             "expand": false,
@@ -2037,17 +1749,601 @@
           },
           {
             "text": "Sequence",
-            "values": "naked",
+            "values": "踊り子",
             "child": [
               {
                 "text": "word",
-                "values": "completely nude",
+                "values": "loincloth",
+                "child": [],
+                "level": 3
+              }
+            ],
+            "expand": false,
+            "level": 2
+          },
+          {
+            "text": "Sequence",
+            "values": "テニス服",
+            "child": [
+              {
+                "text": "word",
+                "values": "tennis uniform",
+                "child": []
+              }
+            ],
+            "level": 2
+          },
+          {
+            "text": "Sequence",
+            "values": "チアリーダー",
+            "child": [
+              {
+                "text": "word",
+                "values": "cheerleader",
+                "child": [],
+                "level": 3
+              }
+            ],
+            "expand": false,
+            "level": 2
+          },
+          {
+            "text": "Sequence",
+            "values": "バニー",
+            "child": [
+              {
+                "text": "word",
+                "values": "playboy bunny",
+                "child": [],
+                "level": 3
+              }
+            ],
+            "expand": false,
+            "level": 2
+          },
+          {
+            "text": "Sequence",
+            "values": "白バニー",
+            "child": [
+              {
+                "text": "word",
+                "values": "white playboy bunny",
+                "child": [],
+                "level": 3
+              }
+            ],
+            "expand": false,
+            "level": 2
+          },
+          {
+            "text": "Sequence",
+            "values": "ビジネススーツ",
+            "child": [
+              {
+                "text": "word",
+                "values": "business suit",
+                "child": [],
+                "level": 3
+              }
+            ],
+            "expand": false,
+            "level": 2
+          },
+          {
+            "text": "Sequence",
+            "values": "ウィッチ",
+            "child": [
+              {
+                "text": "word",
+                "values": "witch",
+                "child": [],
+                "level": 3
+              },
+              {
+                "text": "word",
+                "values": "blue dress",
+                "child": [],
+                "level": 3
+              },
+              {
+                "text": "word",
+                "values": "boots",
+                "child": [],
+                "level": 3
+              },
+              {
+                "text": "Ignore-word",
+                "values": "broom",
+                "child": [],
+                "level": 3
+              }
+            ],
+            "expand": false,
+            "level": 2
+          },
+          {
+            "text": "Sequence",
+            "values": "巫女服",
+            "child": [
+              {
+                "text": "word",
+                "values": "red japanese miko clothes",
+                "child": [],
+                "level": 3
+              }
+            ],
+            "expand": false,
+            "level": 2
+          },
+          {
+            "text": "Sequence",
+            "values": "日本服",
+            "child": [
+              {
+                "text": "word",
+                "values": "white kimono",
+                "child": [],
+                "level": 3
+              },
+              {
+                "text": "word",
+                "values": "red skirt",
+                "child": [],
+                "level": 3
+              }
+            ],
+            "level": 2,
+            "expand": false
+          },
+          {
+            "text": "Sequence",
+            "values": "府警",
+            "child": [
+              {
+                "text": "word",
+                "values": "police uniform",
+                "child": [],
+                "level": 3
+              }
+            ],
+            "expand": false,
+            "level": 2
+          },
+          {
+            "text": "Sequence",
+            "values": "忍者",
+            "child": [
+              {
+                "text": "word",
+                "values": "ninja",
+                "child": [],
+                "level": 3
+              }
+            ],
+            "level": 2,
+            "expand": false
+          },
+          {
+            "text": "Sequence",
+            "values": "フルアーマー",
+            "child": [
+              {
+                "text": "word",
+                "values": "full_armor",
+                "child": [],
+                "level": 3
+              }
+            ],
+            "expand": false,
+            "level": 2
+          },
+          {
+            "text": "Sequence",
+            "values": "女医",
+            "child": [
+              {
+                "text": "word",
+                "values": "lab coat",
+                "child": [],
+                "level": 3
+              }
+            ],
+            "expand": false,
+            "level": 2
+          },
+          {
+            "text": "Sequence",
+            "values": "白衣",
+            "child": [
+              {
+                "text": "word",
+                "values": "white coat",
+                "child": [],
+                "level": 3
+              }
+            ],
+            "expand": false,
+            "level": 2
+          },
+          {
+            "text": "Sequence",
+            "values": "ナース",
+            "child": [
+              {
+                "text": "word",
+                "values": "nurse",
+                "child": [],
+                "level": 3
+              }
+            ],
+            "expand": false,
+            "level": 2
+          },
+          {
+            "text": "Sequence",
+            "values": "軍服",
+            "child": [
+              {
+                "text": "word",
+                "values": "military uniform",
+                "child": [],
+                "level": 3
+              }
+            ],
+            "expand": false,
+            "level": 2
+          },
+          {
+            "text": "Sequence",
+            "values": "園児服",
+            "child": [
+              {
+                "text": "word",
+                "values": "kids kindergarten uniform",
+                "child": [],
+                "level": 3
+              }
+            ],
+            "expand": false,
+            "level": 2
+          },
+          {
+            "text": "Sequence",
+            "values": "カーディガン",
+            "child": [
+              {
+                "text": "word",
+                "values": "open cardigan",
+                "child": [],
+                "level": 3
+              }
+            ],
+            "expand": false,
+            "level": 2
+          },
+          {
+            "text": "Sequence",
+            "values": "ブレザー",
+            "child": [
+              {
+                "text": "word",
+                "values": "blazer",
+                "child": [],
+                "level": 2
+              },
+              {
+                "text": "Select",
+                "values": "skirt",
+                "child": [
+                  {
+                    "text": "word",
+                    "values": "garter_straps",
+                    "child": [],
+                    "level": 3
+                  },
+                  {
+                    "text": "word",
+                    "values": "red plaid skirt",
+                    "child": [],
+                    "level": 3
+                  },
+                  {
+                    "text": "word",
+                    "values": "white pleated skirt",
+                    "child": [],
+                    "level": 3
+                  }
+                ],
+                "expand": true,
+                "level": 2
+              }
+            ],
+            "level": 2,
+            "expand": false
+          },
+          {
+            "text": "Sequence",
+            "values": "スクミズ",
+            "child": [
+              {
+                "text": "word",
+                "values": "school swimsuit",
+                "child": [],
+                "level": 3
+              }
+            ],
+            "expand": false,
+            "level": 2
+          },
+          {
+            "text": "Sequence",
+            "values": "修道服",
+            "child": [
+              {
+                "text": "word",
+                "values": "Nun",
+                "child": []
+              }
+            ],
+            "level": 2
+          },
+          {
+            "text": "Sequence",
+            "values": "学生服",
+            "child": [
+              {
+                "text": "word",
+                "values": "school uniform",
+                "child": [],
+                "level": 3
+              }
+            ],
+            "expand": false,
+            "level": 2
+          },
+          {
+            "text": "Sequence",
+            "values": "黒学生服",
+            "child": [
+              {
+                "text": "word",
+                "values": "black school uniform",
+                "child": [],
+                "level": 3
+              }
+            ],
+            "expand": false,
+            "level": 2
+          },
+          {
+            "text": "Sequence",
+            "values": "黒学生服強め",
+            "child": [
+              {
+                "text": "word",
+                "values": "black sailor collar",
+                "child": [],
+                "level": 3
+              },
+              {
+                "text": "word",
+                "values": "black serafuk",
+                "child": [],
+                "level": 3
+              },
+              {
+                "text": "word",
+                "values": "pleated skirt",
+                "child": [],
+                "level": 3
+              },
+              {
+                "text": "word",
+                "values": "long sleeves",
+                "child": [],
+                "level": 3
+              },
+              {
+                "text": "word",
+                "values": "hat",
+                "child": [],
+                "level": 3
+              }
+            ],
+            "level": 2,
+            "expand": false
+          },
+          {
+            "text": "Sequence",
+            "values": "白学生服",
+            "child": [
+              {
+                "text": "word",
+                "values": "pleated skirt",
+                "child": [],
+                "level": 3
+              },
+              {
+                "text": "word",
+                "values": "white serafuk",
+                "child": [],
+                "level": 3
+              },
+              {
+                "text": "word",
+                "values": "white sailor collar",
+                "child": [],
+                "level": 3
+              }
+            ],
+            "expand": false,
+            "level": 2
+          },
+          {
+            "text": "Sequence",
+            "values": "セーラー",
+            "child": [
+              {
+                "text": "word",
+                "values": "sailer",
+                "child": [],
+                "level": 3
+              }
+            ],
+            "expand": false,
+            "level": 2
+          },
+          {
+            "text": "Sequence",
+            "values": "カーディガン",
+            "child": [
+              {
+                "text": "word",
+                "values": "cardigan",
+                "child": [],
+                "level": 3
+              }
+            ],
+            "expand": false,
+            "level": 2
+          },
+          {
+            "text": "Sequence",
+            "values": "体操服",
+            "child": [
+              {
+                "text": "Select",
+                "values": "buruma",
+                "child": [
+                  {
+                    "text": "word",
+                    "values": "black buruma",
+                    "child": [],
+                    "level": 4
+                  },
+                  {
+                    "text": "Sequence",
+                    "values": "",
+                    "child": [],
+                    "level": 4
+                  }
+                ],
+                "level": 3,
+                "expand": true
+              },
+              {
+                "text": "word",
+                "values": "gym uniform",
+                "child": [],
+                "level": 3
+              }
+            ],
+            "level": 2,
+            "expand": false
+          },
+          {
+            "text": "Sequence",
+            "values": "運動服",
+            "child": [
+              {
+                "text": "word",
+                "values": "pink track jacke",
                 "child": [],
                 "level": 2
               }
             ],
             "level": 2,
             "expand": false
+          },
+          {
+            "text": "Sequence",
+            "values": "メイド",
+            "child": [
+              {
+                "text": "word",
+                "values": "maid",
+                "child": [],
+                "level": 3
+              }
+            ],
+            "level": 2,
+            "expand": false
+          },
+          {
+            "text": "Sequence",
+            "values": "ロリータファッション",
+            "child": [
+              {
+                "text": "word",
+                "values": "white lolita_fashion",
+                "child": [],
+                "level": 3
+              },
+              {
+                "text": "word",
+                "values": "white lolita_hairband",
+                "child": [],
+                "level": 3
+              }
+            ],
+            "expand": false,
+            "level": 2
+          },
+          {
+            "text": "Sequence",
+            "values": "ゴシックロリータ",
+            "child": [
+              {
+                "text": "word",
+                "values": "gothic lolita",
+                "child": [],
+                "level": 3
+              }
+            ],
+            "expand": false,
+            "level": 2
+          },
+          {
+            "text": "Sequence",
+            "values": "ゴスロリ",
+            "child": [
+              {
+                "text": "word",
+                "values": "roswaal_mansion_maid_uniform",
+                "child": [],
+                "level": 3
+              }
+            ],
+            "expand": false,
+            "level": 2
+          },
+          {
+            "text": "Sequence",
+            "values": "パーカー",
+            "child": [
+              {
+                "text": "word",
+                "values": "hoodie",
+                "child": [],
+                "level": 3
+              }
+            ],
+            "expand": false,
+            "level": 2
+          },
+          {
+            "text": "Sequence",
+            "values": "セーター",
+            "child": [
+              {
+                "text": "word",
+                "values": "sweater",
+                "child": [],
+                "level": 3
+              }
+            ],
+            "expand": false,
+            "level": 2
           }
         ],
         "level": 1,
@@ -2303,6 +2599,12 @@
         "child": [
           {
             "text": "word",
+            "values": "black_pantyhose",
+            "child": [],
+            "level": 2
+          },
+          {
+            "text": "word",
             "values": "clothes pull",
             "child": [],
             "level": 2
@@ -2321,55 +2623,7 @@
           },
           {
             "text": "word",
-            "values": "stomach_bulge",
-            "child": [],
-            "level": 2
-          },
-          {
-            "text": "word",
             "values": "female_orgasm",
-            "child": [],
-            "level": 2
-          },
-          {
-            "text": "word",
-            "values": "black_pantyhose",
-            "child": [],
-            "level": 2
-          },
-          {
-            "text": "word",
-            "values": "open pussy",
-            "child": [],
-            "level": 2
-          },
-          {
-            "text": "word",
-            "values": "motion lines",
-            "child": [],
-            "level": 2
-          },
-          {
-            "text": "word",
-            "values": "mesugaki",
-            "child": [],
-            "level": 2
-          },
-          {
-            "text": "word",
-            "values": "nose blush",
-            "child": [],
-            "level": 2
-          },
-          {
-            "text": "word",
-            "values": "lactation",
-            "child": [],
-            "level": 2
-          },
-          {
-            "text": "word",
-            "values": "vaginal",
             "child": [],
             "level": 2
           },
@@ -2381,13 +2635,43 @@
           },
           {
             "text": "word",
-            "values": "torn clothes",
+            "values": "forced sex",
             "child": [],
             "level": 2
           },
           {
             "text": "word",
-            "values": "forced sex",
+            "values": "lactation",
+            "child": [],
+            "level": 2
+          },
+          {
+            "text": "word",
+            "values": "mesugaki",
+            "child": [],
+            "level": 2
+          },
+          {
+            "text": "word",
+            "values": "motion lines",
+            "child": [],
+            "level": 2
+          },
+          {
+            "text": "word",
+            "values": "multiple boys",
+            "child": [],
+            "level": 2
+          },
+          {
+            "text": "word",
+            "values": "nose blush",
+            "child": [],
+            "level": 2
+          },
+          {
+            "text": "word",
+            "values": "open pussy",
             "child": [],
             "level": 2
           },
@@ -2399,7 +2683,25 @@
           },
           {
             "text": "word",
+            "values": "stomach_bulge",
+            "child": [],
+            "level": 2
+          },
+          {
+            "text": "word",
+            "values": "torn clothes",
+            "child": [],
+            "level": 2
+          },
+          {
+            "text": "word",
             "values": "uncensored",
+            "child": [],
+            "level": 2
+          },
+          {
+            "text": "word",
+            "values": "vaginal",
             "child": [],
             "level": 2
           },
@@ -2414,17 +2716,10 @@
             "values": "womb tattoo",
             "child": [],
             "level": 2
-          },
-          {
-            "text": "Select",
-            "values": "",
-            "child": [],
-            "level": 2,
-            "expand": false
           }
         ],
         "level": 1,
-        "expand": true
+        "expand": false
       }
     ],
     "level": 0,
@@ -2442,7 +2737,7 @@
       }
     ],
     "level": 0,
-    "expand": true
+    "expand": false
   },
   {
     "text": "Select",
@@ -2456,25 +2751,45 @@
       },
       {
         "text": "word",
-        "values": "fantasy",
+        "values": "bathing",
         "child": [],
         "level": 1
       },
       {
         "text": "word",
-        "values": "ruins",
+        "values": "beach",
         "child": [],
         "level": 1
       },
       {
         "text": "word",
-        "values": "pool",
+        "values": "bedroom",
         "child": [],
         "level": 1
       },
       {
+        "text": "Sequence",
+        "values": "bed room",
+        "child": [
+          {
+            "text": "word",
+            "values": "on bed",
+            "child": [],
+            "level": 2
+          },
+          {
+            "text": "word",
+            "values": "pillow",
+            "child": [],
+            "level": 2
+          }
+        ],
+        "expand": false,
+        "level": 1
+      },
+      {
         "text": "word",
-        "values": "night pool",
+        "values": "car interior",
         "child": [],
         "level": 1
       },
@@ -2525,6 +2840,24 @@
         "level": 1
       },
       {
+        "text": "word",
+        "values": "fantasy",
+        "child": [],
+        "level": 1
+      },
+      {
+        "text": "word",
+        "values": "ruins",
+        "child": [],
+        "level": 1
+      },
+      {
+        "text": "word",
+        "values": "night pool",
+        "child": [],
+        "level": 1
+      },
+      {
         "text": "Sequence",
         "values": "onsen",
         "child": [
@@ -2546,45 +2879,7 @@
       },
       {
         "text": "word",
-        "values": "beach",
-        "child": [],
-        "level": 1
-      },
-      {
-        "text": "Sequence",
-        "values": "bed room",
-        "child": [
-          {
-            "text": "word",
-            "values": "on bed",
-            "child": [],
-            "level": 2
-          },
-          {
-            "text": "word",
-            "values": "pillow",
-            "child": [],
-            "level": 2
-          }
-        ],
-        "expand": false,
-        "level": 1
-      },
-      {
-        "text": "word",
-        "values": "bedroom",
-        "child": [],
-        "level": 1
-      },
-      {
-        "text": "word",
-        "values": "train interior",
-        "child": [],
-        "level": 1
-      },
-      {
-        "text": "word",
-        "values": "car interior",
+        "values": "pool",
         "child": [],
         "level": 1
       },
@@ -2610,19 +2905,19 @@
       },
       {
         "text": "word",
-        "values": "toilet",
-        "child": [],
-        "level": 1
-      },
-      {
-        "text": "word",
-        "values": "bathing",
-        "child": [],
-        "level": 1
-      },
-      {
-        "text": "word",
         "values": "sofa",
+        "child": [],
+        "level": 1
+      },
+      {
+        "text": "word",
+        "values": "train interior",
+        "child": [],
+        "level": 1
+      },
+      {
+        "text": "word",
+        "values": "toilet",
         "child": [],
         "level": 1
       }
@@ -2647,7 +2942,7 @@
         "level": 1
       }
     ],
-    "expand": true,
+    "expand": false,
     "level": 0
   },
   {
