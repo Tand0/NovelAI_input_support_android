@@ -35,7 +35,7 @@
             android:gravity="start"
             android:minWidth="48dp"
             android:minHeight="48dp"
-
+            style="@style/CustomCheckBox"
             android:text="@string/action_checkbox" />
     </LinearLayout>
 

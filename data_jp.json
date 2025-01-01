@@ -353,6 +353,12 @@
           },
           {
             "text": "word",
+            "values": "alisa_mikhailovna_kujou",
+            "child": [],
+            "level": 2
+          },
+          {
+            "text": "word",
             "values": "artoria_pendragon_(fate)",
             "child": [],
             "level": 2
@@ -1091,7 +1097,7 @@
           },
           {
             "text": "Select",
-            "values": "leaning xxx or from xxx",
+            "values": "なんかいろいろ",
             "child": [
               {
                 "text": "word",
@@ -1410,12 +1416,6 @@
         ],
         "level": 1,
         "expand": false
-      },
-      {
-        "text": "word",
-        "values": "tears",
-        "child": [],
-        "level": 1
       },
       {
         "text": "Select",
@@ -2595,7 +2595,7 @@
       },
       {
         "text": "Select",
-        "values": "",
+        "values": "その他",
         "child": [
           {
             "text": "word",
@@ -2727,17 +2727,17 @@
   },
   {
     "text": "Sequence",
-    "values": "胸の指定",
+    "values": "泣いている",
     "child": [
       {
         "text": "word",
-        "values": "small breasts",
+        "values": "tears",
         "child": [],
-        "level": 1
+        "level": 2
       }
     ],
-    "level": 0,
-    "expand": false
+    "expand": false,
+    "level": 0
   },
   {
     "text": "Select",
@@ -2929,6 +2929,12 @@
     "text": "Ignore-Sequence",
     "values": "女の子追加指定",
     "child": [
+      {
+        "text": "word",
+        "values": "small breasts",
+        "child": [],
+        "level": 1
+      },
       {
         "text": "word",
         "values": "minigirl",

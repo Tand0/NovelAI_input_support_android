@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:state_checked="true"
+        android:state_pressed="true"
+        android:state_enabled="true"
+        android:drawable="@drawable/ic_checkbox_checked_selected_foreground" />
+    <item
+        android:state_checked="true"
+        android:state_pressed="false"
+        android:state_enabled="true"
+        android:drawable="@drawable/ic_checkbox_checked_selected_foreground" />
+    <item
+        android:state_checked="false"
+        android:state_pressed="true"
+        android:state_enabled="true"
+        android:drawable="@drawable/ic_checkbox_checked_foreground" />
+    <item
+        android:state_checked="false"
+        android:state_pressed="false"
+        android:state_enabled="true"
+        android:drawable="@drawable/ic_checkbox_checked_foreground" />
+
+    <item
+        android:state_checked="true"
+        android:state_pressed="true"
+        android:state_enabled="false"
+        android:drawable="@drawable/ic_checkbox_unchecked_foreground" />
+    <item
+        android:state_checked="true"
+        android:state_pressed="false"
+        android:state_enabled="false"
+        android:drawable="@drawable/ic_checkbox_unchecked_foreground" />
+    <item
+        android:state_checked="false"
+        android:state_pressed="true"
+        android:state_enabled="false"
+        android:drawable="@drawable/ic_checkbox_unchecked_foreground" />
+    <item
+        android:state_checked="false"
+        android:state_pressed="false"
+        android:state_enabled="false"
+        android:drawable="@drawable/ic_checkbox_unchecked_foreground" />
+</selector>
