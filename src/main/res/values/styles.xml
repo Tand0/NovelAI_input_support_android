@@ -1,5 +1,8 @@
 <resources>
-    <style name="CustomCheckBox" parent="android:Widget.CompoundButton.CheckBox">
-        <item name="android:button">@drawable/custom_checkbox</item>
+    <style name="BoxCheckBox" parent="android:Widget.CompoundButton.CheckBox">
+        <item name="android:button">@drawable/box_checkbox</item>
+    </style>
+    <style name="EyesCheckBox" parent="android:Widget.CompoundButton.CheckBox">
+        <item name="android:button">@drawable/eyes_checkbox</item>
     </style>
 </resources>

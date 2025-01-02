@@ -2359,49 +2359,49 @@
     "child": [
       {
         "text": "Select",
-        "values": "color",
+        "values": "髪の色",
         "child": [
           {
             "text": "word",
             "values": "light brown hair",
             "child": [],
-            "level": 3
+            "level": 2
           },
           {
             "text": "word",
             "values": "grey_hair",
             "child": [],
-            "level": 3
+            "level": 2
           },
           {
             "text": "Ignore-word",
             "values": "pink hair",
             "child": [],
-            "level": 3
+            "level": 2
           },
           {
             "text": "word",
             "values": "blonde hair",
             "child": [],
-            "level": 3
+            "level": 2
           },
           {
             "text": "word",
             "values": "brown hair",
             "child": [],
-            "level": 3
+            "level": 2
           },
           {
             "text": "word",
             "values": "white hair",
             "child": [],
-            "level": 3
+            "level": 2
           },
           {
             "text": "word",
             "values": "black hair",
             "child": [],
-            "level": 3
+            "level": 2
           }
         ],
         "level": 1,
@@ -2409,7 +2409,7 @@
       },
       {
         "text": "Select",
-        "values": "long hair",
+        "values": "髪の長さ",
         "child": [
           {
             "text": "word",
@@ -2436,12 +2436,12 @@
             "level": 2
           }
         ],
-        "expand": true,
+        "expand": false,
         "level": 1
       },
       {
         "text": "Select",
-        "values": "selected twintails",
+        "values": "追加の特徴",
         "child": [
           {
             "text": "word",
@@ -2547,7 +2547,7 @@
           }
         ],
         "level": 1,
-        "expand": true
+        "expand": false
       }
     ],
     "level": 0,
@@ -2555,7 +2555,7 @@
   },
   {
     "text": "Ignore-Sequence",
-    "values": "nsfw エッチな指定。押すな!!?",
+    "values": "nsfw エッチな指定。押すな。絶対に押すなよ",
     "child": [
       {
         "text": "word",
