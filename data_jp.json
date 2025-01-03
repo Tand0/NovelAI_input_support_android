@@ -686,102 +686,180 @@
         "values": "顔の指定",
         "child": [
           {
-            "text": "word",
-            "values": "nose blush",
-            "child": [],
-            "level": 2
-          },
-          {
-            "text": "word",
-            "values": "empty_eyes",
-            "child": [],
-            "level": 2
-          },
-          {
             "text": "Sequence",
-            "values": "profile",
+            "values": "横顔",
             "child": [
               {
                 "text": "word",
                 "values": "profile",
                 "child": [],
-                "level": 2
+                "level": 3
               },
               {
                 "text": "word",
                 "values": "looking at another",
                 "child": [],
-                "level": 2
+                "level": 3
               }
             ],
             "expand": false,
             "level": 2
           },
           {
-            "text": "word",
-            "values": "grin",
-            "child": [],
-            "level": 2
-          },
-          {
-            "text": "word",
-            "values": "sideways_glance",
-            "child": [],
-            "level": 2
-          },
-          {
-            "text": "word",
-            "values": "smug",
-            "child": [],
+            "text": "Select",
+            "values": "ニヤリ",
+            "child": [
+              {
+                "text": "word",
+                "values": "smug",
+                "child": [],
+                "level": 3
+              },
+              {
+                "text": "word",
+                "values": "scared",
+                "child": [],
+                "level": 3
+              },
+              {
+                "text": "word",
+                "values": "smirk",
+                "child": [],
+                "level": 3
+              },
+              {
+                "text": "word",
+                "values": "grin",
+                "child": [],
+                "level": 3
+              },
+              {
+                "text": "word",
+                "values": "happy",
+                "child": [],
+                "level": 3
+              },
+              {
+                "text": "word",
+                "values": "kind smile",
+                "child": [],
+                "level": 3
+              },
+              {
+                "text": "word",
+                "values": "light smile",
+                "child": [],
+                "level": 3
+              }
+            ],
+            "expand": false,
             "level": 2
           },
           {
             "text": "Sequence",
-            "values": "closed eyes",
+            "values": "笑顔",
             "child": [
               {
                 "text": "word",
-                "values": "closed eyes",
+                "values": "teeth",
                 "child": [],
-                "level": 2
+                "level": 3
+              },
+              {
+                "text": "word",
+                "values": "smile",
+                "child": [],
+                "level": 3
+              }
+            ],
+            "expand": false,
+            "level": 2
+          },
+          {
+            "text": "Sequence",
+            "values": "目の指定",
+            "child": [
+              {
+                "text": "word",
+                "values": "glaring",
+                "child": [],
+                "level": 3
+              },
+              {
+                "text": "word",
+                "values": "looking up",
+                "child": [],
+                "level": 3
+              },
+              {
+                "text": "word",
+                "values": "looking down",
+                "child": [],
+                "level": 3
+              },
+              {
+                "text": "word",
+                "values": "sideways_glance",
+                "child": [],
+                "level": 3
               },
               {
                 "text": "word",
                 "values": "open mouth",
                 "child": [],
-                "level": 2
+                "level": 3
+              },
+              {
+                "text": "word",
+                "values": "closed eyes",
+                "child": [],
+                "level": 3
+              },
+              {
+                "text": "word",
+                "values": "empty_eyes",
+                "child": [],
+                "level": 3
               }
             ],
             "expand": false,
             "level": 2
           },
           {
-            "text": "word",
-            "values": "licking lips",
-            "child": [],
-            "level": 2
-          },
-          {
-            "text": "word",
-            "values": "scared",
-            "child": [],
-            "level": 2
-          },
-          {
-            "text": "word",
-            "values": "smirk",
-            "child": [],
-            "level": 2
-          },
-          {
-            "text": "word",
-            "values": ":t",
-            "child": [],
+            "text": "Sequence",
+            "values": "口元",
+            "child": [
+              {
+                "text": "word",
+                "values": ":t",
+                "child": [],
+                "level": 3
+              },
+              {
+                "text": "word",
+                "values": "licking lips",
+                "child": [],
+                "level": 3
+              },
+              {
+                "text": "word",
+                "values": "licking lips",
+                "child": [],
+                "level": 3
+              },
+              {
+                "text": "word",
+                "values": "parted_lips",
+                "child": [],
+                "level": 3
+              }
+            ],
+            "expand": false,
             "level": 2
           },
           {
             "text": "Sequence",
-            "values": "cry",
+            "values": "叫ぶ",
             "child": [
               {
                 "text": "word",
@@ -801,40 +879,8 @@
           },
           {
             "text": "Sequence",
-            "values": "clenched teeth",
+            "values": "くいしばる",
             "child": [
-              {
-                "text": "Select",
-                "values": "eyes",
-                "child": [
-                  {
-                    "text": "word",
-                    "values": "glaring",
-                    "child": [],
-                    "level": 4
-                  },
-                  {
-                    "text": "word",
-                    "values": "looking up",
-                    "child": [],
-                    "level": 4
-                  },
-                  {
-                    "text": "word",
-                    "values": "looking down",
-                    "child": [],
-                    "level": 4
-                  },
-                  {
-                    "text": "word",
-                    "values": "{tears}",
-                    "child": [],
-                    "level": 4
-                  }
-                ],
-                "expand": false,
-                "level": 3
-              },
               {
                 "text": "word",
                 "values": "clenched teeth",
@@ -847,7 +893,7 @@
           },
           {
             "text": "Sequence",
-            "values": "[[[angry]]]",
+            "values": "怒る",
             "child": [
               {
                 "text": "word",
@@ -863,44 +909,6 @@
               }
             ],
             "expand": false,
-            "level": 2
-          },
-          {
-            "text": "word",
-            "values": "happy",
-            "child": [],
-            "level": 2
-          },
-          {
-            "text": "Sequence",
-            "values": "smile",
-            "child": [
-              {
-                "text": "word",
-                "values": "teeth",
-                "child": [],
-                "level": 3
-              },
-              {
-                "text": "word",
-                "values": "smile",
-                "child": [],
-                "level": 3
-              }
-            ],
-            "expand": false,
-            "level": 2
-          },
-          {
-            "text": "word",
-            "values": "kind smile",
-            "child": [],
-            "level": 2
-          },
-          {
-            "text": "word",
-            "values": "light smile",
-            "child": [],
             "level": 2
           }
         ],
@@ -1149,13 +1157,13 @@
                     "text": "word",
                     "values": "on_side",
                     "child": [],
-                    "level": 3
+                    "level": 4
                   },
                   {
                     "text": "word",
                     "values": "leg_lift",
                     "child": [],
-                    "level": 3
+                    "level": 4
                   }
                 ],
                 "expand": false,
@@ -2424,16 +2432,18 @@
             "level": 2
           },
           {
-            "text": "word",
-            "values": "",
+            "text": "Sequence",
+            "values": "無指定",
             "child": [],
-            "level": 2
+            "level": 2,
+            "expand": false
           },
           {
-            "text": "word",
-            "values": "",
+            "text": "Sequence",
+            "values": "無指定",
             "child": [],
-            "level": 2
+            "level": 2,
+            "expand": false
           }
         ],
         "expand": false,
@@ -2577,13 +2587,13 @@
       },
       {
         "text": "word",
-        "values": "breath",
+        "values": "nose blush",
         "child": [],
         "level": 1
       },
       {
         "text": "word",
-        "values": "blush",
+        "values": "breath",
         "child": [],
         "level": 1
       },
@@ -2665,7 +2675,7 @@
           },
           {
             "text": "word",
-            "values": "nose blush",
+            "values": "blush",
             "child": [],
             "level": 2
           },
@@ -2678,6 +2688,12 @@
           {
             "text": "word",
             "values": "rape",
+            "child": [],
+            "level": 2
+          },
+          {
+            "text": "word",
+            "values": "sex",
             "child": [],
             "level": 2
           },
@@ -2733,7 +2749,7 @@
         "text": "word",
         "values": "tears",
         "child": [],
-        "level": 2
+        "level": 1
       }
     ],
     "expand": false,
