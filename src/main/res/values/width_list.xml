@@ -23,6 +23,7 @@
         <item>nai-diffusion-2</item>
         <item>nai-diffusion-furry-3</item>
         <item>nai-diffusion-3</item>
+        <item>diffusion-4-curated-preview</item>
     </string-array>
     <string-array name="noise_schedule_list">
         <item>native</item>

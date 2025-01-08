@@ -1201,7 +1201,7 @@ public class MyApplication  extends Application {
             for (String key : keys) {
                 if (targetBreak.equals(key)) {
                     notHit = false;
-                     break;
+                    break;
                 }
             }
             if (notHit) {
@@ -1239,10 +1239,10 @@ public class MyApplication  extends Application {
         }
         return list;
     }
-    private String changeBaseKey(String key) {
-        return key.replaceAll("[{}\\[\\]]","").replaceAll("\\s+"," ").trim();
-    }
 
+    private String changeBaseKey(String key) {
+        return key.replaceAll("[_{}\\[\\]]"," ").replaceAll("\\s+"," ").trim();
+    }
 
     /** get subscription
      * @param context activity

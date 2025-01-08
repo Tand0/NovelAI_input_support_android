@@ -756,7 +756,7 @@
             "level": 2
           },
           {
-            "text": "Sequence",
+            "text": "Select",
             "values": "笑顔",
             "child": [
               {
@@ -776,7 +776,7 @@
             "level": 2
           },
           {
-            "text": "Sequence",
+            "text": "Select",
             "values": "目の指定",
             "child": [
               {
@@ -826,7 +826,7 @@
             "level": 2
           },
           {
-            "text": "Sequence",
+            "text": "Select",
             "values": "口元",
             "child": [
               {
@@ -2942,7 +2942,7 @@
     "expand": false
   },
   {
-    "text": "Ignore-Sequence",
+    "text": "Ignore-Select",
     "values": "女の子追加指定",
     "child": [
       {

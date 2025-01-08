@@ -83,7 +83,7 @@
     <string name="privacy_policy_url">https://github.com/Tand0/NovelAI_input_support_android/blob/main/README_jp.md</string>
 
     <string name="menu_move">実行</string>
-    <string name="menu_save">画像を保存?</string>
+    <string name="menu_save">画像を保存</string>
     <string name="from_image_to_prompt">画像からプロンプトをロード</string>
     <string name="from_prompt_to_tree">ツリーへ</string>
     <string name="from_tree_to_prompt">ツリーから</string>

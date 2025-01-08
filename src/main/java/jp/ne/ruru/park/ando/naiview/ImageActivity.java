@@ -18,7 +18,6 @@ import android.provider.MediaStore;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.View;
-import android.widget.Toast;
 
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
@@ -40,6 +39,9 @@ import jp.ne.ruru.park.ando.naiview.databinding.ActivityImageBinding;
  * @author T.Ando
  */
 public class ImageActivity extends AppCompatActivity {
+
+    /** max upscale size */
+    public static final int MAX_UPSCALE_SIZE = 768;
 
     /** detector for click */
     GestureDetector gestureDetector;
@@ -144,15 +146,9 @@ public class ImageActivity extends AppCompatActivity {
      * do upscale
      */
     public void doUpscale() {
-        if ((bitmapX <= 768) && (bitmapY <= 768)) {
-            final MyApplication a =
-                    ((MyApplication)ImageActivity.this.getApplication());
-            a.execution(ImageActivity.this, MyNASI.TYPE.UPSCALE, bitmapX, bitmapY,null);
-        } else {
-            String message = String.format(
-                    Locale.ENGLISH, "already big(%dx%d)", bitmapX,bitmapY);
-            Toast.makeText(this , message, Toast.LENGTH_SHORT).show();
-        }
+        final MyApplication a =
+                ((MyApplication)ImageActivity.this.getApplication());
+        a.execution(ImageActivity.this, MyNASI.TYPE.UPSCALE, bitmapX, bitmapY,null);
     }
 
     public void onSaveDialogMenu() {
@@ -178,11 +174,19 @@ public class ImageActivity extends AppCompatActivity {
         String imageText =  ImageActivity.this.getResources().getString(R.string.generate_image) + addText;
         String upscaleText = ImageActivity.this.getResources().getString(R.string.upscale)
                 + " (x" + a.getSettingScale(preferences) + ")";
-        final String[] items = new String[] {
-                ImageActivity.this.getResources().getString(R.string.action_back),
-                imageText,
-                upscaleText
-        };
+        final String[] items;
+        if ((bitmapX <= MAX_UPSCALE_SIZE) && (bitmapY <= MAX_UPSCALE_SIZE)) {
+            items = new String[] {
+                    ImageActivity.this.getResources().getString(R.string.action_back),
+                    imageText,
+                    upscaleText // add
+            };
+        } else {
+            items = new String[] {
+                    ImageActivity.this.getResources().getString(R.string.action_back),
+                    imageText
+            };
+        }
         View dialogView = this.getLayoutInflater().inflate(R.layout.raw_switch, null);
         //
         SwitchCompat isUseTree = dialogView.findViewById(R.id.setting_use_tree);
