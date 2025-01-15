@@ -139,7 +139,7 @@ public class ImageActivity extends AppCompatActivity {
     public void generateImage() {
         final MyApplication a =
                 ((MyApplication)ImageActivity.this.getApplication());
-        a.execution(ImageActivity.this,MyNASI.TYPE.IMAGE,bitmapX,bitmapY,null);
+        a.execution(ImageActivity.this, MyNASI.REST_TYPE.IMAGE,bitmapX,bitmapY,null);
     }
 
     /**
@@ -148,7 +148,7 @@ public class ImageActivity extends AppCompatActivity {
     public void doUpscale() {
         final MyApplication a =
                 ((MyApplication)ImageActivity.this.getApplication());
-        a.execution(ImageActivity.this, MyNASI.TYPE.UPSCALE, bitmapX, bitmapY,null);
+        a.execution(ImageActivity.this, MyNASI.REST_TYPE.UPSCALE, bitmapX, bitmapY,null);
     }
 
     public void onSaveDialogMenu() {

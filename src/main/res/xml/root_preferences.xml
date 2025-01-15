@@ -88,7 +88,7 @@
     <ListPreference
         android:key="prompt_sampler"
         android:title="@string/prompt_sampler"
-        android:defaultValue="k_dpmpp_2m"
+        android:defaultValue="k_euler_ancestral"
         android:summary="@string/prompt_sampler_summary"
         android:dialogTitle="@string/prompt_sampler_summary"
         android:entries="@array/sampler_list"

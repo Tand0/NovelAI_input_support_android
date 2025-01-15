@@ -6,6 +6,8 @@ import org.junit.Test;
 
 import org.junit.Assert;
 
+import jp.ne.ruru.park.ando.naiview.data.PromptType;
+
 /** test case for MyApplication
  * @author T.Ando
  */
@@ -24,26 +26,9 @@ public class MyApplicationTest {
         Assert.assertNotNull(result);
         //
         //
-        a.ignoreData(true);
-        a.ignoreData(false);
-        System.out.println(a.getTop().toString());
-        a.createData(a.getPrompt(),true);
-        a.createData(a.getUc(),false);
-        //
-        array = new JSONArray(); // clear
-        a.setTop(array);
-        a.setPrompt("prompt test,  aaa");
-        a.setUc("uc test");
-        a.ignoreData(true);
-        a.ignoreData(false);
-        a.createData(a.getPrompt(),true);
-        a.createData(a.getUc(),false);
-        //
-        Assert.assertEquals(2,a.getTop().length());
-        //
-        result = a.fromTree(a.getTop(),true);
+        result = a.fromTree(PromptType.P_BASE_OK, a.getTop());
         Assert.assertEquals(result,"prompt test, aaa");
-        result = a.fromTree(a.getTop(),false);
+        result = a.fromTree(PromptType.P_BASE_NG, a.getTop());
         Assert.assertEquals(result,"uc test");
         //
         result = a.createName("[[aaa:1.6]]");

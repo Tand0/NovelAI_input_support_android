@@ -4,6 +4,7 @@
     <string name="img_description1">画像エリア</string>
     <string name="img_position">0/0</string>
     <string name="title_activity_settings">設定</string>
+
     <string name="title_activity_prompt">プロンプト</string>
     <string name="title_activity_uc">ｘプロンプト</string>
 
@@ -29,7 +30,7 @@
     <string name="setting_width_x_height_summary">サイズ</string>
 
     <string name="setting_nai">NAIの設定</string>
-    <string name="prompt_model">モデル(default:nai-diffusion-3)</string>
+    <string name="prompt_model">モデル(default:nai-diffusion-4-curated-preview)</string>
     <string name="prompt_model_summary">model data</string>
     <string name="prompt_steps">ステップ</string>
     <string name="prompt_steps_summary">steps(default:23)</string>
@@ -140,4 +141,19 @@
     <string name="input_word_hint">プロンプトかｘプロンプトを入力してください</string>
     <string name="title_activity_image">画像</string>
 
+    <!-- prompt long -->
+    <string name="prompt_type_base_ok_long">プロンプト</string>
+    <string name="prompt_type_base_ng_long">ネガティブプロンプト</string>
+    <string name="prompt_type_ch1_ok_long">1キャラクタープロンプト</string>
+    <string name="prompt_type_ch1_ng_long">1キャラクターネガティブプロンプト</string>
+    <string name="prompt_type_ch2_ok_long">2キャラクタープロンプト</string>
+    <string name="prompt_type_ch2_ng_long">2キャラクターネガティブプロンプト</string>
+
+    <!-- prompt short -->
+    <string name="prompt_type_base_ok">プロンプト</string>
+    <string name="prompt_type_base_ng">ネガティブ</string>
+    <string name="prompt_type_ch1_ok">キャラ01 プロンプト</string>
+    <string name="prompt_type_ch1_ng">キャラ01 ネガティブ</string>
+    <string name="prompt_type_ch2_ok">キャラ02 プロンプト</string>
+    <string name="prompt_type_ch2_ng">キャラ02 ネガティブ</string>
 </resources>

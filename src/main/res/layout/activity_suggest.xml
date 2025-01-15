@@ -54,12 +54,7 @@
             android:layout_gravity="center_vertical"
             android:text="@string/menu_not_enhance"
             tools:ignore="ButtonStyle,RtlHardcoded" />
-        <Button
-            android:id="@+id/word_edit_from_tree"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/setting_use_tree"
-            tools:ignore="ButtonStyle,RtlHardcoded" />
+
     </LinearLayout>
 
 

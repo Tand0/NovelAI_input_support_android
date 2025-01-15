@@ -5,15 +5,16 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.fragment.app.Fragment;
+
+import jp.ne.ruru.park.ando.naiview.data.PromptType;
+import jp.ne.ruru.park.ando.naiview.data.TextType;
 
 public abstract class PromptAbstractFragment extends Fragment {
 
@@ -24,20 +25,6 @@ public abstract class PromptAbstractFragment extends Fragment {
         super.onCreate(savedInstanceState);
     }
     protected void onCreateNext() {
-        getFromPromptToTree().setOnClickListener(view->{
-            Activity activity = getActivity();
-            if (activity == null) {
-                return;
-            }
-            MyApplication a = (MyApplication) activity.getApplication();
-            setText(a,getTextPrompt().getText().toString());
-            a.fromPromptToTree(getText(a),isPrompt());
-            String message = "OK: To Tree";
-            Toast.makeText(getActivity() , message, Toast.LENGTH_SHORT).show();
-            a.appendLog(getActivity(),message);
-        });
-        getFromTreeToPrompt().setOnClickListener(view-> actionFromTreeToPrompt());
-
         getToSuggest().setOnClickListener(view->{
             Activity activity = getActivity();
             if (activity == null) {
@@ -52,26 +39,9 @@ public abstract class PromptAbstractFragment extends Fragment {
                 int end = getTextPrompt().getSelectionEnd();
                 target = getTextPrompt().getText().subSequence(start, end).toString();
             }
-            intent.putExtra(SuggestActivity.TYPE,TextType.TEXT_OTHER.toString());
-            intent.putExtra(SuggestActivity.TEXT,target);
+            intent.putExtra(SuggestActivity.SUG_T_TYPE, TextType.OTHER.toString());
+            intent.putExtra(SuggestActivity.SUG_VALUE,target);
             resultLauncher.launch(intent);
-        });
-
-        getToClear().setOnClickListener(view->{
-            Activity activity = getActivity();
-            if (activity == null) {
-                return;
-            }
-            MyApplication a = (MyApplication) activity.getApplication();
-            if (a == null) {
-                return;
-            }
-            //
-            // clear
-            a.changePart(null);
-            //
-            // change button
-            onResumePart();
         });
     }
 
@@ -87,7 +57,7 @@ public abstract class PromptAbstractFragment extends Fragment {
                     if (resultData == null) {
                         return;
                     }
-                    String text = resultData.getStringExtra(SuggestActivity.TEXT);
+                    String text = resultData.getStringExtra(SuggestActivity.SUG_VALUE);
                     if ((text == null) || text.isEmpty()) {
                         return;
                     }
@@ -124,50 +94,24 @@ public abstract class PromptAbstractFragment extends Fragment {
                     getTextPrompt().setText(text);
                 }
             });
-
-    /**
-     * Action FromTreeToPrompt
-     */
-    public void actionFromTreeToPrompt() {
-        Activity activity = getActivity();
-        if (activity == null) {
-            return;
-        }
-        MyApplication a = (MyApplication) activity.getApplication();
-        //
-        // update application
-        setText(a,getTextPrompt().getText().toString());
-        a.fromTreeToPrompt(isPrompt());
-        getTextPrompt().setText(getText(a));
-    }
-
     /**
      * on resume
      */
     @Override
     public void onResume() {
         super.onResume();
-        this.onResumePart();
+        this.onLoad();
     }
-    public void onResumePart() {
+    public void onLoad() {
         Activity activity = getActivity();
         if (activity == null) {
             return;
         }
         MyApplication a = (MyApplication) activity.getApplication();
-        getTextPrompt().setText(getText(a));
-        //
-        Button treeToPrompt = this.getFromTreeToPrompt();
-        Button menuChangePart = this.getToClear();
-        if (a.getChangePartItem() == null) {
-            String text = PromptAbstractFragment.this.getResources().getString(R.string.setting_use_tree);
-            treeToPrompt.setText(text);
-            menuChangePart.setVisibility(View.GONE);
-        } else {
-            String text = PromptAbstractFragment.this.getResources().getString(R.string.menu_change_part);
-            treeToPrompt.setText(text);
-            menuChangePart.setVisibility(View.VISIBLE);
+        if (a == null) {
+            return;
         }
+        getTextPrompt().setText(getText(a));
     }
     /**
      * on pause
@@ -175,6 +119,9 @@ public abstract class PromptAbstractFragment extends Fragment {
     @Override
     public void onPause() {
         super.onPause();
+        onSave();
+    }
+    public void onSave() {
         Activity activity = getActivity();
         if (activity == null) {
             return;
@@ -183,31 +130,32 @@ public abstract class PromptAbstractFragment extends Fragment {
         setText(a, getTextPrompt().getText().toString());
     }
 
-    public abstract Button getFromPromptToTree();
-    public abstract Button getFromTreeToPrompt();
     public abstract Button getToSuggest();
-    public abstract Button getToClear();
 
     public abstract EditText getTextPrompt();
 
     public abstract TextView getTokenView();
     /**
-     * get prompt from application
+     * get prompt
      * @return prompt
      */
-    public abstract String getText(MyApplication a);
+    public String getText(MyApplication a) {
+        return a.getValue(getPromptType());
+    }
 
     /**
-     * set prompt to application
+     * set prompt
      * @param text prompt
      */
-    public abstract void setText(MyApplication a, String text);
+    public void setText(MyApplication a, String text) {
+        a.setValue(getPromptType(), text);
+    }
 
     /**
-     * if prompt then true
-     * @return always true
+     * get prompt type
+     * @return always prompt type
      */
-    public abstract boolean isPrompt();
+    public abstract PromptType getPromptType();
 
 
     protected final TextWatcher myTextWatcher = new TextWatcher() {
@@ -225,7 +173,8 @@ public abstract class PromptAbstractFragment extends Fragment {
         @Override
         public void afterTextChanged(Editable s) {
             String[] ans = s.toString().replaceAll("[^0-9a-zA-Z]"," ").split("\\s+");
-            String index = "token=" + ans.length + " / 255";
+            int id = getPromptType().getIdLong();
+            String index = "token= " + ans.length + "/255:" + getResources().getString(id);
             getTokenView().setText(index);
         }
     };

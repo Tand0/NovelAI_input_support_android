@@ -25,6 +25,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
@@ -35,6 +36,9 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import jp.ne.ruru.park.ando.naiview.adapter.UriEtc;
+import jp.ne.ruru.park.ando.naiview.data.Data;
+import jp.ne.ruru.park.ando.naiview.data.PromptType;
+import jp.ne.ruru.park.ando.naiview.data.TextType;
 
 
 /** application
@@ -56,6 +60,8 @@ public class MyApplication  extends Application {
      * this is constructor
      */
     public MyApplication() {
+        valueHashMap.put(PromptType.P_BASE_OK,MyNASI.DEFAULT_PROMPT);
+        valueHashMap.put(PromptType.P_BASE_NG,MyNASI.DEFAULT_PROMPT_UC);
     }
 
     /**
@@ -107,46 +113,26 @@ public class MyApplication  extends Application {
     /**
      * prompt area
      */
-    private String prompt = MyNASI.DEFAULT_PROMPT;
+    private final HashMap<PromptType,String> valueHashMap = new HashMap<>();
 
     /**
-     * getter for prompt
+     * getter for prompt value
      *
-     * @return prompt
+     * @return prompt value
      */
-    public String getPrompt() {
-        return this.prompt;
+    public String getValue(PromptType pType) {
+        String target = this.valueHashMap.get(pType);
+        return (target == null) ? "" : target;
     }
 
     /**
-     * setter for prompt
+     * setter for prompt value
      *
-     * @param prompt prompt
+     * @param pType prompt type
+     * @param data data
      */
-    public void setPrompt(String prompt) {
-        this.prompt = prompt;
-    }
-
-    /**
-     * uc area
-     */
-    private String uc = MyNASI.DEFAULT_PROMPT_UC;
-    /**
-     * getter for prompt
-     *
-     * @return uc
-     */
-    public String getUc() {
-        return this.uc;
-    }
-
-    /**
-     * setter for uc
-     *
-     * @param uc uc
-     */
-    public void setUc(String uc) {
-        this.uc = uc;
+    public void setValue(PromptType pType, String data) {
+        this.valueHashMap.put(pType,data);
     }
 
     /**
@@ -343,6 +329,22 @@ public class MyApplication  extends Application {
     public void setImagePosition(int imagePosition) {
         this.imagePosition = imagePosition;
     }
+    public String getPromptModel(SharedPreferences preferences) {
+        return preferences.getString("prompt_model", "nai-diffusion-3").trim();
+    }
+    public boolean isPromptModelV4(SharedPreferences preferences) {
+        String target = getPromptModel(preferences);
+        return target.toLowerCase().trim().contains("nai-diffusion-4");
+    }
+    public String changeValuesForV4(String values) {
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
+        values = (values == null) ? "" : values;
+        if (isPromptModelV4(preferences)) {
+            values = values.replaceAll("_"," ");
+            values = values.replaceAll("\\^\\\\s+\\^","^_^");
+        }
+        return values;
+    }
 
     public boolean isUseTree(SharedPreferences preferences) {
         return preferences.getBoolean("setting_use_tree", true);
@@ -415,102 +417,6 @@ public class MyApplication  extends Application {
     }
 
     /**
-     * get object for JSONObject used name
-     * @param object target JSONObject
-     * @param name dict name
-     * @return if in name then return result object, else return null (NOT JSONException)
-     */
-    public JSONArray containJSONArray(Object object, String name) {
-        if (!(object instanceof JSONObject)) {
-            return null;
-        }
-        Object next;
-        try {
-            next = ((JSONObject)object).get(name);
-        } catch (JSONException e) {
-            return null;
-        }
-        if (!(next instanceof JSONArray)) {
-            return null;
-        }
-        return (JSONArray)next;
-    }
-    /**
-     * get object for JSONObject used name
-     * @param object target JSONObject
-     * @param name dict name
-     * @return if in name then return result object, else return null (NOT JSONException)
-     */
-    public String containString(Object object,String name) {
-        if (!(object instanceof JSONObject)) {
-            return null;
-        }
-        Object next;
-        try {
-            next = ((JSONObject)object).get(name);
-        } catch (JSONException e) {
-            return null;
-        }
-        if (!(next instanceof String)) {
-            return null;
-        }
-        return (String)next;
-    }
-    /**
-     * get object for JSONObject used name
-     * @param object target JSONObject
-     * @param name dict name
-     * @return if in name then return result object, else return null (NOT JSONException)
-     */
-    public Integer containInt(Object object,String name) {
-        if (!(object instanceof JSONObject)) {
-            return null;
-        }
-        int next;
-        try {
-            next = ((JSONObject)object).getInt(name);
-        } catch (JSONException e) {
-            return null;
-        }
-        return next;
-    }
-    /**
-     * get object for JSONObject used name
-     * @param object target JSONObject
-     * @param name dict name
-     * @return if in name then return result object, else return null (NOT JSONException)
-     */
-    public Boolean containBoolean(Object object,String name) {
-        if (!(object instanceof JSONObject)) {
-            return null;
-        }
-        boolean next;
-        try {
-            next = ((JSONObject)object).getBoolean(name);
-        } catch (JSONException e) {
-            return null;
-        }
-        return next;
-    }
-    /**
-     * get object for JSONObject used name
-     * @param object target JSONObject
-     * @param name dict name
-     * @return if in name then return result object, else return null (NOT JSONException)
-     */
-    public Double containDouble(Object object,String name) {
-        if (!(object instanceof JSONObject)) {
-            return null;
-        }
-        double next;
-        try {
-            next = ((JSONObject)object).getDouble(name);
-        } catch (JSONException e) {
-            return null;
-        }
-        return next;
-    }
-    /**
      * click action for button
      * @param context activity
      * @param id button id
@@ -551,31 +457,7 @@ public class MyApplication  extends Application {
         return false;
     }
 
-    /**
-     * send data from prompt/uc to tree
-     * @param target prompt
-     * @param isPrompt if prompt then true, uc then false
-     */
-    public void fromPromptToTree(String target,boolean isPrompt) {
-        this.ignoreData(isPrompt);
-        this.createData(target,isPrompt);
-    }
 
-    /**
-     * send data from tree to prompt/uc
-     * @param isPrompt if prompt then true, uc then false
-     */
-    public void fromTreeToPrompt(boolean isPrompt) {
-        if (this.getChangePartItem() == null) {
-            if (isPrompt) {
-                this.setPrompt(fromTree(getTop(),true));
-            } else {
-                this.setUc(fromTree(getTop(),false));
-            }
-        } else {
-            this.changePart();
-        }
-    }
 
     public static final String COMMENT = "comment:";
     public static final String PARAM = "parameters:";
@@ -623,47 +505,80 @@ public class MyApplication  extends Application {
                         String comment = x.toString().substring(COMMENT.length());
                         try {
                             JSONObject item = new JSONObject(comment);
-                            String string = containString(item,"prompt");
-                            if (string != null) {
-                                this.setPrompt(string);
+                            JSONObject v4Prompt = Data.containJSONObject(item, "v4_prompt");
+                            if (v4Prompt == null) { // for v3
+                                String string = Data.containString(item,"prompt");
+                                if (string != null) {
+                                    string = changeValuesForV4(string);
+                                    this.setValue(PromptType.P_BASE_OK,string);
+                                    setValue(PromptType.P_CH01_OK,"");
+                                    setValue(PromptType.P_CH02_OK,"");
+                                }
+                            } else { // for v4
+                                String[] strings = this.getCharCaption(v4Prompt);
+                                PromptType[] pTypeList = {
+                                        PromptType.P_BASE_OK,
+                                        PromptType.P_CH01_OK,
+                                        PromptType.P_CH02_OK,
+                                };
+                                for (int i = 0 ; i < pTypeList.length ; i++) {
+                                    this.setValue(pTypeList[i],strings[i]);
+                                }
                             }
-                            string = containString(item,"uc");
-                            if (string != null) {
-                                this.setUc(string);
+                            v4Prompt = Data.containJSONObject(item, "v4_negative_prompt");
+                            if (v4Prompt == null) { // for v3
+                                String string = Data.containString(item,"uc");
+                                if (string != null) {
+                                    string = changeValuesForV4(string);
+                                    this.setValue(PromptType.P_BASE_NG,string);
+                                    setValue(PromptType.P_CH01_NG,"");
+                                    setValue(PromptType.P_CH02_NG,"");
+                                }
+                            } else { // for v4
+                                String[] strings = this.getCharCaption(v4Prompt);
+                                PromptType[] pTypeList = {
+                                        PromptType.P_BASE_NG,
+                                        PromptType.P_CH01_NG,
+                                        PromptType.P_CH02_NG,
+                                };
+                                for (int i = 0 ; i < pTypeList.length ; i++) {
+                                    this.setValue(pTypeList[i],strings[i]);
+                                }
                             }
-                            Integer integer = containInt(item,"steps");
+                            Integer integer = Data.containInt(item,"steps");
                             if (integer != null) {
                                 editor.putInt("prompt_int_number_steps",integer);
                             }
-                            integer = containInt(item,"scale");
+                            integer = Data.containInt(item,"scale");
                             if (integer != null) {
                                 editor.putInt("prompt_int_number_scale",integer);
                             }
-                            Double doubleX = containDouble(item,"cfg_rescale");
+                            Double doubleX = Data.containDouble(item,"cfg_rescale");
                             if (doubleX != null) {
                                 editor.putInt("prompt_int_cfg_rescale",(int)(doubleX*100));
                             }
-                            string = containString(item,"sampler");
+                            String string;
+                            string = Data.containString(item,"sampler");
                             if (string != null) {
                                 editor.putString("prompt_sampler",string);
                             }
-                            Boolean targetBoolean = containBoolean(item,"sm");
+                            Boolean targetBoolean = Data.containBoolean(item,"sm");
                             if (targetBoolean != null) {
                                 editor.putBoolean("prompt_sm",targetBoolean);
                             }
-                            targetBoolean = containBoolean(item,"sm_dyn");
+                            targetBoolean = Data.containBoolean(item,"sm_dyn");
                             if (targetBoolean != null) {
                                 editor.putBoolean("prompt_sm_dyn",targetBoolean);
                             }
-                            targetBoolean = containBoolean(item,"variety");
+                            targetBoolean = Data.containBoolean(item,"variety");
                             if (targetBoolean != null) {
                                 editor.putBoolean("prompt_variety",targetBoolean);
                             }
-                            integer = containInt(item,"seed");
+                            integer = Data.containInt(item,"seed");
                             if (integer != null) {
                                 this.setSeed(integer);
                             }
-                            string = containString(item,"noise_schedule");
+                            string = Data.containString(item,"noise_schedule");
                             if (string != null) {
                                 editor.putString("noise_schedule",string);
                             }
@@ -678,14 +593,14 @@ public class MyApplication  extends Application {
                             if (0 <= index) {
                                 prompt = prompt.substring(0, index);
                             }
-                            this.setPrompt(prompt);
+                            this.setValue(PromptType.P_BASE_OK,prompt);
                         } else if (x.toString().toLowerCase().startsWith(NEGATIVE_PARAM)) {
                             String uc = x.toString();
                             int index = uc.indexOf(PARAM);
                             if (0 <= index) {
                                 uc = uc.substring(0, index);
                             }
-                            this.setUc(uc);
+                            this.setValue(PromptType.P_BASE_OK,uc);
                         }
                     }
                 }
@@ -704,7 +619,33 @@ public class MyApplication  extends Application {
             context.startActivity(intent);
         }
     }
-
+    protected String[] getCharCaption(JSONObject v4Prompt) {
+        String[] strings = new String[3];
+        JSONObject caption = Data.containJSONObject(v4Prompt, "caption");
+        strings[0] = Data.containString(caption,"base_caption");
+        strings[0] = (strings[0] == null) ? "" : strings[0];
+        //
+        JSONArray charCaptionsList = Data.containJSONArray(caption,"char_captions");
+        strings[1] = getCharCaptions(charCaptionsList,0);
+        strings[2] = getCharCaptions(charCaptionsList,1);
+        return strings;
+    }
+    protected String getCharCaptions(JSONArray charCaptionsList, int index) {
+        String target;
+        if (index < charCaptionsList.length()) {
+            JSONObject charCaptions;
+            try {
+                charCaptions = charCaptionsList.getJSONObject(index);
+                target = Data.containString(charCaptions,"char_caption");
+                target = (target == null) ? "" : target;
+            } catch (JSONException e) {
+                target = "";
+            }
+        } else {
+            target = "";
+        }
+        return target;
+    }
     /**
      * update image buffer from uri
      * @param context activity
@@ -796,102 +737,6 @@ public class MyApplication  extends Application {
             appendLog(context,"Internal save data not fond");
         }
     }
-    /** dict name */
-    public static final String TEXT = "text";
-
-    /** dict value */
-    public static final String TEXT_IGNORE = "Ignore-";
-
-    /** dict value */
-    public static final String TEXT_UC = "uc-";
-
-    /** dict name */
-    public static final String VALUES = "values";
-
-    /** dict name */
-    public static final String CHILD = "child";
-
-    /** dict name for tree activity */
-    public static final String EXPAND = "expand";
-
-    /** dict name for tree activity  */
-    public static final String LEVEL = "level";
-
-    /**
-     * Disable objects directly under root
-     * @param isPrompt if true then prompt else uc.
-     */
-    public void ignoreData(boolean isPrompt) {
-        for (int i = 0 ; i < this.getTop().length() ; i++) {
-            try {
-                JSONObject item = (JSONObject)this.getTop().get(i);
-                String text = containString(item,TEXT);
-                if (text != null) {
-                    boolean isPromptTarget = ! text.contains(TEXT_UC);
-                    if (isPromptTarget != isPrompt) {
-                        continue;
-                    }
-                    if (! text.contains(TEXT_IGNORE)) {
-                        item.put(TEXT,TEXT_IGNORE + text);
-                        item.put(EXPAND,false);
-                    }
-                }
-            } catch (JSONException e) {
-                // NONE
-            }
-        }
-    }
-
-    /**
-     * create dict from prompt/uc
-     * @param string prompt/uc data
-     * @param isPrompt if true then prompt else uc.
-     */
-    public void createData(String string,boolean isPrompt) {
-        string = string.replace("\"", ",")
-                .replace("_", " ")
-                .replace("(", "{")
-                .replace(")", "}")
-                .replace("+", ",")
-                .replace("|", ",")
-                .replace("\r", ",")
-                .replace("\n", ",");
-        String[] middle = string.split(",");
-        String topText;
-        String wordText;
-        String values;
-        topText = TextType.TEXT_SEQUENCE.toString();
-        wordText = TextType.TEXT_WORD.toString();
-        if (isPrompt) {
-            values = "prompt";
-        } else {
-            topText = TEXT_UC + topText;
-            wordText = TEXT_UC + wordText;
-            values = "uc";
-        }
-        JSONObject parent = new JSONObject();
-        this.getTop().put(parent);
-        try {
-            parent.put(TEXT,topText);
-            parent.put(VALUES,values);
-            JSONArray childArray = new JSONArray();
-            parent.put(CHILD,childArray);
-            for (String name : middle) {
-                name = this.createName(name);
-                if ((name == null) || (name.isEmpty())) {
-                    continue;
-                }
-                JSONObject child = new JSONObject();
-                child.put(TEXT,wordText);
-                child.put(VALUES,name);
-                child.put(CHILD,new JSONArray());
-                childArray.put(child);
-            }
-        } catch (JSONException e) {
-            // NONE
-        }
-    }
-
     /**
      * create parse the characters
      * @param word original word
@@ -1001,13 +846,121 @@ public class MyApplication  extends Application {
     }
 
     /**
+     * change tree to list
+     * @param promptType prompt type
+     * @param list list
+     * @param object tree
+     */
+    public void dictToList(PromptType promptType, Object object, LinkedList<String> list) {
+        if (object == null) {
+            return;
+        }
+        try {
+            if (object instanceof JSONArray) {
+                JSONArray array = (JSONArray) object;
+                for (int i = 0; i < array.length(); i++) {
+                    dictToList(promptType, array.get(i), list);
+                }
+                return;
+            } else if (! (object instanceof JSONObject)) {
+                return;
+            }
+            JSONObject jsonObject = (JSONObject) object;
+            Data jsonData = new Data(jsonObject);
+            if (! promptType.equals(jsonData.getPromptType())) {
+                return;
+            }
+            if (jsonData.getIgnore()) {
+                return;
+            }
+            int max;
+            switch (jsonData.getTextType()) {
+                case WORD:
+                    String values = jsonData.getValue();
+                    values = values.replace(",", " ").trim();
+                    values = changeValuesForV4(values);
+                    if (values.isEmpty()) {
+                        break;
+                    }
+                    list.add(values);
+                    break;
+                case SEQUENCE:
+                    dictToList(promptType, jsonData.getChild(), list);
+                    break;
+                case SELECT:
+                    JSONArray childArray = jsonData.getChild();
+                    max = childArray.length();
+                    if (max != 0) {
+                        Random rand = new Random();
+                        int index = rand.nextInt(max);
+                        dictToList(promptType, childArray.get(index), list);
+                    }
+                    break;
+                case WEIGHT:
+                    JSONArray weightArray = jsonData.getChild();
+                    max = weightArray.length();
+                    if (0 < max) {
+                        Random rand = new Random();
+                        boolean flag = true;
+                        for (int i = 0; i < max; i++) {
+                            if (rand.nextInt(100) < 60) {
+                                dictToList(promptType, weightArray.get(i), list);
+                                flag = false;
+                                break;
+                            }
+                        }
+                        if (flag) {
+                            dictToList(promptType, weightArray.get(max - 1), list);
+                        }
+                    }
+                    break;
+            }
+        } catch (JSONException e) {
+            // NONE
+        }
+    }
+    public void setChangePartItem(JSONObject changePartItem) {
+        this.changePartItem = changePartItem;
+    }
+    public JSONObject getChangePartItem() {
+        return this.changePartItem;
+    }
+    protected JSONObject changePartItem = null;
+
+    public void fromTreeToPrompt() {
+        final JSONObject target = getChangePartItem();
+        if (target != null) {
+            Data data = new Data(target);
+            PromptType prompt = data.getPromptType();
+            fromTreeToPromptForPrompt(prompt, target, false);
+            //
+            if (PromptType.P_CH01_OK.equals(prompt)
+                    || PromptType.P_CH02_OK.equals(prompt)) {
+                String baseString = this.getValue(PromptType.P_BASE_OK);
+                baseString = deleteTextFromItem(baseString, target);
+                this.setValue(PromptType.P_BASE_OK, baseString);
+            } else if (PromptType.P_CH01_NG.equals(prompt)
+                    || PromptType.P_CH02_NG.equals(prompt)) {
+                String baseString = this.getValue(PromptType.P_BASE_NG);
+                baseString = deleteTextFromItem(baseString, target);
+                this.setValue(PromptType.P_BASE_NG, baseString);
+            }
+        } else {
+            for (PromptType prompt: PromptType.values()) {
+                fromTreeToPromptForPrompt(prompt, getTop(), true);
+            }
+        }
+    }
+
+    /**
      * get prompt/uc from tree
-     * @param array original data
-     * @param isPrompt if true then prompt else uc.
+     * @param prompt promptType
+     * @param object original data
      * @return prompt/uc
      */
-    public String fromTree(JSONArray array,boolean isPrompt) {
-        List<String> result = fromTreeList(array,isPrompt);
+    public String fromTree(PromptType prompt, Object object) {
+        LinkedList<String> result = new LinkedList<>();
+        dictToList(prompt, object, result);
         String ans = "";
         if (!result.isEmpty()) {
             StringBuilder builder = new StringBuilder();
@@ -1020,169 +973,21 @@ public class MyApplication  extends Application {
         }
         return ans;
     }
-
-    /**
-     * get prompt/uc from tree
-     * @param array original data
-     * @param isPrompt if true then prompt else uc.
-     * @return prompt/uc
-     */
-    public List<String> fromTreeList(JSONArray array,boolean isPrompt) {
-        JSONArray data = new JSONArray();
-        this.deepCopyRemoveIgnore(data,array,isPrompt);
-        LinkedList<String> result = new LinkedList<>();
-        dictToList(result, data);
-        return result;
-    }
-    /**
-     * get a deep copy of the data ignoring TEXT_IGNORE
-     * @param copy copy data
-     * @param array original data
-     * @param isPrompt if true then prompt else uc.
-     */
-    public void deepCopyRemoveIgnore(JSONArray copy,JSONArray array, boolean isPrompt) {
-        try {
-            for (int i = 0; i < array.length(); i++) {
-                Object object = array.get(i);
-                if (!(object instanceof JSONObject)) {
-                    continue;
-                }
-                JSONObject jsonObject = (JSONObject) object;
-                String text = containString(jsonObject,TEXT);
-                if (text == null) {
-                    continue;
-                }
-                if (text.contains(TEXT_IGNORE)) {
-                    continue;
-                }
-                boolean flag = text.contains(TEXT_UC);
-                if (flag == isPrompt) {
-                    continue;
-                }
-                JSONObject child = new JSONObject();
-                copy.put(child);
-                text = containString(jsonObject,TEXT);
-                if (text != null) child.put(TEXT,text);
-                String values = containString(jsonObject,VALUES);
-                if (values != null) child.put(VALUES,values);
-                JSONArray copyChildArray = new JSONArray();
-                JSONArray childArray = containJSONArray(jsonObject,CHILD);
-                if ((childArray != null) && (0 < childArray.length())) {
-                    deepCopyRemoveIgnore(copyChildArray, childArray, isPrompt);
-                }
-                child.put(CHILD,copyChildArray);
+    public void fromTreeToPromptForPrompt(PromptType prompt, Object item,boolean all) {
+        String answer = fromTree(prompt, item);
+        if (!all) {
+            String target;
+            target = this.getValue(prompt);
+            target = deleteTextFromItem(target, item);
+            if (!target.isEmpty() && !answer.isEmpty()) {
+                target = target + ", ";
             }
-        } catch (JSONException e) {
-            // NONE
+            answer = target + answer;
         }
-    }
-
-    /**
-     * change tree to list
-     * @param list list
-     * @param object tree
-     */
-    public void dictToList(LinkedList<String> list,Object object) {
-        if (object == null) {
-            return;
-        }
-        try {
-            if (object instanceof JSONArray) {
-                JSONArray array = (JSONArray) object;
-                for (int i = 0; i < array.length(); i++) {
-                    dictToList(list, array.get(i));
-                }
-            } else if (object instanceof JSONObject) {
-                JSONObject jsonObject = (JSONObject) object;
-                String mode = containString(jsonObject, TEXT);
-                if (mode != null) {
-                    if (TextType.TEXT_WORD.contains(mode)) {
-                        String values = containString(jsonObject, VALUES);
-                        if (values != null) {
-                            values = values.replace(","," ").trim();
-                            if (!values.isEmpty()) {
-                                list.add(values);
-                            }
-                        }
-                    } else if (TextType.TEXT_SEQUENCE.contains(mode)) {
-                        dictToList(list, containJSONArray(jsonObject, CHILD));
-                    } else if (TextType.TEXT_SELECT.contains(mode)) {
-                        JSONArray childArray = containJSONArray(jsonObject, CHILD);
-                        if (childArray != null) {
-                            int max = childArray.length();
-                            if (max != 0) {
-                                Random rand = new Random();
-                                int index = rand.nextInt(max);
-                                dictToList(list, childArray.get(index));
-                            }
-                        }
-                    } else if (TextType.TEXT_WEIGHT.contains(mode)) {
-                        JSONArray childArray = containJSONArray(jsonObject, CHILD);
-                        if (childArray != null) {
-                            int max = childArray.length();
-                            if (0 < max) {
-                                Random rand = new Random();
-                                boolean flag = true;
-                                for (int i = 0; i < max; i++) {
-                                    if (rand.nextInt(100) < 60) {
-                                        dictToList(list, childArray.get(i));
-                                        flag = false;
-                                        break;
-                                    }
-                                }
-                                if (flag) {
-                                    dictToList(list, childArray.get(max - 1));
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        } catch (JSONException e) {
-            // NONE
-        }
-    }
-    public JSONObject getChangePartItem() {
-        return changePartItem;
-    }
-    protected JSONObject changePartItem = null;
-    public void changePart(JSONObject item) {
-        this.changePartItem = item;
-        if (item == null) {
-            return;
-        }
-        this.changePart();
-    }
-    public void changePart() {
-        Object item = this.changePartItem;
-        if (item == null) {
-            item = this.getTop();
-        }
-        String key = containString(item,TEXT);
-        boolean isPrompt;
-        if (key == null) {
-            isPrompt = Boolean.FALSE;
-        } else {
-            isPrompt = ! key.contains(TEXT_UC);
-        }
+        answer = answer.replaceAll(",(\\s*,)+\\s*",", ");
         //
-        JSONArray dummyTop = new JSONArray();
-        dummyTop.put(item);
-        String answer = fromTree(dummyTop,isPrompt);
-        String target = isPrompt ? this.getPrompt() : this.getUc();
-        target = deleteTextFromItem(target,item);
-        if (!target.isEmpty() && !answer.isEmpty()) {
-            target = target + ", ";
-        }
-        target = target + answer;
-        target = target.replaceAll(",(\\s*,)+\\s*",", ");
-        if (isPrompt) {
-            this.setPrompt(target);
-        } else {
-            this.setUc(target);
-        }
+        this.setValue(prompt, answer);
     }
-
     /**
      * delete text from item
      * @param targets original text
@@ -1228,14 +1033,14 @@ public class MyApplication  extends Application {
                 }
             }
         } else if (object instanceof JSONObject) {
-            String type = containString(object,TEXT);
-            if (TextType.TEXT_WORD.contains(type)) {
-                String key = containString(object,VALUES);
-                if (key != null) {
+            Data objectData = new Data(object);
+            if (TextType.WORD.equals(objectData.getTextType())) {
+                String key = objectData.getValue();
+                if (! key.isEmpty()) {
                     list.add(changeBaseKey(key));
                 }
             }
-            list.addAll(getDeleteTextList(containJSONArray(object,CHILD)));
+            list.addAll(getDeleteTextList(objectData.getChild()));
         }
         return list;
     }
@@ -1248,7 +1053,7 @@ public class MyApplication  extends Application {
      * @param context activity
      */
     public void subscription(Context context) {
-        execution(context,MyNASI.TYPE.SUBSCRIPTION,-1,-1,null);
+        execution(context, MyNASI.REST_TYPE.SUBSCRIPTION,-1,-1,null);
     }
 
     /** send data fo Novel AI Support Interface
@@ -1259,12 +1064,12 @@ public class MyApplication  extends Application {
      * @param bitmapY display image height
      * @param option option
      */
-    public void execution(Context context,MyNASI.TYPE type,int bitmapX,int bitmapY,Object option) {
+    public void execution(Context context, MyNASI.REST_TYPE type, int bitmapX, int bitmapY, Object option) {
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
         String email = preferences.getString("setting_login_email","").trim();
         String password = preferences.getString("setting_login_password","").trim();
         MyNASI.Allin1Request request;
-        if (type == MyNASI.TYPE.UPSCALE) {
+        if (type == MyNASI.REST_TYPE.UPSCALE) {
             String message = context.getResources().getString(R.string.upscale);
             Toast.makeText(this, message, Toast.LENGTH_LONG).show();
             appendLog(context, message);
@@ -1276,27 +1081,17 @@ public class MyApplication  extends Application {
                     bitmapY,
                     getSettingScale(preferences),
                     this.imageBuffer);
-        } else if (type == MyNASI.TYPE.IMAGE) {
+        } else if (type == MyNASI.REST_TYPE.IMAGE) {
             String message = context.getResources().getString(R.string.generate_image);
             boolean isI2i = isSettingI2i(preferences);
             Toast.makeText(this, message, Toast.LENGTH_LONG).show();
             appendLog(context, message);
             if (isUseTree(preferences)) {
-                if (this.getChangePartItem() == null) {
-                    if (0 < this.getTop().length()) {
-                        this.setPrompt(fromTree(getTop(), true));
-                        this.setUc(fromTree(getTop(), false));
-                    } else {
-                        this.fromPromptToTree(getPrompt(), true);
-                        this.fromPromptToTree(getUc(), false);
-                    }
-                } else {
-                    this.changePart();
-                }
+                fromTreeToPrompt();
             }
-            String prompt = this.getPrompt();
-            String uc = this.getUc();
-            String model = preferences.getString("prompt_model", "nai-diffusion-3").trim();
+            String prompt = this.getValue(PromptType.P_BASE_OK);
+            String uc = this.getValue(PromptType.P_BASE_NG);
+            String model = getPromptModel(preferences);
             int width;
             int height;
             byte[] targetBuffer;
@@ -1411,8 +1206,14 @@ public class MyApplication  extends Application {
                 this.setSeed(seed);
             }
             String noise_schedule = preferences.getString("prompt_noise_schedule", "karras").trim();
+            String[] characters = new String[4];
+            characters[0] = this.getValue(PromptType.P_CH01_OK);
+            characters[1] = this.getValue(PromptType.P_CH01_NG);
+            characters[2] = this.getValue(PromptType.P_CH02_OK);
+            characters[3] = this.getValue(PromptType.P_CH02_NG);
             request = new MyNASI.Allin1RequestImage(
-                    MyNASI.TYPE.IMAGE,
+                    isPromptModelV4(preferences),
+                    MyNASI.REST_TYPE.IMAGE,
                     email,
                     password,
                     model,
@@ -1431,9 +1232,10 @@ public class MyApplication  extends Application {
                     noise_schedule,
                     targetBuffer,
                     strength,
-                    noise);
-        } else if (type == MyNASI.TYPE.SUGGEST_TAGS) {
-            String model = preferences.getString("prompt_model", "nai-diffusion-3").trim();
+                    noise,
+                    characters);
+        } else if (type == MyNASI.REST_TYPE.SUGGEST_TAGS) {
+            String model = getPromptModel(preferences);
             String target = (String) option;
             //
             request = new MyNASI.Allin1RequestSuggestTags(
@@ -1453,11 +1255,11 @@ public class MyApplication  extends Application {
                 try {
                     final MyNASI.Allin1Response res;
                     MyNASI nasi = this.getMyNASI();
-                    if (request.type == MyNASI.TYPE.UPSCALE) {
+                    if (request.type == MyNASI.REST_TYPE.UPSCALE) {
                         res = nasi.upscale((MyNASI.Allin1RequestUpscale)request);
-                    } else if (request.type == MyNASI.TYPE.IMAGE) {
+                    } else if (request.type == MyNASI.REST_TYPE.IMAGE) {
                         res = nasi.downloadImage((MyNASI.Allin1RequestImage)request);
-                    } else if (request.type == MyNASI.TYPE.SUGGEST_TAGS) {
+                    } else if (request.type == MyNASI.REST_TYPE.SUGGEST_TAGS) {
                         res = nasi.suggestTags((MyNASI.Allin1RequestSuggestTags)request);
                     } else {
                         res = nasi.subscription(request);
@@ -1472,50 +1274,72 @@ public class MyApplication  extends Application {
         Executors.newSingleThreadExecutor().execute(runnable);
     }
 
-    protected void appendJSONObject(StringBuilder buf,int index, Object m) {
-        if (m instanceof JSONObject) {
-            JSONObject obj = (JSONObject) m;
-            for (Iterator<String> it = obj.keys(); it.hasNext(); ) {
-                for (int i = 0 ; i < index ; i++) {
-                    buf.append(" ");
-                }
+    protected void appendJSONObject(StringBuilder buf,int index, JSONObject m) {
+        try {
+            for (Iterator<String> it = m.keys(); it.hasNext(); ) {
                 String key = it.next();
+                appendIndexToSpace(buf, index);
+                buf.append("\"");
                 buf.append(key);
-                buf.append("=\n");
+                buf.append("\"");
                 if (key.equals("image")) {
-                    appendJSONObject(buf, index + 2, "*image*");
+                    buf.append("*image*\n");
+                    continue;
+                }
+                Object nextData = m.get(key);
+                if (nextData instanceof JSONObject) {
+                    buf.append(":{\n");
+                    appendJSONObject(buf, index + 2, (JSONObject) nextData);
+                } else if (nextData instanceof JSONArray) {
+                    buf.append(":[\n");
+                    appendJSONObject(buf, index + 2, (JSONArray) nextData);
+                } else if (nextData instanceof String) {
+                    buf.append(":\"");
+                    buf.append(nextData);
+                    buf.append("\"\n");
                 } else {
-                    try {
-                        Object nextData = obj.get(key);
-                        appendJSONObject(buf, index + 2, nextData);
-                    } catch (JSONException e) {
-                        appendJSONObject(buf, index + 2, e.getMessage());
-                    }
+                    buf.append(":");
+                    buf.append(nextData);
+                    buf.append("\n");
                 }
             }
-        } else if (m instanceof JSONArray) {
-            JSONArray array = (JSONArray)m;
-            for (int i = 0 ; i < index ; i++) {
-                buf.append(" ");
-            }
-            buf.append("[\n");
-            for (int i = 0 ; i < array.length() ; i++) {
-                try {
-                Object nextData = array.get(i);
-                    appendJSONObject(buf, index + 2, nextData);
-                } catch (JSONException e) {
-                    appendJSONObject(buf, index + 2, e.getMessage());
-                }
-            }
-        } else {
-            for (int i = 0 ; i < index ; i++) {
-                buf.append(" ");
-            }
-            buf.append(m.toString());
+        } catch (JSONException e) {
+            buf.append("\n");
+            buf.append(e.getMessage());
             buf.append("\n");
         }
     }
-
+    protected void appendJSONObject(StringBuilder buf,int index, JSONArray m) {
+        try {
+            for (int i = 0; i < m.length() ; i++) {
+                Object nextData = m.get(i);
+                appendIndexToSpace(buf, index);
+                if (nextData instanceof JSONObject) {
+                    buf.append("{\n");
+                    appendJSONObject(buf, index + 2, (JSONObject) nextData);
+                } else if (nextData instanceof JSONArray) {
+                    buf.append("[\n");
+                    appendJSONObject(buf, index + 2, (JSONArray) nextData);
+                } else if (nextData instanceof String) {
+                    buf.append(":\"");
+                    buf.append(nextData);
+                    buf.append("\"\n");
+                } else {
+                    buf.append(nextData);
+                    buf.append("\n");
+                }
+            }
+        } catch (JSONException e) {
+            buf.append("\n");
+            buf.append(e.getMessage());
+            buf.append("\n");
+        }
+    }
+    protected void appendIndexToSpace(StringBuilder buf,int index) {
+        for (int j = 0 ; j < index ; j++) {
+            buf.append(" ");
+        }
+    }
     /** call back from Novel AI Support Interface
      * @param context activity
      * @param res result data
@@ -1529,15 +1353,15 @@ public class MyApplication  extends Application {
         if ((res.content != null) && (!res.content.isEmpty())) {
             buf.append("content=").append(res.content).append("\n");
         }
-        if (res.type == MyNASI.TYPE.LOGIN) {
+        if (res.type == MyNASI.REST_TYPE.LOGIN) {
             buf.append("login\n");
-        } else if ((res.type == MyNASI.TYPE.IMAGE)
-            || (res.type == MyNASI.TYPE.UPSCALE)) {
+        } else if ((res.type == MyNASI.REST_TYPE.IMAGE)
+            || (res.type == MyNASI.REST_TYPE.UPSCALE)) {
             JSONObject m = res.m;
             if (m == null) {
                 buf.append("requestBody=").append("null");
             } else {
-                buf.append("requestBody=\n");
+                buf.append("requestBody:{\n");
                 appendJSONObject(buf,2, m);
             }
             if (res.statusCode == 200) {
@@ -1557,7 +1381,7 @@ public class MyApplication  extends Application {
                 String message = "NG";
                 Toast.makeText(context, message, Toast.LENGTH_LONG).show();
             }
-        } else if (res.type == MyNASI.TYPE.SUGGEST_TAGS) {
+        } else if (res.type == MyNASI.REST_TYPE.SUGGEST_TAGS) {
             if (res.statusCode == 200) {
                 if (context instanceof SuggestActivity) {
                     ((SuggestActivity) context).suggestTagsResponse(res.content);

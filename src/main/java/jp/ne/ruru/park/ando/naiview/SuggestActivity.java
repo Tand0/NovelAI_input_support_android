@@ -16,6 +16,8 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
+import jp.ne.ruru.park.ando.naiview.data.Data;
+import jp.ne.ruru.park.ando.naiview.data.TextType;
 import jp.ne.ruru.park.ando.naiview.databinding.ActivitySuggestBinding;
 import jp.ne.ruru.park.ando.naiview.adapter.SuggestList;
 import jp.ne.ruru.park.ando.naiview.adapter.SuggestListAdapter;
@@ -29,9 +31,9 @@ public class SuggestActivity extends AppCompatActivity {
 
     private ActivitySuggestBinding binding;
 
-    public static final String TYPE = "SuggestActivity.type";
-    public static final String IS_INSERT = "SuggestActivity.is_insert";
-    public static final String TEXT = "SuggestActivity.TEXT";
+    public static final String SUG_IS_INSERT = "SuggestActivity.is_insert";
+    public static final String SUG_VALUE = "SuggestActivity.VALUE";
+    public static final String SUG_T_TYPE = "SuggestActivity.T_TYPE";
 
 
     /** on create
@@ -66,23 +68,15 @@ public class SuggestActivity extends AppCompatActivity {
             values = a.getEnhanceText(values, index);
             update(values);
         });
-        binding.wordEditFromTree.setOnClickListener(view->{
-            a.fromTreeToPrompt(true);
-            List<String> listString  = a.fromTreeList(a.getTop(),true);
-            List<SuggestList> list = new ArrayList<>();
-            for (String string : listString) {
-                list.add(new SuggestList(string, 1, 0.0, null, 0));
-            }
-            updateAdapter(list);
-        });
         binding.wordEditInsert.setOnClickListener((v)->wordEditBack(true));
         binding.wordEditChange.setOnClickListener((v)->wordEditBack(false));
         Intent intent = getIntent();
         if (intent == null) {
             return;
         }
-        TextType selectedItem = TextType.getTextType(intent.getStringExtra(TYPE));
-        if (TextType.TEXT_OTHER.equals(selectedItem)) {
+        String sTType = intent.getStringExtra(SUG_T_TYPE);
+        TextType selectedTItem = TextType.getTypeString(sTType);
+        if (TextType.OTHER.equals(selectedTItem)) {
             binding.wordEditSpinner.setEnabled(false);
             binding.wordEditSpinner.setVisibility(View.GONE);
             binding.wordEditChange.setEnabled(false);
@@ -90,11 +84,11 @@ public class SuggestActivity extends AppCompatActivity {
         } else {
             binding.wordEditSpinner.setEnabled(true);
             binding.wordEditSpinner.setVisibility(View.VISIBLE);
-            binding.wordEditSpinner.setSelection(selectedItem.getIndex());
+            binding.wordEditSpinner.setSelection(selectedTItem.getIndex());
             binding.wordEditChange.setEnabled(true);
             binding.wordEditChange.setVisibility(View.VISIBLE);
         }
-        update(intent.getStringExtra(TEXT));
+        update(intent.getStringExtra(SUG_VALUE));
         //
         binding.suggestTags.setOnClickListener(this::suggestTags);
         //
@@ -118,9 +112,9 @@ public class SuggestActivity extends AppCompatActivity {
         if ((position < 0) || (TextType.values().length <= position)) {
             position = 0;
         }
-        intent.putExtra(TYPE,TextType.values()[position].toString());
-        intent.putExtra(IS_INSERT,isInsert);
-        intent.putExtra(TEXT,getPrompt().trim());
+        intent.putExtra(SUG_T_TYPE,TextType.values()[position].toString());
+        intent.putExtra(SUG_IS_INSERT,isInsert);
+        intent.putExtra(SUG_VALUE,getPrompt().trim());
 
         SuggestActivity.this.setResult(Activity.RESULT_OK,intent);
         SuggestActivity.this.finish();
@@ -159,7 +153,7 @@ public class SuggestActivity extends AppCompatActivity {
             a.appendLog(this,"suggest==null");
             return;
         }
-        a.execution(this, MyNASI.TYPE.SUGGEST_TAGS,0,0,wordRaw);
+        a.execution(this, MyNASI.REST_TYPE.SUGGEST_TAGS,0,0,wordRaw);
     }
     public void suggestTagsResponse(String string) {
         MyApplication a =
@@ -170,7 +164,7 @@ public class SuggestActivity extends AppCompatActivity {
         JSONArray array;
         try {
             JSONObject top = new JSONObject(string);
-            array = a.containJSONArray(top,"tags");
+            array = Data.containJSONArray(top,"tags");
         } catch (JSONException e) {
             try {
                 array = new JSONArray(string);
@@ -183,12 +177,12 @@ public class SuggestActivity extends AppCompatActivity {
         try {
              for (int i = 0; i < array.length() ; i++) {
                 Object object = array.get(i);
-                String tag = a.containString(object,"tag");
-                Integer count = a.containInt(object,"count");
-                Double confidence = a.containDouble(object,"confidence");
-                String jpTag = a.containString(object,"jp_tag");
-                String enTag = a.containString(object,"en_tag");
-                Integer power = a.containInt(object,"power");
+                String tag = Data.containString(object,"tag");
+                Integer count = Data.containInt(object,"count");
+                Double confidence = Data.containDouble(object,"confidence");
+                String jpTag = Data.containString(object,"jp_tag");
+                String enTag = Data.containString(object,"en_tag");
+                Integer power = Data.containInt(object,"power");
                 if ((tag != null) && (count != null) && (confidence != null)) {
                     list.add(new SuggestList(tag,count,confidence, null, 0));
                 } else if ((jpTag != null) && (enTag != null) && (power != null)) {

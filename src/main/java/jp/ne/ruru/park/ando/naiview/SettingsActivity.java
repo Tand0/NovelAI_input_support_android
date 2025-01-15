@@ -7,7 +7,10 @@ import android.view.MenuItem;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.preference.ListPreference;
+import androidx.preference.Preference;
 import androidx.preference.PreferenceFragmentCompat;
+import androidx.preference.SwitchPreferenceCompat;
 
 import jp.ne.ruru.park.ando.naiview.databinding.ActivitySettingsBinding;
 
@@ -42,6 +45,7 @@ public class SettingsActivity extends AppCompatActivity {
                     .replace(R.id.settings, new SettingsFragment())
                     .commit();
         }
+        //
     }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -75,6 +79,27 @@ public class SettingsActivity extends AppCompatActivity {
         @Override
         public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
             setPreferencesFromResource(R.xml.root_preferences, rootKey);
+            //
+            ListPreference listPreference = this.findPreference("prompt_model");
+            if (listPreference == null) {
+                return;
+            }
+            String base = listPreference.getValue();
+            changeSm((base == null ) || (!base.contains("4")));
+            listPreference.setOnPreferenceChangeListener((Preference preference, Object newValue)->{
+                return changeSm(newValue);
+            });
+        }
+        public boolean changeSm(Object newValue) {
+            SwitchPreferenceCompat sm = this.findPreference("prompt_sm");
+            SwitchPreferenceCompat smDyn = this.findPreference("prompt_sm_dyn");
+            if ((sm != null) && (smDyn != null)) {
+                boolean flag = ! newValue.toString().contains("4");
+                sm.setVisible(flag);
+                sm.setVisible(flag);
+                return true;
+            }
+            return false;
         }
     }
 

@@ -35,7 +35,7 @@ public class MyNASI {
     /**
      * default prompt
      */
-    public static final String DEFAULT_PROMPT= "1girl, best quality, amazing quality, very aesthetic, absurdres";
+    public static final String DEFAULT_PROMPT = "1girl, best quality, amazing quality, very aesthetic, absurdres";
 
     /**
      * default UC prompt
@@ -53,7 +53,7 @@ public class MyNASI {
     /**
      * state machine
      */
-    public enum TYPE {
+    public enum REST_TYPE {
         LOGIN,
         IMAGE,
         SUBSCRIPTION,
@@ -74,7 +74,7 @@ public class MyNASI {
          * @param password password (for login)
          */
         Allin1Request(
-                TYPE type,
+                REST_TYPE type,
                 String email,
                 String password) {
             this.type = type;
@@ -82,7 +82,7 @@ public class MyNASI {
             this.password = password;
         }
 
-        public final TYPE type;
+        public final REST_TYPE type;
         public final String email;
         public final String password;
     }
@@ -94,6 +94,7 @@ public class MyNASI {
         /**
          * this is constructor
          *
+         * @param isV4            if version_4 then true
          * @param type            execution type
          * @param email           mail address (for login)
          * @param password        password (for login)
@@ -114,9 +115,11 @@ public class MyNASI {
          * @param imageBuffer     base image for image2image
          * @param strength        strength for image2image
          * @param noise           noise for image2image
+         * @param characters      cha01_Ok, cha01_NG, ch02_Ok, ch02_NG
          */
         Allin1RequestImage(
-                TYPE type,
+                boolean isV4,
+                REST_TYPE type,
                 String email,
                 String password,
                 String model,
@@ -135,9 +138,11 @@ public class MyNASI {
                 String noise_schedule,
                 byte[] imageBuffer,
                 int strength,
-                int noise
+                int noise,
+                String[] characters
         ) {
             super(type,email,password);
+            this.isV4 = isV4;
             this.model = model;
             this.input = input;
             this.width = width;
@@ -155,7 +160,9 @@ public class MyNASI {
             this.imageBuffer = imageBuffer;
             this.strength = strength;
             this.noise = noise;
+            this.characters = characters;
         }
+        public final boolean isV4;
         public final String model;
         public final String input;
 
@@ -180,6 +187,8 @@ public class MyNASI {
         public final int strength;
 
         public final int noise;
+
+        public final String[] characters;
     }
     /**
      * all in 1 request data.
@@ -198,7 +207,7 @@ public class MyNASI {
          * @param imageBuffer     image data
          */
         Allin1RequestUpscale(
-                TYPE type,
+                REST_TYPE type,
                 String email,
                 String password,
                 int width,
@@ -231,7 +240,7 @@ public class MyNASI {
          * @param prompt          prompt
          */
         Allin1RequestSuggestTags(
-                TYPE type,
+                REST_TYPE type,
                 String email,
                 String password,
                 String model,
@@ -258,7 +267,7 @@ public class MyNASI {
          * @param imageData image data (for image activity)
          */
         Allin1Response(
-                TYPE type,
+                REST_TYPE type,
                 JSONObject m,
                 int statusCode,
                 String mimeType,
@@ -281,7 +290,7 @@ public class MyNASI {
             this.description = description;
             return this;
         }
-        public final TYPE type;
+        public final REST_TYPE type;
         public final JSONObject m;
         public final int statusCode;
         public final String mimeType;
@@ -339,10 +348,10 @@ public class MyNASI {
             JSONObject m = new JSONObject();
             m.put("key", aKey);
             res = getConnection(
-                    TYPE.LOGIN,LOGIN_URL,m);
+                    REST_TYPE.LOGIN,LOGIN_URL,m);
         } catch (JSONException e) {
             return new Allin1Response(
-                    TYPE.LOGIN,
+                    REST_TYPE.LOGIN,
                     null,
                     202,
                     "",
@@ -403,6 +412,22 @@ public class MyNASI {
         //
         Allin1Response res;
         try {
+            String okInput = (request.input == null) ? "" : request.input;
+            String ngInput = (request.negative_prompt == null) ? "" : request.negative_prompt;
+            if (! request.isV4) {
+                if (!request.characters[0].isEmpty()) {
+                    okInput = request.characters[0] + ", " + okInput;
+                }
+                if (!request.characters[1].isEmpty()) {
+                    ngInput = request.characters[1] + ", " + ngInput;
+                }
+                if (!request.characters[2].isEmpty()) {
+                    okInput = request.characters[2] + ", " + okInput;
+                }
+                if (!request.characters[3].isEmpty()) {
+                    ngInput = request.characters[3] + ", " + ngInput;
+                }
+            }
             JSONObject p = new JSONObject();
             p.put("params_version",3);
             p.put("width",request.width);
@@ -414,8 +439,10 @@ public class MyNASI {
             p.put("n_samples",1);
             p.put("ucPreset", 0);
             p.put("qualityToggle",true);
-            p.put("sm",request.sm);
-            p.put("sm_dyn",request.sm_dyn);
+            if (! request.isV4) {
+                p.put("sm", request.sm);
+                p.put("sm_dyn", request.sm_dyn);
+            }
             p.put("dynamic_thresholding",false);
             p.put("controlnet_strength",1);
             p.put("legacy",false);
@@ -428,7 +455,32 @@ public class MyNASI {
             } else {
                 p.put("skip_cfg_above_sigma", null);
             }
-            p.put("negative_prompt",request.negative_prompt);
+            if (request.isV4) {
+                p.put("use_coords",true);
+                JSONArray characterPrompts = new JSONArray();
+                p.put("characterPrompts",characterPrompts);
+                //character 01
+                if (! request.characters[0].isEmpty()) {
+                    String ok = request.characters[0];
+                    String ng = request.characters[1];
+                    characterPrompts.put(createCharacterPrompts(ok, ng));
+                }
+                if (! request.characters[2].isEmpty()) {
+                    String ok = request.characters[2];
+                    String ng = request.characters[3];
+                    characterPrompts.put(createCharacterPrompts(ok, ng));
+                }
+                //
+                JSONObject v4Prompt = new JSONObject();
+                p.put("v4_prompt",v4Prompt);
+                v4Prompt.put("caption",createCaption(request,true));
+                v4Prompt.put("use_coords", true);
+                v4Prompt.put("use_order", true);
+                JSONObject v4NegativePrompt = new JSONObject();
+                p.put("v4_negative_prompt",v4NegativePrompt);
+                v4NegativePrompt.put("caption",createCaption(request,false));
+            }
+            p.put("negative_prompt",ngInput);
             JSONArray noArray = new JSONArray();
             p.put("reference_image_multiple",noArray);
             p.put("reference_information_extracted_multiple",noArray);
@@ -444,12 +496,8 @@ public class MyNASI {
                 p.put("extra_noise_seed",request.seed);
             }
             //
-            String input = DEFAULT_PROMPT;
-            if ((request.input != null) && (!request.input.isEmpty())) {
-                input = request.input;
-            }
             JSONObject m = new JSONObject();
-            m.put("input",input);
+            m.put("input",okInput);
             m.put("model",request.model);
             if (request.imageBuffer == null) {
                 // for generate image
@@ -491,6 +539,50 @@ public class MyNASI {
             description = "Unknown stats code.";
         }
         return res.setDescription(description).setAnlas(anlas);
+    }
+
+    public JSONObject createCharacterPrompts(String ok, String ng) throws JSONException {
+        JSONObject target = new JSONObject();
+        target.put("prompt",ok);
+        target.put("uc",ng);
+        target.put("center", createCener());
+        return target;
+    }
+    public JSONObject createCener() throws JSONException {
+        JSONObject center = new JSONObject();
+        center.put("x", 0.5);
+        center.put("y", 0.5);
+        return center;
+    }
+    public JSONObject createCaption(Allin1RequestImage request, boolean isOk) throws JSONException {
+        JSONObject target = new JSONObject();
+        JSONArray charCaptions = new JSONArray();
+        String base = isOk ? request.input : request.negative_prompt;
+        boolean ch01Flag = ! request.characters[0].isEmpty();
+        boolean ch02Flag = ! request.characters[2].isEmpty();
+        String ch01 = isOk ? request.characters[0] : request.characters[1];
+        String ch02 = isOk ? request.characters[2] : request.characters[3];
+        target.put("base_caption", base);
+        target.put("char_captions", charCaptions);
+        if (ch01Flag) {
+            JSONObject charCaption = new JSONObject();
+            charCaption.put("char_caption",ch01);
+            JSONArray centers = new JSONArray();
+            centers.put(createCener());
+            charCaption.put("centers",centers);
+            //
+            charCaptions.put(charCaption);
+        }
+        if (ch02Flag) {
+            JSONObject charCaption = new JSONObject();
+            charCaption.put("char_caption",ch02);
+            JSONArray centers = new JSONArray();
+            centers.put(createCener());
+            charCaption.put("centers",centers);
+            //
+            charCaptions.put(charCaption);
+        }
+        return target;
     }
 
     /**
@@ -720,7 +812,7 @@ public class MyNASI {
      * @param m request body
      * @return all in 1 result
      */
-    protected Allin1Response getConnection(TYPE type, String targetUrl, JSONObject m) throws JSONException{
+    protected Allin1Response getConnection(REST_TYPE type, String targetUrl, JSONObject m) throws JSONException{
         //
         String requestBody;
         if (m == null) {

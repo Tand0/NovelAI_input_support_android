@@ -29,12 +29,14 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.Locale;
 
+import jp.ne.ruru.park.ando.naiview.data.Data;
 import jp.ne.ruru.park.ando.naiview.MyApplication;
 import jp.ne.ruru.park.ando.naiview.MyNASI;
+import jp.ne.ruru.park.ando.naiview.data.PromptType;
 import jp.ne.ruru.park.ando.naiview.R;
 import jp.ne.ruru.park.ando.naiview.SuggestActivity;
 import jp.ne.ruru.park.ando.naiview.TreeActivity;
-import jp.ne.ruru.park.ando.naiview.TextType;
+import jp.ne.ruru.park.ando.naiview.data.TextType;
 
 /**
  * json list adapter
@@ -44,7 +46,8 @@ import jp.ne.ruru.park.ando.naiview.TextType;
 public class JSONListAdapter<T extends JSONObject> extends ArrayAdapter<T> {
     /**
      * This is constructor.
-     * @param context activity object
+     *
+     * @param context  activity object
      * @param resource resource
      */
     public JSONListAdapter(@NonNull Context context, int resource) {
@@ -53,14 +56,14 @@ public class JSONListAdapter<T extends JSONObject> extends ArrayAdapter<T> {
 
     /**
      * @param position The position of the item within the adapter's data set of the item whose view
-     *        we want.
-     * @param view The old view to reuse, if possible. Note: You should check that this view
-     *        is non-null and of an appropriate type before using. If it is not possible to convert
-     *        this view to display the correct data, this method can create a new view.
-     *        Heterogeneous lists can specify their number of view types, so that this View is
-     *        always of the right type (see {@link #getViewTypeCount()} and
-     *        {@link #getItemViewType(int)}).
-     * @param parent The parent that this view will eventually be attached to
+     *                 we want.
+     * @param view     The old view to reuse, if possible. Note: You should check that this view
+     *                 is non-null and of an appropriate type before using. If it is not possible to convert
+     *                 this view to display the correct data, this method can create a new view.
+     *                 Heterogeneous lists can specify their number of view types, so that this View is
+     *                 always of the right type (see {@link #getViewTypeCount()} and
+     *                 {@link #getItemViewType(int)}).
+     * @param parent   The parent that this view will eventually be attached to
      * @return view
      */
     @NonNull
@@ -75,41 +78,17 @@ public class JSONListAdapter<T extends JSONObject> extends ArrayAdapter<T> {
         boolean expand;
         StringBuilder value = new StringBuilder();
         StringBuilder folderString = new StringBuilder();
-        boolean isNotWord = true;
-        boolean isUc = true;
-        boolean isIgnore = true;
         MyApplication a =
-                ((MyApplication)((AppCompatActivity) this.getContext()).getApplication());
+                ((MyApplication) ((AppCompatActivity) this.getContext()).getApplication());
         //
-        if (item != null) {
-            Boolean expandBoolean = a.containBoolean(item, MyApplication.EXPAND);
-            if (expandBoolean != null) {
-                expand = expandBoolean;
-            } else {
-                expand = false;
-            }
-            Integer level = a.containInt(item,MyApplication.LEVEL);
-            if (level != null) {
-                for (int i = 0 ; i < level ; i++) {
-                    folderString.append("    |");
-                }
-            }
-            String text = a.containString(item,MyApplication.TEXT);
-            if (text != null) {
-                if (text.contains(TextType.TEXT_WORD.toString())) {
-                    isNotWord = false;
-                }
-                value.append("(").append(text).append(") ");
-                isUc = text.contains(MyApplication.TEXT_UC);
-                isIgnore = text.contains(MyApplication.TEXT_IGNORE);
-            }
-            String values = a.containString(item,MyApplication.VALUES);
-            if (values != null) {
-                value.append(values);
-            }
-        } else {
-            expand = false;
+        Data itemData = new Data(item);
+        expand = itemData.getExpand();
+        int level = itemData.getLevel();
+        for (int i = 0; i < level; i++) {
+            folderString.append("    |");
         }
+        value.append("(").append(itemData.getTextType()).append(") ");
+        value.append(itemData.getValue());
         Button button = view.findViewById(R.id.button_cheese);
         if (button != null) {
             button.setText(String.format(Locale.ENGLISH, "%d", position));
@@ -119,13 +98,14 @@ public class JSONListAdapter<T extends JSONObject> extends ArrayAdapter<T> {
         if (textView != null) {
             textView.setText(folderString);
         }
+        boolean isNotWord = ! TextType.WORD.equals(itemData.getTextType());
         CheckBox checkBox = view.findViewById(R.id.checkbox_cheese);
         if (checkBox != null) {
             if (checkBox.isChecked() != expand) {
                 checkBox.setOnCheckedChangeListener(null);
                 checkBox.setChecked(expand);
             }
-            checkBox.setOnCheckedChangeListener((buttonView, isChecked) -> expand(position,isChecked));
+            checkBox.setOnCheckedChangeListener((buttonView, isChecked) -> expand(position, isChecked));
             checkBox.setEnabled(isNotWord);
             boolean darkFlag = false;
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
@@ -140,20 +120,20 @@ public class JSONListAdapter<T extends JSONObject> extends ArrayAdapter<T> {
             int dirUcColor;
             if (!darkFlag) {
                 backgroundColor = Color.parseColor("#FFFFFF");
-                textColor =  Color.parseColor("#000000");
+                textColor = Color.parseColor("#000000");
                 dirColor = Color.parseColor("#0000C0");
-                textUcColor =  Color.parseColor("#008000");
+                textUcColor = Color.parseColor("#008000");
                 dirUcColor = Color.parseColor("#004060");
             } else {
                 backgroundColor = Color.parseColor("#000000");
                 textColor = Color.parseColor("#FFFFFF");
-                dirColor = Color.parseColor( "#CFCFFF");
+                dirColor = Color.parseColor("#CFCFFF");
                 textUcColor = Color.parseColor("#FFCFFF");
                 dirUcColor = Color.parseColor("#FFCF3F");
             }
-            if (! isIgnore) {
+            if (! itemData.getIgnore()) {
                 checkBox.setBackgroundColor(backgroundColor);
-                if (!isUc) {
+                if (!itemData.getPromptType().isNegative()) {
                     if (isNotWord) {
                         checkBox.setTextColor(dirColor);
                     } else {
@@ -175,19 +155,20 @@ public class JSONListAdapter<T extends JSONObject> extends ArrayAdapter<T> {
         }
         checkBox = view.findViewById(R.id.ignore_cheese);
         if (checkBox != null) {
-            if (checkBox.isChecked() != isIgnore) {
+            if (checkBox.isChecked() != itemData.getIgnore()) {
                 checkBox.setOnCheckedChangeListener(null);
-                checkBox.setChecked(isIgnore);
+                checkBox.setChecked(itemData.getIgnore());
             }
             checkBox.setText("");
             checkBox.setHint("");
-            checkBox.setOnCheckedChangeListener((buttonView, isChecked) -> ignoreButton(position,isChecked));
+            checkBox.setOnCheckedChangeListener((buttonView, isChecked) -> ignoreButton(position, isChecked));
         }
         return view;
     }
 
     /**
      * execute button
+     *
      * @param view button view
      */
     public void executeButton(View view) {
@@ -196,49 +177,53 @@ public class JSONListAdapter<T extends JSONObject> extends ArrayAdapter<T> {
         PopupMenu popup = new PopupMenu(this.getContext(), button);
         Menu menu = popup.getMenu();
         popup.getMenuInflater().inflate(R.menu.menu_tree, menu);
-        //
-        MenuItem pastItem = menu.findItem(R.id.menu_past);
         MyApplication a =
                 ((MyApplication) ((AppCompatActivity) this.getContext()).getApplication());
+        //
+        MenuItem titleItem = menu.findItem(R.id.menu_prompt_type);
+        Data positionData = new Data(this.getItem(position));
+        int id = positionData.getPromptType().getIdLong();
+        String title = a.getResources().getString(id);
+        titleItem.setTitle(title);
+        //
+        MenuItem pastItem = menu.findItem(R.id.menu_past);
         pastItem.setVisible(a.getCut() != null);
         //
         popup.show();
         popup.setOnMenuItemClickListener(item -> {
-            AppCompatActivity appCompatActivity = (AppCompatActivity)this.getContext();
+            AppCompatActivity appCompatActivity = (AppCompatActivity) this.getContext();
             ListView listView = appCompatActivity.findViewById(R.id.list_view);
             if (listView != null) {
                 listView.setSelection(position);
             }
-            return executePopup(item.getItemId(),position);
+            return executePopup(item.getItemId(), position);
         });
     }
 
     /**
      * press button
-     * @param itemId item id
+     *
+     * @param itemId   item id
      * @param position position of list view
      * @return if execution then true
      */
-    protected boolean executePopup(int itemId,final int position) {
+    protected boolean executePopup(int itemId, final int position) {
         MyApplication a =
-                ((MyApplication)((AppCompatActivity) this.getContext()).getApplication());
+                ((MyApplication) ((AppCompatActivity) this.getContext()).getApplication());
         String textRaw;
         final JSONObject item;
-        TextType textType = TextType.TEXT_WORD;
+        final Data itemData;
         if (0 <= position) {
-            item  = this.getItem(position);
+            item = this.getItem(position);
+            itemData = new Data(item);
             if (item != null) {
-                textRaw = a.containString(item,MyApplication.VALUES);
-                if (textRaw == null) {
-                    textRaw = "";
-                }
-                String textKey = a.containString(item,MyApplication.TEXT);
-                textType = TextType.getTextType(textKey);
+                textRaw = itemData.getValue();
             } else {
                 textRaw = "";
             }
         } else {
             item = null;
+            itemData = new Data(null);
             textRaw = "";
         }
         final String text = textRaw;
@@ -254,24 +239,25 @@ public class JSONListAdapter<T extends JSONObject> extends ArrayAdapter<T> {
             }
             return true;
         } else if (itemId == R.id.menu_edit) {
-            addText( item, text, textType);
+            addText(item, text, itemData.getTextType());
             return true;
         } else if (itemId == R.id.menu_add_text_detail) {
-            addText( item, text, TextType.TEXT_WORD);
+            addText(item, text, TextType.WORD);
             return true;
         } else if (itemId == R.id.menu_add_sequence_detail) {
-            addText( item, text, TextType.TEXT_SEQUENCE);
+            addText(item, text, TextType.SEQUENCE);
             return true;
         } else if (itemId == R.id.menu_add_select_detail) {
-            addText( item, text, TextType.TEXT_SELECT);
+            addText(item, text, TextType.SELECT);
             return true;
         } else if (itemId == R.id.menu_add_weight_detail) {
-            addText( item, text, TextType.TEXT_WEIGHT);
+            addText(item, text, TextType.WEIGHT);
             return true;
         } else if (itemId == R.id.menu_change_part) {
             if (item != null) {
-                a.changePart(item);
-                a.action(this.getContext(),R.id.action_prompt);
+                a.setChangePartItem(item);
+                a.fromTreeToPrompt();
+                a.action(this.getContext(), R.id.action_prompt);
             }
             return true;
         }
@@ -280,26 +266,28 @@ public class JSONListAdapter<T extends JSONObject> extends ArrayAdapter<T> {
 
     /**
      * insert or change text to json object
-     * @param item json object
-     * @param text insert or change text
+     *
+     * @param item           json object
+     * @param text           insert or change text
      * @param targetMenuItem menu item
      */
-    public void addText(JSONObject item,String text,TextType targetMenuItem) {
-        TreeActivity ta = (TreeActivity)this.getContext();
+    public void addText(JSONObject item, String text, TextType targetMenuItem) {
+        TreeActivity ta = (TreeActivity) this.getContext();
         MyApplication a = (MyApplication) ta.getApplication();
-        a.appendLog(ta,"Action: Suggest");
+        a.appendLog(ta, "Action: Suggest");
         Intent intent = new Intent(ta, SuggestActivity.class);
-        intent.putExtra(SuggestActivity.TYPE,targetMenuItem.toString());
-        intent.putExtra(SuggestActivity.TEXT,text);
+        intent.putExtra(SuggestActivity.SUG_T_TYPE, targetMenuItem.toString());
+        intent.putExtra(SuggestActivity.SUG_VALUE, text);
         resultLauncher.launch(intent);
         this.suggestPosition = item;
     }
+
     public JSONObject suggestPosition = null;
     /**
      * intent call back method.
      * Used by Storage Access Framework
      */
-    ActivityResultLauncher<Intent> resultLauncher = ((TreeActivity)this.getContext()).registerForActivityResult(
+    ActivityResultLauncher<Intent> resultLauncher = ((TreeActivity) this.getContext()).registerForActivityResult(
             new ActivityResultContracts.StartActivityForResult(),
             result -> {
                 if (suggestPosition == null) {
@@ -308,61 +296,45 @@ public class JSONListAdapter<T extends JSONObject> extends ArrayAdapter<T> {
                 if (result.getResultCode() != Activity.RESULT_OK) {
                     return;
                 }
-                Intent resultData  = result.getData();
+                Intent resultData = result.getData();
                 if (resultData == null) {
                     return;
                 }
-                String text = resultData.getStringExtra(SuggestActivity.TEXT);
-                boolean isInsert = resultData.getBooleanExtra(SuggestActivity.IS_INSERT,false);
-                TextType textType = TextType.getTextType(resultData.getStringExtra(SuggestActivity.TYPE));
-                if (TextType.TEXT_OTHER.equals(textType)) {
+                String text = resultData.getStringExtra(SuggestActivity.SUG_VALUE);
+                boolean isInsert = resultData.getBooleanExtra(SuggestActivity.SUG_IS_INSERT, false);
+                TextType changedType = TextType.getTypeString(resultData.getStringExtra(SuggestActivity.SUG_T_TYPE));
+                if (TextType.OTHER.equals(changedType)) {
                     return;
                 }
                 MyApplication a =
-                        ((MyApplication)((AppCompatActivity) this.getContext()).getApplication());
+                        ((MyApplication) ((AppCompatActivity) this.getContext()).getApplication());
                 if (isInsert) {
                     JSONObject target = new JSONObject();
-                    try {
-                        target.put(MyApplication.TEXT, textType.toString());
-                        target.put(MyApplication.VALUES, text);
-                        JSONArray array = new JSONArray();
-                        target.put(MyApplication.CHILD,array);
-                        if (! TextType.TEXT_WORD.equals(textType)) {
-                            // this is folder
-                            target.put(MyApplication.EXPAND, true);
-                        }
-                        a.setCut(target);
-                        this.pastJSONObject(suggestPosition);
-                    } catch (JSONException e) {
-                        // NONE
+                    Data targetData = new Data(target);
+                    targetData.setIgnore(false);
+                    targetData.setPromptType(PromptType.P_BASE_OK); // dummy
+                    targetData.setTextType(changedType);
+                    targetData.setValue(text);
+                    targetData.setChild(new JSONArray());
+                    if (!TextType.WORD.equals(changedType)) {
+                        // this is folder
+                        targetData.setExpand(true);
                     }
+                    a.setCut(target);
+                    this.pastJSONObject(suggestPosition);
                 } else { // change
                     if (suggestPosition == null) {
                         return;
                     }
-                    try {
-                        String key = a.containString(suggestPosition,MyApplication.TEXT);
-                        for (TextType s: TextType.values()) {
-                            key = key.replace(s.toString(),"");
-                        }
-                        key = key + textType;
-                        suggestPosition.put(MyApplication.TEXT, key);
-                        if (TextType.TEXT_WORD.contains(key)) {
-                            suggestPosition.put(MyApplication.CHILD,new JSONArray());
-                        } else {
-                            JSONArray array = a.containJSONArray(suggestPosition,MyApplication.CHILD);
-                            if (array == null) {
-                                suggestPosition.put(MyApplication.CHILD,new JSONArray());
-                            }
-                        }
-                        suggestPosition.put(MyApplication.VALUES, text);
-                    } catch (JSONException e) {
-                        return;
+                    Data suggestedData = new Data(suggestPosition);
+                    suggestedData.setTextType(changedType);
+                    if (TextType.WORD.equals(changedType)) {
+                        suggestedData.setChild(new JSONArray()); // clear
                     }
+                    suggestedData.setValue(text);
                     this.updateJSONArray();
                 }
             });
-
 
     /**
      * get top of tree
@@ -379,26 +351,11 @@ public class JSONListAdapter<T extends JSONObject> extends ArrayAdapter<T> {
         if (listView == null) {
             return;
         }
-        MyApplication a = (MyApplication)appCompatActivity.getApplication();
-        JSONObject item = this.getItem(position);
-        if (item == null) {
-            return;
-        }
-        boolean expand;
-        Boolean expandBoolean = a.containBoolean(item,MyApplication.EXPAND);
-        if (expandBoolean != null) {
-            expand = expandBoolean;
-        } else {
-            expand = false;
-        }
-        if (expand != isChecked) {
-            try {
-                item.put(MyApplication.EXPAND,isChecked);
-                listView.setSelection(position);
-                updateJSONArray();
-            } catch (JSONException e) {
-                // NONE
-            }
+        Data itemData = new Data(this.getItem(position));
+        if (itemData.getExpand() != isChecked) {
+            itemData.setExpand(isChecked);
+            listView.setSelection(position);
+            updateJSONArray();
         }
     }
 
@@ -409,34 +366,12 @@ public class JSONListAdapter<T extends JSONObject> extends ArrayAdapter<T> {
      */
     public void ignoreButton(int position,boolean isChecked) {
         JSONObject item = this.getItem(position);
-        if (item == null) {
-            return;
-        }
-        MyApplication a =
-                ((MyApplication)((AppCompatActivity) this.getContext()).getApplication());
-        String text = a.containString(item,MyApplication.TEXT);
-        if (text == null) {
-            return;
-        }
-        boolean flag = false;
-        if (isChecked) {
-            if (!text.contains(MyApplication.TEXT_IGNORE)) {
-                text = MyApplication.TEXT_IGNORE + text;
-                flag = true;
-            }
-        } else {
-            if (text.contains(MyApplication.TEXT_IGNORE)) {
-                text = text.replace(MyApplication.TEXT_IGNORE, "");
-                flag = true;
-            }
-        }
-        if (flag) {
-            try {
-                item.put(MyApplication.TEXT, text);
-                this.updateJSONArray();
-            } catch (JSONException e) {
-                // NONE
-            }
+        Data itemData = new Data(item);
+        boolean ignore = itemData.getIgnore();
+        if (isChecked != ignore) {
+            itemData.setIgnore(isChecked);
+            itemData.setTextType(itemData.getTextType());
+            updateJSONArray();
         }
     }
     /**
@@ -464,30 +399,19 @@ public class JSONListAdapter<T extends JSONObject> extends ArrayAdapter<T> {
         if (cut == null) {
             return false;
         }
-        JSONArray top = this.getTop();
-        String text = a.containString(item,MyApplication.TEXT);
-        if (text == null) {
-            return false;
-        }
+        Data itemData = new Data(item);
         boolean flag;
-        try {
-            Boolean expand = a.containBoolean(item,MyApplication.EXPAND);
-            if (TextType.TEXT_WORD.contains(text)
-                    || (expand == null)
-                    || (!expand)) {
-                flag = this.pastJSONObject(top,item);
-            } else {
-                item.put(MyApplication.EXPAND,true);
-                JSONArray child = a.containJSONArray(item,MyApplication.CHILD);
-                if (child == null) {
-                    child =new JSONArray();
-                    cut.put(MyApplication.CHILD, child);
-                }
-                insertObject(child,cut,0);
-                flag = true;
-            }
-        } catch (JSONException e) {
-            flag = false;
+        boolean expand = itemData.getExpand();
+        if (TextType.WORD.equals(itemData.getTextType())
+                || (!expand)) {
+            flag = this.pastJSONObject(this.getTop(),item,null);
+        } else {
+            itemData.setExpand(true);
+            JSONArray child = itemData.getChild();
+            insertObject(child,cut,0);
+            Data cutData = new Data(cut);
+            cutData.changePromptType(itemData.getPromptType());
+            flag = true;
         }
         if (flag) {
             a.setCut(null);
@@ -528,40 +452,41 @@ public class JSONListAdapter<T extends JSONObject> extends ArrayAdapter<T> {
 
     /**
      * past JSONObject
-     * @param top top of tree
+     * @param array top of tree
      * @param focusObject target
      * @return if changed then true
      */
-    public boolean pastJSONObject(JSONArray top,JSONObject focusObject) {
+    public boolean pastJSONObject(JSONArray array,JSONObject focusObject,PromptType targetPrompt) {
         MyApplication a =
                 ((MyApplication)((AppCompatActivity) this.getContext()).getApplication());
         JSONObject cut = a.getCut();
         if (cut == null) {
             return false;
         }
-        for (int i = 0; i < top.length(); i++) {
+        for (int i = 0; i < array.length(); i++) {
             JSONObject item;
             try {
-                item = top.getJSONObject(i);
+                item = array.getJSONObject(i);
             } catch (JSONException e) {
                 continue;
             }
+            Data itemData = new Data(item);
             if (item == focusObject) {
-                insertObject(top,cut,i + 1);
+                insertObject(array,cut,i + 1);
+                Data cutData = new Data(cut);
+                cutData.changePromptType(targetPrompt);
                 a.setCut(null);
                 return true;
             }
-            Boolean expand = a.containBoolean(item,MyApplication.EXPAND);
-            JSONArray child = a.containJSONArray(item,MyApplication.CHILD);
-            if ((expand != null)
-                    && expand
-                    && (child != null)) {
-                boolean flag = pastJSONObject(child,focusObject);
-                if (flag) {
-                    return true;
-                }
+            if (! itemData.getExpand()) {
+                continue;
             }
-
+            PromptType nextPrompt = itemData.getPromptType();
+            boolean flag = pastJSONObject(itemData.getChild(),focusObject,nextPrompt);
+            if (! flag) {
+                continue;
+            }
+            return true;
         }
         return false;
     }
@@ -594,8 +519,6 @@ public class JSONListAdapter<T extends JSONObject> extends ArrayAdapter<T> {
      * @return if changed then true
      */
     public boolean removeJSONObject(JSONArray top,JSONObject jsonObject) {
-        MyApplication a =
-                ((MyApplication)((AppCompatActivity) this.getContext()).getApplication());
         for (int i = 0; i < top.length(); i++) {
             try {
                 JSONObject item = top.getJSONObject(i);
@@ -603,12 +526,9 @@ public class JSONListAdapter<T extends JSONObject> extends ArrayAdapter<T> {
                     top.remove(i);
                     return true;
                 }
-                Boolean expand = a.containBoolean(item,MyApplication.EXPAND);
-                JSONArray child = a.containJSONArray(item,MyApplication.CHILD);
-                if ((expand != null)
-                        && expand
-                        && (child != null)) {
-                    boolean flag = removeJSONObject(child,jsonObject);
+                Data itemData = new Data(item);
+                if (itemData.getExpand()) {
+                    boolean flag = removeJSONObject(itemData.getChild(),jsonObject);
                     if (flag) {
                         return true;
                     }
@@ -631,10 +551,10 @@ public class JSONListAdapter<T extends JSONObject> extends ArrayAdapter<T> {
         }
         int position = listView.getSelectedItemPosition();
         //
-        ArrayList<T> list = new ArrayList<>();
         createDefaultTree();
-
-        updateJSONArray(list, 0, this.getTop(),null);
+        //
+        ArrayList<T> list = new ArrayList<>();
+        updateJSONArray(list, 0, this.getTop());
         this.clear();
         this.addAll(list);
         //
@@ -649,66 +569,54 @@ public class JSONListAdapter<T extends JSONObject> extends ArrayAdapter<T> {
      * if top of tree is null then create default object
      */
     public void createDefaultTree() {
-        try {
-            JSONArray top = this.getTop();
-            MyApplication a =
-                    ((MyApplication)((AppCompatActivity) this.getContext()).getApplication());
-            boolean flagOK = true;
-            boolean flagUC = true;
-            for (int i = 0 ; i < top.length() ; i++) {
-                JSONObject item = (JSONObject) top.get(i);
-                //
-                String text = a.containString(item,MyApplication.TEXT);
-                if (text == null) {
-                    continue;
-                }
-                boolean containUC = text.contains(MyApplication.TEXT_UC);
-                flagOK = flagOK & (containUC);
-                flagUC = flagUC & (!containUC);
-                if ((!flagOK) & (!flagUC)) {
-                    // this is not default
-                    return;
+        Data topData = new Data(this.getTop());
+        MyApplication a =
+                ((MyApplication)((AppCompatActivity) this.getContext()).getApplication());
+        for (PromptType promptType: PromptType.values()) {
+            boolean hit = false;
+            for (JSONObject item : topData) {
+                Data itemData = new Data(item);
+                if (promptType.equals(itemData.getPromptType())) {
+                    hit = true; // hit
+                    break;
                 }
             }
-            String defaultString = this.getContext().getResources().getString(R.string.menu_default);
-
-            if (flagOK) {
-                JSONObject prompt = new JSONObject();
-                top.put(prompt);
-                prompt.put(MyApplication.TEXT, TextType.TEXT_SEQUENCE.toString());
-                prompt.put(MyApplication.VALUES, defaultString);
-                prompt.put(MyApplication.EXPAND, true);
-                JSONArray childArray = new JSONArray();
-                prompt.put(MyApplication.CHILD, childArray);
-                for (String split : MyNASI.DEFAULT_PROMPT.split(",")) {
-                    JSONObject child = new JSONObject();
-                    child.put(MyApplication.TEXT, TextType.TEXT_WORD.toString());
-                    child.put(MyApplication.VALUES, split.trim());
-                    child.put(MyApplication.EXPAND, false);
-                    child.put(MyApplication.CHILD, new JSONArray());
-                    childArray.put(child);
-                }
+            if (hit) {
+                continue;
             }
+            String defaultString = a.getApplicationContext().getResources().getString(promptType.getIdLong());
+            JSONArray childArray = new JSONArray();
             //
-            if (flagUC) {
-                JSONObject uc = new JSONObject();
-                top.put(uc);
-                uc.put(MyApplication.TEXT, MyApplication.TEXT_UC + TextType.TEXT_SEQUENCE);
-                uc.put(MyApplication.VALUES, defaultString);
-                uc.put(MyApplication.EXPAND, false);
-                JSONArray childArray = new JSONArray();
-                uc.put(MyApplication.CHILD, childArray);
-                for (String split : MyNASI.DEFAULT_PROMPT_UC.split(",")) {
-                    JSONObject child = new JSONObject();
-                    child.put(MyApplication.TEXT, TextType.TEXT_WORD.toString());
-                    child.put(MyApplication.VALUES, split.trim());
-                    child.put(MyApplication.EXPAND, false);
-                    child.put(MyApplication.CHILD, new JSONArray());
-                    childArray.put(child);
-                }
+            JSONObject target = new JSONObject();
+            this.getTop().put(target);
+            //
+            Data targetData = new Data(target);
+            targetData.setTextType(TextType.SEQUENCE);
+            targetData.setPromptType(promptType);
+            targetData.setValue(defaultString);
+            targetData.setExpand(true);
+            targetData.setChild(childArray);
+            String[] strings;
+            switch (promptType) {
+                case P_BASE_OK:
+                    strings = MyNASI.DEFAULT_PROMPT.split(",");
+                    break;
+                case P_BASE_NG:
+                    strings = MyNASI.DEFAULT_PROMPT_UC.split(",");
+                    break;
+                default:
+                    strings = new String[]{};
             }
-        } catch (JSONException e) {
-            // NONE
+            for (String split : strings) {
+                JSONObject child = new JSONObject();
+                Data childData = new Data(child);
+                childData.setTextType(TextType.WORD);
+                childData.setPromptType(promptType);
+                childData.setValue(split.trim());
+                childData.setExpand(false);
+                childData.setChild(new JSONArray());
+                childArray.put(child);
+            }
         }
     }
 
@@ -717,52 +625,21 @@ public class JSONListAdapter<T extends JSONObject> extends ArrayAdapter<T> {
      * @param list list view data
      * @param level level of tree
      * @param target target object
-     * @param unusedFlag if unused then true
      */
     @SuppressWarnings("unchecked")
-    public void updateJSONArray(ArrayList<T> list, int level,Object target,Boolean unusedFlag) {
-        MyApplication a =
-                ((MyApplication)((AppCompatActivity) this.getContext()).getApplication());
+    public void updateJSONArray(ArrayList<T> list, int level,Object target) {
+        Data itemData = new Data(target);
         if (target instanceof JSONArray) {
-            JSONArray array = (JSONArray) target;
-            for (int i = 0; i < array.length(); i++) {
-                try {
-                    JSONObject obj = array.getJSONObject(i);
-                    updateJSONArray(list, level,obj,unusedFlag);
-                } catch (JSONException e) {
-                    // pass
-                }
+            for (JSONObject obj : itemData) {
+                updateJSONArray(list, level,obj);
             }
         } else if (target instanceof JSONObject) {
-            JSONObject item = (JSONObject) target;
-            try {
-                //
-                item.put(MyApplication.LEVEL, level);
-                //
-                String text = a.containString(item,MyApplication.TEXT);
-                if (text != null) {
-                    boolean containUC = text.contains(MyApplication.TEXT_UC);
-                    if (unusedFlag == null) {
-                        unusedFlag = containUC;
-                    }
-                    if ((! unusedFlag) && containUC) {
-                        text = text.replace(MyApplication.TEXT_UC, "");
-                        item.put(MyApplication.TEXT,text);
-                    } else if (unusedFlag && (! containUC)) {
-                        text = MyApplication.TEXT_UC + text;
-                        item.put(MyApplication.TEXT,text);
-                    }
-                }
-                list.add((T) item);
-                Boolean expand = a.containBoolean(item,MyApplication.EXPAND);
-                if ((expand != null) && expand) {
-                    JSONArray child = a.containJSONArray(item,MyApplication.CHILD);
-                    if (child != null) {
-                        updateJSONArray(list, level + 1, child, unusedFlag);
-                    }
-                }
-            } catch (JSONException e) {
-                // pass
+            itemData.setLevel(level);
+            list.add((T)target);
+            boolean expand = itemData.getExpand();
+            if (expand) {
+                JSONArray child = itemData.getChild();
+                updateJSONArray(list, level + 1, child);
             }
         }
     }

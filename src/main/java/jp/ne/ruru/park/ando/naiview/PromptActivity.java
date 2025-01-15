@@ -1,25 +1,31 @@
 package jp.ne.ruru.park.ando.naiview;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.preference.PreferenceManager;
 import androidx.viewpager2.widget.ViewPager2;
 
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
 
 import jp.ne.ruru.park.ando.naiview.adapter.PromptFragmentAdapter;
+import jp.ne.ruru.park.ando.naiview.data.PromptType;
 import jp.ne.ruru.park.ando.naiview.databinding.ActivityPromptBinding;
 
 /** prompt activity
  * @author T.Ando
  */
 public class PromptActivity extends AppCompatActivity {
-
+    /** binding */
+    private ActivityPromptBinding binding;
     /**
      * on create
      * @param savedInstanceState If the activity is being re-initialized after
@@ -31,29 +37,43 @@ public class PromptActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         //
-        ActivityPromptBinding binding = ActivityPromptBinding.inflate(getLayoutInflater());
+        binding = ActivityPromptBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         setSupportActionBar(binding.toolbar);
-        binding.toolbar.setTitle(this.getResources().getString(R.string.action_prompt));
+        binding.toolbar.setTitle(this.getResources().getString(PromptType.P_BASE_OK.getIdShort()));
         ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
             actionBar.setDisplayHomeAsUpEnabled(true);
         }
-
         ViewPager2 pager = binding.pager;
         PromptFragmentAdapter adapter = new PromptFragmentAdapter(this);
         pager.setAdapter(adapter);
-
         //
         TabLayout tabs = binding.tabLayout;
-        new TabLayoutMediator(tabs, pager,
-                (tab, position) -> tab.setText(
-                        position == 0 ? this.getResources().getString(R.string.action_prompt)
-                                : this.getResources().getString(R.string.action_uc_prompt))
-        ).attach();
-
+        TabLayoutMediator manager = new TabLayoutMediator(tabs, pager, (tab, position) -> {
+                int id = PromptFragmentAdapter.getPositionToPromptType(position).getIdShort();
+                tab.setText(this.getResources().getString(id));
+            }
+        );
+        manager.attach();
+        //
+        final MyApplication a = (MyApplication) this.getApplication();
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
+        if (a.isPromptModelV4(preferences)) {
+            pager.setCurrentItem(1, false);
+        }
+        //
+        binding.fromTreeToPrompt.setOnClickListener(view-> {
+            adapter.actionSave();
+            a.fromTreeToPrompt();
+            adapter.actionLoad();
+        });
+        //
+        binding.actionClear.setOnClickListener(view-> {
+            a.setChangePartItem(null); // clear data..
+            onResumePart(); // change button
+        });
     }
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_prompt, menu);
@@ -72,5 +92,29 @@ public class PromptActivity extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(menuButton);
     }
-
+    /**
+     * on resume
+     */
+    @Override
+    public void onResume() {
+        super.onResume();
+        onResumePart();
+    }
+    public void onResumePart() {
+        MyApplication a = (MyApplication) this.getApplication();
+        if (a == null) {
+            return;
+        }
+        Button treeToPrompt = binding.fromTreeToPrompt;
+        Button menuChangePart = binding.actionClear;
+        if (a.getChangePartItem() == null) {
+            String text = this.getResources().getString(R.string.setting_use_tree);
+            treeToPrompt.setText(text);
+            menuChangePart.setVisibility(View.GONE);
+        } else {
+            String text = this.getResources().getString(R.string.menu_change_part);
+            treeToPrompt.setText(text);
+            menuChangePart.setVisibility(View.VISIBLE);
+        }
+    }
 }

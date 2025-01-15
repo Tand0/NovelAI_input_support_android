@@ -1,7 +1,9 @@
 [
   {
-    "text": "Ignore-Sequence",
-    "values": "版権",
+    "ignore": false,
+    "prompt": "c0",
+    "text": "Sequence",
+    "values": "プロンプト",
     "child": [
       {
         "text": "Select",
@@ -9,332 +11,826 @@
         "child": [
           {
             "text": "word",
-            "values": "40010prototype",
+            "values": "artist:40010prototype",
             "child": [],
-            "level": 2
+            "level": 2,
+            "ignore": false,
+            "prompt": "c0"
           },
           {
             "text": "word",
-            "values": "Amagappa Shoujogun",
+            "values": "artist:Amagappa Shoujogun",
             "child": [],
-            "level": 2
+            "level": 2,
+            "ignore": false,
+            "prompt": "c0"
           },
           {
             "text": "word",
-            "values": "Airandou",
+            "values": "artist:airandou",
             "child": [],
-            "level": 2
+            "level": 2,
+            "ignore": false,
+            "prompt": "c0"
           },
           {
             "text": "word",
-            "values": "akazawa red",
+            "values": "artist:akazawa_red",
             "child": [],
-            "level": 2
+            "level": 2,
+            "ignore": false,
+            "prompt": "c0"
           },
           {
             "text": "word",
             "values": "artist:onineko",
             "child": [],
-            "level": 2
+            "level": 2,
+            "ignore": false,
+            "prompt": "c0"
           },
           {
             "text": "word",
-            "values": "aisaka_taiga",
+            "values": "artist:aisaka_taiga",
             "child": [],
-            "level": 2
+            "level": 2,
+            "ignore": false,
+            "prompt": "c0"
           },
           {
             "text": "word",
-            "values": "bosshi",
+            "values": "artist:bosshi",
             "child": [],
-            "level": 2
+            "level": 2,
+            "ignore": false,
+            "prompt": "c0"
           },
           {
             "text": "word",
-            "values": "blade_(galaxist)",
+            "values": "artist:blade_(galaxist)",
             "child": [],
-            "level": 2
+            "level": 2,
+            "ignore": false,
+            "prompt": "c0"
           },
           {
             "text": "word",
-            "values": "dodome-iro_mayonnaise",
+            "values": "artist:dodome-iro_mayonnaise",
             "child": [],
-            "level": 2
+            "level": 2,
+            "ignore": false,
+            "prompt": "c0"
           },
           {
             "text": "word",
-            "values": "egami",
+            "values": "artist:egami",
             "child": [],
-            "level": 2
+            "level": 2,
+            "ignore": false,
+            "prompt": "c0"
           },
           {
             "text": "word",
-            "values": "emily_(pure_dream)",
+            "values": "artist:emily_(pure_dream)",
             "child": [],
-            "level": 2
+            "level": 2,
+            "ignore": false,
+            "prompt": "c0"
           },
           {
             "text": "word",
-            "values": "fuzichoco",
+            "values": "artist:fuzichoco",
             "child": [],
-            "level": 2
+            "level": 2,
+            "ignore": false,
+            "prompt": "c0"
           },
           {
             "text": "word",
-            "values": "fujisaki_hikari",
+            "values": "artist:fujisaki_hikari",
             "child": [],
-            "level": 2
+            "level": 2,
+            "ignore": false,
+            "prompt": "c0"
           },
           {
             "text": "word",
-            "values": "fujiyama",
+            "values": "artist:fujiyama",
             "child": [],
-            "level": 2
+            "level": 2,
+            "ignore": false,
+            "prompt": "c0"
           },
           {
             "text": "word",
-            "values": "happoubi_jin",
+            "values": "artist:happoubi_jin",
             "child": [],
-            "level": 2
+            "level": 2,
+            "ignore": false,
+            "prompt": "c0"
           },
           {
             "text": "word",
-            "values": "henreader",
+            "values": "artist:henreader",
             "child": [],
-            "level": 2
+            "level": 2,
+            "ignore": false,
+            "prompt": "c0"
           },
           {
             "text": "word",
-            "values": "hong_(white_spider)",
+            "values": "artist:hong_(white_spider)",
             "child": [],
-            "level": 2
+            "level": 2,
+            "ignore": false,
+            "prompt": "c0"
           },
           {
             "text": "word",
-            "values": "horosuke",
+            "values": "artist:horosuke",
             "child": [],
-            "level": 2
+            "level": 2,
+            "ignore": false,
+            "prompt": "c0"
           },
           {
             "text": "word",
-            "values": "ini_(inunabe00)",
+            "values": "artist:ini_(inunabe00)",
             "child": [],
-            "level": 2
+            "level": 2,
+            "ignore": false,
+            "prompt": "c0"
           },
           {
             "text": "word",
-            "values": "inugami_kira",
+            "values": "artist:inugami_kira",
             "child": [],
-            "level": 2
+            "level": 2,
+            "ignore": false,
+            "prompt": "c0"
           },
           {
             "text": "word",
-            "values": "ishikei",
+            "values": "artist:ishikei",
             "child": [],
-            "level": 2
+            "level": 2,
+            "ignore": false,
+            "prompt": "c0"
           },
           {
             "text": "word",
-            "values": "itolife",
+            "values": "artist:itolife",
             "child": [],
-            "level": 2
+            "level": 2,
+            "ignore": false,
+            "prompt": "c0"
           },
           {
             "text": "word",
-            "values": "ito noizi",
+            "values": "artist:ito_noizi",
             "child": [],
-            "level": 2
+            "level": 2,
+            "ignore": false,
+            "prompt": "c0"
           },
           {
             "text": "word",
-            "values": "ixy",
+            "values": "artist:ixy",
             "child": [],
-            "level": 2
+            "level": 2,
+            "ignore": false,
+            "prompt": "c0"
           },
           {
             "text": "word",
-            "values": "kanro_ame_(ameko)",
+            "values": "artist:kanro_ame_(ameko)",
             "child": [],
-            "level": 2
+            "level": 2,
+            "ignore": false,
+            "prompt": "c0"
           },
           {
             "text": "word",
-            "values": "kedama_milk",
+            "values": "artist:kedama_milk",
             "child": [],
-            "level": 2
+            "level": 2,
+            "ignore": false,
+            "prompt": "c0"
           },
           {
             "text": "word",
-            "values": "kiira",
+            "values": "artist:kiira",
             "child": [],
-            "level": 2
+            "level": 2,
+            "ignore": false,
+            "prompt": "c0"
           },
           {
             "text": "word",
-            "values": "kikurage(crayon arts)",
+            "values": "artist:kikurage(crayon arts)",
             "child": [],
-            "level": 2
+            "level": 2,
+            "ignore": false,
+            "prompt": "c0"
           },
           {
             "text": "word",
-            "values": "kino_(kino_konomi)",
+            "values": "artist:kino_(kino_konomi)",
             "child": [],
-            "level": 2
+            "level": 2,
+            "ignore": false,
+            "prompt": "c0"
           },
           {
             "text": "word",
-            "values": "kupa_(jesterwii)",
+            "values": "artist:kupa_(jesterwii)",
             "child": [],
-            "level": 2
+            "level": 2,
+            "ignore": false,
+            "prompt": "c0"
           },
           {
             "text": "word",
-            "values": "kyokucho",
+            "values": "artist:kyokucho",
             "child": [],
-            "level": 2
+            "level": 2,
+            "ignore": false,
+            "prompt": "c0"
           },
           {
             "text": "word",
-            "values": "michiking",
+            "values": "artist:michiking",
             "child": [],
-            "level": 2
+            "level": 2,
+            "ignore": false,
+            "prompt": "c0"
           },
           {
             "text": "word",
-            "values": "miya9",
+            "values": "artist:miya9",
             "child": [],
-            "level": 2
+            "level": 2,
+            "ignore": false,
+            "prompt": "c0"
           },
           {
             "text": "word",
-            "values": "mizushima_sorahiko",
+            "values": "artist:mizushima_sorahiko",
             "child": [],
-            "level": 2
+            "level": 2,
+            "ignore": false,
+            "prompt": "c0"
           },
           {
             "text": "word",
-            "values": "mochi_(circle_rin)",
+            "values": "artist:mochi_(circle_rin)",
             "child": [],
-            "level": 2
+            "level": 2,
+            "ignore": false,
+            "prompt": "c0"
           },
           {
             "text": "word",
-            "values": "mudou_eichi",
+            "values": "artist:mudou_eichi",
             "child": [],
-            "level": 2
+            "level": 2,
+            "ignore": false,
+            "prompt": "c0"
           },
           {
             "text": "word",
-            "values": "nishi iori",
+            "values": "artist:nishi_iori",
             "child": [],
-            "level": 2
+            "level": 2,
+            "ignore": false,
+            "prompt": "c0"
           },
           {
             "text": "word",
-            "values": "oouso",
+            "values": "artist:oouso",
             "child": [],
-            "level": 2
+            "level": 2,
+            "ignore": false,
+            "prompt": "c0"
           },
           {
             "text": "word",
-            "values": "otintin",
+            "values": "artist:otintin",
             "child": [],
-            "level": 2
+            "level": 2,
+            "ignore": false,
+            "prompt": "c0"
           },
           {
             "text": "word",
-            "values": "oyari_ashito",
+            "values": "artist:oyari_ashito",
             "child": [],
-            "level": 2
+            "level": 2,
+            "ignore": false,
+            "prompt": "c0"
           },
           {
             "text": "word",
-            "values": "ruroo",
+            "values": "artist:ruroo",
             "child": [],
-            "level": 2
+            "level": 2,
+            "ignore": false,
+            "prompt": "c0"
           },
           {
             "text": "word",
-            "values": "sakurazawa_izumi",
+            "values": "artist:sakurazawa_izumi",
             "child": [],
-            "level": 2
+            "level": 2,
+            "ignore": false,
+            "prompt": "c0"
           },
           {
             "text": "word",
-            "values": "sawayaka samehada",
+            "values": "artist:sawayaka_samehada",
             "child": [],
-            "level": 2
+            "level": 2,
+            "ignore": false,
+            "prompt": "c0"
           },
           {
             "text": "word",
-            "values": "sanshoku_amido",
+            "values": "artist:sanshoku_amido",
             "child": [],
-            "level": 2
+            "level": 2,
+            "ignore": false,
+            "prompt": "c0"
           },
           {
             "text": "word",
-            "values": "sekiya_asami",
+            "values": "artist:sekiya_asami",
             "child": [],
-            "level": 2
+            "level": 2,
+            "ignore": false,
+            "prompt": "c0"
           },
           {
             "text": "word",
-            "values": "shikei",
+            "values": "artist:shikei",
             "child": [],
-            "level": 2
+            "level": 2,
+            "ignore": false,
+            "prompt": "c0"
           },
           {
             "text": "word",
-            "values": "sumiyao_(amam)",
+            "values": "artist:sumiyao_(amam)",
             "child": [],
-            "level": 2
+            "level": 2,
+            "ignore": false,
+            "prompt": "c0"
           },
           {
             "text": "word",
-            "values": "tsurusaki_takahiro",
+            "values": "artist:tsurusaki_takahiro",
             "child": [],
-            "level": 2
+            "level": 2,
+            "ignore": false,
+            "prompt": "c0"
           },
           {
             "text": "word",
-            "values": "takashina_masato",
+            "values": "artist:takashina_masato",
             "child": [],
-            "level": 2
+            "level": 2,
+            "ignore": false,
+            "prompt": "c0"
           },
           {
             "text": "word",
-            "values": "takayaki",
+            "values": "artist:takayaki",
             "child": [],
-            "level": 2
+            "level": 2,
+            "ignore": false,
+            "prompt": "c0"
           },
           {
             "text": "word",
-            "values": "takei_ooki",
+            "values": "artist:takei_ooki",
             "child": [],
-            "level": 2
+            "level": 2,
+            "ignore": false,
+            "prompt": "c0"
           },
           {
             "text": "word",
-            "values": "tomose_shunsaku",
+            "values": "artist:tomose_shunsaku",
             "child": [],
-            "level": 2
+            "level": 2,
+            "ignore": false,
+            "prompt": "c0"
           },
           {
             "text": "word",
-            "values": "yuizaki_kazuya",
+            "values": "artist:yuizaki_kazuya",
             "child": [],
-            "level": 2
+            "level": 2,
+            "ignore": false,
+            "prompt": "c0"
           },
           {
             "text": "word",
-            "values": "yabuki_kentarou",
+            "values": "artist:yabuki_kentarou",
             "child": [],
-            "level": 2
+            "level": 2,
+            "ignore": false,
+            "prompt": "c0"
           }
         ],
         "expand": false,
-        "level": 1
+        "level": 1,
+        "ignore": true,
+        "prompt": "c0"
       },
+      {
+        "text": "Select",
+        "values": "場所の指定",
+        "child": [
+          {
+            "text": "word",
+            "values": "against wall",
+            "child": [],
+            "level": 1,
+            "ignore": false,
+            "prompt": "c0"
+          },
+          {
+            "text": "word",
+            "values": "bathing",
+            "child": [],
+            "level": 1,
+            "ignore": false,
+            "prompt": "c0"
+          },
+          {
+            "text": "word",
+            "values": "beach",
+            "child": [],
+            "level": 1,
+            "ignore": false,
+            "prompt": "c0"
+          },
+          {
+            "text": "word",
+            "values": "bedroom",
+            "child": [],
+            "level": 1,
+            "ignore": false,
+            "prompt": "c0"
+          },
+          {
+            "text": "Sequence",
+            "values": "bed room",
+            "child": [
+              {
+                "text": "word",
+                "values": "on bed",
+                "child": [],
+                "level": 2,
+                "ignore": false,
+                "prompt": "c0"
+              },
+              {
+                "text": "word",
+                "values": "pillow",
+                "child": [],
+                "level": 2,
+                "ignore": false,
+                "prompt": "c0"
+              }
+            ],
+            "expand": false,
+            "level": 1,
+            "ignore": false,
+            "prompt": "c0"
+          },
+          {
+            "text": "word",
+            "values": "car interior",
+            "child": [],
+            "level": 1,
+            "ignore": false,
+            "prompt": "c0"
+          },
+          {
+            "text": "word",
+            "values": "corridor",
+            "child": [],
+            "level": 1,
+            "ignore": false,
+            "prompt": "c0"
+          },
+          {
+            "text": "Sequence",
+            "values": "classroom",
+            "child": [
+              {
+                "text": "word",
+                "values": "classroom",
+                "child": [],
+                "level": 2,
+                "ignore": false,
+                "prompt": "c0"
+              },
+              {
+                "text": "Select",
+                "values": "chair",
+                "child": [
+                  {
+                    "text": "word",
+                    "values": "chair",
+                    "child": [],
+                    "level": 3,
+                    "ignore": false,
+                    "prompt": "c0"
+                  },
+                  {
+                    "text": "word",
+                    "values": "school table",
+                    "child": [],
+                    "level": 3,
+                    "ignore": false,
+                    "prompt": "c0"
+                  },
+                  {
+                    "text": "word",
+                    "values": "desk",
+                    "child": [],
+                    "level": 3,
+                    "ignore": false,
+                    "prompt": "c0"
+                  }
+                ],
+                "expand": true,
+                "level": 2,
+                "ignore": false,
+                "prompt": "c0"
+              }
+            ],
+            "expand": false,
+            "level": 1,
+            "ignore": false,
+            "prompt": "c0"
+          },
+          {
+            "text": "word",
+            "values": "fantasy",
+            "child": [],
+            "level": 1,
+            "ignore": false,
+            "prompt": "c0"
+          },
+          {
+            "text": "word",
+            "values": "ruins",
+            "child": [],
+            "level": 1,
+            "ignore": false,
+            "prompt": "c0"
+          },
+          {
+            "text": "word",
+            "values": "night pool",
+            "child": [],
+            "level": 1,
+            "ignore": false,
+            "prompt": "c0"
+          },
+          {
+            "text": "Sequence",
+            "values": "onsen",
+            "child": [
+              {
+                "text": "word",
+                "values": "night sky",
+                "child": [],
+                "level": 2,
+                "ignore": false,
+                "prompt": "c0"
+              },
+              {
+                "text": "word",
+                "values": "onsen",
+                "child": [],
+                "level": 2,
+                "ignore": false,
+                "prompt": "c0"
+              }
+            ],
+            "expand": false,
+            "level": 1,
+            "ignore": false,
+            "prompt": "c0"
+          },
+          {
+            "text": "word",
+            "values": "pool",
+            "child": [],
+            "level": 1,
+            "ignore": false,
+            "prompt": "c0"
+          },
+          {
+            "text": "Sequence",
+            "values": "showering",
+            "child": [
+              {
+                "text": "word",
+                "values": "showering",
+                "child": [],
+                "level": 2,
+                "ignore": true,
+                "prompt": "c0"
+              },
+              {
+                "text": "word",
+                "values": "bathroom",
+                "child": [],
+                "level": 2,
+                "ignore": false,
+                "prompt": "c0"
+              }
+            ],
+            "expand": false,
+            "level": 1,
+            "ignore": false,
+            "prompt": "c0"
+          },
+          {
+            "text": "word",
+            "values": "sofa",
+            "child": [],
+            "level": 1,
+            "ignore": false,
+            "prompt": "c0"
+          },
+          {
+            "text": "word",
+            "values": "train interior",
+            "child": [],
+            "level": 1,
+            "ignore": false,
+            "prompt": "c0"
+          },
+          {
+            "text": "word",
+            "values": "toilet",
+            "child": [],
+            "level": 1,
+            "ignore": false,
+            "prompt": "c0"
+          }
+        ],
+        "level": 1,
+        "expand": false,
+        "ignore": false,
+        "prompt": "c0"
+      },
+      {
+        "text": "Sequence",
+        "values": "品質の指定",
+        "child": [
+          {
+            "text": "word",
+            "values": "{best quality}",
+            "child": [],
+            "level": 1,
+            "ignore": true,
+            "prompt": "c0"
+          },
+          {
+            "text": "word",
+            "values": "absurdres",
+            "child": [],
+            "level": 1,
+            "ignore": true,
+            "prompt": "c0"
+          },
+          {
+            "text": "word",
+            "values": "amazing quality",
+            "child": [],
+            "level": 1,
+            "ignore": true,
+            "prompt": "c0"
+          },
+          {
+            "text": "word",
+            "values": "very aesthetic",
+            "child": [],
+            "level": 1,
+            "ignore": false,
+            "prompt": "c0"
+          },
+          {
+            "text": "word",
+            "values": "photorealistic",
+            "child": [],
+            "level": 1,
+            "ignore": true,
+            "prompt": "c0"
+          },
+          {
+            "text": "word",
+            "values": "extremely detailed CG unity",
+            "child": [],
+            "level": 1,
+            "ignore": true,
+            "prompt": "c0"
+          },
+          {
+            "text": "word",
+            "values": "official",
+            "child": [],
+            "level": 1,
+            "ignore": true,
+            "prompt": "c0"
+          },
+          {
+            "text": "word",
+            "values": "official art",
+            "child": [],
+            "level": 1,
+            "ignore": true,
+            "prompt": "c0"
+          },
+          {
+            "text": "word",
+            "values": "illustration",
+            "child": [],
+            "level": 1,
+            "ignore": true,
+            "prompt": "c0"
+          },
+          {
+            "text": "word",
+            "values": "masterpiece",
+            "child": [],
+            "level": 1,
+            "ignore": true,
+            "prompt": "c0"
+          },
+          {
+            "text": "word",
+            "values": "{realistic body}",
+            "child": [],
+            "level": 1,
+            "ignore": true,
+            "prompt": "c0"
+          },
+          {
+            "text": "word",
+            "values": "awesome detailed",
+            "child": [],
+            "level": 1,
+            "ignore": true,
+            "prompt": "c0"
+          },
+          {
+            "text": "word",
+            "values": "[hyper detailed]",
+            "child": [],
+            "level": 1,
+            "ignore": true,
+            "prompt": "c0"
+          },
+          {
+            "text": "word",
+            "values": "[ultra detailed skin]",
+            "child": [],
+            "level": 1,
+            "ignore": true,
+            "prompt": "c0"
+          },
+          {
+            "text": "word",
+            "values": "{{{{glistening shining skin}}}}",
+            "child": [],
+            "level": 1,
+            "ignore": true,
+            "prompt": "c0"
+          }
+        ],
+        "level": 1,
+        "expand": false,
+        "ignore": false,
+        "prompt": "c0"
+      }
+    ],
+    "expand": true,
+    "level": 0
+  },
+  {
+    "text": "Sequence",
+    "prompt": "c1",
+    "values": "1キャラクタープロンプト",
+    "expand": true,
+    "child": [
       {
         "text": "Select",
         "values": "キャラクター名",
@@ -343,344 +839,448 @@
             "text": "word",
             "values": "asuna (sao)",
             "child": [],
-            "level": 2
+            "level": 2,
+            "ignore": false,
+            "prompt": "c1"
           },
           {
             "text": "word",
             "values": "amae_koromo",
             "child": [],
-            "level": 2
+            "level": 2,
+            "ignore": false,
+            "prompt": "c1"
           },
           {
             "text": "word",
             "values": "alisa_mikhailovna_kujou",
             "child": [],
-            "level": 2
+            "level": 2,
+            "ignore": false,
+            "prompt": "c1"
           },
           {
             "text": "word",
             "values": "artoria_pendragon_(fate)",
             "child": [],
-            "level": 2
+            "level": 2,
+            "ignore": false,
+            "prompt": "c1"
           },
           {
             "text": "word",
             "values": "atelier totori",
             "child": [],
-            "level": 2
+            "level": 2,
+            "ignore": false,
+            "prompt": "c1"
           },
           {
             "text": "word",
             "values": "cafe_stella_to_shinigami_no_chou",
             "child": [],
-            "level": 2
+            "level": 2,
+            "ignore": false,
+            "prompt": "c1"
           },
           {
             "text": "word",
             "values": "djeeta_(granblue_fantasy)",
             "child": [],
-            "level": 2
+            "level": 2,
+            "ignore": false,
+            "prompt": "c1"
           },
           {
             "text": "word",
             "values": "elaina (majo no tabitabi)",
             "child": [],
-            "level": 2
+            "level": 2,
+            "ignore": false,
+            "prompt": "c1"
           },
           {
             "text": "word",
             "values": "frenda_seivelun",
             "child": [],
-            "level": 2
+            "level": 2,
+            "ignore": false,
+            "prompt": "c1"
           },
           {
             "text": "word",
             "values": "gokou ruri",
             "child": [],
-            "level": 2
+            "level": 2,
+            "ignore": false,
+            "prompt": "c1"
           },
           {
             "text": "word",
             "values": "hasegawa_kobato",
             "child": [],
-            "level": 2
+            "level": 2,
+            "ignore": false,
+            "prompt": "c1"
           },
           {
             "text": "word",
             "values": "hinatsuru ai",
             "child": [],
-            "level": 2
+            "level": 2,
+            "ignore": false,
+            "prompt": "c1"
           },
           {
             "text": "word",
             "values": "higuchi_madoka",
             "child": [],
-            "level": 2
+            "level": 2,
+            "ignore": false,
+            "prompt": "c1"
           },
           {
             "text": "word",
             "values": "hoshii_miki",
             "child": [],
-            "level": 2
+            "level": 2,
+            "ignore": false,
+            "prompt": "c1"
           },
           {
             "text": "word",
             "values": "hoshikawa sara",
             "child": [],
-            "level": 2
+            "level": 2,
+            "ignore": false,
+            "prompt": "c1"
           },
           {
             "text": "word",
             "values": "ichijo hotaru",
             "child": [],
-            "level": 2
+            "level": 2,
+            "ignore": false,
+            "prompt": "c1"
           },
           {
             "text": "word",
             "values": "illyasviel_von_einzbern",
             "child": [],
-            "level": 2
+            "level": 2,
+            "ignore": false,
+            "prompt": "c1"
           },
           {
             "text": "word",
             "values": "kafuu chino",
             "child": [],
-            "level": 2
+            "level": 2,
+            "ignore": false,
+            "prompt": "c1"
           },
           {
             "text": "word",
             "values": "komeiji satori",
             "child": [],
-            "level": 2
+            "level": 2,
+            "ignore": false,
+            "prompt": "c1"
           },
           {
             "text": "word",
             "values": "konjiki_no_yami",
             "child": [],
-            "level": 2
+            "level": 2,
+            "ignore": false,
+            "prompt": "c1"
           },
           {
             "text": "word",
             "values": "koshimizu_sachiko",
             "child": [],
-            "level": 2
+            "level": 2,
+            "ignore": false,
+            "prompt": "c1"
           },
           {
             "text": "word",
             "values": "kotegawa_yui",
             "child": [],
-            "level": 2
+            "level": 2,
+            "ignore": false,
+            "prompt": "c1"
           },
           {
             "text": "word",
             "values": "kula_diamond",
             "child": [],
-            "level": 2
+            "level": 2,
+            "ignore": false,
+            "prompt": "c1"
           },
           {
             "text": "word",
             "values": "kuroyukihime",
             "child": [],
-            "level": 2
+            "level": 2,
+            "ignore": false,
+            "prompt": "c1"
           },
           {
             "text": "word",
             "values": "lillie_(pokemon)",
             "child": [],
-            "level": 2
+            "level": 2,
+            "ignore": false,
+            "prompt": "c1"
           },
           {
             "text": "word",
             "values": "hakui koyori",
             "child": [],
-            "level": 2
+            "level": 2,
+            "ignore": false,
+            "prompt": "c1"
           },
           {
             "text": "word",
             "values": "latifa_fleuranza",
             "child": [],
-            "level": 2
+            "level": 2,
+            "ignore": false,
+            "prompt": "c1"
           },
           {
             "text": "word",
             "values": "louise francoise le blanc de la valliere",
             "child": [],
-            "level": 2
+            "level": 2,
+            "ignore": false,
+            "prompt": "c1"
           },
           {
             "text": "word",
             "values": "madorosu tomita",
             "child": [],
-            "level": 2
+            "level": 2,
+            "ignore": false,
+            "prompt": "c1"
           },
           {
             "text": "word",
             "values": "mary stuart",
             "child": [],
-            "level": 2
+            "level": 2,
+            "ignore": false,
+            "prompt": "c1"
           },
           {
             "text": "word",
             "values": "mystia_lorelei",
             "child": [],
-            "level": 2
+            "level": 2,
+            "ignore": false,
+            "prompt": "c1"
           },
           {
             "text": "word",
             "values": "mythra_(xenoblade)",
             "child": [],
-            "level": 2
+            "level": 2,
+            "ignore": false,
+            "prompt": "c1"
           },
           {
             "text": "word",
             "values": "natalia_luzu_kimlasca_lanvaldear",
             "child": [],
-            "level": 2
+            "level": 2,
+            "ignore": false,
+            "prompt": "c1"
           },
           {
             "text": "word",
             "values": "nekopara",
             "child": [],
-            "level": 2
+            "level": 2,
+            "ignore": false,
+            "prompt": "c1"
           },
           {
             "text": "word",
             "values": "ninomiya asuka",
             "child": [],
-            "level": 2
+            "level": 2,
+            "ignore": false,
+            "prompt": "c1"
           },
           {
             "text": "word",
             "values": "momo_velia_deviluke",
             "child": [],
-            "level": 2
+            "level": 2,
+            "ignore": false,
+            "prompt": "c1"
           },
           {
             "text": "word",
             "values": "murasaki_shion",
             "child": [],
-            "level": 2
+            "level": 2,
+            "ignore": false,
+            "prompt": "c1"
           },
           {
             "text": "word",
             "values": "oshino_shinobu",
             "child": [],
-            "level": 2
+            "level": 2,
+            "ignore": false,
+            "prompt": "c1"
           },
           {
             "text": "word",
             "values": "priestess (goblin slayer!)",
             "child": [],
-            "level": 2
+            "level": 2,
+            "ignore": false,
+            "prompt": "c1"
           },
           {
             "text": "word",
             "values": "pyra_(xenoblade)",
             "child": [],
-            "level": 2
+            "level": 2,
+            "ignore": false,
+            "prompt": "c1"
           },
           {
             "text": "word",
             "values": "rice shower (umamusume)",
             "child": [],
-            "level": 2
+            "level": 2,
+            "ignore": false,
+            "prompt": "c1"
           },
           {
             "text": "word",
             "values": "rem_(re:zero)",
             "child": [],
-            "level": 2
+            "level": 2,
+            "ignore": false,
+            "prompt": "c1"
           },
           {
             "text": "word",
             "values": "saten ruiko",
             "child": [],
-            "level": 2
+            "level": 2,
+            "ignore": false,
+            "prompt": "c1"
           },
           {
             "text": "word",
             "values": "sawamura_spencer_eriri",
             "child": [],
-            "level": 2
+            "level": 2,
+            "ignore": false,
+            "prompt": "c1"
           },
           {
             "text": "word",
             "values": "shiki_natsume",
             "child": [],
-            "level": 2
+            "level": 2,
+            "ignore": false,
+            "prompt": "c1"
           },
           {
             "text": "word",
             "values": "shakugan_no_shana",
             "child": [],
-            "level": 2
+            "level": 2,
+            "ignore": false,
+            "prompt": "c1"
           },
           {
             "text": "word",
             "values": "shibuya rin",
             "child": [],
-            "level": 2
+            "level": 2,
+            "ignore": false,
+            "prompt": "c1"
           },
           {
             "text": "word",
             "values": "sora ginko",
             "child": [],
-            "level": 2
+            "level": 2,
+            "ignore": false,
+            "prompt": "c1"
           },
           {
             "text": "word",
             "values": "suigintou",
             "child": [],
-            "level": 2
+            "level": 2,
+            "ignore": false,
+            "prompt": "c1"
           },
           {
             "text": "word",
             "values": "shigure_(kancolle)",
             "child": [],
-            "level": 2
+            "level": 2,
+            "ignore": false,
+            "prompt": "c1"
           },
           {
             "text": "word",
             "values": "shokuhou misaki",
             "child": [],
-            "level": 2
+            "level": 2,
+            "ignore": false,
+            "prompt": "c1"
           },
           {
             "text": "word",
             "values": "tokisaki_kurumi",
             "child": [],
-            "level": 2
+            "level": 2,
+            "ignore": false,
+            "prompt": "c1"
           },
           {
             "text": "word",
             "values": "tokoyami_towa",
             "child": [],
-            "level": 2
+            "level": 2,
+            "ignore": false,
+            "prompt": "c1"
           },
           {
             "text": "word",
             "values": "verxina_(umamusume)",
             "child": [],
-            "level": 2
+            "level": 2,
+            "ignore": false,
+            "prompt": "c1"
           },
           {
             "text": "word",
             "values": "wonder acute (umamusume)",
             "child": [],
-            "level": 2
+            "level": 2,
+            "ignore": false,
+            "prompt": "c1"
           }
         ],
         "expand": false,
-        "level": 1
-      }
-    ],
-    "expand": false,
-    "level": 0
-  },
-  {
-    "text": "Sequence",
-    "values": "女の子の指定",
-    "child": [
+        "level": 1,
+        "ignore": true,
+        "prompt": "c1"
+      },
       {
         "text": "Select",
         "values": "顔の指定",
@@ -693,17 +1293,23 @@
                 "text": "word",
                 "values": "profile",
                 "child": [],
-                "level": 3
+                "level": 3,
+                "ignore": false,
+                "prompt": "c1"
               },
               {
                 "text": "word",
                 "values": "looking at another",
                 "child": [],
-                "level": 3
+                "level": 3,
+                "ignore": false,
+                "prompt": "c1"
               }
             ],
             "expand": false,
-            "level": 2
+            "level": 1,
+            "ignore": false,
+            "prompt": "c1"
           },
           {
             "text": "Select",
@@ -713,47 +1319,63 @@
                 "text": "word",
                 "values": "smug",
                 "child": [],
-                "level": 3
+                "level": 2,
+                "ignore": false,
+                "prompt": "c1"
               },
               {
                 "text": "word",
                 "values": "scared",
                 "child": [],
-                "level": 3
+                "level": 2,
+                "ignore": false,
+                "prompt": "c1"
               },
               {
                 "text": "word",
                 "values": "smirk",
                 "child": [],
-                "level": 3
+                "level": 2,
+                "ignore": false,
+                "prompt": "c1"
               },
               {
                 "text": "word",
                 "values": "grin",
                 "child": [],
-                "level": 3
+                "level": 2,
+                "ignore": false,
+                "prompt": "c1"
               },
               {
                 "text": "word",
                 "values": "happy",
                 "child": [],
-                "level": 3
+                "level": 2,
+                "ignore": false,
+                "prompt": "c1"
               },
               {
                 "text": "word",
                 "values": "kind smile",
                 "child": [],
-                "level": 3
+                "level": 2,
+                "ignore": false,
+                "prompt": "c1"
               },
               {
                 "text": "word",
                 "values": "light smile",
                 "child": [],
-                "level": 3
+                "level": 2,
+                "ignore": false,
+                "prompt": "c1"
               }
             ],
             "expand": false,
-            "level": 2
+            "level": 1,
+            "ignore": false,
+            "prompt": "c1"
           },
           {
             "text": "Select",
@@ -763,17 +1385,23 @@
                 "text": "word",
                 "values": "teeth",
                 "child": [],
-                "level": 3
+                "level": 2,
+                "ignore": false,
+                "prompt": "c1"
               },
               {
                 "text": "word",
                 "values": "smile",
                 "child": [],
-                "level": 3
+                "level": 2,
+                "ignore": false,
+                "prompt": "c1"
               }
             ],
             "expand": false,
-            "level": 2
+            "level": 1,
+            "ignore": false,
+            "prompt": "c1"
           },
           {
             "text": "Select",
@@ -781,49 +1409,73 @@
             "child": [
               {
                 "text": "word",
+                "values": "half closed eyes",
+                "child": [],
+                "level": 3,
+                "ignore": false,
+                "prompt": "c1"
+              },
+              {
+                "text": "word",
                 "values": "glaring",
                 "child": [],
-                "level": 3
+                "level": 3,
+                "ignore": false,
+                "prompt": "c1"
               },
               {
                 "text": "word",
                 "values": "looking up",
                 "child": [],
-                "level": 3
+                "level": 3,
+                "ignore": false,
+                "prompt": "c1"
               },
               {
                 "text": "word",
                 "values": "looking down",
                 "child": [],
-                "level": 3
+                "level": 3,
+                "ignore": false,
+                "prompt": "c1"
               },
               {
                 "text": "word",
                 "values": "sideways_glance",
                 "child": [],
-                "level": 3
+                "level": 3,
+                "ignore": false,
+                "prompt": "c1"
               },
               {
                 "text": "word",
                 "values": "open mouth",
                 "child": [],
-                "level": 3
+                "level": 3,
+                "ignore": false,
+                "prompt": "c1"
               },
               {
                 "text": "word",
                 "values": "closed eyes",
                 "child": [],
-                "level": 3
+                "level": 3,
+                "ignore": false,
+                "prompt": "c1"
               },
               {
                 "text": "word",
                 "values": "empty_eyes",
                 "child": [],
-                "level": 3
+                "level": 3,
+                "ignore": false,
+                "prompt": "c1"
               }
             ],
             "expand": false,
-            "level": 2
+            "level": 1,
+            "ignore": false,
+            "prompt": "c1"
           },
           {
             "text": "Select",
@@ -833,29 +1485,39 @@
                 "text": "word",
                 "values": ":t",
                 "child": [],
-                "level": 3
+                "level": 3,
+                "ignore": false,
+                "prompt": "c1"
               },
               {
                 "text": "word",
                 "values": "licking lips",
                 "child": [],
-                "level": 3
+                "level": 3,
+                "ignore": false,
+                "prompt": "c1"
               },
               {
                 "text": "word",
                 "values": "licking lips",
                 "child": [],
-                "level": 3
+                "level": 3,
+                "ignore": false,
+                "prompt": "c1"
               },
               {
                 "text": "word",
                 "values": "parted_lips",
                 "child": [],
-                "level": 3
+                "level": 3,
+                "ignore": false,
+                "prompt": "c1"
               }
             ],
             "expand": false,
-            "level": 2
+            "level": 1,
+            "ignore": false,
+            "prompt": "c1"
           },
           {
             "text": "Sequence",
@@ -865,17 +1527,23 @@
                 "text": "word",
                 "values": "cry",
                 "child": [],
-                "level": 3
+                "level": 3,
+                "ignore": false,
+                "prompt": "c1"
               },
               {
                 "text": "word",
                 "values": "drooling",
                 "child": [],
-                "level": 3
+                "level": 3,
+                "ignore": false,
+                "prompt": "c1"
               }
             ],
-            "level": 2,
-            "expand": false
+            "level": 1,
+            "expand": false,
+            "ignore": false,
+            "prompt": "c1"
           },
           {
             "text": "Sequence",
@@ -885,11 +1553,15 @@
                 "text": "word",
                 "values": "clenched teeth",
                 "child": [],
-                "level": 3
+                "level": 3,
+                "ignore": false,
+                "prompt": "c1"
               }
             ],
-            "level": 2,
-            "expand": false
+            "level": 1,
+            "expand": false,
+            "ignore": false,
+            "prompt": "c1"
           },
           {
             "text": "Sequence",
@@ -899,2346 +1571,2688 @@
                 "text": "word",
                 "values": "parted_lips",
                 "child": [],
-                "level": 3
+                "level": 3,
+                "ignore": false,
+                "prompt": "c1"
               },
               {
                 "text": "word",
                 "values": "[[[angry]]]",
                 "child": [],
-                "level": 3
+                "level": 3,
+                "ignore": false,
+                "prompt": "c1"
               }
             ],
             "expand": false,
-            "level": 2
+            "level": 1,
+            "ignore": false,
+            "prompt": "c1"
           }
         ],
         "level": 1,
-        "expand": false
+        "expand": false,
+        "ignore": false,
+        "prompt": "c1"
       },
       {
-        "text": "Select",
-        "values": "格好（ポーズ）の指定",
+        "text": "Sequence",
+        "values": "女の子の指定",
         "child": [
           {
-            "text": "Sequence",
-            "values": "寝てる",
-            "child": [
-              {
-                "text": "word",
-                "values": "lying",
-                "child": [],
-                "level": 3
-              },
-              {
-                "text": "Weight",
-                "values": "足の指定",
-                "child": [
-                  {
-                    "text": "word",
-                    "values": "spread legs",
-                    "child": [],
-                    "level": 4
-                  },
-                  {
-                    "text": "word",
-                    "values": "knees up",
-                    "child": [],
-                    "level": 4
-                  },
-                  {
-                    "text": "word",
-                    "values": "legs apart",
-                    "child": [],
-                    "level": 4
-                  },
-                  {
-                    "text": "word",
-                    "values": "wide spread legs",
-                    "child": [],
-                    "level": 4
-                  }
-                ],
-                "level": 3,
-                "expand": false
-              },
-              {
-                "text": "Select",
-                "values": "手の指定",
-                "child": [
-                  {
-                    "text": "word",
-                    "values": "outstretched arms",
-                    "child": [],
-                    "level": 4
-                  },
-                  {
-                    "text": "word",
-                    "values": "hands up",
-                    "child": [],
-                    "level": 4
-                  },
-                  {
-                    "text": "Select",
-                    "values": "hands pouse",
-                    "child": [
-                      {
-                        "text": "word",
-                        "values": "hand in panties",
-                        "child": [],
-                        "level": 5
-                      },
-                      {
-                        "text": "word",
-                        "values": "covering mouth",
-                        "child": [],
-                        "level": 5
-                      },
-                      {
-                        "text": "Select",
-                        "values": "cross",
-                        "child": [
-                          {
-                            "text": "word",
-                            "values": "sheet_grab",
-                            "child": [],
-                            "level": 6
-                          },
-                          {
-                            "text": "word",
-                            "values": "hands on own chest",
-                            "child": [],
-                            "level": 6
-                          },
-                          {
-                            "text": "word",
-                            "values": "own hands together",
-                            "child": [],
-                            "level": 6
-                          },
-                          {
-                            "text": "word",
-                            "values": "hands on own face",
-                            "child": [],
-                            "level": 6
-                          },
-                          {
-                            "text": "word",
-                            "values": "own hands clasped",
-                            "child": [],
-                            "level": 6
-                          }
-                        ],
-                        "level": 5,
-                        "expand": false
-                      },
-                      {
-                        "text": "word",
-                        "values": "hands_grab",
-                        "child": [],
-                        "level": 5
-                      },
-                      {
-                        "text": "word",
-                        "values": "arm_grab",
-                        "child": [],
-                        "level": 5
-                      },
-                      {
-                        "text": "word",
-                        "values": "arms_grab",
-                        "child": [],
-                        "level": 5
-                      },
-                      {
-                        "text": "word",
-                        "values": "torso_grab",
-                        "child": [],
-                        "level": 5
-                      },
-                      {
-                        "text": "word",
-                        "values": "bound wrists",
-                        "child": [],
-                        "level": 5
-                      },
-                      {
-                        "text": "word",
-                        "values": "holding book",
-                        "child": [],
-                        "level": 5
-                      },
-                      {
-                        "text": "word",
-                        "values": "handcuffs",
-                        "child": [],
-                        "level": 5
-                      },
-                      {
-                        "text": "word",
-                        "values": "holding wrist",
-                        "child": [],
-                        "level": 5
-                      },
-                      {
-                        "text": "word",
-                        "values": "pov hands",
-                        "child": [],
-                        "level": 5
-                      },
-                      {
-                        "text": "word",
-                        "values": "arms_around_neck",
-                        "child": [],
-                        "level": 5
-                      }
-                    ],
-                    "expand": true,
-                    "level": 4
-                  }
-                ],
-                "level": 3,
-                "expand": false
-              }
-            ],
-            "level": 2,
-            "expand": false
-          },
-          {
             "text": "Select",
-            "values": "なんかいろいろ",
+            "values": "格好（ポーズ）の指定",
             "child": [
-              {
-                "text": "word",
-                "values": "folded",
-                "child": [],
-                "level": 3
-              },
-              {
-                "text": "word",
-                "values": "suspended congress",
-                "child": [],
-                "level": 3
-              },
-              {
-                "text": "word",
-                "values": "anvil position",
-                "child": [],
-                "level": 3
-              },
-              {
-                "text": "word",
-                "values": "crucifixion",
-                "child": [],
-                "level": 3
-              },
-              {
-                "text": "word",
-                "values": "sex_from_behind",
-                "child": [],
-                "level": 3
-              },
-              {
-                "text": "word",
-                "values": "boy_on_top",
-                "child": [],
-                "level": 3
-              },
-              {
-                "text": "word",
-                "values": "prone bone",
-                "child": [],
-                "level": 3
-              },
               {
                 "text": "Sequence",
-                "values": "leg_lift",
+                "values": "寝てる",
                 "child": [
-                  {
-                    "text": "word",
-                    "values": "on_side",
-                    "child": [],
-                    "level": 4
-                  },
-                  {
-                    "text": "word",
-                    "values": "leg_lift",
-                    "child": [],
-                    "level": 4
-                  }
-                ],
-                "expand": false,
-                "level": 3
-              },
-              {
-                "text": "word",
-                "values": "arched back",
-                "child": [],
-                "level": 3
-              },
-              {
-                "text": "word",
-                "values": "standing missionary",
-                "child": [],
-                "level": 3
-              },
-              {
-                "text": "word",
-                "values": "standing sex",
-                "child": [],
-                "level": 3
-              },
-              {
-                "text": "word",
-                "values": "from side",
-                "child": [],
-                "level": 3
-              },
-              {
-                "text": "word",
-                "values": "top-down bottom-up",
-                "child": [],
-                "level": 3
-              },
-              {
-                "text": "word",
-                "values": "leaning forward",
-                "child": [],
-                "level": 3
-              },
-              {
-                "text": "word",
-                "values": "leaning back",
-                "child": [],
-                "level": 3
-              }
-            ],
-            "expand": false,
-            "level": 2
-          },
-          {
-            "text": "Sequence",
-            "values": "hug ハグしてる",
-            "child": [
-              {
-                "text": "word",
-                "values": "face-to-face",
-                "child": [],
-                "level": 3
-              },
-              {
-                "text": "Select",
-                "values": "sitting",
-                "child": [
-                  {
-                    "text": "word",
-                    "values": "standing",
-                    "child": [],
-                    "level": 3
-                  },
-                  {
-                    "text": "word",
-                    "values": "sitting",
-                    "child": [],
-                    "level": 3
-                  },
                   {
                     "text": "word",
                     "values": "lying",
                     "child": [],
-                    "level": 3
-                  }
-                ],
-                "expand": false,
-                "level": 3
-              },
-              {
-                "text": "word",
-                "values": "hug",
-                "child": [],
-                "level": 3
-              },
-              {
-                "text": "Select",
-                "values": "1 boy and 1 girl",
-                "child": [
-                  {
-                    "text": "word",
-                    "values": "grabbing from behind",
-                    "child": [],
-                    "level": 4
+                    "level": 3,
+                    "ignore": false,
+                    "prompt": "c1"
                   },
                   {
-                    "text": "Sequence",
-                    "values": "2 girl",
+                    "text": "Weight",
+                    "values": "足の指定",
                     "child": [
                       {
                         "text": "word",
-                        "values": "couple",
+                        "values": "spread legs",
                         "child": [],
-                        "level": 5
+                        "level": 4,
+                        "ignore": false,
+                        "prompt": "c1"
                       },
                       {
                         "text": "word",
-                        "values": "2girl",
+                        "values": "knees up",
                         "child": [],
-                        "level": 5
+                        "level": 4,
+                        "ignore": false,
+                        "prompt": "c1"
+                      },
+                      {
+                        "text": "word",
+                        "values": "legs apart",
+                        "child": [],
+                        "level": 4,
+                        "ignore": false,
+                        "prompt": "c1"
+                      },
+                      {
+                        "text": "word",
+                        "values": "wide spread legs",
+                        "child": [],
+                        "level": 4,
+                        "ignore": false,
+                        "prompt": "c1"
                       }
                     ],
+                    "level": 3,
                     "expand": false,
-                    "level": 4
+                    "ignore": false,
+                    "prompt": "c1"
+                  },
+                  {
+                    "text": "Select",
+                    "values": "手の指定",
+                    "child": [
+                      {
+                        "text": "word",
+                        "values": "hands up",
+                        "child": [],
+                        "level": 4,
+                        "ignore": false,
+                        "prompt": "c1"
+                      },
+                      {
+                        "text": "Select",
+                        "values": "hands pouse",
+                        "child": [
+                          {
+                            "text": "word",
+                            "values": "arm_grab",
+                            "child": [],
+                            "level": 5,
+                            "ignore": false,
+                            "prompt": "c1"
+                          },
+                          {
+                            "text": "word",
+                            "values": "arms_grab",
+                            "child": [],
+                            "level": 5,
+                            "ignore": false,
+                            "prompt": "c1"
+                          },
+                          {
+                            "text": "word",
+                            "values": "hands_grab",
+                            "child": [],
+                            "level": 5,
+                            "ignore": false,
+                            "prompt": "c1"
+                          },
+                          {
+                            "text": "word",
+                            "values": "torso_grab",
+                            "child": [],
+                            "level": 5,
+                            "ignore": false,
+                            "prompt": "c1"
+                          },
+                          {
+                            "text": "word",
+                            "values": "arms_around_neck",
+                            "child": [],
+                            "level": 5,
+                            "ignore": false,
+                            "prompt": "c1"
+                          },
+                          {
+                            "text": "word",
+                            "values": "bound wrists",
+                            "child": [],
+                            "level": 5,
+                            "ignore": false,
+                            "prompt": "c1"
+                          },
+                          {
+                            "text": "word",
+                            "values": "covering mouth",
+                            "child": [],
+                            "level": 5,
+                            "ignore": false,
+                            "prompt": "c1"
+                          },
+                          {
+                            "text": "Select",
+                            "values": "cross",
+                            "child": [
+                              {
+                                "text": "word",
+                                "values": "sheet_grab",
+                                "child": [],
+                                "level": 6,
+                                "ignore": false,
+                                "prompt": "c1"
+                              },
+                              {
+                                "text": "word",
+                                "values": "hands on own chest",
+                                "child": [],
+                                "level": 6,
+                                "ignore": false,
+                                "prompt": "c1"
+                              },
+                              {
+                                "text": "word",
+                                "values": "own hands together",
+                                "child": [],
+                                "level": 6,
+                                "ignore": false,
+                                "prompt": "c1"
+                              },
+                              {
+                                "text": "word",
+                                "values": "hands on own face",
+                                "child": [],
+                                "level": 6,
+                                "ignore": false,
+                                "prompt": "c1"
+                              },
+                              {
+                                "text": "word",
+                                "values": "own hands clasped",
+                                "child": [],
+                                "level": 6,
+                                "ignore": false,
+                                "prompt": "c1"
+                              }
+                            ],
+                            "level": 5,
+                            "expand": false,
+                            "ignore": false,
+                            "prompt": "c1"
+                          },
+                          {
+                            "text": "word",
+                            "values": "holding book",
+                            "child": [],
+                            "level": 5,
+                            "ignore": false,
+                            "prompt": "c1"
+                          },
+                          {
+                            "text": "word",
+                            "values": "handcuffs",
+                            "child": [],
+                            "level": 5,
+                            "ignore": false,
+                            "prompt": "c1"
+                          },
+                          {
+                            "text": "word",
+                            "values": "hand in panties",
+                            "child": [],
+                            "level": 5,
+                            "ignore": false,
+                            "prompt": "c1"
+                          },
+                          {
+                            "text": "word",
+                            "values": "holding wrist",
+                            "child": [],
+                            "level": 5,
+                            "ignore": false,
+                            "prompt": "c1"
+                          },
+                          {
+                            "text": "word",
+                            "values": "outstretched arms",
+                            "child": [],
+                            "level": 5,
+                            "ignore": false,
+                            "prompt": "c1"
+                          },
+                          {
+                            "text": "word",
+                            "values": "pov hands",
+                            "child": [],
+                            "level": 5,
+                            "ignore": false,
+                            "prompt": "c1"
+                          }
+                        ],
+                        "expand": false,
+                        "level": 4,
+                        "ignore": false,
+                        "prompt": "c1"
+                      }
+                    ],
+                    "level": 3,
+                    "expand": false,
+                    "ignore": false,
+                    "prompt": "c1"
+                  }
+                ],
+                "level": 2,
+                "expand": false,
+                "ignore": false,
+                "prompt": "c1"
+              },
+              {
+                "text": "Select",
+                "values": "なんかいろいろ",
+                "child": [
+                  {
+                    "text": "word",
+                    "values": "folded",
+                    "child": [],
+                    "level": 3,
+                    "ignore": false,
+                    "prompt": "c1"
+                  },
+                  {
+                    "text": "word",
+                    "values": "suspended congress",
+                    "child": [],
+                    "level": 3,
+                    "ignore": false,
+                    "prompt": "c1"
+                  },
+                  {
+                    "text": "word",
+                    "values": "anvil position",
+                    "child": [],
+                    "level": 3,
+                    "ignore": false,
+                    "prompt": "c1"
+                  },
+                  {
+                    "text": "word",
+                    "values": "crucifixion",
+                    "child": [],
+                    "level": 3,
+                    "ignore": false,
+                    "prompt": "c1"
+                  },
+                  {
+                    "text": "word",
+                    "values": "sex_from_behind",
+                    "child": [],
+                    "level": 3,
+                    "ignore": false,
+                    "prompt": "c1"
+                  },
+                  {
+                    "text": "word",
+                    "values": "boy_on_top",
+                    "child": [],
+                    "level": 3,
+                    "ignore": false,
+                    "prompt": "c1"
+                  },
+                  {
+                    "text": "word",
+                    "values": "prone bone",
+                    "child": [],
+                    "level": 3,
+                    "ignore": false,
+                    "prompt": "c1"
                   },
                   {
                     "text": "Sequence",
+                    "values": "leg_lift",
+                    "child": [
+                      {
+                        "text": "word",
+                        "values": "on_side",
+                        "child": [],
+                        "level": 4,
+                        "ignore": false,
+                        "prompt": "c1"
+                      },
+                      {
+                        "text": "word",
+                        "values": "leg_lift",
+                        "child": [],
+                        "level": 4,
+                        "ignore": false,
+                        "prompt": "c1"
+                      }
+                    ],
+                    "expand": false,
+                    "level": 3,
+                    "ignore": false,
+                    "prompt": "c1"
+                  },
+                  {
+                    "text": "word",
+                    "values": "arched back",
+                    "child": [],
+                    "level": 3,
+                    "ignore": false,
+                    "prompt": "c1"
+                  },
+                  {
+                    "text": "word",
+                    "values": "standing missionary",
+                    "child": [],
+                    "level": 3,
+                    "ignore": false,
+                    "prompt": "c1"
+                  },
+                  {
+                    "text": "word",
+                    "values": "standing sex",
+                    "child": [],
+                    "level": 3,
+                    "ignore": false,
+                    "prompt": "c1"
+                  },
+                  {
+                    "text": "word",
+                    "values": "from side",
+                    "child": [],
+                    "level": 3,
+                    "ignore": false,
+                    "prompt": "c1"
+                  },
+                  {
+                    "text": "word",
+                    "values": "top-down bottom-up",
+                    "child": [],
+                    "level": 3,
+                    "ignore": false,
+                    "prompt": "c1"
+                  },
+                  {
+                    "text": "word",
+                    "values": "leaning forward",
+                    "child": [],
+                    "level": 3,
+                    "ignore": false,
+                    "prompt": "c1"
+                  },
+                  {
+                    "text": "word",
+                    "values": "leaning back",
+                    "child": [],
+                    "level": 3,
+                    "ignore": false,
+                    "prompt": "c1"
+                  }
+                ],
+                "expand": false,
+                "level": 2,
+                "ignore": false,
+                "prompt": "c1"
+              },
+              {
+                "text": "Sequence",
+                "values": "hug ハグしてる",
+                "child": [
+                  {
+                    "text": "word",
+                    "values": "face-to-face",
+                    "child": [],
+                    "level": 3,
+                    "ignore": false,
+                    "prompt": "c1"
+                  },
+                  {
+                    "text": "Select",
+                    "values": "sitting",
+                    "child": [
+                      {
+                        "text": "word",
+                        "values": "standing",
+                        "child": [],
+                        "level": 3,
+                        "ignore": false,
+                        "prompt": "c1"
+                      },
+                      {
+                        "text": "word",
+                        "values": "sitting",
+                        "child": [],
+                        "level": 3,
+                        "ignore": false,
+                        "prompt": "c1"
+                      },
+                      {
+                        "text": "word",
+                        "values": "lying",
+                        "child": [],
+                        "level": 3,
+                        "ignore": false,
+                        "prompt": "c1"
+                      }
+                    ],
+                    "expand": false,
+                    "level": 3,
+                    "ignore": false,
+                    "prompt": "c1"
+                  },
+                  {
+                    "text": "word",
+                    "values": "hug",
+                    "child": [],
+                    "level": 3,
+                    "ignore": false,
+                    "prompt": "c1"
+                  },
+                  {
+                    "text": "Select",
                     "values": "1 boy and 1 girl",
                     "child": [
                       {
                         "text": "word",
-                        "values": "hetero",
+                        "values": "grabbing from behind",
                         "child": [],
-                        "level": 5
+                        "level": 4,
+                        "ignore": false,
+                        "prompt": "c1"
                       },
                       {
-                        "text": "word",
-                        "values": "1boy and 1girl",
-                        "child": [],
-                        "level": 5
+                        "text": "Sequence",
+                        "values": "2 girl",
+                        "child": [
+                          {
+                            "text": "word",
+                            "values": "couple",
+                            "child": [],
+                            "level": 5,
+                            "ignore": false,
+                            "prompt": "c1"
+                          },
+                          {
+                            "text": "word",
+                            "values": "2girl",
+                            "child": [],
+                            "level": 5,
+                            "ignore": false,
+                            "prompt": "c1"
+                          }
+                        ],
+                        "expand": false,
+                        "level": 4,
+                        "ignore": false,
+                        "prompt": "c1"
+                      },
+                      {
+                        "text": "Sequence",
+                        "values": "1 boy and 1 girl",
+                        "child": [
+                          {
+                            "text": "word",
+                            "values": "hetero",
+                            "child": [],
+                            "level": 5,
+                            "ignore": false,
+                            "prompt": "c1"
+                          },
+                          {
+                            "text": "word",
+                            "values": "1boy and 1girl",
+                            "child": [],
+                            "level": 5,
+                            "ignore": false,
+                            "prompt": "c1"
+                          }
+                        ],
+                        "expand": false,
+                        "level": 4,
+                        "ignore": false,
+                        "prompt": "c1"
                       }
                     ],
                     "expand": false,
-                    "level": 4
+                    "level": 3,
+                    "ignore": false,
+                    "prompt": "c1"
                   }
                 ],
                 "expand": false,
-                "level": 3
+                "level": 2,
+                "ignore": false,
+                "prompt": "c1"
+              },
+              {
+                "text": "Select",
+                "values": "座ってる",
+                "child": [
+                  {
+                    "text": "word",
+                    "values": "squatting",
+                    "child": [],
+                    "level": 3,
+                    "ignore": false,
+                    "prompt": "c1"
+                  },
+                  {
+                    "text": "Sequence",
+                    "values": "all fours",
+                    "child": [
+                      {
+                        "text": "word",
+                        "values": "all fours",
+                        "child": [],
+                        "level": 3,
+                        "ignore": false,
+                        "prompt": "c1"
+                      },
+                      {
+                        "text": "word",
+                        "values": "doggystyle",
+                        "child": [],
+                        "level": 3,
+                        "ignore": false,
+                        "prompt": "c1"
+                      }
+                    ],
+                    "level": 3,
+                    "expand": false,
+                    "ignore": false,
+                    "prompt": "c1"
+                  },
+                  {
+                    "text": "Sequence",
+                    "values": "sitting",
+                    "child": [
+                      {
+                        "text": "word",
+                        "values": "sitting",
+                        "child": [],
+                        "level": 4,
+                        "ignore": false,
+                        "prompt": "c1"
+                      },
+                      {
+                        "text": "word",
+                        "values": "upright straddle",
+                        "child": [],
+                        "level": 4,
+                        "ignore": false,
+                        "prompt": "c1"
+                      }
+                    ],
+                    "expand": false,
+                    "level": 3,
+                    "ignore": false,
+                    "prompt": "c1"
+                  },
+                  {
+                    "text": "Sequence",
+                    "values": "cowgirl position",
+                    "child": [
+                      {
+                        "text": "word",
+                        "values": "arms between legs",
+                        "child": [],
+                        "level": 4,
+                        "ignore": false,
+                        "prompt": "c1"
+                      },
+                      {
+                        "text": "word",
+                        "values": "girl on top",
+                        "child": [],
+                        "level": 4,
+                        "ignore": false,
+                        "prompt": "c1"
+                      },
+                      {
+                        "text": "word",
+                        "values": "cowgirl position",
+                        "child": [],
+                        "level": 4,
+                        "ignore": false,
+                        "prompt": "c1"
+                      }
+                    ],
+                    "level": 3,
+                    "expand": false,
+                    "ignore": false,
+                    "prompt": "c1"
+                  }
+                ],
+                "level": 2,
+                "expand": false,
+                "ignore": false,
+                "prompt": "c1"
+              },
+              {
+                "text": "Sequence",
+                "values": "対面座位",
+                "child": [
+                  {
+                    "text": "word",
+                    "values": "upright_straddle",
+                    "child": [],
+                    "level": 3,
+                    "ignore": false,
+                    "prompt": "c1"
+                  },
+                  {
+                    "text": "word",
+                    "values": "leg_lock",
+                    "child": [],
+                    "level": 3,
+                    "ignore": false,
+                    "prompt": "c1"
+                  },
+                  {
+                    "text": "word",
+                    "values": "straddling",
+                    "child": [],
+                    "level": 3,
+                    "ignore": false,
+                    "prompt": "c1"
+                  }
+                ],
+                "expand": false,
+                "level": 2,
+                "ignore": false,
+                "prompt": "c1"
               }
             ],
+            "level": 2,
             "expand": false,
-            "level": 2
+            "ignore": false,
+            "prompt": "c1"
           },
           {
             "text": "Select",
-            "values": "座ってる",
+            "values": "服装の指定",
             "child": [
               {
-                "text": "word",
-                "values": "squatting",
-                "child": [],
-                "level": 3
-              },
-              {
                 "text": "Sequence",
-                "values": "all fours",
+                "values": "全裸待機",
                 "child": [
                   {
                     "text": "word",
-                    "values": "all fours",
+                    "values": "completely nude",
                     "child": [],
-                    "level": 3
-                  },
-                  {
-                    "text": "word",
-                    "values": "doggystyle",
-                    "child": [],
-                    "level": 3
+                    "level": 3,
+                    "ignore": false,
+                    "prompt": "c1"
                   }
                 ],
-                "level": 3,
-                "expand": false
+                "level": 2,
+                "expand": false,
+                "ignore": false,
+                "prompt": "c1"
               },
               {
                 "text": "Sequence",
-                "values": "sitting",
+                "values": "タオル",
                 "child": [
                   {
                     "text": "word",
-                    "values": "sitting",
+                    "values": "towel",
                     "child": [],
-                    "level": 4
-                  },
-                  {
-                    "text": "word",
-                    "values": "upright straddle",
-                    "child": [],
-                    "level": 4
+                    "level": 3,
+                    "ignore": false,
+                    "prompt": "c1"
                   }
                 ],
                 "expand": false,
-                "level": 3
+                "level": 2,
+                "ignore": false,
+                "prompt": "c1"
               },
               {
                 "text": "Sequence",
-                "values": "cowgirl position",
+                "values": "裸エプロン",
                 "child": [
                   {
                     "text": "word",
-                    "values": "arms between legs",
+                    "values": "naked apron",
                     "child": [],
-                    "level": 4
-                  },
-                  {
-                    "text": "word",
-                    "values": "girl on top",
-                    "child": [],
-                    "level": 4
-                  },
-                  {
-                    "text": "word",
-                    "values": "cowgirl position",
-                    "child": [],
-                    "level": 4
+                    "level": 3,
+                    "ignore": false,
+                    "prompt": "c1"
                   }
                 ],
-                "level": 3,
-                "expand": false
-              }
-            ],
-            "level": 2,
-            "expand": false
-          },
-          {
-            "text": "Sequence",
-            "values": "対面座位",
-            "child": [
-              {
-                "text": "word",
-                "values": "upright_straddle",
-                "child": [],
-                "level": 3
+                "expand": false,
+                "level": 2,
+                "ignore": false,
+                "prompt": "c1"
               },
               {
-                "text": "word",
-                "values": "leg_lock",
-                "child": [],
-                "level": 3
-              },
-              {
-                "text": "word",
-                "values": "straddling",
-                "child": [],
-                "level": 3
-              }
-            ],
-            "expand": false,
-            "level": 2
-          }
-        ],
-        "level": 1,
-        "expand": false
-      },
-      {
-        "text": "Select",
-        "values": "服装の指定",
-        "child": [
-          {
-            "text": "Sequence",
-            "values": "全裸待機",
-            "child": [
-              {
-                "text": "word",
-                "values": "completely nude",
-                "child": [],
-                "level": 3
-              }
-            ],
-            "level": 2,
-            "expand": false
-          },
-          {
-            "text": "Sequence",
-            "values": "タオル",
-            "child": [
-              {
-                "text": "word",
-                "values": "towel",
-                "child": [],
-                "level": 3
-              }
-            ],
-            "expand": false,
-            "level": 2
-          },
-          {
-            "text": "Sequence",
-            "values": "裸エプロン",
-            "child": [
-              {
-                "text": "word",
-                "values": "naked apron",
-                "child": [],
-                "level": 3
-              }
-            ],
-            "expand": false,
-            "level": 2
-          },
-          {
-            "text": "Sequence",
-            "values": "キャミソール",
-            "child": [
-              {
-                "text": "word",
-                "values": "camisole",
-                "child": [],
-                "level": 3
-              }
-            ],
-            "expand": false,
-            "level": 2
-          },
-          {
-            "text": "Sequence",
-            "values": "ランジェリー",
-            "child": [
-              {
-                "text": "word",
-                "values": "lingerie",
-                "child": [],
-                "level": 3
-              }
-            ],
-            "expand": false,
-            "level": 2
-          },
-          {
-            "text": "Sequence",
-            "values": "黒ブラ、ガーター",
-            "child": [
-              {
-                "text": "word",
-                "values": "garter_straps",
-                "child": [],
-                "level": 2
-              },
-              {
-                "text": "word",
-                "values": "black bra",
-                "child": [],
-                "level": 2
-              },
-              {
-                "text": "word",
-                "values": "clothes pull",
-                "child": [],
-                "level": 2
-              }
-            ],
-            "expand": false,
-            "level": 2
-          },
-          {
-            "text": "Sequence",
-            "values": "悪魔っ子",
-            "child": [
-              {
-                "text": "word",
-                "values": "garter_straps",
-                "child": [],
-                "level": 3
-              },
-              {
-                "text": "word",
-                "values": "black bra",
-                "child": [],
-                "level": 3
-              },
-              {
-                "text": "word",
-                "values": "demon girl",
-                "child": [],
-                "level": 3
-              }
-            ],
-            "expand": false,
-            "level": 2
-          },
-          {
-            "text": "Sequence",
-            "values": "パジャマ",
-            "child": [
-              {
-                "text": "word",
-                "values": "pajamas",
-                "child": [],
-                "level": 3
-              }
-            ],
-            "expand": false,
-            "level": 2
-          },
-          {
-            "text": "Sequence",
-            "values": "麦わら帽子と白ドレス",
-            "child": [
-              {
-                "text": "word",
-                "values": "straw hat",
-                "child": [],
-                "level": 2
-              },
-              {
-                "text": "Select",
-                "values": "dress",
+                "text": "Sequence",
+                "values": "キャミソール",
                 "child": [
                   {
                     "text": "word",
-                    "values": "sundress",
+                    "values": "camisole",
                     "child": [],
-                    "level": 3
-                  },
-                  {
-                    "text": "word",
-                    "values": "white dress",
-                    "child": [],
-                    "level": 3
-                  },
-                  {
-                    "text": "word",
-                    "values": "dress",
-                    "child": [],
-                    "level": 3
+                    "level": 3,
+                    "ignore": false,
+                    "prompt": "c1"
                   }
                 ],
-                "expand": true,
-                "level": 2
-              }
-            ],
-            "level": 2,
-            "expand": false
-          },
-          {
-            "text": "Sequence",
-            "values": "ウェディングドレス",
-            "child": [
-              {
-                "text": "word",
-                "values": "wedding dress",
-                "child": [],
-                "level": 3
-              }
-            ],
-            "expand": false,
-            "level": 2
-          },
-          {
-            "text": "Sequence",
-            "values": "水着",
-            "child": [
-              {
-                "text": "word",
-                "values": "swimsuit",
-                "child": [],
-                "level": 3
-              }
-            ],
-            "expand": false,
-            "level": 2
-          },
-          {
-            "text": "Sequence",
-            "values": "白レオタード",
-            "child": [
-              {
-                "text": "word",
-                "values": "{{{see-through}}}",
-                "child": [],
-                "level": 3
+                "expand": false,
+                "level": 2,
+                "ignore": false,
+                "prompt": "c1"
               },
               {
-                "text": "Ignore-word",
-                "values": "{sailor senshi uniform}",
-                "child": [],
-                "level": 3
+                "text": "Sequence",
+                "values": "ランジェリー",
+                "child": [
+                  {
+                    "text": "word",
+                    "values": "lingerie",
+                    "child": [],
+                    "level": 3,
+                    "ignore": false,
+                    "prompt": "c1"
+                  }
+                ],
+                "expand": false,
+                "level": 2,
+                "ignore": false,
+                "prompt": "c1"
               },
               {
-                "text": "word",
-                "values": "magical girl",
-                "child": [],
-                "level": 3
-              },
-              {
-                "text": "word",
-                "values": "white sheer leotard",
-                "child": [],
-                "level": 3
-              },
-              {
-                "text": "Ignore-word",
-                "values": "dress",
-                "child": [],
-                "level": 3
-              },
-              {
-                "text": "Ignore-word",
-                "values": "sailor collar",
-                "child": [],
-                "level": 3
-              },
-              {
-                "text": "Ignore-word",
-                "values": "frilled dress",
-                "child": [],
-                "level": 3
-              },
-              {
-                "text": "Ignore-word",
-                "values": "choker",
-                "child": [],
-                "level": 3
-              },
-              {
-                "text": "Ignore-word",
-                "values": "sleeveless",
-                "child": [],
-                "level": 3
-              }
-            ],
-            "level": 2,
-            "expand": false
-          },
-          {
-            "text": "Sequence",
-            "values": "シースルー",
-            "child": [
-              {
-                "text": "word",
-                "values": "see-through",
-                "child": [],
-                "level": 3
-              }
-            ],
-            "expand": false,
-            "level": 2
-          },
-          {
-            "text": "Sequence",
-            "values": "デニムスカート",
-            "child": [
-              {
-                "text": "word",
-                "values": "yellow tie",
-                "child": [],
-                "level": 3
-              },
-              {
-                "text": "word",
-                "values": "{{clothing aside}}",
-                "child": [],
-                "level": 3
-              },
-              {
-                "text": "word",
-                "values": "white collared shirt",
-                "child": [],
-                "level": 3
-              },
-              {
-                "text": "word",
-                "values": "denim shorts",
-                "child": [],
-                "level": 3
-              }
-            ],
-            "level": 2,
-            "expand": false
-          },
-          {
-            "text": "Sequence",
-            "values": "バレーボール",
-            "child": [
-              {
-                "text": "word",
-                "values": "volleyball uniform",
-                "child": [],
-                "level": 3
-              }
-            ],
-            "expand": false,
-            "level": 2
-          },
-          {
-            "text": "Sequence",
-            "values": "踊り子",
-            "child": [
-              {
-                "text": "word",
-                "values": "loincloth",
-                "child": [],
-                "level": 3
-              }
-            ],
-            "expand": false,
-            "level": 2
-          },
-          {
-            "text": "Sequence",
-            "values": "テニス服",
-            "child": [
-              {
-                "text": "word",
-                "values": "tennis uniform",
-                "child": []
-              }
-            ],
-            "level": 2
-          },
-          {
-            "text": "Sequence",
-            "values": "チアリーダー",
-            "child": [
-              {
-                "text": "word",
-                "values": "cheerleader",
-                "child": [],
-                "level": 3
-              }
-            ],
-            "expand": false,
-            "level": 2
-          },
-          {
-            "text": "Sequence",
-            "values": "バニー",
-            "child": [
-              {
-                "text": "word",
-                "values": "playboy bunny",
-                "child": [],
-                "level": 3
-              }
-            ],
-            "expand": false,
-            "level": 2
-          },
-          {
-            "text": "Sequence",
-            "values": "白バニー",
-            "child": [
-              {
-                "text": "word",
-                "values": "white playboy bunny",
-                "child": [],
-                "level": 3
-              }
-            ],
-            "expand": false,
-            "level": 2
-          },
-          {
-            "text": "Sequence",
-            "values": "ビジネススーツ",
-            "child": [
-              {
-                "text": "word",
-                "values": "business suit",
-                "child": [],
-                "level": 3
-              }
-            ],
-            "expand": false,
-            "level": 2
-          },
-          {
-            "text": "Sequence",
-            "values": "ウィッチ",
-            "child": [
-              {
-                "text": "word",
-                "values": "witch",
-                "child": [],
-                "level": 3
-              },
-              {
-                "text": "word",
-                "values": "blue dress",
-                "child": [],
-                "level": 3
-              },
-              {
-                "text": "word",
-                "values": "boots",
-                "child": [],
-                "level": 3
-              },
-              {
-                "text": "Ignore-word",
-                "values": "broom",
-                "child": [],
-                "level": 3
-              }
-            ],
-            "expand": false,
-            "level": 2
-          },
-          {
-            "text": "Sequence",
-            "values": "巫女服",
-            "child": [
-              {
-                "text": "word",
-                "values": "red japanese miko clothes",
-                "child": [],
-                "level": 3
-              }
-            ],
-            "expand": false,
-            "level": 2
-          },
-          {
-            "text": "Sequence",
-            "values": "日本服",
-            "child": [
-              {
-                "text": "word",
-                "values": "white kimono",
-                "child": [],
-                "level": 3
-              },
-              {
-                "text": "word",
-                "values": "red skirt",
-                "child": [],
-                "level": 3
-              }
-            ],
-            "level": 2,
-            "expand": false
-          },
-          {
-            "text": "Sequence",
-            "values": "府警",
-            "child": [
-              {
-                "text": "word",
-                "values": "police uniform",
-                "child": [],
-                "level": 3
-              }
-            ],
-            "expand": false,
-            "level": 2
-          },
-          {
-            "text": "Sequence",
-            "values": "忍者",
-            "child": [
-              {
-                "text": "word",
-                "values": "ninja",
-                "child": [],
-                "level": 3
-              }
-            ],
-            "level": 2,
-            "expand": false
-          },
-          {
-            "text": "Sequence",
-            "values": "フルアーマー",
-            "child": [
-              {
-                "text": "word",
-                "values": "full_armor",
-                "child": [],
-                "level": 3
-              }
-            ],
-            "expand": false,
-            "level": 2
-          },
-          {
-            "text": "Sequence",
-            "values": "女医",
-            "child": [
-              {
-                "text": "word",
-                "values": "lab coat",
-                "child": [],
-                "level": 3
-              }
-            ],
-            "expand": false,
-            "level": 2
-          },
-          {
-            "text": "Sequence",
-            "values": "白衣",
-            "child": [
-              {
-                "text": "word",
-                "values": "white coat",
-                "child": [],
-                "level": 3
-              }
-            ],
-            "expand": false,
-            "level": 2
-          },
-          {
-            "text": "Sequence",
-            "values": "ナース",
-            "child": [
-              {
-                "text": "word",
-                "values": "nurse",
-                "child": [],
-                "level": 3
-              }
-            ],
-            "expand": false,
-            "level": 2
-          },
-          {
-            "text": "Sequence",
-            "values": "軍服",
-            "child": [
-              {
-                "text": "word",
-                "values": "military uniform",
-                "child": [],
-                "level": 3
-              }
-            ],
-            "expand": false,
-            "level": 2
-          },
-          {
-            "text": "Sequence",
-            "values": "園児服",
-            "child": [
-              {
-                "text": "word",
-                "values": "kids kindergarten uniform",
-                "child": [],
-                "level": 3
-              }
-            ],
-            "expand": false,
-            "level": 2
-          },
-          {
-            "text": "Sequence",
-            "values": "カーディガン",
-            "child": [
-              {
-                "text": "word",
-                "values": "open cardigan",
-                "child": [],
-                "level": 3
-              }
-            ],
-            "expand": false,
-            "level": 2
-          },
-          {
-            "text": "Sequence",
-            "values": "ブレザー",
-            "child": [
-              {
-                "text": "word",
-                "values": "blazer",
-                "child": [],
-                "level": 2
-              },
-              {
-                "text": "Select",
-                "values": "skirt",
+                "text": "Sequence",
+                "values": "黒ブラ、ガーター",
                 "child": [
                   {
                     "text": "word",
                     "values": "garter_straps",
                     "child": [],
-                    "level": 3
+                    "level": 2,
+                    "ignore": false,
+                    "prompt": "c1"
                   },
                   {
                     "text": "word",
-                    "values": "red plaid skirt",
+                    "values": "black bra",
                     "child": [],
-                    "level": 3
+                    "level": 2,
+                    "ignore": false,
+                    "prompt": "c1"
                   },
                   {
                     "text": "word",
-                    "values": "white pleated skirt",
+                    "values": "clothes pull",
                     "child": [],
-                    "level": 3
+                    "level": 2,
+                    "ignore": false,
+                    "prompt": "c1"
                   }
                 ],
-                "expand": true,
-                "level": 2
-              }
-            ],
-            "level": 2,
-            "expand": false
-          },
-          {
-            "text": "Sequence",
-            "values": "スクミズ",
-            "child": [
-              {
-                "text": "word",
-                "values": "school swimsuit",
-                "child": [],
-                "level": 3
-              }
-            ],
-            "expand": false,
-            "level": 2
-          },
-          {
-            "text": "Sequence",
-            "values": "修道服",
-            "child": [
-              {
-                "text": "word",
-                "values": "Nun",
-                "child": []
-              }
-            ],
-            "level": 2
-          },
-          {
-            "text": "Sequence",
-            "values": "学生服",
-            "child": [
-              {
-                "text": "word",
-                "values": "school uniform",
-                "child": [],
-                "level": 3
-              }
-            ],
-            "expand": false,
-            "level": 2
-          },
-          {
-            "text": "Sequence",
-            "values": "黒学生服",
-            "child": [
-              {
-                "text": "word",
-                "values": "black school uniform",
-                "child": [],
-                "level": 3
-              }
-            ],
-            "expand": false,
-            "level": 2
-          },
-          {
-            "text": "Sequence",
-            "values": "黒学生服強め",
-            "child": [
-              {
-                "text": "word",
-                "values": "black sailor collar",
-                "child": [],
-                "level": 3
+                "expand": false,
+                "level": 2,
+                "ignore": false,
+                "prompt": "c1"
               },
               {
-                "text": "word",
-                "values": "black serafuk",
-                "child": [],
-                "level": 3
-              },
-              {
-                "text": "word",
-                "values": "pleated skirt",
-                "child": [],
-                "level": 3
-              },
-              {
-                "text": "word",
-                "values": "long sleeves",
-                "child": [],
-                "level": 3
-              },
-              {
-                "text": "word",
-                "values": "hat",
-                "child": [],
-                "level": 3
-              }
-            ],
-            "level": 2,
-            "expand": false
-          },
-          {
-            "text": "Sequence",
-            "values": "白学生服",
-            "child": [
-              {
-                "text": "word",
-                "values": "pleated skirt",
-                "child": [],
-                "level": 3
-              },
-              {
-                "text": "word",
-                "values": "white serafuk",
-                "child": [],
-                "level": 3
-              },
-              {
-                "text": "word",
-                "values": "white sailor collar",
-                "child": [],
-                "level": 3
-              }
-            ],
-            "expand": false,
-            "level": 2
-          },
-          {
-            "text": "Sequence",
-            "values": "セーラー",
-            "child": [
-              {
-                "text": "word",
-                "values": "sailer",
-                "child": [],
-                "level": 3
-              }
-            ],
-            "expand": false,
-            "level": 2
-          },
-          {
-            "text": "Sequence",
-            "values": "カーディガン",
-            "child": [
-              {
-                "text": "word",
-                "values": "cardigan",
-                "child": [],
-                "level": 3
-              }
-            ],
-            "expand": false,
-            "level": 2
-          },
-          {
-            "text": "Sequence",
-            "values": "体操服",
-            "child": [
-              {
-                "text": "Select",
-                "values": "buruma",
+                "text": "Sequence",
+                "values": "悪魔っ子",
                 "child": [
                   {
                     "text": "word",
-                    "values": "black buruma",
+                    "values": "garter_straps",
                     "child": [],
-                    "level": 4
+                    "level": 3,
+                    "ignore": false,
+                    "prompt": "c1"
                   },
                   {
-                    "text": "Sequence",
-                    "values": "",
+                    "text": "word",
+                    "values": "black bra",
                     "child": [],
-                    "level": 4
+                    "level": 3,
+                    "ignore": false,
+                    "prompt": "c1"
+                  },
+                  {
+                    "text": "word",
+                    "values": "demon girl",
+                    "child": [],
+                    "level": 3,
+                    "ignore": false,
+                    "prompt": "c1"
                   }
                 ],
-                "level": 3,
-                "expand": true
+                "expand": false,
+                "level": 2,
+                "ignore": false,
+                "prompt": "c1"
               },
               {
-                "text": "word",
-                "values": "gym uniform",
-                "child": [],
-                "level": 3
-              }
-            ],
-            "level": 2,
-            "expand": false
-          },
-          {
-            "text": "Sequence",
-            "values": "運動服",
-            "child": [
-              {
-                "text": "word",
-                "values": "pink track jacke",
-                "child": [],
-                "level": 2
-              }
-            ],
-            "level": 2,
-            "expand": false
-          },
-          {
-            "text": "Sequence",
-            "values": "メイド",
-            "child": [
-              {
-                "text": "word",
-                "values": "maid",
-                "child": [],
-                "level": 3
-              }
-            ],
-            "level": 2,
-            "expand": false
-          },
-          {
-            "text": "Sequence",
-            "values": "ロリータファッション",
-            "child": [
-              {
-                "text": "word",
-                "values": "white lolita_fashion",
-                "child": [],
-                "level": 3
+                "text": "Sequence",
+                "values": "パジャマ",
+                "child": [
+                  {
+                    "text": "word",
+                    "values": "pajamas",
+                    "child": [],
+                    "level": 3,
+                    "ignore": false,
+                    "prompt": "c1"
+                  }
+                ],
+                "expand": false,
+                "level": 2,
+                "ignore": false,
+                "prompt": "c1"
               },
               {
-                "text": "word",
-                "values": "white lolita_hairband",
-                "child": [],
-                "level": 3
-              }
-            ],
-            "expand": false,
-            "level": 2
-          },
-          {
-            "text": "Sequence",
-            "values": "ゴシックロリータ",
-            "child": [
+                "text": "Sequence",
+                "values": "麦わら帽子と白ドレス",
+                "child": [
+                  {
+                    "text": "word",
+                    "values": "straw hat",
+                    "child": [],
+                    "level": 2,
+                    "ignore": false,
+                    "prompt": "c1"
+                  },
+                  {
+                    "text": "Select",
+                    "values": "dress",
+                    "child": [
+                      {
+                        "text": "word",
+                        "values": "sundress",
+                        "child": [],
+                        "level": 3,
+                        "ignore": false,
+                        "prompt": "c1"
+                      },
+                      {
+                        "text": "word",
+                        "values": "white dress",
+                        "child": [],
+                        "level": 3,
+                        "ignore": false,
+                        "prompt": "c1"
+                      },
+                      {
+                        "text": "word",
+                        "values": "dress",
+                        "child": [],
+                        "level": 3,
+                        "ignore": false,
+                        "prompt": "c1"
+                      }
+                    ],
+                    "expand": true,
+                    "level": 2,
+                    "ignore": false,
+                    "prompt": "c1"
+                  }
+                ],
+                "level": 2,
+                "expand": false,
+                "ignore": false,
+                "prompt": "c1"
+              },
               {
-                "text": "word",
-                "values": "gothic lolita",
-                "child": [],
-                "level": 3
-              }
-            ],
-            "expand": false,
-            "level": 2
-          },
-          {
-            "text": "Sequence",
-            "values": "ゴスロリ",
-            "child": [
+                "text": "Sequence",
+                "values": "ウェディングドレス",
+                "child": [
+                  {
+                    "text": "word",
+                    "values": "wedding dress",
+                    "child": [],
+                    "level": 3,
+                    "ignore": false,
+                    "prompt": "c1"
+                  }
+                ],
+                "expand": false,
+                "level": 2,
+                "ignore": false,
+                "prompt": "c1"
+              },
               {
-                "text": "word",
-                "values": "roswaal_mansion_maid_uniform",
-                "child": [],
-                "level": 3
-              }
-            ],
-            "expand": false,
-            "level": 2
-          },
-          {
-            "text": "Sequence",
-            "values": "パーカー",
-            "child": [
+                "text": "Sequence",
+                "values": "水着",
+                "child": [
+                  {
+                    "text": "word",
+                    "values": "swimsuit",
+                    "child": [],
+                    "level": 3,
+                    "ignore": false,
+                    "prompt": "c1"
+                  }
+                ],
+                "expand": false,
+                "level": 2,
+                "ignore": false,
+                "prompt": "c1"
+              },
               {
-                "text": "word",
-                "values": "hoodie",
-                "child": [],
-                "level": 3
-              }
-            ],
-            "expand": false,
-            "level": 2
-          },
-          {
-            "text": "Sequence",
-            "values": "セーター",
-            "child": [
+                "text": "Sequence",
+                "values": "白レオタード",
+                "child": [
+                  {
+                    "text": "word",
+                    "values": "{{{see-through}}}",
+                    "child": [],
+                    "level": 3,
+                    "ignore": false,
+                    "prompt": "c1"
+                  },
+                  {
+                    "text": "word",
+                    "values": "{sailor senshi uniform}",
+                    "child": [],
+                    "level": 3,
+                    "ignore": true,
+                    "prompt": "c1"
+                  },
+                  {
+                    "text": "word",
+                    "values": "magical girl",
+                    "child": [],
+                    "level": 3,
+                    "ignore": false,
+                    "prompt": "c1"
+                  },
+                  {
+                    "text": "word",
+                    "values": "white sheer leotard",
+                    "child": [],
+                    "level": 3,
+                    "ignore": false,
+                    "prompt": "c1"
+                  },
+                  {
+                    "text": "word",
+                    "values": "dress",
+                    "child": [],
+                    "level": 3,
+                    "ignore": true,
+                    "prompt": "c1"
+                  },
+                  {
+                    "text": "word",
+                    "values": "sailor collar",
+                    "child": [],
+                    "level": 3,
+                    "ignore": true,
+                    "prompt": "c1"
+                  },
+                  {
+                    "text": "word",
+                    "values": "frilled dress",
+                    "child": [],
+                    "level": 3,
+                    "ignore": true,
+                    "prompt": "c1"
+                  },
+                  {
+                    "text": "word",
+                    "values": "choker",
+                    "child": [],
+                    "level": 3,
+                    "ignore": true,
+                    "prompt": "c1"
+                  },
+                  {
+                    "text": "word",
+                    "values": "sleeveless",
+                    "child": [],
+                    "level": 3,
+                    "ignore": true,
+                    "prompt": "c1"
+                  }
+                ],
+                "level": 2,
+                "expand": false,
+                "ignore": false,
+                "prompt": "c1"
+              },
               {
-                "text": "word",
-                "values": "sweater",
-                "child": [],
-                "level": 3
+                "text": "Sequence",
+                "values": "シースルー",
+                "child": [
+                  {
+                    "text": "word",
+                    "values": "see-through",
+                    "child": [],
+                    "level": 3,
+                    "ignore": false,
+                    "prompt": "c1"
+                  }
+                ],
+                "expand": false,
+                "level": 2,
+                "ignore": false,
+                "prompt": "c1"
+              },
+              {
+                "text": "Sequence",
+                "values": "デニムスカート",
+                "child": [
+                  {
+                    "text": "word",
+                    "values": "yellow tie",
+                    "child": [],
+                    "level": 3,
+                    "ignore": false,
+                    "prompt": "c1"
+                  },
+                  {
+                    "text": "word",
+                    "values": "{{clothing aside}}",
+                    "child": [],
+                    "level": 3,
+                    "ignore": false,
+                    "prompt": "c1"
+                  },
+                  {
+                    "text": "word",
+                    "values": "white collared shirt",
+                    "child": [],
+                    "level": 3,
+                    "ignore": false,
+                    "prompt": "c1"
+                  },
+                  {
+                    "text": "word",
+                    "values": "denim shorts",
+                    "child": [],
+                    "level": 3,
+                    "ignore": false,
+                    "prompt": "c1"
+                  }
+                ],
+                "level": 2,
+                "expand": false,
+                "ignore": false,
+                "prompt": "c1"
+              },
+              {
+                "text": "Sequence",
+                "values": "バレーボール",
+                "child": [
+                  {
+                    "text": "word",
+                    "values": "volleyball uniform",
+                    "child": [],
+                    "level": 3,
+                    "ignore": false,
+                    "prompt": "c1"
+                  }
+                ],
+                "expand": false,
+                "level": 2,
+                "ignore": false,
+                "prompt": "c1"
+              },
+              {
+                "text": "Sequence",
+                "values": "踊り子",
+                "child": [
+                  {
+                    "text": "word",
+                    "values": "loincloth",
+                    "child": [],
+                    "level": 3,
+                    "ignore": false,
+                    "prompt": "c1"
+                  }
+                ],
+                "expand": false,
+                "level": 2,
+                "ignore": false,
+                "prompt": "c1"
+              },
+              {
+                "text": "Sequence",
+                "values": "テニス服",
+                "child": [
+                  {
+                    "text": "word",
+                    "values": "tennis uniform",
+                    "child": [],
+                    "ignore": false,
+                    "prompt": "c1"
+                  }
+                ],
+                "level": 2,
+                "ignore": false,
+                "prompt": "c1"
+              },
+              {
+                "text": "Sequence",
+                "values": "チアリーダー",
+                "child": [
+                  {
+                    "text": "word",
+                    "values": "cheerleader",
+                    "child": [],
+                    "level": 3,
+                    "ignore": false,
+                    "prompt": "c1"
+                  }
+                ],
+                "expand": false,
+                "level": 2,
+                "ignore": false,
+                "prompt": "c1"
+              },
+              {
+                "text": "Sequence",
+                "values": "バニー",
+                "child": [
+                  {
+                    "text": "word",
+                    "values": "playboy bunny",
+                    "child": [],
+                    "level": 3,
+                    "ignore": false,
+                    "prompt": "c1"
+                  }
+                ],
+                "expand": false,
+                "level": 2,
+                "ignore": false,
+                "prompt": "c1"
+              },
+              {
+                "text": "Sequence",
+                "values": "白バニー",
+                "child": [
+                  {
+                    "text": "word",
+                    "values": "white playboy bunny",
+                    "child": [],
+                    "level": 3,
+                    "ignore": false,
+                    "prompt": "c1"
+                  }
+                ],
+                "expand": false,
+                "level": 2,
+                "ignore": false,
+                "prompt": "c1"
+              },
+              {
+                "text": "Sequence",
+                "values": "ビジネススーツ",
+                "child": [
+                  {
+                    "text": "word",
+                    "values": "business suit",
+                    "child": [],
+                    "level": 3,
+                    "ignore": false,
+                    "prompt": "c1"
+                  }
+                ],
+                "expand": false,
+                "level": 2,
+                "ignore": false,
+                "prompt": "c1"
+              },
+              {
+                "text": "Sequence",
+                "values": "ウィッチ",
+                "child": [
+                  {
+                    "text": "word",
+                    "values": "witch",
+                    "child": [],
+                    "level": 3,
+                    "ignore": false,
+                    "prompt": "c1"
+                  },
+                  {
+                    "text": "word",
+                    "values": "blue dress",
+                    "child": [],
+                    "level": 3,
+                    "ignore": false,
+                    "prompt": "c1"
+                  },
+                  {
+                    "text": "word",
+                    "values": "boots",
+                    "child": [],
+                    "level": 3,
+                    "ignore": false,
+                    "prompt": "c1"
+                  },
+                  {
+                    "text": "word",
+                    "values": "broom",
+                    "child": [],
+                    "level": 3,
+                    "ignore": true,
+                    "prompt": "c1"
+                  }
+                ],
+                "expand": false,
+                "level": 2,
+                "ignore": false,
+                "prompt": "c1"
+              },
+              {
+                "text": "Sequence",
+                "values": "巫女服",
+                "child": [
+                  {
+                    "text": "word",
+                    "values": "red japanese miko clothes",
+                    "child": [],
+                    "level": 3,
+                    "ignore": false,
+                    "prompt": "c1"
+                  }
+                ],
+                "expand": false,
+                "level": 2,
+                "ignore": false,
+                "prompt": "c1"
+              },
+              {
+                "text": "Sequence",
+                "values": "日本服",
+                "child": [
+                  {
+                    "text": "word",
+                    "values": "white kimono",
+                    "child": [],
+                    "level": 3,
+                    "ignore": false,
+                    "prompt": "c1"
+                  },
+                  {
+                    "text": "word",
+                    "values": "red skirt",
+                    "child": [],
+                    "level": 3,
+                    "ignore": false,
+                    "prompt": "c1"
+                  }
+                ],
+                "level": 2,
+                "expand": false,
+                "ignore": false,
+                "prompt": "c1"
+              },
+              {
+                "text": "Sequence",
+                "values": "府警",
+                "child": [
+                  {
+                    "text": "word",
+                    "values": "police uniform",
+                    "child": [],
+                    "level": 3,
+                    "ignore": false,
+                    "prompt": "c1"
+                  }
+                ],
+                "expand": false,
+                "level": 2,
+                "ignore": false,
+                "prompt": "c1"
+              },
+              {
+                "text": "Sequence",
+                "values": "忍者",
+                "child": [
+                  {
+                    "text": "word",
+                    "values": "ninja",
+                    "child": [],
+                    "level": 3,
+                    "ignore": false,
+                    "prompt": "c1"
+                  }
+                ],
+                "level": 2,
+                "expand": false,
+                "ignore": false,
+                "prompt": "c1"
+              },
+              {
+                "text": "Sequence",
+                "values": "フルアーマー",
+                "child": [
+                  {
+                    "text": "word",
+                    "values": "full_armor",
+                    "child": [],
+                    "level": 3,
+                    "ignore": false,
+                    "prompt": "c1"
+                  }
+                ],
+                "expand": false,
+                "level": 2,
+                "ignore": false,
+                "prompt": "c1"
+              },
+              {
+                "text": "Sequence",
+                "values": "女医",
+                "child": [
+                  {
+                    "text": "word",
+                    "values": "lab coat",
+                    "child": [],
+                    "level": 3,
+                    "ignore": false,
+                    "prompt": "c1"
+                  }
+                ],
+                "expand": false,
+                "level": 2,
+                "ignore": false,
+                "prompt": "c1"
+              },
+              {
+                "text": "Sequence",
+                "values": "白衣",
+                "child": [
+                  {
+                    "text": "word",
+                    "values": "white coat",
+                    "child": [],
+                    "level": 3,
+                    "ignore": false,
+                    "prompt": "c1"
+                  }
+                ],
+                "expand": false,
+                "level": 2,
+                "ignore": false,
+                "prompt": "c1"
+              },
+              {
+                "text": "Sequence",
+                "values": "ナース",
+                "child": [
+                  {
+                    "text": "word",
+                    "values": "nurse",
+                    "child": [],
+                    "level": 3,
+                    "ignore": false,
+                    "prompt": "c1"
+                  }
+                ],
+                "expand": false,
+                "level": 2,
+                "ignore": false,
+                "prompt": "c1"
+              },
+              {
+                "text": "Sequence",
+                "values": "軍服",
+                "child": [
+                  {
+                    "text": "word",
+                    "values": "military uniform",
+                    "child": [],
+                    "level": 3,
+                    "ignore": false,
+                    "prompt": "c1"
+                  }
+                ],
+                "expand": false,
+                "level": 2,
+                "ignore": false,
+                "prompt": "c1"
+              },
+              {
+                "text": "Sequence",
+                "values": "園児服",
+                "child": [
+                  {
+                    "text": "word",
+                    "values": "kids kindergarten uniform",
+                    "child": [],
+                    "level": 3,
+                    "ignore": false,
+                    "prompt": "c1"
+                  }
+                ],
+                "expand": false,
+                "level": 2,
+                "ignore": false,
+                "prompt": "c1"
+              },
+              {
+                "text": "Sequence",
+                "values": "カーディガン",
+                "child": [
+                  {
+                    "text": "word",
+                    "values": "open cardigan",
+                    "child": [],
+                    "level": 3,
+                    "ignore": false,
+                    "prompt": "c1"
+                  }
+                ],
+                "expand": false,
+                "level": 2,
+                "ignore": false,
+                "prompt": "c1"
+              },
+              {
+                "text": "Sequence",
+                "values": "ブレザー",
+                "child": [
+                  {
+                    "text": "word",
+                    "values": "blazer",
+                    "child": [],
+                    "level": 2,
+                    "ignore": false,
+                    "prompt": "c1"
+                  },
+                  {
+                    "text": "Select",
+                    "values": "skirt",
+                    "child": [
+                      {
+                        "text": "word",
+                        "values": "garter_straps",
+                        "child": [],
+                        "level": 3,
+                        "ignore": false,
+                        "prompt": "c1"
+                      },
+                      {
+                        "text": "word",
+                        "values": "red plaid skirt",
+                        "child": [],
+                        "level": 3,
+                        "ignore": false,
+                        "prompt": "c1"
+                      },
+                      {
+                        "text": "word",
+                        "values": "white pleated skirt",
+                        "child": [],
+                        "level": 3,
+                        "ignore": false,
+                        "prompt": "c1"
+                      }
+                    ],
+                    "expand": true,
+                    "level": 2,
+                    "ignore": false,
+                    "prompt": "c1"
+                  }
+                ],
+                "level": 2,
+                "expand": false,
+                "ignore": false,
+                "prompt": "c1"
+              },
+              {
+                "text": "Sequence",
+                "values": "スクミズ",
+                "child": [
+                  {
+                    "text": "word",
+                    "values": "school swimsuit",
+                    "child": [],
+                    "level": 3,
+                    "ignore": false,
+                    "prompt": "c1"
+                  }
+                ],
+                "expand": false,
+                "level": 2,
+                "ignore": false,
+                "prompt": "c1"
+              },
+              {
+                "text": "Sequence",
+                "values": "修道服",
+                "child": [
+                  {
+                    "text": "word",
+                    "values": "Nun",
+                    "child": [],
+                    "ignore": false,
+                    "prompt": "c1"
+                  }
+                ],
+                "level": 2,
+                "ignore": false,
+                "prompt": "c1"
+              },
+              {
+                "text": "Sequence",
+                "values": "学生服",
+                "child": [
+                  {
+                    "text": "word",
+                    "values": "school uniform",
+                    "child": [],
+                    "level": 3,
+                    "ignore": false,
+                    "prompt": "c1"
+                  }
+                ],
+                "expand": false,
+                "level": 2,
+                "ignore": false,
+                "prompt": "c1"
+              },
+              {
+                "text": "Sequence",
+                "values": "黒学生服",
+                "child": [
+                  {
+                    "text": "word",
+                    "values": "black school uniform",
+                    "child": [],
+                    "level": 3,
+                    "ignore": false,
+                    "prompt": "c1"
+                  }
+                ],
+                "expand": false,
+                "level": 2,
+                "ignore": false,
+                "prompt": "c1"
+              },
+              {
+                "text": "Sequence",
+                "values": "黒学生服強め",
+                "child": [
+                  {
+                    "text": "word",
+                    "values": "black sailor collar",
+                    "child": [],
+                    "level": 3,
+                    "ignore": false,
+                    "prompt": "c1"
+                  },
+                  {
+                    "text": "word",
+                    "values": "black serafuk",
+                    "child": [],
+                    "level": 3,
+                    "ignore": false,
+                    "prompt": "c1"
+                  },
+                  {
+                    "text": "word",
+                    "values": "pleated skirt",
+                    "child": [],
+                    "level": 3,
+                    "ignore": false,
+                    "prompt": "c1"
+                  },
+                  {
+                    "text": "word",
+                    "values": "long sleeves",
+                    "child": [],
+                    "level": 3,
+                    "ignore": false,
+                    "prompt": "c1"
+                  },
+                  {
+                    "text": "word",
+                    "values": "hat",
+                    "child": [],
+                    "level": 3,
+                    "ignore": false,
+                    "prompt": "c1"
+                  }
+                ],
+                "level": 2,
+                "expand": false,
+                "ignore": false,
+                "prompt": "c1"
+              },
+              {
+                "text": "Sequence",
+                "values": "白学生服",
+                "child": [
+                  {
+                    "text": "word",
+                    "values": "pleated skirt",
+                    "child": [],
+                    "level": 3,
+                    "ignore": false,
+                    "prompt": "c1"
+                  },
+                  {
+                    "text": "word",
+                    "values": "white serafuk",
+                    "child": [],
+                    "level": 3,
+                    "ignore": false,
+                    "prompt": "c1"
+                  },
+                  {
+                    "text": "word",
+                    "values": "white sailor collar",
+                    "child": [],
+                    "level": 3,
+                    "ignore": false,
+                    "prompt": "c1"
+                  }
+                ],
+                "expand": false,
+                "level": 2,
+                "ignore": false,
+                "prompt": "c1"
+              },
+              {
+                "text": "Sequence",
+                "values": "セーラー",
+                "child": [
+                  {
+                    "text": "word",
+                    "values": "sailer",
+                    "child": [],
+                    "level": 3,
+                    "ignore": false,
+                    "prompt": "c1"
+                  }
+                ],
+                "expand": false,
+                "level": 2,
+                "ignore": false,
+                "prompt": "c1"
+              },
+              {
+                "text": "Sequence",
+                "values": "カーディガン",
+                "child": [
+                  {
+                    "text": "word",
+                    "values": "cardigan",
+                    "child": [],
+                    "level": 3,
+                    "ignore": false,
+                    "prompt": "c1"
+                  }
+                ],
+                "expand": false,
+                "level": 2,
+                "ignore": false,
+                "prompt": "c1"
+              },
+              {
+                "text": "Sequence",
+                "values": "体操服",
+                "child": [
+                  {
+                    "text": "Select",
+                    "values": "buruma",
+                    "child": [
+                      {
+                        "text": "word",
+                        "values": "black buruma",
+                        "child": [],
+                        "level": 4,
+                        "ignore": false,
+                        "prompt": "c1"
+                      },
+                      {
+                        "text": "Sequence",
+                        "values": "",
+                        "child": [],
+                        "level": 4,
+                        "ignore": false,
+                        "prompt": "c1"
+                      }
+                    ],
+                    "level": 3,
+                    "expand": true,
+                    "ignore": false,
+                    "prompt": "c1"
+                  },
+                  {
+                    "text": "word",
+                    "values": "gym uniform",
+                    "child": [],
+                    "level": 3,
+                    "ignore": false,
+                    "prompt": "c1"
+                  }
+                ],
+                "level": 2,
+                "expand": false,
+                "ignore": false,
+                "prompt": "c1"
+              },
+              {
+                "text": "Sequence",
+                "values": "運動服",
+                "child": [
+                  {
+                    "text": "word",
+                    "values": "pink track jacke",
+                    "child": [],
+                    "level": 2,
+                    "ignore": false,
+                    "prompt": "c1"
+                  }
+                ],
+                "level": 2,
+                "expand": false,
+                "ignore": false,
+                "prompt": "c1"
+              },
+              {
+                "text": "Sequence",
+                "values": "メイド",
+                "child": [
+                  {
+                    "text": "word",
+                    "values": "maid",
+                    "child": [],
+                    "level": 3,
+                    "ignore": false,
+                    "prompt": "c1"
+                  }
+                ],
+                "level": 2,
+                "expand": false,
+                "ignore": false,
+                "prompt": "c1"
+              },
+              {
+                "text": "Sequence",
+                "values": "ロリータファッション",
+                "child": [
+                  {
+                    "text": "word",
+                    "values": "white lolita_fashion",
+                    "child": [],
+                    "level": 3,
+                    "ignore": false,
+                    "prompt": "c1"
+                  },
+                  {
+                    "text": "word",
+                    "values": "white lolita_hairband",
+                    "child": [],
+                    "level": 3,
+                    "ignore": false,
+                    "prompt": "c1"
+                  }
+                ],
+                "expand": false,
+                "level": 2,
+                "ignore": false,
+                "prompt": "c1"
+              },
+              {
+                "text": "Sequence",
+                "values": "ゴシックロリータ",
+                "child": [
+                  {
+                    "text": "word",
+                    "values": "gothic lolita",
+                    "child": [],
+                    "level": 3,
+                    "ignore": false,
+                    "prompt": "c1"
+                  }
+                ],
+                "expand": false,
+                "level": 2,
+                "ignore": false,
+                "prompt": "c1"
+              },
+              {
+                "text": "Sequence",
+                "values": "ミニスカロリ",
+                "child": [
+                  {
+                    "text": "word",
+                    "values": "lolita_hairband",
+                    "child": [],
+                    "level": 3,
+                    "ignore": false,
+                    "prompt": "c1"
+                  },
+                  {
+                    "text": "word",
+                    "values": "pencil skirt",
+                    "child": [],
+                    "level": 3,
+                    "ignore": false,
+                    "prompt": "c1"
+                  }
+                ],
+                "expand": false,
+                "level": 2,
+                "ignore": false,
+                "prompt": "c1"
+              },
+              {
+                "text": "Sequence",
+                "values": "ゴスロリ",
+                "child": [
+                  {
+                    "text": "word",
+                    "values": "roswaal_mansion_maid_uniform",
+                    "child": [],
+                    "level": 3,
+                    "ignore": false,
+                    "prompt": "c1"
+                  }
+                ],
+                "expand": false,
+                "level": 2,
+                "ignore": false,
+                "prompt": "c1"
+              },
+              {
+                "text": "Sequence",
+                "values": "パーカー",
+                "child": [
+                  {
+                    "text": "word",
+                    "values": "hoodie",
+                    "child": [],
+                    "level": 3,
+                    "ignore": false,
+                    "prompt": "c1"
+                  }
+                ],
+                "expand": false,
+                "level": 2,
+                "ignore": false,
+                "prompt": "c1"
+              },
+              {
+                "text": "Sequence",
+                "values": "セーター",
+                "child": [
+                  {
+                    "text": "word",
+                    "values": "sweater",
+                    "child": [],
+                    "level": 3,
+                    "ignore": false,
+                    "prompt": "c1"
+                  }
+                ],
+                "expand": false,
+                "level": 2,
+                "ignore": false,
+                "prompt": "c1"
               }
             ],
-            "expand": false,
-            "level": 2
-          }
-        ],
-        "level": 1,
-        "expand": false
-      }
-    ],
-    "expand": true,
-    "level": 0
-  },
-  {
-    "text": "Sequence",
-    "values": "髪の毛の指定",
-    "child": [
-      {
-        "text": "Select",
-        "values": "髪の色",
-        "child": [
-          {
-            "text": "word",
-            "values": "light brown hair",
-            "child": [],
-            "level": 2
-          },
-          {
-            "text": "word",
-            "values": "grey_hair",
-            "child": [],
-            "level": 2
-          },
-          {
-            "text": "Ignore-word",
-            "values": "pink hair",
-            "child": [],
-            "level": 2
-          },
-          {
-            "text": "word",
-            "values": "blonde hair",
-            "child": [],
-            "level": 2
-          },
-          {
-            "text": "word",
-            "values": "brown hair",
-            "child": [],
-            "level": 2
-          },
-          {
-            "text": "word",
-            "values": "white hair",
-            "child": [],
-            "level": 2
-          },
-          {
-            "text": "word",
-            "values": "black hair",
-            "child": [],
-            "level": 2
-          }
-        ],
-        "level": 1,
-        "expand": false
-      },
-      {
-        "text": "Select",
-        "values": "髪の長さ",
-        "child": [
-          {
-            "text": "word",
-            "values": "very long hair",
-            "child": [],
-            "level": 2
-          },
-          {
-            "text": "word",
-            "values": "long hair",
-            "child": [],
-            "level": 2
-          },
-          {
-            "text": "Sequence",
-            "values": "無指定",
-            "child": [],
             "level": 2,
-            "expand": false
-          },
-          {
-            "text": "Sequence",
-            "values": "無指定",
-            "child": [],
-            "level": 2,
-            "expand": false
+            "expand": false,
+            "ignore": false,
+            "prompt": "c1"
           }
         ],
-        "expand": false,
-        "level": 1
-      },
-      {
-        "text": "Select",
-        "values": "追加の特徴",
-        "child": [
-          {
-            "text": "word",
-            "values": "ahoge",
-            "child": [],
-            "level": 2
-          },
-          {
-            "text": "word",
-            "values": "hair_between_eyes",
-            "child": [],
-            "level": 2
-          },
-          {
-            "text": "word",
-            "values": "long bangs",
-            "child": [],
-            "level": 2
-          },
-          {
-            "text": "word",
-            "values": "hair over one eye",
-            "child": [],
-            "level": 2
-          },
-          {
-            "text": "word",
-            "values": "curly hair",
-            "child": [],
-            "level": 2
-          },
-          {
-            "text": "word",
-            "values": "straight hair",
-            "child": [],
-            "level": 2
-          },
-          {
-            "text": "word",
-            "values": "twintails",
-            "child": [],
-            "level": 2
-          },
-          {
-            "text": "word",
-            "values": "ponytail",
-            "child": [],
-            "level": 2
-          },
-          {
-            "text": "word",
-            "values": "side ponytail",
-            "child": [],
-            "level": 2
-          },
-          {
-            "text": "word",
-            "values": "messy hair",
-            "child": [],
-            "level": 2
-          },
-          {
-            "text": "word",
-            "values": "wavy hair",
-            "child": [],
-            "level": 2
-          },
-          {
-            "text": "word",
-            "values": "beautiful hair",
-            "child": [],
-            "level": 2
-          },
-          {
-            "text": "word",
-            "values": "hair between eyes",
-            "child": [],
-            "level": 2
-          },
-          {
-            "text": "word",
-            "values": "",
-            "child": [],
-            "level": 2
-          },
-          {
-            "text": "word",
-            "values": "",
-            "child": [],
-            "level": 2
-          },
-          {
-            "text": "word",
-            "values": "",
-            "child": [],
-            "level": 2
-          },
-          {
-            "text": "word",
-            "values": "",
-            "child": [],
-            "level": 2
-          }
-        ],
+        "expand": true,
         "level": 1,
-        "expand": false
-      }
-    ],
-    "level": 0,
-    "expand": false
-  },
-  {
-    "text": "Ignore-Sequence",
-    "values": "nsfw エッチな指定。押すな。絶対に押すなよ",
-    "child": [
-      {
-        "text": "word",
-        "values": "pussy",
-        "child": [],
-        "level": 1
-      },
-      {
-        "text": "word",
-        "values": "nsfw",
-        "child": [],
-        "level": 1
-      },
-      {
-        "text": "word",
-        "values": "sweat",
-        "child": [],
-        "level": 1
-      },
-      {
-        "text": "word",
-        "values": "nose blush",
-        "child": [],
-        "level": 1
-      },
-      {
-        "text": "word",
-        "values": "breath",
-        "child": [],
-        "level": 1
-      },
-      {
-        "text": "word",
-        "values": "drooling",
-        "child": [],
-        "level": 1
-      },
-      {
-        "text": "Select",
-        "values": "その他",
-        "child": [
-          {
-            "text": "word",
-            "values": "black_pantyhose",
-            "child": [],
-            "level": 2
-          },
-          {
-            "text": "word",
-            "values": "clothes pull",
-            "child": [],
-            "level": 2
-          },
-          {
-            "text": "word",
-            "values": "cum on pussy",
-            "child": [],
-            "level": 2
-          },
-          {
-            "text": "word",
-            "values": "embarrassed",
-            "child": [],
-            "level": 2
-          },
-          {
-            "text": "word",
-            "values": "female_orgasm",
-            "child": [],
-            "level": 2
-          },
-          {
-            "text": "word",
-            "values": "insert penis",
-            "child": [],
-            "level": 2
-          },
-          {
-            "text": "word",
-            "values": "forced sex",
-            "child": [],
-            "level": 2
-          },
-          {
-            "text": "word",
-            "values": "lactation",
-            "child": [],
-            "level": 2
-          },
-          {
-            "text": "word",
-            "values": "mesugaki",
-            "child": [],
-            "level": 2
-          },
-          {
-            "text": "word",
-            "values": "motion lines",
-            "child": [],
-            "level": 2
-          },
-          {
-            "text": "word",
-            "values": "multiple boys",
-            "child": [],
-            "level": 2
-          },
-          {
-            "text": "word",
-            "values": "blush",
-            "child": [],
-            "level": 2
-          },
-          {
-            "text": "word",
-            "values": "open pussy",
-            "child": [],
-            "level": 2
-          },
-          {
-            "text": "word",
-            "values": "rape",
-            "child": [],
-            "level": 2
-          },
-          {
-            "text": "word",
-            "values": "sex",
-            "child": [],
-            "level": 2
-          },
-          {
-            "text": "word",
-            "values": "stomach_bulge",
-            "child": [],
-            "level": 2
-          },
-          {
-            "text": "word",
-            "values": "torn clothes",
-            "child": [],
-            "level": 2
-          },
-          {
-            "text": "word",
-            "values": "uncensored",
-            "child": [],
-            "level": 2
-          },
-          {
-            "text": "word",
-            "values": "vaginal",
-            "child": [],
-            "level": 2
-          },
-          {
-            "text": "word",
-            "values": "white_pantyhose",
-            "child": [],
-            "level": 2
-          },
-          {
-            "text": "word",
-            "values": "womb tattoo",
-            "child": [],
-            "level": 2
-          }
-        ],
-        "level": 1,
-        "expand": false
-      }
-    ],
-    "level": 0,
-    "expand": false
-  },
-  {
-    "text": "Sequence",
-    "values": "泣いている",
-    "child": [
-      {
-        "text": "word",
-        "values": "tears",
-        "child": [],
-        "level": 1
-      }
-    ],
-    "expand": false,
-    "level": 0
-  },
-  {
-    "text": "Select",
-    "values": "場所の指定",
-    "child": [
-      {
-        "text": "word",
-        "values": "against wall",
-        "child": [],
-        "level": 1
-      },
-      {
-        "text": "word",
-        "values": "bathing",
-        "child": [],
-        "level": 1
-      },
-      {
-        "text": "word",
-        "values": "beach",
-        "child": [],
-        "level": 1
-      },
-      {
-        "text": "word",
-        "values": "bedroom",
-        "child": [],
-        "level": 1
+        "ignore": false,
+        "prompt": "c1"
       },
       {
         "text": "Sequence",
-        "values": "bed room",
+        "values": "髪の毛の指定",
         "child": [
           {
-            "text": "word",
-            "values": "on bed",
-            "child": [],
-            "level": 2
-          },
-          {
-            "text": "word",
-            "values": "pillow",
-            "child": [],
-            "level": 2
-          }
-        ],
-        "expand": false,
-        "level": 1
-      },
-      {
-        "text": "word",
-        "values": "car interior",
-        "child": [],
-        "level": 1
-      },
-      {
-        "text": "word",
-        "values": "corridor",
-        "child": [],
-        "level": 1
-      },
-      {
-        "text": "Sequence",
-        "values": "classroom",
-        "child": [
-          {
-            "text": "word",
-            "values": "classroom",
-            "child": [],
-            "level": 2
+            "text": "Select",
+            "values": "髪の色",
+            "child": [
+              {
+                "text": "word",
+                "values": "light brown hair",
+                "child": [],
+                "level": 2,
+                "ignore": false,
+                "prompt": "c1"
+              },
+              {
+                "text": "word",
+                "values": "grey_hair",
+                "child": [],
+                "level": 2,
+                "ignore": false,
+                "prompt": "c1"
+              },
+              {
+                "text": "word",
+                "values": "pink hair",
+                "child": [],
+                "level": 2,
+                "ignore": true,
+                "prompt": "c1"
+              },
+              {
+                "text": "word",
+                "values": "blonde hair",
+                "child": [],
+                "level": 2,
+                "ignore": false,
+                "prompt": "c1"
+              },
+              {
+                "text": "word",
+                "values": "brown hair",
+                "child": [],
+                "level": 2,
+                "ignore": false,
+                "prompt": "c1"
+              },
+              {
+                "text": "word",
+                "values": "white hair",
+                "child": [],
+                "level": 2,
+                "ignore": false,
+                "prompt": "c1"
+              },
+              {
+                "text": "word",
+                "values": "black hair",
+                "child": [],
+                "level": 2,
+                "ignore": false,
+                "prompt": "c1"
+              }
+            ],
+            "level": 1,
+            "expand": false,
+            "ignore": false,
+            "prompt": "c1"
           },
           {
             "text": "Select",
-            "values": "chair",
+            "values": "髪の長さ",
             "child": [
               {
                 "text": "word",
-                "values": "chair",
+                "values": "very long hair",
                 "child": [],
-                "level": 3
+                "level": 2,
+                "ignore": false,
+                "prompt": "c1"
               },
               {
                 "text": "word",
-                "values": "school table",
+                "values": "long hair",
                 "child": [],
-                "level": 3
+                "level": 2,
+                "ignore": false,
+                "prompt": "c1"
               },
               {
-                "text": "word",
-                "values": "desk",
+                "text": "Sequence",
+                "values": "無指定",
                 "child": [],
-                "level": 3
+                "level": 2,
+                "expand": false,
+                "ignore": false,
+                "prompt": "c1"
+              },
+              {
+                "text": "Sequence",
+                "values": "無指定",
+                "child": [],
+                "level": 2,
+                "expand": false,
+                "ignore": false,
+                "prompt": "c1"
               }
             ],
-            "expand": true,
-            "level": 2
+            "expand": false,
+            "level": 1,
+            "ignore": false,
+            "prompt": "c1"
+          },
+          {
+            "text": "Select",
+            "values": "追加の特徴",
+            "child": [
+              {
+                "text": "word",
+                "values": "ahoge",
+                "child": [],
+                "level": 2,
+                "ignore": false,
+                "prompt": "c1"
+              },
+              {
+                "text": "word",
+                "values": "hair_between_eyes",
+                "child": [],
+                "level": 2,
+                "ignore": false,
+                "prompt": "c1"
+              },
+              {
+                "text": "word",
+                "values": "long bangs",
+                "child": [],
+                "level": 2,
+                "ignore": false,
+                "prompt": "c1"
+              },
+              {
+                "text": "word",
+                "values": "hair over one eye",
+                "child": [],
+                "level": 2,
+                "ignore": false,
+                "prompt": "c1"
+              },
+              {
+                "text": "word",
+                "values": "curly hair",
+                "child": [],
+                "level": 2,
+                "ignore": false,
+                "prompt": "c1"
+              },
+              {
+                "text": "word",
+                "values": "straight hair",
+                "child": [],
+                "level": 2,
+                "ignore": false,
+                "prompt": "c1"
+              },
+              {
+                "text": "word",
+                "values": "twintails",
+                "child": [],
+                "level": 2,
+                "ignore": false,
+                "prompt": "c1"
+              },
+              {
+                "text": "word",
+                "values": "ponytail",
+                "child": [],
+                "level": 2,
+                "ignore": false,
+                "prompt": "c1"
+              },
+              {
+                "text": "word",
+                "values": "side ponytail",
+                "child": [],
+                "level": 2,
+                "ignore": false,
+                "prompt": "c1"
+              },
+              {
+                "text": "word",
+                "values": "messy hair",
+                "child": [],
+                "level": 2,
+                "ignore": false,
+                "prompt": "c1"
+              },
+              {
+                "text": "word",
+                "values": "wavy hair",
+                "child": [],
+                "level": 2,
+                "ignore": false,
+                "prompt": "c1"
+              },
+              {
+                "text": "word",
+                "values": "beautiful hair",
+                "child": [],
+                "level": 2,
+                "ignore": false,
+                "prompt": "c1"
+              },
+              {
+                "text": "word",
+                "values": "hair between eyes",
+                "child": [],
+                "level": 2,
+                "ignore": false,
+                "prompt": "c1"
+              },
+              {
+                "text": "word",
+                "values": "",
+                "child": [],
+                "level": 2,
+                "ignore": false,
+                "prompt": "c1"
+              },
+              {
+                "text": "word",
+                "values": "",
+                "child": [],
+                "level": 2,
+                "ignore": false,
+                "prompt": "c1"
+              },
+              {
+                "text": "word",
+                "values": "",
+                "child": [],
+                "level": 2,
+                "ignore": false,
+                "prompt": "c1"
+              },
+              {
+                "text": "word",
+                "values": "",
+                "child": [],
+                "level": 2,
+                "ignore": false,
+                "prompt": "c1"
+              }
+            ],
+            "level": 1,
+            "expand": false,
+            "ignore": false,
+            "prompt": "c1"
           }
         ],
+        "level": 1,
         "expand": false,
-        "level": 1
-      },
-      {
-        "text": "word",
-        "values": "fantasy",
-        "child": [],
-        "level": 1
-      },
-      {
-        "text": "word",
-        "values": "ruins",
-        "child": [],
-        "level": 1
-      },
-      {
-        "text": "word",
-        "values": "night pool",
-        "child": [],
-        "level": 1
+        "ignore": false,
+        "prompt": "c1"
       },
       {
         "text": "Sequence",
-        "values": "onsen",
+        "values": "泣いている",
         "child": [
           {
             "text": "word",
-            "values": "night sky",
+            "values": "tears",
             "child": [],
-            "level": 2
-          },
-          {
-            "text": "word",
-            "values": "onsen",
-            "child": [],
-            "level": 2
+            "level": 1,
+            "ignore": false,
+            "prompt": "c1"
           }
         ],
         "expand": false,
-        "level": 1
+        "level": 1,
+        "ignore": false,
+        "prompt": "c1"
       },
       {
-        "text": "word",
-        "values": "pool",
-        "child": [],
-        "level": 1
+        "text": "Select",
+        "values": "女の子追加指定",
+        "child": [
+          {
+            "text": "word",
+            "values": "small breasts",
+            "child": [],
+            "level": 2,
+            "ignore": false,
+            "prompt": "c1"
+          },
+          {
+            "text": "word",
+            "values": "minigirl",
+            "child": [],
+            "level": 2,
+            "ignore": false,
+            "prompt": "c1"
+          },
+          {
+            "text": "word",
+            "values": "little girl",
+            "child": [],
+            "level": 2,
+            "ignore": false,
+            "prompt": "c1"
+          }
+        ],
+        "expand": false,
+        "level": 1,
+        "ignore": true,
+        "prompt": "c1"
       },
       {
         "text": "Sequence",
-        "values": "showering",
+        "values": "nsfw エッチな指定。押すな。絶対に押すなよ",
         "child": [
           {
-            "text": "Ignore-word",
-            "values": "showering",
+            "text": "word",
+            "values": "pussy",
             "child": [],
-            "level": 2
+            "level": 2,
+            "ignore": false,
+            "prompt": "c1"
           },
           {
             "text": "word",
-            "values": "bathroom",
+            "values": "nsfw",
             "child": [],
-            "level": 2
+            "level": 2,
+            "ignore": false,
+            "prompt": "c1"
+          },
+          {
+            "text": "word",
+            "values": "sweat",
+            "child": [],
+            "level": 2,
+            "ignore": false,
+            "prompt": "c1"
+          },
+          {
+            "text": "word",
+            "values": "nose blush",
+            "child": [],
+            "level": 2,
+            "ignore": false,
+            "prompt": "c1"
+          },
+          {
+            "text": "word",
+            "values": "breath",
+            "child": [],
+            "level": 2,
+            "ignore": false,
+            "prompt": "c1"
+          },
+          {
+            "text": "word",
+            "values": "drooling",
+            "child": [],
+            "level": 2,
+            "ignore": false,
+            "prompt": "c1"
+          },
+          {
+            "text": "Select",
+            "values": "その他",
+            "child": [
+              {
+                "text": "word",
+                "values": "black_pantyhose",
+                "child": [],
+                "level": 2,
+                "ignore": false,
+                "prompt": "c1"
+              },
+              {
+                "text": "word",
+                "values": "clothes pull",
+                "child": [],
+                "level": 2,
+                "ignore": false,
+                "prompt": "c1"
+              },
+              {
+                "text": "word",
+                "values": "cum on pussy",
+                "child": [],
+                "level": 2,
+                "ignore": false,
+                "prompt": "c1"
+              },
+              {
+                "text": "word",
+                "values": "embarrassed",
+                "child": [],
+                "level": 2,
+                "ignore": false,
+                "prompt": "c1"
+              },
+              {
+                "text": "word",
+                "values": "female_orgasm",
+                "child": [],
+                "level": 2,
+                "ignore": false,
+                "prompt": "c1"
+              },
+              {
+                "text": "word",
+                "values": "insert penis",
+                "child": [],
+                "level": 2,
+                "ignore": false,
+                "prompt": "c1"
+              },
+              {
+                "text": "word",
+                "values": "forced sex",
+                "child": [],
+                "level": 2,
+                "ignore": false,
+                "prompt": "c1"
+              },
+              {
+                "text": "word",
+                "values": "lactation",
+                "child": [],
+                "level": 2,
+                "ignore": false,
+                "prompt": "c1"
+              },
+              {
+                "text": "word",
+                "values": "mesugaki",
+                "child": [],
+                "level": 2,
+                "ignore": false,
+                "prompt": "c1"
+              },
+              {
+                "text": "word",
+                "values": "motion lines",
+                "child": [],
+                "level": 2,
+                "ignore": false,
+                "prompt": "c1"
+              },
+              {
+                "text": "word",
+                "values": "multiple boys",
+                "child": [],
+                "level": 2,
+                "ignore": false,
+                "prompt": "c1"
+              },
+              {
+                "text": "word",
+                "values": "blush",
+                "child": [],
+                "level": 2,
+                "ignore": false,
+                "prompt": "c1"
+              },
+              {
+                "text": "word",
+                "values": "open pussy",
+                "child": [],
+                "level": 2,
+                "ignore": false,
+                "prompt": "c1"
+              },
+              {
+                "text": "word",
+                "values": "rape",
+                "child": [],
+                "level": 2,
+                "ignore": false,
+                "prompt": "c1"
+              },
+              {
+                "text": "word",
+                "values": "sex",
+                "child": [],
+                "level": 2,
+                "ignore": false,
+                "prompt": "c1"
+              },
+              {
+                "text": "word",
+                "values": "stomach_bulge",
+                "child": [],
+                "level": 2,
+                "ignore": false,
+                "prompt": "c1"
+              },
+              {
+                "text": "word",
+                "values": "torn clothes",
+                "child": [],
+                "level": 2,
+                "ignore": false,
+                "prompt": "c1"
+              },
+              {
+                "text": "word",
+                "values": "uncensored",
+                "child": [],
+                "level": 2,
+                "ignore": false,
+                "prompt": "c1"
+              },
+              {
+                "text": "word",
+                "values": "vaginal",
+                "child": [],
+                "level": 2,
+                "ignore": false,
+                "prompt": "c1"
+              },
+              {
+                "text": "word",
+                "values": "white_pantyhose",
+                "child": [],
+                "level": 2,
+                "ignore": false,
+                "prompt": "c1"
+              },
+              {
+                "text": "word",
+                "values": "womb tattoo",
+                "child": [],
+                "level": 2,
+                "ignore": false,
+                "prompt": "c1"
+              }
+            ],
+            "level": 2,
+            "expand": false,
+            "ignore": false,
+            "prompt": "c1"
           }
         ],
+        "level": 1,
         "expand": false,
-        "level": 1
-      },
-      {
-        "text": "word",
-        "values": "sofa",
-        "child": [],
-        "level": 1
-      },
-      {
-        "text": "word",
-        "values": "train interior",
-        "child": [],
-        "level": 1
-      },
-      {
-        "text": "word",
-        "values": "toilet",
-        "child": [],
-        "level": 1
+        "ignore": true,
+        "prompt": "c1"
       }
     ],
-    "level": 0,
-    "expand": false
-  },
-  {
-    "text": "Ignore-Select",
-    "values": "女の子追加指定",
-    "child": [
-      {
-        "text": "word",
-        "values": "small breasts",
-        "child": [],
-        "level": 1
-      },
-      {
-        "text": "word",
-        "values": "minigirl",
-        "child": [],
-        "level": 1
-      },
-      {
-        "text": "word",
-        "values": "little girl",
-        "child": [],
-        "level": 1
-      }
-    ],
-    "expand": false,
+    "ignore": false,
     "level": 0
   },
   {
     "text": "Sequence",
-    "values": "品質の指定",
+    "prompt": "c2",
+    "values": "2キャラクタープロンプト",
+    "expand": false,
+    "child": [],
+    "ignore": false,
+    "level": 0
+  },
+  {
+    "text": "Sequence",
+    "prompt": "u0",
+    "values": "ネガティブプロンプト",
+    "expand": false,
     "child": [
       {
-        "text": "Ignore-word",
-        "values": "{best quality}",
+        "text": "word",
+        "prompt": "u0",
+        "values": "lowres",
+        "expand": false,
         "child": [],
-        "level": 1
-      },
-      {
-        "text": "Ignore-word",
-        "values": "absurdres",
-        "child": [],
-        "level": 1
-      },
-      {
-        "text": "Ignore-word",
-        "values": "amazing quality",
-        "child": [],
+        "ignore": false,
         "level": 1
       },
       {
         "text": "word",
-        "values": "very aesthetic",
+        "prompt": "u0",
+        "values": "bad anatomy",
+        "expand": false,
         "child": [],
+        "ignore": false,
         "level": 1
       },
       {
-        "text": "Ignore-word",
-        "values": "photorealistic",
+        "text": "word",
+        "prompt": "u0",
+        "values": "bad hands",
+        "expand": false,
         "child": [],
+        "ignore": false,
         "level": 1
       },
       {
-        "text": "Ignore-word",
-        "values": "extremely detailed CG unity",
+        "text": "word",
+        "prompt": "u0",
+        "values": "text",
+        "expand": false,
         "child": [],
+        "ignore": false,
         "level": 1
       },
       {
-        "text": "Ignore-word",
-        "values": "official",
+        "text": "word",
+        "prompt": "u0",
+        "values": "error",
+        "expand": false,
         "child": [],
+        "ignore": false,
         "level": 1
       },
       {
-        "text": "Ignore-word",
-        "values": "official art",
+        "text": "word",
+        "prompt": "u0",
+        "values": "missing fingers",
+        "expand": false,
         "child": [],
+        "ignore": false,
         "level": 1
       },
       {
-        "text": "Ignore-word",
-        "values": "illustration",
+        "text": "word",
+        "prompt": "u0",
+        "values": "extra digit",
+        "expand": false,
         "child": [],
+        "ignore": false,
         "level": 1
       },
       {
-        "text": "Ignore-word",
-        "values": "masterpiece",
+        "text": "word",
+        "prompt": "u0",
+        "values": "fewer digits",
+        "expand": false,
         "child": [],
+        "ignore": false,
         "level": 1
       },
       {
-        "text": "Ignore-word",
-        "values": "{realistic body}",
+        "text": "word",
+        "prompt": "u0",
+        "values": "cropped",
+        "expand": false,
         "child": [],
+        "ignore": false,
         "level": 1
       },
       {
-        "text": "Ignore-word",
-        "values": "awesome detailed",
+        "text": "word",
+        "prompt": "u0",
+        "values": "worst quality",
+        "expand": false,
         "child": [],
+        "ignore": false,
         "level": 1
       },
       {
-        "text": "Ignore-word",
-        "values": "[hyper detailed]",
+        "text": "word",
+        "prompt": "u0",
+        "values": "low quality",
+        "expand": false,
         "child": [],
+        "ignore": false,
         "level": 1
       },
       {
-        "text": "Ignore-word",
-        "values": "[ultra detailed skin]",
+        "text": "word",
+        "prompt": "u0",
+        "values": "normal quality",
+        "expand": false,
         "child": [],
+        "ignore": false,
         "level": 1
       },
       {
-        "text": "Ignore-word",
-        "values": "{{{{glistening shining skin}}}}",
+        "text": "word",
+        "prompt": "u0",
+        "values": "jpeg artifacts",
+        "expand": false,
         "child": [],
+        "ignore": false,
+        "level": 1
+      },
+      {
+        "text": "word",
+        "prompt": "u0",
+        "values": "signature",
+        "expand": false,
+        "child": [],
+        "ignore": false,
+        "level": 1
+      },
+      {
+        "text": "word",
+        "prompt": "u0",
+        "values": "watermark",
+        "expand": false,
+        "child": [],
+        "ignore": false,
+        "level": 1
+      },
+      {
+        "text": "word",
+        "prompt": "u0",
+        "values": "username",
+        "expand": false,
+        "child": [],
+        "ignore": false,
+        "level": 1
+      },
+      {
+        "text": "word",
+        "prompt": "u0",
+        "values": "blurry",
+        "expand": false,
+        "child": [],
+        "ignore": false,
         "level": 1
       }
     ],
-    "level": 0,
-    "expand": false
+    "ignore": false,
+    "level": 0
   },
   {
-    "text": "uc-Sequence",
-    "values": "ネガティブプロンプトの指定",
-    "child": [
-      {
-        "text": "Ignore-uc-word",
-        "values": "huge breasts",
-        "child": [],
-        "level": 1
-      },
-      {
-        "text": "uc-word",
-        "values": "mosaic_censoring",
-        "child": [],
-        "level": 1
-      },
-      {
-        "text": "Ignore-uc-word",
-        "values": "censored",
-        "child": [],
-        "level": 1
-      },
-      {
-        "text": "Ignore-uc-word",
-        "values": "bar_censor",
-        "child": [],
-        "level": 1
-      },
-      {
-        "text": "Ignore-uc-word",
-        "values": "3d",
-        "child": [],
-        "level": 1
-      },
-      {
-        "text": "uc-word",
-        "values": "lowres",
-        "child": [],
-        "level": 1
-      },
-      {
-        "text": "uc-word",
-        "values": "bad anatomy",
-        "child": [],
-        "level": 1
-      },
-      {
-        "text": "uc-word",
-        "values": "bad hands",
-        "child": [],
-        "level": 1
-      },
-      {
-        "text": "uc-word",
-        "values": "text",
-        "child": [],
-        "level": 1
-      },
-      {
-        "text": "uc-word",
-        "values": "error",
-        "child": [],
-        "level": 1
-      },
-      {
-        "text": "uc-word",
-        "values": "missing fingers",
-        "child": [],
-        "level": 1
-      },
-      {
-        "text": "uc-word",
-        "values": "extra digit",
-        "child": [],
-        "level": 1
-      },
-      {
-        "text": "uc-word",
-        "values": "fewer digits",
-        "child": [],
-        "level": 1
-      },
-      {
-        "text": "uc-word",
-        "values": "cropped",
-        "child": [],
-        "level": 1
-      },
-      {
-        "text": "uc-word",
-        "values": "worst quality",
-        "child": [],
-        "level": 1
-      },
-      {
-        "text": "uc-word",
-        "values": "low quality",
-        "child": [],
-        "level": 1
-      },
-      {
-        "text": "uc-word",
-        "values": "normal quality",
-        "child": [],
-        "level": 1
-      },
-      {
-        "text": "uc-word",
-        "values": "jpeg artifacts",
-        "child": [],
-        "level": 1
-      },
-      {
-        "text": "uc-word",
-        "values": "signature",
-        "child": [],
-        "level": 1
-      },
-      {
-        "text": "uc-word",
-        "values": "watermark",
-        "child": [],
-        "level": 1
-      },
-      {
-        "text": "uc-word",
-        "values": "username",
-        "child": [],
-        "level": 1
-      },
-      {
-        "text": "uc-word",
-        "values": "blurry",
-        "child": [],
-        "level": 1
-      },
-      {
-        "text": "Ignore-uc-word",
-        "values": "monochrome",
-        "child": [],
-        "level": 1
-      },
-      {
-        "text": "Ignore-uc-word",
-        "values": "white background",
-        "child": [],
-        "level": 1
-      },
-      {
-        "text": "Ignore-uc-word",
-        "values": "simple background",
-        "child": [],
-        "level": 1
-      },
-      {
-        "text": "Ignore-uc-word",
-        "values": "black background",
-        "child": [],
-        "level": 1
-      },
-      {
-        "text": "Ignore-uc-word",
-        "values": "red background",
-        "child": [],
-        "level": 1
-      },
-      {
-        "text": "Ignore-uc-word",
-        "values": "blue background",
-        "child": [],
-        "level": 1
-      }
-    ],
-    "level": 0,
-    "expand": false
+    "text": "Sequence",
+    "prompt": "u1",
+    "values": "1キャラクターネガティブプロンプト",
+    "expand": false,
+    "child": [],
+    "ignore": false,
+    "level": 0
+  },
+  {
+    "text": "Sequence",
+    "prompt": "u2",
+    "values": "2キャラクターネガティブプロンプト",
+    "expand": false,
+    "child": [],
+    "ignore": false,
+    "level": 0
   }
 ]
