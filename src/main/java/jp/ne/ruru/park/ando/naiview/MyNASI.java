@@ -116,6 +116,7 @@ public class MyNASI {
          * @param strength        strength for image2image
          * @param noise           noise for image2image
          * @param characters      cha01_Ok, cha01_NG, ch02_Ok, ch02_NG
+         * @param locations        character locations
          */
         Allin1RequestImage(
                 boolean isV4,
@@ -139,7 +140,8 @@ public class MyNASI {
                 byte[] imageBuffer,
                 int strength,
                 int noise,
-                String[] characters
+                String[] characters,
+                int[] locations
         ) {
             super(type,email,password);
             this.isV4 = isV4;
@@ -161,6 +163,7 @@ public class MyNASI {
             this.strength = strength;
             this.noise = noise;
             this.characters = characters;
+            this.locations = locations;
         }
         public final boolean isV4;
         public final String model;
@@ -189,6 +192,8 @@ public class MyNASI {
         public final int noise;
 
         public final String[] characters;
+
+        public final int[] locations;
     }
     /**
      * all in 1 request data.
@@ -463,12 +468,16 @@ public class MyNASI {
                 if (! request.characters[0].isEmpty()) {
                     String ok = request.characters[0];
                     String ng = request.characters[1];
-                    characterPrompts.put(createCharacterPrompts(ok, ng));
+                    int x = request.locations[0];
+                    int y = request.locations[1];
+                    characterPrompts.put(createCharacterPrompts(ok, ng, x, y));
                 }
                 if (! request.characters[2].isEmpty()) {
                     String ok = request.characters[2];
                     String ng = request.characters[3];
-                    characterPrompts.put(createCharacterPrompts(ok, ng));
+                    int x = request.locations[2];
+                    int y = request.locations[3];
+                    characterPrompts.put(createCharacterPrompts(ok, ng, x, y));
                 }
                 //
                 JSONObject v4Prompt = new JSONObject();
@@ -541,17 +550,17 @@ public class MyNASI {
         return res.setDescription(description).setAnlas(anlas);
     }
 
-    public JSONObject createCharacterPrompts(String ok, String ng) throws JSONException {
+    public JSONObject createCharacterPrompts(String ok, String ng, int x, int y) throws JSONException {
         JSONObject target = new JSONObject();
         target.put("prompt",ok);
         target.put("uc",ng);
-        target.put("center", createCener());
+        target.put("center", createCenter(x, y));
         return target;
     }
-    public JSONObject createCener() throws JSONException {
+    public JSONObject createCenter(int x, int y) throws JSONException {
         JSONObject center = new JSONObject();
-        center.put("x", 0.5);
-        center.put("y", 0.5);
+        center.put("x", ((double)x)/10.0);
+        center.put("y", ((double)y)/10.0);
         return center;
     }
     public JSONObject createCaption(Allin1RequestImage request, boolean isOk) throws JSONException {
@@ -565,19 +574,23 @@ public class MyNASI {
         target.put("base_caption", base);
         target.put("char_captions", charCaptions);
         if (ch01Flag) {
+            int x = request.locations[0];
+            int y = request.locations[1];
             JSONObject charCaption = new JSONObject();
             charCaption.put("char_caption",ch01);
             JSONArray centers = new JSONArray();
-            centers.put(createCener());
+            centers.put(createCenter(x, y));
             charCaption.put("centers",centers);
             //
             charCaptions.put(charCaption);
         }
         if (ch02Flag) {
+            int x = request.locations[2];
+            int y = request.locations[3];
             JSONObject charCaption = new JSONObject();
             charCaption.put("char_caption",ch02);
             JSONArray centers = new JSONArray();
-            centers.put(createCener());
+            centers.put(createCenter(x, y));
             charCaption.put("centers",centers);
             //
             charCaptions.put(charCaption);

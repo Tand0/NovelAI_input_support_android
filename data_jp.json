@@ -444,7 +444,7 @@
         ],
         "expand": false,
         "level": 1,
-        "ignore": true,
+        "ignore": false,
         "prompt": "c0"
       },
       {
@@ -455,7 +455,7 @@
             "text": "word",
             "values": "against wall",
             "child": [],
-            "level": 1,
+            "level": 2,
             "ignore": false,
             "prompt": "c0"
           },
@@ -463,7 +463,7 @@
             "text": "word",
             "values": "bathing",
             "child": [],
-            "level": 1,
+            "level": 2,
             "ignore": false,
             "prompt": "c0"
           },
@@ -471,7 +471,7 @@
             "text": "word",
             "values": "beach",
             "child": [],
-            "level": 1,
+            "level": 2,
             "ignore": false,
             "prompt": "c0"
           },
@@ -479,7 +479,7 @@
             "text": "word",
             "values": "bedroom",
             "child": [],
-            "level": 1,
+            "level": 2,
             "ignore": false,
             "prompt": "c0"
           },
@@ -505,7 +505,7 @@
               }
             ],
             "expand": false,
-            "level": 1,
+            "level": 2,
             "ignore": false,
             "prompt": "c0"
           },
@@ -513,7 +513,7 @@
             "text": "word",
             "values": "car interior",
             "child": [],
-            "level": 1,
+            "level": 2,
             "ignore": false,
             "prompt": "c0"
           },
@@ -521,7 +521,7 @@
             "text": "word",
             "values": "corridor",
             "child": [],
-            "level": 1,
+            "level": 2,
             "ignore": false,
             "prompt": "c0"
           },
@@ -573,7 +573,7 @@
               }
             ],
             "expand": false,
-            "level": 1,
+            "level": 2,
             "ignore": false,
             "prompt": "c0"
           },
@@ -581,7 +581,7 @@
             "text": "word",
             "values": "fantasy",
             "child": [],
-            "level": 1,
+            "level": 2,
             "ignore": false,
             "prompt": "c0"
           },
@@ -589,7 +589,7 @@
             "text": "word",
             "values": "ruins",
             "child": [],
-            "level": 1,
+            "level": 2,
             "ignore": false,
             "prompt": "c0"
           },
@@ -597,7 +597,7 @@
             "text": "word",
             "values": "night pool",
             "child": [],
-            "level": 1,
+            "level": 2,
             "ignore": false,
             "prompt": "c0"
           },
@@ -623,7 +623,7 @@
               }
             ],
             "expand": false,
-            "level": 1,
+            "level": 2,
             "ignore": false,
             "prompt": "c0"
           },
@@ -631,7 +631,7 @@
             "text": "word",
             "values": "pool",
             "child": [],
-            "level": 1,
+            "level": 2,
             "ignore": false,
             "prompt": "c0"
           },
@@ -657,7 +657,7 @@
               }
             ],
             "expand": false,
-            "level": 1,
+            "level": 2,
             "ignore": false,
             "prompt": "c0"
           },
@@ -665,7 +665,7 @@
             "text": "word",
             "values": "sofa",
             "child": [],
-            "level": 1,
+            "level": 2,
             "ignore": false,
             "prompt": "c0"
           },
@@ -673,7 +673,7 @@
             "text": "word",
             "values": "train interior",
             "child": [],
-            "level": 1,
+            "level": 2,
             "ignore": false,
             "prompt": "c0"
           },
@@ -681,7 +681,7 @@
             "text": "word",
             "values": "toilet",
             "child": [],
-            "level": 1,
+            "level": 2,
             "ignore": false,
             "prompt": "c0"
           }
@@ -699,7 +699,7 @@
             "text": "word",
             "values": "{best quality}",
             "child": [],
-            "level": 1,
+            "level": 2,
             "ignore": true,
             "prompt": "c0"
           },
@@ -707,7 +707,7 @@
             "text": "word",
             "values": "absurdres",
             "child": [],
-            "level": 1,
+            "level": 2,
             "ignore": true,
             "prompt": "c0"
           },
@@ -715,7 +715,7 @@
             "text": "word",
             "values": "amazing quality",
             "child": [],
-            "level": 1,
+            "level": 2,
             "ignore": true,
             "prompt": "c0"
           },
@@ -723,7 +723,7 @@
             "text": "word",
             "values": "very aesthetic",
             "child": [],
-            "level": 1,
+            "level": 2,
             "ignore": false,
             "prompt": "c0"
           },
@@ -731,7 +731,7 @@
             "text": "word",
             "values": "photorealistic",
             "child": [],
-            "level": 1,
+            "level": 2,
             "ignore": true,
             "prompt": "c0"
           },
@@ -739,7 +739,7 @@
             "text": "word",
             "values": "extremely detailed CG unity",
             "child": [],
-            "level": 1,
+            "level": 2,
             "ignore": true,
             "prompt": "c0"
           },
@@ -747,7 +747,7 @@
             "text": "word",
             "values": "official",
             "child": [],
-            "level": 1,
+            "level": 2,
             "ignore": true,
             "prompt": "c0"
           },
@@ -755,7 +755,7 @@
             "text": "word",
             "values": "official art",
             "child": [],
-            "level": 1,
+            "level": 2,
             "ignore": true,
             "prompt": "c0"
           },
@@ -763,7 +763,7 @@
             "text": "word",
             "values": "illustration",
             "child": [],
-            "level": 1,
+            "level": 2,
             "ignore": true,
             "prompt": "c0"
           },
@@ -771,7 +771,7 @@
             "text": "word",
             "values": "masterpiece",
             "child": [],
-            "level": 1,
+            "level": 2,
             "ignore": true,
             "prompt": "c0"
           },
@@ -779,7 +779,7 @@
             "text": "word",
             "values": "{realistic body}",
             "child": [],
-            "level": 1,
+            "level": 2,
             "ignore": true,
             "prompt": "c0"
           },
@@ -787,7 +787,7 @@
             "text": "word",
             "values": "awesome detailed",
             "child": [],
-            "level": 1,
+            "level": 2,
             "ignore": true,
             "prompt": "c0"
           },
@@ -795,7 +795,7 @@
             "text": "word",
             "values": "[hyper detailed]",
             "child": [],
-            "level": 1,
+            "level": 2,
             "ignore": true,
             "prompt": "c0"
           },
@@ -803,7 +803,7 @@
             "text": "word",
             "values": "[ultra detailed skin]",
             "child": [],
-            "level": 1,
+            "level": 2,
             "ignore": true,
             "prompt": "c0"
           },
@@ -811,7 +811,7 @@
             "text": "word",
             "values": "{{{{glistening shining skin}}}}",
             "child": [],
-            "level": 1,
+            "level": 2,
             "ignore": true,
             "prompt": "c0"
           }
@@ -820,16 +820,61 @@
         "expand": false,
         "ignore": false,
         "prompt": "c0"
+      },
+      {
+        "ignore": false,
+        "prompt": "c0",
+        "text": "Sequence",
+        "values": "nsfw",
+        "child": [
+          {
+            "ignore": false,
+            "prompt": "c0",
+            "text": "word",
+            "values": "nsfw",
+            "child": [],
+            "expand": true,
+            "level": 2
+          },
+          {
+            "ignore": true,
+            "prompt": "c0",
+            "text": "Select",
+            "values": "その他",
+            "child": [
+              {
+                "text": "word",
+                "values": "uncensored",
+                "child": [],
+                "level": 3,
+                "ignore": false,
+                "prompt": "c0"
+              },
+              {
+                "text": "word",
+                "values": "multiple boys",
+                "child": [],
+                "level": 3,
+                "ignore": false,
+                "prompt": "c0"
+              }
+            ],
+            "expand": false,
+            "level": 2
+          }
+        ],
+        "expand": false,
+        "level": 1
       }
     ],
-    "expand": true,
+    "expand": false,
     "level": 0
   },
   {
     "text": "Sequence",
     "prompt": "c1",
     "values": "1キャラクタープロンプト",
-    "expand": true,
+    "expand": false,
     "child": [
       {
         "text": "Select",
@@ -1278,7 +1323,7 @@
         ],
         "expand": false,
         "level": 1,
-        "ignore": true,
+        "ignore": false,
         "prompt": "c1"
       },
       {
@@ -1307,7 +1352,7 @@
               }
             ],
             "expand": false,
-            "level": 1,
+            "level": 2,
             "ignore": false,
             "prompt": "c1"
           },
@@ -1373,7 +1418,7 @@
               }
             ],
             "expand": false,
-            "level": 1,
+            "level": 2,
             "ignore": false,
             "prompt": "c1"
           },
@@ -1399,7 +1444,7 @@
               }
             ],
             "expand": false,
-            "level": 1,
+            "level": 2,
             "ignore": false,
             "prompt": "c1"
           },
@@ -1473,7 +1518,7 @@
               }
             ],
             "expand": false,
-            "level": 1,
+            "level": 2,
             "ignore": false,
             "prompt": "c1"
           },
@@ -1515,7 +1560,7 @@
               }
             ],
             "expand": false,
-            "level": 1,
+            "level": 2,
             "ignore": false,
             "prompt": "c1"
           },
@@ -1540,7 +1585,7 @@
                 "prompt": "c1"
               }
             ],
-            "level": 1,
+            "level": 2,
             "expand": false,
             "ignore": false,
             "prompt": "c1"
@@ -1558,7 +1603,7 @@
                 "prompt": "c1"
               }
             ],
-            "level": 1,
+            "level": 2,
             "expand": false,
             "ignore": false,
             "prompt": "c1"
@@ -1585,7 +1630,7 @@
               }
             ],
             "expand": false,
-            "level": 1,
+            "level": 2,
             "ignore": false,
             "prompt": "c1"
           }
@@ -1597,7 +1642,7 @@
       },
       {
         "text": "Sequence",
-        "values": "女の子の指定",
+        "values": "格好と服装の指定",
         "child": [
           {
             "text": "Select",
@@ -1611,7 +1656,7 @@
                     "text": "word",
                     "values": "lying",
                     "child": [],
-                    "level": 3,
+                    "level": 4,
                     "ignore": false,
                     "prompt": "c1"
                   },
@@ -1652,7 +1697,7 @@
                         "prompt": "c1"
                       }
                     ],
-                    "level": 3,
+                    "level": 4,
                     "expand": false,
                     "ignore": false,
                     "prompt": "c1"
@@ -1665,7 +1710,7 @@
                         "text": "word",
                         "values": "hands up",
                         "child": [],
-                        "level": 4,
+                        "level": 5,
                         "ignore": false,
                         "prompt": "c1"
                       },
@@ -1675,41 +1720,9 @@
                         "child": [
                           {
                             "text": "word",
-                            "values": "arm_grab",
-                            "child": [],
-                            "level": 5,
-                            "ignore": false,
-                            "prompt": "c1"
-                          },
-                          {
-                            "text": "word",
-                            "values": "arms_grab",
-                            "child": [],
-                            "level": 5,
-                            "ignore": false,
-                            "prompt": "c1"
-                          },
-                          {
-                            "text": "word",
-                            "values": "hands_grab",
-                            "child": [],
-                            "level": 5,
-                            "ignore": false,
-                            "prompt": "c1"
-                          },
-                          {
-                            "text": "word",
-                            "values": "torso_grab",
-                            "child": [],
-                            "level": 5,
-                            "ignore": false,
-                            "prompt": "c1"
-                          },
-                          {
-                            "text": "word",
                             "values": "arms_around_neck",
                             "child": [],
-                            "level": 5,
+                            "level": 6,
                             "ignore": false,
                             "prompt": "c1"
                           },
@@ -1717,7 +1730,7 @@
                             "text": "word",
                             "values": "bound wrists",
                             "child": [],
-                            "level": 5,
+                            "level": 6,
                             "ignore": false,
                             "prompt": "c1"
                           },
@@ -1725,7 +1738,7 @@
                             "text": "word",
                             "values": "covering mouth",
                             "child": [],
-                            "level": 5,
+                            "level": 6,
                             "ignore": false,
                             "prompt": "c1"
                           },
@@ -1737,7 +1750,7 @@
                                 "text": "word",
                                 "values": "sheet_grab",
                                 "child": [],
-                                "level": 6,
+                                "level": 7,
                                 "ignore": false,
                                 "prompt": "c1"
                               },
@@ -1745,7 +1758,7 @@
                                 "text": "word",
                                 "values": "hands on own chest",
                                 "child": [],
-                                "level": 6,
+                                "level": 7,
                                 "ignore": false,
                                 "prompt": "c1"
                               },
@@ -1753,7 +1766,7 @@
                                 "text": "word",
                                 "values": "own hands together",
                                 "child": [],
-                                "level": 6,
+                                "level": 7,
                                 "ignore": false,
                                 "prompt": "c1"
                               },
@@ -1761,7 +1774,7 @@
                                 "text": "word",
                                 "values": "hands on own face",
                                 "child": [],
-                                "level": 6,
+                                "level": 7,
                                 "ignore": false,
                                 "prompt": "c1"
                               },
@@ -1769,12 +1782,12 @@
                                 "text": "word",
                                 "values": "own hands clasped",
                                 "child": [],
-                                "level": 6,
+                                "level": 7,
                                 "ignore": false,
                                 "prompt": "c1"
                               }
                             ],
-                            "level": 5,
+                            "level": 6,
                             "expand": false,
                             "ignore": false,
                             "prompt": "c1"
@@ -1783,7 +1796,7 @@
                             "text": "word",
                             "values": "holding book",
                             "child": [],
-                            "level": 5,
+                            "level": 6,
                             "ignore": false,
                             "prompt": "c1"
                           },
@@ -1791,7 +1804,7 @@
                             "text": "word",
                             "values": "handcuffs",
                             "child": [],
-                            "level": 5,
+                            "level": 6,
                             "ignore": false,
                             "prompt": "c1"
                           },
@@ -1799,7 +1812,7 @@
                             "text": "word",
                             "values": "hand in panties",
                             "child": [],
-                            "level": 5,
+                            "level": 6,
                             "ignore": false,
                             "prompt": "c1"
                           },
@@ -1807,7 +1820,7 @@
                             "text": "word",
                             "values": "holding wrist",
                             "child": [],
-                            "level": 5,
+                            "level": 6,
                             "ignore": false,
                             "prompt": "c1"
                           },
@@ -1815,7 +1828,7 @@
                             "text": "word",
                             "values": "outstretched arms",
                             "child": [],
-                            "level": 5,
+                            "level": 6,
                             "ignore": false,
                             "prompt": "c1"
                           },
@@ -1823,24 +1836,24 @@
                             "text": "word",
                             "values": "pov hands",
                             "child": [],
-                            "level": 5,
+                            "level": 6,
                             "ignore": false,
                             "prompt": "c1"
                           }
                         ],
                         "expand": false,
-                        "level": 4,
+                        "level": 5,
                         "ignore": false,
                         "prompt": "c1"
                       }
                     ],
-                    "level": 3,
+                    "level": 4,
                     "expand": false,
                     "ignore": false,
                     "prompt": "c1"
                   }
                 ],
-                "level": 2,
+                "level": 3,
                 "expand": false,
                 "ignore": false,
                 "prompt": "c1"
@@ -1853,7 +1866,7 @@
                     "text": "word",
                     "values": "folded",
                     "child": [],
-                    "level": 3,
+                    "level": 4,
                     "ignore": false,
                     "prompt": "c1"
                   },
@@ -1861,7 +1874,7 @@
                     "text": "word",
                     "values": "suspended congress",
                     "child": [],
-                    "level": 3,
+                    "level": 4,
                     "ignore": false,
                     "prompt": "c1"
                   },
@@ -1869,7 +1882,7 @@
                     "text": "word",
                     "values": "anvil position",
                     "child": [],
-                    "level": 3,
+                    "level": 4,
                     "ignore": false,
                     "prompt": "c1"
                   },
@@ -1877,7 +1890,7 @@
                     "text": "word",
                     "values": "crucifixion",
                     "child": [],
-                    "level": 3,
+                    "level": 4,
                     "ignore": false,
                     "prompt": "c1"
                   },
@@ -1885,7 +1898,7 @@
                     "text": "word",
                     "values": "sex_from_behind",
                     "child": [],
-                    "level": 3,
+                    "level": 4,
                     "ignore": false,
                     "prompt": "c1"
                   },
@@ -1893,7 +1906,7 @@
                     "text": "word",
                     "values": "boy_on_top",
                     "child": [],
-                    "level": 3,
+                    "level": 4,
                     "ignore": false,
                     "prompt": "c1"
                   },
@@ -1901,7 +1914,7 @@
                     "text": "word",
                     "values": "prone bone",
                     "child": [],
-                    "level": 3,
+                    "level": 4,
                     "ignore": false,
                     "prompt": "c1"
                   },
@@ -1913,7 +1926,7 @@
                         "text": "word",
                         "values": "on_side",
                         "child": [],
-                        "level": 4,
+                        "level": 5,
                         "ignore": false,
                         "prompt": "c1"
                       },
@@ -1921,13 +1934,13 @@
                         "text": "word",
                         "values": "leg_lift",
                         "child": [],
-                        "level": 4,
+                        "level": 5,
                         "ignore": false,
                         "prompt": "c1"
                       }
                     ],
                     "expand": false,
-                    "level": 3,
+                    "level": 4,
                     "ignore": false,
                     "prompt": "c1"
                   },
@@ -1935,7 +1948,7 @@
                     "text": "word",
                     "values": "arched back",
                     "child": [],
-                    "level": 3,
+                    "level": 4,
                     "ignore": false,
                     "prompt": "c1"
                   },
@@ -1943,7 +1956,7 @@
                     "text": "word",
                     "values": "standing missionary",
                     "child": [],
-                    "level": 3,
+                    "level": 4,
                     "ignore": false,
                     "prompt": "c1"
                   },
@@ -1951,7 +1964,7 @@
                     "text": "word",
                     "values": "standing sex",
                     "child": [],
-                    "level": 3,
+                    "level": 4,
                     "ignore": false,
                     "prompt": "c1"
                   },
@@ -1959,7 +1972,7 @@
                     "text": "word",
                     "values": "from side",
                     "child": [],
-                    "level": 3,
+                    "level": 4,
                     "ignore": false,
                     "prompt": "c1"
                   },
@@ -1967,7 +1980,7 @@
                     "text": "word",
                     "values": "top-down bottom-up",
                     "child": [],
-                    "level": 3,
+                    "level": 4,
                     "ignore": false,
                     "prompt": "c1"
                   },
@@ -1975,7 +1988,7 @@
                     "text": "word",
                     "values": "leaning forward",
                     "child": [],
-                    "level": 3,
+                    "level": 4,
                     "ignore": false,
                     "prompt": "c1"
                   },
@@ -1983,13 +1996,13 @@
                     "text": "word",
                     "values": "leaning back",
                     "child": [],
-                    "level": 3,
+                    "level": 4,
                     "ignore": false,
                     "prompt": "c1"
                   }
                 ],
                 "expand": false,
-                "level": 2,
+                "level": 3,
                 "ignore": false,
                 "prompt": "c1"
               },
@@ -2119,7 +2132,7 @@
                   }
                 ],
                 "expand": false,
-                "level": 2,
+                "level": 3,
                 "ignore": false,
                 "prompt": "c1"
               },
@@ -2222,7 +2235,7 @@
                     "prompt": "c1"
                   }
                 ],
-                "level": 2,
+                "level": 3,
                 "expand": false,
                 "ignore": false,
                 "prompt": "c1"
@@ -2257,7 +2270,7 @@
                   }
                 ],
                 "expand": false,
-                "level": 2,
+                "level": 3,
                 "ignore": false,
                 "prompt": "c1"
               }
@@ -3502,7 +3515,7 @@
             "prompt": "c1"
           }
         ],
-        "expand": true,
+        "expand": false,
         "level": 1,
         "ignore": false,
         "prompt": "c1"
@@ -3572,7 +3585,7 @@
                 "prompt": "c1"
               }
             ],
-            "level": 1,
+            "level": 2,
             "expand": false,
             "ignore": false,
             "prompt": "c1"
@@ -3617,7 +3630,7 @@
               }
             ],
             "expand": false,
-            "level": 1,
+            "level": 2,
             "ignore": false,
             "prompt": "c1"
           },
@@ -3762,7 +3775,7 @@
                 "prompt": "c1"
               }
             ],
-            "level": 1,
+            "level": 2,
             "expand": false,
             "ignore": false,
             "prompt": "c1"
@@ -3781,7 +3794,7 @@
             "text": "word",
             "values": "tears",
             "child": [],
-            "level": 1,
+            "level": 2,
             "ignore": false,
             "prompt": "c1"
           }
@@ -3827,27 +3840,11 @@
       },
       {
         "text": "Sequence",
-        "values": "nsfw エッチな指定。押すな。絶対に押すなよ",
+        "values": "nsfw 叡智な指定",
         "child": [
           {
             "text": "word",
-            "values": "pussy",
-            "child": [],
-            "level": 2,
-            "ignore": false,
-            "prompt": "c1"
-          },
-          {
-            "text": "word",
-            "values": "nsfw",
-            "child": [],
-            "level": 2,
-            "ignore": false,
-            "prompt": "c1"
-          },
-          {
-            "text": "word",
-            "values": "sweat",
+            "values": "drooling",
             "child": [],
             "level": 2,
             "ignore": false,
@@ -3863,7 +3860,7 @@
           },
           {
             "text": "word",
-            "values": "breath",
+            "values": "pussy",
             "child": [],
             "level": 2,
             "ignore": false,
@@ -3871,7 +3868,7 @@
           },
           {
             "text": "word",
-            "values": "drooling",
+            "values": "sweat",
             "child": [],
             "level": 2,
             "ignore": false,
@@ -3885,7 +3882,15 @@
                 "text": "word",
                 "values": "black_pantyhose",
                 "child": [],
-                "level": 2,
+                "level": 3,
+                "ignore": false,
+                "prompt": "c1"
+              },
+              {
+                "text": "word",
+                "values": "breath",
+                "child": [],
+                "level": 3,
                 "ignore": false,
                 "prompt": "c1"
               },
@@ -3893,7 +3898,7 @@
                 "text": "word",
                 "values": "clothes pull",
                 "child": [],
-                "level": 2,
+                "level": 3,
                 "ignore": false,
                 "prompt": "c1"
               },
@@ -3901,7 +3906,7 @@
                 "text": "word",
                 "values": "cum on pussy",
                 "child": [],
-                "level": 2,
+                "level": 3,
                 "ignore": false,
                 "prompt": "c1"
               },
@@ -3909,7 +3914,7 @@
                 "text": "word",
                 "values": "embarrassed",
                 "child": [],
-                "level": 2,
+                "level": 3,
                 "ignore": false,
                 "prompt": "c1"
               },
@@ -3917,7 +3922,7 @@
                 "text": "word",
                 "values": "female_orgasm",
                 "child": [],
-                "level": 2,
+                "level": 3,
                 "ignore": false,
                 "prompt": "c1"
               },
@@ -3925,7 +3930,7 @@
                 "text": "word",
                 "values": "insert penis",
                 "child": [],
-                "level": 2,
+                "level": 3,
                 "ignore": false,
                 "prompt": "c1"
               },
@@ -3933,7 +3938,7 @@
                 "text": "word",
                 "values": "forced sex",
                 "child": [],
-                "level": 2,
+                "level": 3,
                 "ignore": false,
                 "prompt": "c1"
               },
@@ -3941,7 +3946,7 @@
                 "text": "word",
                 "values": "lactation",
                 "child": [],
-                "level": 2,
+                "level": 3,
                 "ignore": false,
                 "prompt": "c1"
               },
@@ -3949,7 +3954,7 @@
                 "text": "word",
                 "values": "mesugaki",
                 "child": [],
-                "level": 2,
+                "level": 3,
                 "ignore": false,
                 "prompt": "c1"
               },
@@ -3957,15 +3962,7 @@
                 "text": "word",
                 "values": "motion lines",
                 "child": [],
-                "level": 2,
-                "ignore": false,
-                "prompt": "c1"
-              },
-              {
-                "text": "word",
-                "values": "multiple boys",
-                "child": [],
-                "level": 2,
+                "level": 3,
                 "ignore": false,
                 "prompt": "c1"
               },
@@ -3973,7 +3970,7 @@
                 "text": "word",
                 "values": "blush",
                 "child": [],
-                "level": 2,
+                "level": 3,
                 "ignore": false,
                 "prompt": "c1"
               },
@@ -3981,7 +3978,7 @@
                 "text": "word",
                 "values": "open pussy",
                 "child": [],
-                "level": 2,
+                "level": 3,
                 "ignore": false,
                 "prompt": "c1"
               },
@@ -3989,7 +3986,7 @@
                 "text": "word",
                 "values": "rape",
                 "child": [],
-                "level": 2,
+                "level": 3,
                 "ignore": false,
                 "prompt": "c1"
               },
@@ -3997,7 +3994,7 @@
                 "text": "word",
                 "values": "sex",
                 "child": [],
-                "level": 2,
+                "level": 3,
                 "ignore": false,
                 "prompt": "c1"
               },
@@ -4005,7 +4002,7 @@
                 "text": "word",
                 "values": "stomach_bulge",
                 "child": [],
-                "level": 2,
+                "level": 3,
                 "ignore": false,
                 "prompt": "c1"
               },
@@ -4013,15 +4010,7 @@
                 "text": "word",
                 "values": "torn clothes",
                 "child": [],
-                "level": 2,
-                "ignore": false,
-                "prompt": "c1"
-              },
-              {
-                "text": "word",
-                "values": "uncensored",
-                "child": [],
-                "level": 2,
+                "level": 3,
                 "ignore": false,
                 "prompt": "c1"
               },
@@ -4029,7 +4018,7 @@
                 "text": "word",
                 "values": "vaginal",
                 "child": [],
-                "level": 2,
+                "level": 3,
                 "ignore": false,
                 "prompt": "c1"
               },
@@ -4037,7 +4026,7 @@
                 "text": "word",
                 "values": "white_pantyhose",
                 "child": [],
-                "level": 2,
+                "level": 3,
                 "ignore": false,
                 "prompt": "c1"
               },
@@ -4045,7 +4034,7 @@
                 "text": "word",
                 "values": "womb tattoo",
                 "child": [],
-                "level": 2,
+                "level": 3,
                 "ignore": false,
                 "prompt": "c1"
               }
@@ -4070,8 +4059,51 @@
     "prompt": "c2",
     "values": "2キャラクタープロンプト",
     "expand": false,
-    "child": [],
-    "ignore": false,
+    "child": [
+      {
+        "ignore": true,
+        "prompt": "c2",
+        "text": "Select",
+        "values": "掴む系",
+        "child": [
+          {
+            "text": "word",
+            "values": "arm_grab",
+            "child": [],
+            "level": 2,
+            "ignore": false,
+            "prompt": "c2"
+          },
+          {
+            "text": "word",
+            "values": "arms_grab",
+            "child": [],
+            "level": 2,
+            "ignore": false,
+            "prompt": "c2"
+          },
+          {
+            "text": "word",
+            "values": "hands_grab",
+            "child": [],
+            "level": 2,
+            "ignore": false,
+            "prompt": "c2"
+          },
+          {
+            "text": "word",
+            "values": "torso_grab",
+            "child": [],
+            "level": 2,
+            "ignore": false,
+            "prompt": "c2"
+          }
+        ],
+        "expand": false,
+        "level": 1
+      }
+    ],
+    "ignore": true,
     "level": 0
   },
   {
@@ -4252,7 +4284,7 @@
     "values": "2キャラクターネガティブプロンプト",
     "expand": false,
     "child": [],
-    "ignore": false,
+    "ignore": true,
     "level": 0
   }
 ]

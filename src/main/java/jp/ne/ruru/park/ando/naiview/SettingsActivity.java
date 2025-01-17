@@ -47,6 +47,7 @@ public class SettingsActivity extends AppCompatActivity {
         }
         //
     }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_setting, menu);
@@ -84,19 +85,33 @@ public class SettingsActivity extends AppCompatActivity {
             if (listPreference == null) {
                 return;
             }
+            listPreference.setOnPreferenceChangeListener((Preference preference, Object newValue)-> changeSm(newValue));
+        }
+        @Override
+        public void onResume() {
+            ListPreference listPreference = this.findPreference("prompt_model");
+            if (listPreference == null) {
+                return;
+            }
             String base = listPreference.getValue();
-            changeSm((base == null ) || (!base.contains("4")));
-            listPreference.setOnPreferenceChangeListener((Preference preference, Object newValue)->{
-                return changeSm(newValue);
-            });
+            changeSm(base);
+            //
+            super.onResume();
+            //
         }
         public boolean changeSm(Object newValue) {
             SwitchPreferenceCompat sm = this.findPreference("prompt_sm");
             SwitchPreferenceCompat smDyn = this.findPreference("prompt_sm_dyn");
             if ((sm != null) && (smDyn != null)) {
-                boolean flag = ! newValue.toString().contains("4");
-                sm.setVisible(flag);
-                sm.setVisible(flag);
+                boolean flag = (newValue == null) || (! (newValue.toString().contains("4")));
+                sm.setEnabled(flag);
+                smDyn.setEnabled(flag);
+                for (String key : MyApplication.LOCATIONS) {
+                    DoubleSeekBarPreference x = this.findPreference(key);
+                    if (x != null) {
+                        x.setEnabled(! flag);
+                    }
+                }
                 return true;
             }
             return false;

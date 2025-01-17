@@ -140,7 +140,7 @@ public abstract class PromptAbstractFragment extends Fragment {
      * @return prompt
      */
     public String getText(MyApplication a) {
-        return a.getValue(getPromptType());
+        return a.getPromptValue(getPromptType());
     }
 
     /**
@@ -148,7 +148,7 @@ public abstract class PromptAbstractFragment extends Fragment {
      * @param text prompt
      */
     public void setText(MyApplication a, String text) {
-        a.setValue(getPromptType(), text);
+        a.setPromptValue(getPromptType(), text);
     }
 
     /**

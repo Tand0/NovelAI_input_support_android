@@ -1,153 +1,218 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
-    <EditTextPreference
-        app:key="setting_login_email"
-        app:title="@string/setting_login_email"
-        app:defaultValue="xxx@yyy.zzz"
-        android:hint="@string/setting_login_email_hint"
-        android:contentDescription="@string/setting_login_email_hint"
-        app:useSimpleSummaryProvider="true" />
 
-    <EditTextPreference
-        app:key="setting_login_password"
-        app:title="@string/setting_login_password"
-        android:hint="@string/setting_login_password_hint"
-        android:contentDescription="@string/setting_login_password_hint"
-        android:inputType="textPassword"
-        app:defaultValue=""
-        app:useSimpleSummaryProvider="false" />
+    <PreferenceCategory android:title="@string/setting_login">
 
-    <SwitchPreferenceCompat
-        app:key="setting_use_tree"
-        app:title="@string/setting_use_tree"
-        app:summary="@string/setting_use_tree_summary" />
+        <EditTextPreference
+            app:key="setting_login_email"
+            app:title="@string/setting_login_email"
+            app:defaultValue="xxx@yyy.zzz"
+            android:hint="@string/setting_login_email_hint"
+            android:contentDescription="@string/setting_login_email_hint"
+            app:useSimpleSummaryProvider="true" />
 
-    <SwitchPreferenceCompat
-        app:key="prompt_fixed_seed"
-        app:defaultValue="false"
-        app:title="@string/prompt_fixed_seed"
-        app:summary="@string/prompt_fixed_seed_summary" />
+        <EditTextPreference
+            app:key="setting_login_password"
+            app:title="@string/setting_login_password"
+            android:hint="@string/setting_login_password_hint"
+            android:contentDescription="@string/setting_login_password_hint"
+            android:inputType="textPassword"
+            app:defaultValue=""
+            app:useSimpleSummaryProvider="false" />
 
-    <SwitchPreferenceCompat
-        app:key="setting_exif"
-        app:defaultValue="true"
-        app:summary="@string/exif_summary"
-        app:title="@string/exif" />
+    </PreferenceCategory>
 
-    <ListPreference
-        android:key="setting_width_x_height"
-        android:title="@string/setting_width_x_height"
-        android:defaultValue="832x1216"
-        android:summary="@string/setting_width_x_height_summary"
-        android:dialogTitle="@string/setting_width_x_height_summary"
-        android:entries="@array/width_list"
-        android:entryValues="@array/width_list"
-        app:useSimpleSummaryProvider="true" />
+    <PreferenceCategory android:title="@string/setting_device">
+        <SwitchPreferenceCompat
+            app:key="setting_use_tree"
+            app:title="@string/setting_use_tree"
+            app:summary="@string/setting_use_tree_summary" />
 
-    <ListPreference
-        android:key="prompt_model"
-        android:title="@string/prompt_model"
-        android:defaultValue="nai-diffusion-3"
-        android:summary="@string/prompt_model_summary"
-        android:dialogTitle="@string/prompt_model_summary"
-        android:entries="@array/model_list"
-        android:entryValues="@array/model_list"
-        app:useSimpleSummaryProvider="true" />
+        <SwitchPreferenceCompat
+            app:key="prompt_fixed_seed"
+            app:defaultValue="false"
+            app:title="@string/prompt_fixed_seed"
+            app:summary="@string/prompt_fixed_seed_summary" />
 
-    <SeekBarPreference
-        app:key="prompt_int_number_steps"
-        app:title="@string/prompt_steps"
-        app:summary="@string/prompt_steps_summary"
-        app:defaultValue="23"
-        app:min="1"
-        android:max="50"
-        app:showSeekBarValue="true"
-        />
+        <SwitchPreferenceCompat
+            app:key="setting_exif"
+            app:defaultValue="true"
+            app:summary="@string/exif_summary"
+            app:title="@string/exif" />
+    </PreferenceCategory>
 
-    <SeekBarPreference
-        app:key="prompt_int_number_scale"
-        app:title="@string/prompt_scale"
-        app:summary="@string/prompt_scale_summary"
-        app:defaultValue="5"
-        app:min="0"
-        android:max="25"
-        app:showSeekBarValue="true"
-        />
 
-    <SeekBarPreference
-        app:key="prompt_int_cfg_rescale"
-        app:title="@string/prompt_cfg_rescale"
-        app:summary="@string/prompt_cfg_rescale_summary"
-        app:defaultValue="0"
-        app:min="0"
-        android:max="150"
-        app:showSeekBarValue="true"
-        />
+    <PreferenceCategory android:title="@string/setting_nai">
+        <ListPreference
+            android:key="setting_width_x_height"
+            android:title="@string/setting_width_x_height"
+            android:defaultValue="832x1216"
+            android:summary="@string/setting_width_x_height_summary"
+            android:dialogTitle="@string/setting_width_x_height_summary"
+            android:entries="@array/width_list"
+            android:entryValues="@array/width_list"
+            app:useSimpleSummaryProvider="true" />
 
-    <ListPreference
-        android:key="prompt_sampler"
-        android:title="@string/prompt_sampler"
-        android:defaultValue="k_euler_ancestral"
-        android:summary="@string/prompt_sampler_summary"
-        android:dialogTitle="@string/prompt_sampler_summary"
-        android:entries="@array/sampler_list"
-        android:entryValues="@array/sampler_list"
-        app:useSimpleSummaryProvider="true" />
+        <ListPreference
+            android:key="prompt_model"
+            android:title="@string/prompt_model"
+            android:defaultValue="nai-diffusion-3"
+            android:summary="@string/prompt_model_summary"
+            android:dialogTitle="@string/prompt_model_summary"
+            android:entries="@array/model_list"
+            android:entryValues="@array/model_list"
+            app:useSimpleSummaryProvider="true" />
 
-    <SwitchPreferenceCompat
-        app:key="prompt_sm"
-        app:defaultValue="true"
-        app:title="@string/prompt_sm" />
+        <SeekBarPreference
+            app:key="prompt_int_number_steps"
+            app:title="@string/prompt_steps"
+            app:summary="@string/prompt_steps_summary"
+            app:defaultValue="23"
+            app:min="1"
+            android:max="50"
+            app:showSeekBarValue="true"
+            />
 
-    <SwitchPreferenceCompat
-        app:key="prompt_sm_dyn"
-        app:defaultValue="false"
-        app:title="@string/prompt_sm_dyn" />
+        <SeekBarPreference
+            app:key="prompt_int_number_scale"
+            app:title="@string/prompt_scale"
+            app:summary="@string/prompt_scale_summary"
+            app:defaultValue="5"
+            app:min="0"
+            android:max="25"
+            app:showSeekBarValue="true"
+            />
 
-    <SwitchPreferenceCompat
-        app:key="prompt_variety"
-        app:defaultValue="false"
-        app:title="@string/prompt_variety" />
+        <!-- SeekBarPreference
+            app:key="prompt_int_cfg_rescale"
+            app:title="@string/prompt_cfg_rescale"
+            app:summary="@string/prompt_cfg_rescale_summary"
+            app:defaultValue="0"
+            app:min="0"
+            android:max="150"
+            app:showSeekBarValue="true"
+            / -->
+        <jp.ne.ruru.park.ando.naiview.DoubleSeekBarPreference
+            app:key="prompt_int_cfg_rescale"
+            app:np_title="@string/prompt_cfg_rescale"
+            app:np_minValue="0"
+            app:np_maxValue="150"
+            app:np_defaultValue="0"
+            app:np_step="1"
+            app:np_digit="2"
+            />
 
-    <SwitchPreferenceCompat
-        app:key="setting_scale"
-        app:defaultValue="true"
-        app:summary="@string/upscale_summary"
-        app:title="@string/upscale" />
+        <ListPreference
+            android:key="prompt_sampler"
+            android:title="@string/prompt_sampler"
+            android:defaultValue="k_euler_ancestral"
+            android:summary="@string/prompt_sampler_summary"
+            android:dialogTitle="@string/prompt_sampler_summary"
+            android:entries="@array/sampler_list"
+            android:entryValues="@array/sampler_list"
+            app:useSimpleSummaryProvider="true" />
 
-    <ListPreference
-        android:key="prompt_noise_schedule"
-        android:title="@string/prompt_noise_schedule"
-        android:defaultValue="karras"
-        android:summary="@string/prompt_noise_schedule_summary"
-        android:dialogTitle="@string/prompt_noise_schedule_summary"
-        android:entries="@array/noise_schedule_list"
-        android:entryValues="@array/noise_schedule_list"
-        app:useSimpleSummaryProvider="true" />
+        <SwitchPreferenceCompat
+            app:key="prompt_sm"
+            app:defaultValue="true"
+            app:title="@string/prompt_sm" />
 
-    <SwitchPreferenceCompat
-        app:key="setting_i2i"
-        app:defaultValue="false"
-        app:summary="@string/i2i_summary"
-        app:title="@string/i2i" />
+        <SwitchPreferenceCompat
+            app:key="prompt_sm_dyn"
+            app:defaultValue="false"
+            app:title="@string/prompt_sm_dyn" />
 
-    <SeekBarPreference
-        app:key="prompt_int_strength"
-        app:title="@string/prompt_strength"
-        app:summary="@string/prompt_strength_summary"
-        app:defaultValue="10"
-        app:min="0"
-        android:max="99"
-        app:showSeekBarValue="true"
-        />
-    <SeekBarPreference
-        app:key="prompt_int_noise"
-        app:title="@string/prompt_noise"
-        app:summary="@string/prompt_noise_summary"
-        app:defaultValue="0"
-        app:min="0"
-        android:max="99"
-        app:showSeekBarValue="true"
-        />
+        <SwitchPreferenceCompat
+            app:key="prompt_variety"
+            app:defaultValue="false"
+            app:title="@string/prompt_variety" />
+
+        <SwitchPreferenceCompat
+            app:key="setting_scale"
+            app:defaultValue="true"
+            app:summary="@string/upscale_summary"
+            app:title="@string/upscale" />
+
+        <ListPreference
+            android:key="prompt_noise_schedule"
+            android:title="@string/prompt_noise_schedule"
+            android:defaultValue="karras"
+            android:summary="@string/prompt_noise_schedule_summary"
+            android:dialogTitle="@string/prompt_noise_schedule_summary"
+            android:entries="@array/noise_schedule_list"
+            android:entryValues="@array/noise_schedule_list"
+            app:useSimpleSummaryProvider="true" />
+    </PreferenceCategory>
+
+    <PreferenceCategory android:title="@string/i2i_summary">
+        <SwitchPreferenceCompat
+            app:key="setting_i2i"
+            app:defaultValue="false"
+            app:summary="@string/i2i_summary"
+            app:title="@string/i2i" />
+
+        <SeekBarPreference
+            app:key="prompt_int_strength"
+            app:dependency="setting_i2i"
+            app:title="@string/prompt_strength"
+            app:summary="@string/prompt_strength_summary"
+            app:defaultValue="10"
+            app:min="0"
+            android:max="99"
+            app:showSeekBarValue="true"
+            />
+        <SeekBarPreference
+            app:key="prompt_int_noise"
+            app:dependency="setting_i2i"
+            app:title="@string/prompt_noise"
+            app:summary="@string/prompt_noise_summary"
+            app:defaultValue="0"
+            app:min="0"
+            android:max="99"
+            app:showSeekBarValue="true"
+            />
+    </PreferenceCategory>
+
+    <PreferenceCategory android:title="@string/prompt_location">
+        <jp.ne.ruru.park.ando.naiview.DoubleSeekBarPreference
+            app:key="prompt_int_location_ch1_x"
+            app:np_title="@string/prompt_location_ch1_x"
+            app:np_minValue="1"
+            app:np_maxValue="9"
+            app:np_defaultValue="5"
+            app:np_step="2"
+            app:np_digit="1"
+            />
+        <jp.ne.ruru.park.ando.naiview.DoubleSeekBarPreference
+            app:key="prompt_int_location_ch1_y"
+            app:np_title="@string/prompt_location_ch1_y"
+            app:np_minValue="1"
+            app:np_maxValue="9"
+            app:np_defaultValue="5"
+            app:np_step="2"
+            app:np_digit="1"
+            />
+        <jp.ne.ruru.park.ando.naiview.DoubleSeekBarPreference
+            app:key="prompt_int_location_ch2_x"
+            app:np_title="@string/prompt_location_ch2_x"
+            app:np_minValue="1"
+            app:np_maxValue="9"
+            app:np_defaultValue="5"
+            app:np_step="2"
+            app:np_digit="1"
+            />
+        <jp.ne.ruru.park.ando.naiview.DoubleSeekBarPreference
+            app:key="prompt_int_location_ch2_y"
+            app:np_title="@string/prompt_location_ch2_y"
+            app:np_minValue="1"
+            app:np_maxValue="9"
+            app:np_defaultValue="5"
+            app:np_step="2"
+            app:np_digit="1"
+            />
+    </PreferenceCategory>
+
+    <PreferenceCategory android:title="@string/dummy">
+    </PreferenceCategory>
 </PreferenceScreen>

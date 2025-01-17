@@ -1,4 +1,13 @@
 <resources>
+    <declare-styleable name="Double_SeekBar_attrs">
+        <attr name="np_minValue" format="integer"/>
+        <attr name="np_maxValue" format="integer"/>
+        <attr name="np_defaultValue" format="integer"/>
+        <attr name="np_step" format="integer"/>
+        <attr name="np_digit" format="integer"/>
+        <attr name="np_title" format="string"/>
+    </declare-styleable>
+
     <!-- Reply Preference -->
     <string-array name="reply_entries">
         <item>Reply</item>
@@ -9,4 +18,5 @@
         <item>reply</item>
         <item>reply_all</item>
     </string-array>
+
 </resources>

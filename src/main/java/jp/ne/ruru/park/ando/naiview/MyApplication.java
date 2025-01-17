@@ -120,7 +120,7 @@ public class MyApplication  extends Application {
      *
      * @return prompt value
      */
-    public String getValue(PromptType pType) {
+    public String getPromptValue(PromptType pType) {
         String target = this.valueHashMap.get(pType);
         return (target == null) ? "" : target;
     }
@@ -131,10 +131,27 @@ public class MyApplication  extends Application {
      * @param pType prompt type
      * @param data data
      */
-    public void setValue(PromptType pType, String data) {
+    public void setPromptValue(PromptType pType, String data) {
         this.valueHashMap.put(pType,data);
     }
 
+    public static final PromptType[] CHARACTER = {
+            PromptType.P_CH01_OK,
+            PromptType.P_CH01_NG,
+            PromptType.P_CH02_OK,
+            PromptType.P_CH02_NG
+    };
+    public String[] getCharacters() {
+        String[] target = new String[CHARACTER.length];
+        for (int i = 0 ; i < CHARACTER.length; i++) {
+            try {
+                target[i] = getPromptValue(CHARACTER[i]);
+            } catch(ClassCastException e) {
+                target[i] = "";
+            }
+        }
+        return target;
+    }
     /**
      * top (root) of tree
      */
@@ -398,7 +415,35 @@ public class MyApplication  extends Application {
         return isWidth ? width : height;
     }
     public boolean isSettingI2i(SharedPreferences preferences) {
-        return preferences.getBoolean("setting_i2i", false);
+        try {
+            return preferences.getBoolean("setting_i2i", false);
+        } catch(ClassCastException e) {
+            return false;
+        }
+    }
+    public static final String[] LOCATIONS = {
+            "prompt_int_location_ch1_x",
+            "prompt_int_location_ch1_y",
+            "prompt_int_location_ch2_x",
+            "prompt_int_location_ch2_y"
+    };
+    public int[] getLocations(SharedPreferences preferences) {
+        int[] target = new int[LOCATIONS.length];
+        for (int i = 0 ; i < LOCATIONS.length; i++) {
+            try {
+                target[i] = preferences.getInt(LOCATIONS[i], 5);
+            } catch(ClassCastException e) {
+                target[i] = 0;
+            }
+        }
+        return target;
+    }
+    public void setLocations(SharedPreferences preferences, int[] values) {
+        final SharedPreferences.Editor editor = preferences.edit();
+        for (int i = 0 ; i < LOCATIONS.length; i++) {
+            editor.putInt(LOCATIONS[i], values[i]);
+        }
+        editor.apply();
     }
     /**
      * Novel AI Support Interface area
@@ -508,42 +553,21 @@ public class MyApplication  extends Application {
                             JSONObject v4Prompt = Data.containJSONObject(item, "v4_prompt");
                             if (v4Prompt == null) { // for v3
                                 String string = Data.containString(item,"prompt");
-                                if (string != null) {
-                                    string = changeValuesForV4(string);
-                                    this.setValue(PromptType.P_BASE_OK,string);
-                                    setValue(PromptType.P_CH01_OK,"");
-                                    setValue(PromptType.P_CH02_OK,"");
-                                }
+                                separateV3Prompt(true, string);
                             } else { // for v4
                                 String[] strings = this.getCharCaption(v4Prompt);
-                                PromptType[] pTypeList = {
-                                        PromptType.P_BASE_OK,
-                                        PromptType.P_CH01_OK,
-                                        PromptType.P_CH02_OK,
-                                };
-                                for (int i = 0 ; i < pTypeList.length ; i++) {
-                                    this.setValue(pTypeList[i],strings[i]);
-                                }
+                                separateV4Prompt(true, strings);
+                                //
+                                int[] locations = this.getLocation(v4Prompt);
+                                setLocations(preferences,locations);
                             }
                             v4Prompt = Data.containJSONObject(item, "v4_negative_prompt");
                             if (v4Prompt == null) { // for v3
                                 String string = Data.containString(item,"uc");
-                                if (string != null) {
-                                    string = changeValuesForV4(string);
-                                    this.setValue(PromptType.P_BASE_NG,string);
-                                    setValue(PromptType.P_CH01_NG,"");
-                                    setValue(PromptType.P_CH02_NG,"");
-                                }
+                                separateV3Prompt(false, string);
                             } else { // for v4
                                 String[] strings = this.getCharCaption(v4Prompt);
-                                PromptType[] pTypeList = {
-                                        PromptType.P_BASE_NG,
-                                        PromptType.P_CH01_NG,
-                                        PromptType.P_CH02_NG,
-                                };
-                                for (int i = 0 ; i < pTypeList.length ; i++) {
-                                    this.setValue(pTypeList[i],strings[i]);
-                                }
+                                separateV4Prompt(false, strings);
                             }
                             Integer integer = Data.containInt(item,"steps");
                             if (integer != null) {
@@ -554,7 +578,7 @@ public class MyApplication  extends Application {
                                 editor.putInt("prompt_int_number_scale",integer);
                             }
                             Double doubleX = Data.containDouble(item,"cfg_rescale");
-                            if (doubleX != null) {
+                            if ((doubleX != null) && (doubleX != 0)) {
                                 editor.putInt("prompt_int_cfg_rescale",(int)(doubleX*100));
                             }
                             String string;
@@ -593,14 +617,14 @@ public class MyApplication  extends Application {
                             if (0 <= index) {
                                 prompt = prompt.substring(0, index);
                             }
-                            this.setValue(PromptType.P_BASE_OK,prompt);
+                            this.setPromptValue(PromptType.P_BASE_OK,prompt);
                         } else if (x.toString().toLowerCase().startsWith(NEGATIVE_PARAM)) {
                             String uc = x.toString();
                             int index = uc.indexOf(PARAM);
                             if (0 <= index) {
                                 uc = uc.substring(0, index);
                             }
-                            this.setValue(PromptType.P_BASE_OK,uc);
+                            this.setPromptValue(PromptType.P_BASE_OK,uc);
                         }
                     }
                 }
@@ -619,6 +643,80 @@ public class MyApplication  extends Application {
             context.startActivity(intent);
         }
     }
+    protected void separateV3Prompt(boolean ok, String string) {
+        if (string == null) {
+            return;
+        }
+        PromptType base;
+        PromptType character1;
+        PromptType character2;
+        if (ok) {
+            base = PromptType.P_BASE_OK;
+            character1 = PromptType.P_CH01_OK;
+            character2 = PromptType.P_CH02_OK;
+        } else {
+            base = PromptType.P_BASE_NG;
+            character1 = PromptType.P_CH01_NG;
+            character2 = PromptType.P_CH02_NG;
+        }
+        string = changeValuesForV4(string);
+        string = separateV3PromptOne(string, character1);
+        string = separateV3PromptOne(string, character2);
+        setPromptValue(base,string);
+    }
+    protected String separateV3PromptOne(String string, PromptType character) {
+        JSONArray array = getTop();
+        StringBuilder buffer = null;
+        for (int i = 0; i < array.length() ; i++) {
+            Object obj;
+            try {
+                obj = array.get(i);
+            } catch (JSONException e) {
+                continue;
+            }
+            Data data = new Data(obj);
+            PromptType targetPrompt = data.getPromptType();
+            if (character.equals(targetPrompt)) {
+                String[] result = deleteTextFromItem(string,obj);
+                string = result[0];
+                if (! result[0].isEmpty()) {
+                    if (buffer == null) {
+                        buffer = new StringBuilder();
+                    } else {
+                        buffer.append(", ");
+                    }
+                    buffer.append(result[1]);
+                }
+            }
+        }
+        if (buffer == null) {
+            buffer = new StringBuilder();
+        }
+        setPromptValue(character, buffer.toString());
+        return string;
+    }
+    protected void separateV4Prompt(boolean ok, String[] strings) {
+        if (strings == null) {
+            return;
+        }
+        final PromptType[] pTypeList;
+        if (ok) {
+            pTypeList = new PromptType[]{
+                    PromptType.P_BASE_OK,
+                    PromptType.P_CH01_OK,
+                    PromptType.P_CH02_OK
+            };
+        } else {
+            pTypeList = new PromptType[]{
+                    PromptType.P_BASE_NG,
+                    PromptType.P_CH01_NG,
+                    PromptType.P_CH02_NG
+            };
+        }
+        for (int i = 0 ; i < pTypeList.length ; i++) {
+            this.setPromptValue(pTypeList[i],strings[i]);
+        }
+    }
     protected String[] getCharCaption(JSONObject v4Prompt) {
         String[] strings = new String[3];
         JSONObject caption = Data.containJSONObject(v4Prompt, "caption");
@@ -631,6 +729,9 @@ public class MyApplication  extends Application {
         return strings;
     }
     protected String getCharCaptions(JSONArray charCaptionsList, int index) {
+        if (charCaptionsList == null) {
+            return "";
+        }
         String target;
         if (index < charCaptionsList.length()) {
             JSONObject charCaptions;
@@ -645,6 +746,39 @@ public class MyApplication  extends Application {
             target = "";
         }
         return target;
+    }
+    protected int[] getLocation(JSONObject v4Prompt) {
+        int[] target = {5, 5, 5, 5};
+        JSONObject caption = Data.containJSONObject(v4Prompt, "caption");
+        if (caption == null) {
+            return target;
+        }
+        JSONArray charCaptionsList = Data.containJSONArray(caption,"char_captions");
+        getLocationCenters(charCaptionsList,0, target);
+        getLocationCenters(charCaptionsList,1, target);
+        return target;
+    }
+    protected void getLocationCenters(JSONArray charCaptionsList, int index, int[] target) {
+        if (charCaptionsList == null) {
+            return;
+        }
+        try {
+            if (index < charCaptionsList.length()) {
+                JSONObject obj;
+                obj = charCaptionsList.getJSONObject(index);
+                JSONArray centersList = Data.containJSONArray(obj,"centers");
+                if ((centersList == null) || (centersList.length() < 1)) {
+                    return;
+                }
+                JSONObject xy = centersList.getJSONObject(0);
+                double x = Data.containDouble(xy,"x");
+                double y = Data.containDouble(xy,"y");
+                target[index * 2] = (int)(x*10);
+                target[index * 2 + 1] = (int)(y*10);
+            }
+        } catch (JSONException e) {
+            // NONE
+        }
     }
     /**
      * update image buffer from uri
@@ -936,14 +1070,14 @@ public class MyApplication  extends Application {
             //
             if (PromptType.P_CH01_OK.equals(prompt)
                     || PromptType.P_CH02_OK.equals(prompt)) {
-                String baseString = this.getValue(PromptType.P_BASE_OK);
-                baseString = deleteTextFromItem(baseString, target);
-                this.setValue(PromptType.P_BASE_OK, baseString);
+                String baseString = this.getPromptValue(PromptType.P_BASE_OK);
+                baseString = deleteTextFromItem(baseString, target)[0];
+                this.setPromptValue(PromptType.P_BASE_OK, baseString);
             } else if (PromptType.P_CH01_NG.equals(prompt)
                     || PromptType.P_CH02_NG.equals(prompt)) {
-                String baseString = this.getValue(PromptType.P_BASE_NG);
-                baseString = deleteTextFromItem(baseString, target);
-                this.setValue(PromptType.P_BASE_NG, baseString);
+                String baseString = this.getPromptValue(PromptType.P_BASE_NG);
+                baseString = deleteTextFromItem(baseString, target)[0];
+                this.setPromptValue(PromptType.P_BASE_NG, baseString);
             }
         } else {
             for (PromptType prompt: PromptType.values()) {
@@ -977,8 +1111,8 @@ public class MyApplication  extends Application {
         String answer = fromTree(prompt, item);
         if (!all) {
             String target;
-            target = this.getValue(prompt);
-            target = deleteTextFromItem(target, item);
+            target = this.getPromptValue(prompt);
+            target = deleteTextFromItem(target, item)[0];
             if (!target.isEmpty() && !answer.isEmpty()) {
                 target = target + ", ";
             }
@@ -986,7 +1120,7 @@ public class MyApplication  extends Application {
         }
         answer = answer.replaceAll(",(\\s*,)+\\s*",", ");
         //
-        this.setValue(prompt, answer);
+        this.setPromptValue(prompt, answer);
     }
     /**
      * delete text from item
@@ -994,30 +1128,38 @@ public class MyApplication  extends Application {
      * @param object item
      * @return change text
      */
-    protected String deleteTextFromItem(String targets,Object object) {
+    protected String[] deleteTextFromItem(String targets,Object object) {
         List<String> keys = getDeleteTextList(object);
         keys.sort((a,b)-> a.length() == b.length() ? b.compareTo(a) : b.length() - a.length());
         String[] targetsArray = targets.split(",");
-        StringBuilder result = new StringBuilder();
-        boolean commaFlag = false;
+        StringBuilder resultHit = new StringBuilder();
+        StringBuilder resultNoHit = new StringBuilder();
+        boolean commaFlagHit = false;
+        boolean commaFlagNoHit = false;
         for (String target : targetsArray) {
-            boolean notHit = true;
+            boolean hit = false;
             String targetBreak = changeBaseKey(target);
             for (String key : keys) {
                 if (targetBreak.equals(key)) {
-                    notHit = false;
+                    hit = true;
                     break;
                 }
             }
-            if (notHit) {
-                if (commaFlag) {
-                    result.append(", ");
+            if (hit) {
+                if (commaFlagHit) {
+                    resultHit.append(", ");
                 }
-                commaFlag = true;
-                result.append(target.trim());
+                commaFlagHit = true;
+                resultHit.append(target.trim());
+            } else {
+                if (commaFlagNoHit) {
+                    resultNoHit.append(", ");
+                }
+                commaFlagNoHit = true;
+                resultNoHit.append(target.trim());
             }
         }
-        return result.toString();
+        return new String[] {resultNoHit.toString(), resultHit.toString()};
     }
     protected List<String> getDeleteTextList(Object object) {
         List<String> list = new java.util.ArrayList<>();
@@ -1089,8 +1231,8 @@ public class MyApplication  extends Application {
             if (isUseTree(preferences)) {
                 fromTreeToPrompt();
             }
-            String prompt = this.getValue(PromptType.P_BASE_OK);
-            String uc = this.getValue(PromptType.P_BASE_NG);
+            String prompt = this.getPromptValue(PromptType.P_BASE_OK);
+            String uc = this.getPromptValue(PromptType.P_BASE_NG);
             String model = getPromptModel(preferences);
             int width;
             int height;
@@ -1206,11 +1348,8 @@ public class MyApplication  extends Application {
                 this.setSeed(seed);
             }
             String noise_schedule = preferences.getString("prompt_noise_schedule", "karras").trim();
-            String[] characters = new String[4];
-            characters[0] = this.getValue(PromptType.P_CH01_OK);
-            characters[1] = this.getValue(PromptType.P_CH01_NG);
-            characters[2] = this.getValue(PromptType.P_CH02_OK);
-            characters[3] = this.getValue(PromptType.P_CH02_NG);
+            String[] characters = this.getCharacters();
+            int[] locations = this.getLocations(preferences);
             request = new MyNASI.Allin1RequestImage(
                     isPromptModelV4(preferences),
                     MyNASI.REST_TYPE.IMAGE,
@@ -1233,7 +1372,8 @@ public class MyApplication  extends Application {
                     targetBuffer,
                     strength,
                     noise,
-                    characters);
+                    characters,
+                    locations);
         } else if (type == MyNASI.REST_TYPE.SUGGEST_TAGS) {
             String model = getPromptModel(preferences);
             String target = (String) option;

@@ -1,7 +1,6 @@
 package jp.ne.ruru.park.ando.naiview;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -10,13 +9,13 @@ import android.widget.Button;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.preference.PreferenceManager;
 import androidx.viewpager2.widget.ViewPager2;
 
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
 
 import jp.ne.ruru.park.ando.naiview.adapter.PromptFragmentAdapter;
+import jp.ne.ruru.park.ando.naiview.data.Data;
 import jp.ne.ruru.park.ando.naiview.data.PromptType;
 import jp.ne.ruru.park.ando.naiview.databinding.ActivityPromptBinding;
 
@@ -26,6 +25,8 @@ import jp.ne.ruru.park.ando.naiview.databinding.ActivityPromptBinding;
 public class PromptActivity extends AppCompatActivity {
     /** binding */
     private ActivityPromptBinding binding;
+
+    private ViewPager2 pager;
     /**
      * on create
      * @param savedInstanceState If the activity is being re-initialized after
@@ -45,7 +46,7 @@ public class PromptActivity extends AppCompatActivity {
         if (actionBar != null) {
             actionBar.setDisplayHomeAsUpEnabled(true);
         }
-        ViewPager2 pager = binding.pager;
+        pager = binding.pager;
         PromptFragmentAdapter adapter = new PromptFragmentAdapter(this);
         pager.setAdapter(adapter);
         //
@@ -58,10 +59,6 @@ public class PromptActivity extends AppCompatActivity {
         manager.attach();
         //
         final MyApplication a = (MyApplication) this.getApplication();
-        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
-        if (a.isPromptModelV4(preferences)) {
-            pager.setCurrentItem(1, false);
-        }
         //
         binding.fromTreeToPrompt.setOnClickListener(view-> {
             adapter.actionSave();
@@ -115,6 +112,20 @@ public class PromptActivity extends AppCompatActivity {
             String text = this.getResources().getString(R.string.menu_change_part);
             treeToPrompt.setText(text);
             menuChangePart.setVisibility(View.VISIBLE);
+        }
+        //
+        PromptType promptTarget;
+        if (a.getChangePartItem() == null) {
+            promptTarget = PromptType.P_CH01_OK;
+        } else {
+            Data cutData = new Data(a.getChangePartItem());
+            promptTarget = cutData.getPromptType();
+        }
+        for (int i = 0 ; i < PromptType.values().length ; i++) {
+            if (promptTarget.equals(PromptFragmentAdapter.getPositionToPromptType(i))) {
+                pager.setCurrentItem(i, false);
+                break;
+            }
         }
     }
 }

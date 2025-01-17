@@ -11,6 +11,7 @@
     <!-- Preference Titles -->
     <string name="messages_header">メッセージ</string>
     <string name="sync_header">同期</string>
+    <string name="dummy">ダミー</string>
 
     <!-- Messages Preferences -->
     <string name="signature_title">あなたのシグネチャ</string>
@@ -36,8 +37,8 @@
     <string name="prompt_steps_summary">steps(default:23)</string>
     <string name="prompt_scale">プロンプトガイダンス</string>
     <string name="prompt_scale_summary">scale(default:5)</string>
-    <string name="prompt_cfg_rescale">プロンプトガイダンスの再調整</string>
-    <string name="prompt_cfg_rescale_summary">Prompt guidance rescale(default:100)</string>
+    <string name="prompt_cfg_rescale">プロンプトガイダンスの再調整(default:1.00)</string>
+    <string name="prompt_cfg_rescale_summary">Prompt guidance rescale(default:1.00)</string>
     <string name="prompt_sampler">サンプラー</string>
     <string name="prompt_sampler_summary">サンプラーの種別</string>
     <string name="prompt_sm">sm</string>
@@ -156,4 +157,11 @@
     <string name="prompt_type_ch1_ng">キャラ01 ネガティブ</string>
     <string name="prompt_type_ch2_ok">キャラ02 プロンプト</string>
     <string name="prompt_type_ch2_ng">キャラ02 ネガティブ</string>
+
+    <!-- prompt x or y -->
+    <string name="prompt_location">キャラクターの位置</string>
+    <string name="prompt_location_ch1_x">01 キャラクターの位置 X(default:0.5)</string>
+    <string name="prompt_location_ch1_y">01 キャラクターの位置 Y(default:0.5)</string>
+    <string name="prompt_location_ch2_x">02 キャラクターの位置 X(default:0.5)</string>
+    <string name="prompt_location_ch2_y">02 キャラクターの位置 Y(default:0.5)</string>
 </resources>

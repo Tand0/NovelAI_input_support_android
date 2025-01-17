@@ -11,6 +11,7 @@
     <!-- Preference Titles -->
     <string name="messages_header">Messages</string>
     <string name="sync_header">Sync</string>
+    <string name="dummy">Dummy</string>
 
     <!-- Messages Preferences -->
     <string name="signature_title">Your signature</string>
@@ -36,8 +37,8 @@
     <string name="prompt_steps_summary">steps(default:23)</string>
     <string name="prompt_scale">Prompt guidance</string>
     <string name="prompt_scale_summary">scale(default:5)</string>
-    <string name="prompt_cfg_rescale">Prompt guidance</string>
-    <string name="prompt_cfg_rescale_summary">cfg_rescale(default:0)</string>
+    <string name="prompt_cfg_rescale">Prompt guidance rescale(default:1.0)</string>
+    <string name="prompt_cfg_rescale_summary">cfg_rescale(default:1.0)</string>
     <string name="prompt_sampler">sampler(default:k_dpmpp_2m)</string>
     <string name="prompt_sampler_summary">sampler data</string>
     <string name="prompt_sm">sm</string>
@@ -157,4 +158,10 @@
     <string name="prompt_type_ch2_ok">Char02 Prompt</string>
     <string name="prompt_type_ch2_ng">Char02 Negative</string>
 
+    <!-- prompt x or y -->
+    <string name="prompt_location">Character Location</string>
+    <string name="prompt_location_ch1_x">01 Character Location X(default:0.5)</string>
+    <string name="prompt_location_ch1_y">01 Character Location Y(default:0.5)</string>
+    <string name="prompt_location_ch2_x">02 Character Location X(default:0.5)</string>
+    <string name="prompt_location_ch2_y">02 Character Location Y(default:0.5)</string>
 </resources>
