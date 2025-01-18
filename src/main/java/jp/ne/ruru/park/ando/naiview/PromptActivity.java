@@ -116,7 +116,16 @@ public class PromptActivity extends AppCompatActivity {
         //
         PromptType promptTarget;
         if (a.getChangePartItem() == null) {
-            promptTarget = PromptType.P_CH01_OK;
+            int target0 = a.getPromptValue(PromptType.P_BASE_OK).length();
+            int target1 = a.getPromptValue(PromptType.P_CH01_OK).length();
+            int target2 = a.getPromptValue(PromptType.P_CH02_OK).length();
+            if ((target1 <= target0) && (target2 <= target0)) {
+                promptTarget = PromptType.P_BASE_OK;
+            } else if (target2 <= target1) {
+                promptTarget = PromptType.P_CH01_OK;
+            } else {
+                promptTarget = PromptType.P_CH02_OK;
+            }
         } else {
             Data cutData = new Data(a.getChangePartItem());
             promptTarget = cutData.getPromptType();

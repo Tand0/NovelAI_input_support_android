@@ -115,37 +115,38 @@ public class JSONListAdapter<T extends JSONObject> extends ArrayAdapter<T> {
             }
             int backgroundColor;
             int textColor;
-            int dirColor;
-            int textUcColor;
-            int dirUcColor;
+            int baseColor;
+            int character1Color;
+            int character2Color;
             if (!darkFlag) {
                 backgroundColor = Color.parseColor("#FFFFFF");
                 textColor = Color.parseColor("#000000");
-                dirColor = Color.parseColor("#0000C0");
-                textUcColor = Color.parseColor("#008000");
-                dirUcColor = Color.parseColor("#004060");
+                baseColor = Color.parseColor("#0000C0");
+                character1Color = Color.parseColor("#008000");
+                character2Color = Color.parseColor("#004060");
             } else {
                 backgroundColor = Color.parseColor("#000000");
                 textColor = Color.parseColor("#FFFFFF");
-                dirColor = Color.parseColor("#CFCFFF");
-                textUcColor = Color.parseColor("#FFCFFF");
-                dirUcColor = Color.parseColor("#FFCF3F");
+                baseColor = Color.parseColor("#CFCFFF");
+                character1Color = Color.parseColor("#FFCFFF");
+                character2Color = Color.parseColor("#FFCF3F");
             }
             if (! itemData.getIgnore()) {
-                checkBox.setBackgroundColor(backgroundColor);
-                if (!itemData.getPromptType().isNegative()) {
-                    if (isNotWord) {
-                        checkBox.setTextColor(dirColor);
-                    } else {
-                        checkBox.setTextColor(textColor);
-                    }
+                PromptType itemPrompt = itemData.getPromptType();
+                int color;
+                if (! isNotWord) {
+                    color = textColor;
+                } else if ((PromptType.P_BASE_OK.equals(itemPrompt))
+                        || (PromptType.P_BASE_NG.equals(itemPrompt))) {
+                    color = baseColor;
+                } else if ((PromptType.P_CH01_OK.equals(itemPrompt))
+                        || (PromptType.P_CH01_NG.equals(itemPrompt))) {
+                    color = character1Color;
                 } else {
-                    if (isNotWord) {
-                        checkBox.setTextColor(dirUcColor);
-                    } else {
-                        checkBox.setTextColor(textUcColor);
-                    }
+                    color = character2Color;
                 }
+                checkBox.setBackgroundColor(backgroundColor);
+                checkBox.setTextColor(color);
             } else {
                 checkBox.setBackgroundColor(textColor);
                 checkBox.setTextColor(backgroundColor);

@@ -1,5 +1,6 @@
 package jp.ne.ruru.park.ando.naiview.data;
 
+
 import androidx.annotation.NonNull;
 
 import org.json.JSONObject;
@@ -81,16 +82,6 @@ public enum PromptType {
             return false;
         }
         return key.equals(name);
-    }
-    public boolean isNegative() {
-        switch (this) {
-            case P_BASE_NG:
-            case P_CH01_NG:
-            case P_CH02_NG:
-                return true;
-            default:
-                return false;
-        }
     }
     static PromptType getType(JSONObject item) {
         String pType = Data.containString(item, Data.P_TYPE);

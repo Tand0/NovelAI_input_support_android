@@ -145,35 +145,6 @@
             app:useSimpleSummaryProvider="true" />
     </PreferenceCategory>
 
-    <PreferenceCategory android:title="@string/i2i_summary">
-        <SwitchPreferenceCompat
-            app:key="setting_i2i"
-            app:defaultValue="false"
-            app:summary="@string/i2i_summary"
-            app:title="@string/i2i" />
-
-        <SeekBarPreference
-            app:key="prompt_int_strength"
-            app:dependency="setting_i2i"
-            app:title="@string/prompt_strength"
-            app:summary="@string/prompt_strength_summary"
-            app:defaultValue="10"
-            app:min="0"
-            android:max="99"
-            app:showSeekBarValue="true"
-            />
-        <SeekBarPreference
-            app:key="prompt_int_noise"
-            app:dependency="setting_i2i"
-            app:title="@string/prompt_noise"
-            app:summary="@string/prompt_noise_summary"
-            app:defaultValue="0"
-            app:min="0"
-            android:max="99"
-            app:showSeekBarValue="true"
-            />
-    </PreferenceCategory>
-
     <PreferenceCategory android:title="@string/prompt_location">
         <jp.ne.ruru.park.ando.naiview.DoubleSeekBarPreference
             app:key="prompt_int_location_ch1_x"
@@ -212,6 +183,38 @@
             app:np_digit="1"
             />
     </PreferenceCategory>
+
+
+
+    <PreferenceCategory android:title="@string/i2i_summary">
+        <SwitchPreferenceCompat
+            app:key="setting_i2i"
+            app:defaultValue="false"
+            app:summary="@string/i2i_summary"
+            app:title="@string/i2i" />
+
+        <SeekBarPreference
+            app:key="prompt_int_strength"
+            app:dependency="setting_i2i"
+            app:title="@string/prompt_strength"
+            app:summary="@string/prompt_strength_summary"
+            app:defaultValue="10"
+            app:min="0"
+            android:max="99"
+            app:showSeekBarValue="true"
+            />
+        <SeekBarPreference
+            app:key="prompt_int_noise"
+            app:dependency="setting_i2i"
+            app:title="@string/prompt_noise"
+            app:summary="@string/prompt_noise_summary"
+            app:defaultValue="0"
+            app:min="0"
+            android:max="99"
+            app:showSeekBarValue="true"
+            />
+    </PreferenceCategory>
+
 
     <PreferenceCategory android:title="@string/dummy">
     </PreferenceCategory>

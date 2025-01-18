@@ -822,7 +822,7 @@
         "prompt": "c0"
       },
       {
-        "ignore": false,
+        "ignore": true,
         "prompt": "c0",
         "text": "Sequence",
         "values": "nsfw",
@@ -867,14 +867,14 @@
         "level": 1
       }
     ],
-    "expand": false,
+    "expand": true,
     "level": 0
   },
   {
     "text": "Sequence",
     "prompt": "c1",
     "values": "1キャラクタープロンプト",
-    "expand": false,
+    "expand": true,
     "child": [
       {
         "text": "Select",
@@ -1831,14 +1831,6 @@
                             "level": 6,
                             "ignore": false,
                             "prompt": "c1"
-                          },
-                          {
-                            "text": "word",
-                            "values": "pov hands",
-                            "child": [],
-                            "level": 6,
-                            "ignore": false,
-                            "prompt": "c1"
                           }
                         ],
                         "expand": false,
@@ -2248,7 +2240,7 @@
                     "text": "word",
                     "values": "upright_straddle",
                     "child": [],
-                    "level": 3,
+                    "level": 4,
                     "ignore": false,
                     "prompt": "c1"
                   },
@@ -2256,7 +2248,7 @@
                     "text": "word",
                     "values": "leg_lock",
                     "child": [],
-                    "level": 3,
+                    "level": 4,
                     "ignore": false,
                     "prompt": "c1"
                   },
@@ -2264,7 +2256,7 @@
                     "text": "word",
                     "values": "straddling",
                     "child": [],
-                    "level": 3,
+                    "level": 4,
                     "ignore": false,
                     "prompt": "c1"
                   }
@@ -3515,7 +3507,7 @@
             "prompt": "c1"
           }
         ],
-        "expand": false,
+        "expand": true,
         "level": 1,
         "ignore": false,
         "prompt": "c1"
@@ -4097,13 +4089,21 @@
             "level": 2,
             "ignore": false,
             "prompt": "c2"
+          },
+          {
+            "text": "word",
+            "values": "pov hands",
+            "child": [],
+            "level": 2,
+            "ignore": false,
+            "prompt": "c2"
           }
         ],
         "expand": false,
         "level": 1
       }
     ],
-    "ignore": true,
+    "ignore": false,
     "level": 0
   },
   {

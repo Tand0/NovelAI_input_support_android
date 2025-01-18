@@ -362,7 +362,6 @@ public class MyApplication  extends Application {
         }
         return values;
     }
-
     public boolean isUseTree(SharedPreferences preferences) {
         return preferences.getBoolean("setting_use_tree", true);
     }
@@ -414,13 +413,6 @@ public class MyApplication  extends Application {
         }
         return isWidth ? width : height;
     }
-    public boolean isSettingI2i(SharedPreferences preferences) {
-        try {
-            return preferences.getBoolean("setting_i2i", false);
-        } catch(ClassCastException e) {
-            return false;
-        }
-    }
     public static final String[] LOCATIONS = {
             "prompt_int_location_ch1_x",
             "prompt_int_location_ch1_y",
@@ -444,6 +436,13 @@ public class MyApplication  extends Application {
             editor.putInt(LOCATIONS[i], values[i]);
         }
         editor.apply();
+    }
+    public boolean isSettingI2i(SharedPreferences preferences) {
+        try {
+            return preferences.getBoolean("setting_i2i", false);
+        } catch(ClassCastException e) {
+            return false;
+        }
     }
     /**
      * Novel AI Support Interface area
@@ -665,15 +664,9 @@ public class MyApplication  extends Application {
         setPromptValue(base,string);
     }
     protected String separateV3PromptOne(String string, PromptType character) {
-        JSONArray array = getTop();
+        Data array = new Data(getTop());
         StringBuilder buffer = null;
-        for (int i = 0; i < array.length() ; i++) {
-            Object obj;
-            try {
-                obj = array.get(i);
-            } catch (JSONException e) {
-                continue;
-            }
+        for (JSONObject obj : array) {
             Data data = new Data(obj);
             PromptType targetPrompt = data.getPromptType();
             if (character.equals(targetPrompt)) {
@@ -714,7 +707,8 @@ public class MyApplication  extends Application {
             };
         }
         for (int i = 0 ; i < pTypeList.length ; i++) {
-            this.setPromptValue(pTypeList[i],strings[i]);
+            String stringV4 = changeValuesForV4(strings[i]);
+            this.setPromptValue(pTypeList[i],stringV4);
         }
     }
     protected String[] getCharCaption(JSONObject v4Prompt) {
@@ -992,8 +986,9 @@ public class MyApplication  extends Application {
         try {
             if (object instanceof JSONArray) {
                 JSONArray array = (JSONArray) object;
-                for (int i = 0; i < array.length(); i++) {
-                    dictToList(promptType, array.get(i), list);
+                Data arrayData = new Data(array);
+                for (JSONObject target : arrayData) {
+                    dictToList(promptType, target, list);
                 }
                 return;
             } else if (! (object instanceof JSONObject)) {
@@ -1126,16 +1121,15 @@ public class MyApplication  extends Application {
      * delete text from item
      * @param targets original text
      * @param object item
-     * @return change text
+     * @return [0] survived string, [1] delete string
      */
     protected String[] deleteTextFromItem(String targets,Object object) {
-        List<String> keys = getDeleteTextList(object);
+        List<String> keys = new java.util.ArrayList<>();
+        getAllTextList(object, keys);
         keys.sort((a,b)-> a.length() == b.length() ? b.compareTo(a) : b.length() - a.length());
         String[] targetsArray = targets.split(",");
-        StringBuilder resultHit = new StringBuilder();
-        StringBuilder resultNoHit = new StringBuilder();
-        boolean commaFlagHit = false;
-        boolean commaFlagNoHit = false;
+        StringBuilder resultHit = null;
+        StringBuilder resultNoHit = null;
         for (String target : targetsArray) {
             boolean hit = false;
             String targetBreak = changeBaseKey(target);
@@ -1146,35 +1140,37 @@ public class MyApplication  extends Application {
                 }
             }
             if (hit) {
-                if (commaFlagHit) {
+                if (resultHit == null) {
+                    resultHit = new StringBuilder();
+                } else {
                     resultHit.append(", ");
                 }
-                commaFlagHit = true;
                 resultHit.append(target.trim());
             } else {
-                if (commaFlagNoHit) {
+                if (resultNoHit == null) {
+                    resultNoHit = new StringBuilder();
+                } else {
                     resultNoHit.append(", ");
                 }
-                commaFlagNoHit = true;
                 resultNoHit.append(target.trim());
             }
         }
+        resultHit = (resultHit == null) ? new StringBuilder() : resultHit;
+        resultNoHit = (resultNoHit == null) ? new StringBuilder() : resultNoHit;
         return new String[] {resultNoHit.toString(), resultHit.toString()};
     }
-    protected List<String> getDeleteTextList(Object object) {
-        List<String> list = new java.util.ArrayList<>();
+    protected void getAllTextList(Object object, List<String> list) {
         if (object == null) {
-            return list;
-        } else if (object instanceof JSONArray) {
-            JSONArray array = (JSONArray)object;
-            for (int i = 0 ; i < array.length() ; i++) {
-                try {
-                    list.addAll(getDeleteTextList(array.get(i)));
-                } catch (JSONException e) {
-                    // NONE
-                }
+            return;
+        }
+        if (object instanceof JSONArray) {
+            Data data = new Data(object);
+            for (JSONObject target : data) {
+                getAllTextList(target,list);
             }
-        } else if (object instanceof JSONObject) {
+            return;
+        }
+        if (object instanceof JSONObject) {
             Data objectData = new Data(object);
             if (TextType.WORD.equals(objectData.getTextType())) {
                 String key = objectData.getValue();
@@ -1182,13 +1178,12 @@ public class MyApplication  extends Application {
                     list.add(changeBaseKey(key));
                 }
             }
-            list.addAll(getDeleteTextList(objectData.getChild()));
+            getAllTextList(objectData.getChild(),list);
         }
-        return list;
     }
 
     private String changeBaseKey(String key) {
-        return key.replaceAll("[_{}\\[\\]]"," ").replaceAll("\\s+"," ").trim();
+        return key.replaceAll("artist:", "").replaceAll("[_{}\\[\\]]"," ").replaceAll("\\s+"," ").trim();
     }
 
     /** get subscription
