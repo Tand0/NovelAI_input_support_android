@@ -694,157 +694,22 @@
       {
         "text": "Sequence",
         "values": "品質の指定",
-        "child": [
-          {
-            "text": "word",
-            "values": "{best quality}",
-            "child": [],
-            "level": 2,
-            "ignore": true,
-            "prompt": "c0"
-          },
-          {
-            "text": "word",
-            "values": "absurdres",
-            "child": [],
-            "level": 2,
-            "ignore": true,
-            "prompt": "c0"
-          },
-          {
-            "text": "word",
-            "values": "amazing quality",
-            "child": [],
-            "level": 2,
-            "ignore": true,
-            "prompt": "c0"
-          },
-          {
-            "text": "word",
-            "values": "very aesthetic",
-            "child": [],
-            "level": 2,
-            "ignore": false,
-            "prompt": "c0"
-          },
-          {
-            "text": "word",
-            "values": "photorealistic",
-            "child": [],
-            "level": 2,
-            "ignore": true,
-            "prompt": "c0"
-          },
-          {
-            "text": "word",
-            "values": "extremely detailed CG unity",
-            "child": [],
-            "level": 2,
-            "ignore": true,
-            "prompt": "c0"
-          },
-          {
-            "text": "word",
-            "values": "official",
-            "child": [],
-            "level": 2,
-            "ignore": true,
-            "prompt": "c0"
-          },
-          {
-            "text": "word",
-            "values": "official art",
-            "child": [],
-            "level": 2,
-            "ignore": true,
-            "prompt": "c0"
-          },
-          {
-            "text": "word",
-            "values": "illustration",
-            "child": [],
-            "level": 2,
-            "ignore": true,
-            "prompt": "c0"
-          },
-          {
-            "text": "word",
-            "values": "masterpiece",
-            "child": [],
-            "level": 2,
-            "ignore": true,
-            "prompt": "c0"
-          },
-          {
-            "text": "word",
-            "values": "{realistic body}",
-            "child": [],
-            "level": 2,
-            "ignore": true,
-            "prompt": "c0"
-          },
-          {
-            "text": "word",
-            "values": "awesome detailed",
-            "child": [],
-            "level": 2,
-            "ignore": true,
-            "prompt": "c0"
-          },
-          {
-            "text": "word",
-            "values": "[hyper detailed]",
-            "child": [],
-            "level": 2,
-            "ignore": true,
-            "prompt": "c0"
-          },
-          {
-            "text": "word",
-            "values": "[ultra detailed skin]",
-            "child": [],
-            "level": 2,
-            "ignore": true,
-            "prompt": "c0"
-          },
-          {
-            "text": "word",
-            "values": "{{{{glistening shining skin}}}}",
-            "child": [],
-            "level": 2,
-            "ignore": true,
-            "prompt": "c0"
-          }
-        ],
         "level": 1,
         "expand": false,
         "ignore": false,
-        "prompt": "c0"
-      },
-      {
-        "ignore": true,
         "prompt": "c0",
-        "text": "Sequence",
-        "values": "nsfw",
         "child": [
           {
+            "text": "Sequence",
+            "values": "品質の指定",
+            "level": 2,
+            "expand": false,
             "ignore": false,
             "prompt": "c0",
-            "text": "word",
-            "values": "nsfw",
-            "child": [],
-            "expand": true,
-            "level": 2
-          },
-          {
-            "ignore": true,
-            "prompt": "c0",
-            "text": "Select",
-            "values": "その他",
             "child": [
               {
                 "text": "word",
-                "values": "uncensored",
+                "values": "best quality",
                 "child": [],
                 "level": 3,
                 "ignore": false,
@@ -852,29 +717,291 @@
               },
               {
                 "text": "word",
-                "values": "multiple boys",
+                "values": "{very aesthetic}",
+                "child": [],
+                "level": 3,
+                "ignore": false,
+                "prompt": "c0"
+              },
+              {
+                "text": "word",
+                "values": "absurdres",
                 "child": [],
                 "level": 3,
                 "ignore": false,
                 "prompt": "c0"
               }
+            ]
+          },
+          {
+            "ignore": false,
+            "prompt": "c0",
+            "text": "Sequence",
+            "values": "お好みで",
+            "child": [
+              {
+                "ignore": false,
+                "prompt": "c0",
+                "text": "word",
+                "values": "aesthetic",
+                "child": [],
+                "level": 3
+              },
+              {
+                "ignore": false,
+                "prompt": "c0",
+                "text": "word",
+                "values": "displeasing",
+                "child": [],
+                "level": 3
+              },
+              {
+                "ignore": false,
+                "prompt": "c0",
+                "text": "word",
+                "values": "very displeasing",
+                "child": [],
+                "level": 3
+              }
             ],
             "expand": false,
             "level": 2
+          },
+          {
+            "text": "Sequence",
+            "values": "その他",
+            "level": 2,
+            "expand": false,
+            "ignore": true,
+            "prompt": "c0",
+            "child": [
+              {
+                "text": "word",
+                "values": "amazing quality",
+                "child": [],
+                "level": 3,
+                "ignore": false,
+                "prompt": "c0"
+              },
+              {
+                "text": "word",
+                "values": "photorealistic",
+                "child": [],
+                "level": 3,
+                "ignore": false,
+                "prompt": "c0"
+              },
+              {
+                "text": "word",
+                "values": "extremely detailed CG unity",
+                "child": [],
+                "level": 3,
+                "ignore": false,
+                "prompt": "c0"
+              },
+              {
+                "text": "word",
+                "values": "official",
+                "child": [],
+                "level": 3,
+                "ignore": false,
+                "prompt": "c0"
+              },
+              {
+                "text": "word",
+                "values": "official art",
+                "child": [],
+                "level": 3,
+                "ignore": false,
+                "prompt": "c0"
+              },
+              {
+                "text": "word",
+                "values": "illustration",
+                "child": [],
+                "level": 3,
+                "ignore": false,
+                "prompt": "c0"
+              },
+              {
+                "text": "word",
+                "values": "masterpiece",
+                "child": [],
+                "level": 3,
+                "ignore": false,
+                "prompt": "c0"
+              },
+              {
+                "text": "word",
+                "values": "{realistic body}",
+                "child": [],
+                "level": 3,
+                "ignore": false,
+                "prompt": "c0"
+              },
+              {
+                "text": "word",
+                "values": "awesome detailed",
+                "child": [],
+                "level": 3,
+                "ignore": false,
+                "prompt": "c0"
+              },
+              {
+                "text": "word",
+                "values": "[hyper detailed]",
+                "child": [],
+                "level": 3,
+                "ignore": false,
+                "prompt": "c0"
+              },
+              {
+                "text": "word",
+                "values": "[ultra detailed skin]",
+                "child": [],
+                "level": 3,
+                "ignore": false,
+                "prompt": "c0"
+              },
+              {
+                "text": "word",
+                "values": "{{{{glistening shining skin}}}}",
+                "child": [],
+                "level": 3,
+                "ignore": false,
+                "prompt": "c0"
+              }
+            ]
           }
-        ],
+        ]
+      },
+      {
+        "ignore": false,
+        "prompt": "c0",
+        "text": "Select",
+        "values": "レーティング",
         "expand": false,
-        "level": 1
+        "level": 1,
+        "child": [
+          {
+            "ignore": false,
+            "prompt": "c0",
+            "text": "Sequence",
+            "values": "一般",
+            "expand": false,
+            "level": 2,
+            "child": [
+              {
+                "text": "word",
+                "values": "rating:general",
+                "child": [],
+                "level": 3,
+                "ignore": false,
+                "prompt": "c0"
+              }
+            ]
+          },
+          {
+            "ignore": true,
+            "prompt": "c0",
+            "text": "Sequence",
+            "values": "センシティブ",
+            "expand": false,
+            "level": 2,
+            "child": [
+              {
+                "text": "word",
+                "values": "rating:sensitive",
+                "child": [],
+                "level": 3,
+                "ignore": true,
+                "prompt": "c0"
+              }
+            ]
+          },
+          {
+            "ignore": true,
+            "prompt": "c0",
+            "text": "Sequence",
+            "values": "疑問",
+            "expand": false,
+            "level": 2,
+            "child": [
+              {
+                "text": "word",
+                "values": "rating:questionable",
+                "child": [],
+                "level": 3,
+                "ignore": true,
+                "prompt": "c0"
+              }
+            ]
+          },
+          {
+            "ignore": true,
+            "prompt": "c0",
+            "text": "Sequence",
+            "values": "露骨",
+            "expand": false,
+            "level": 2,
+            "child": [
+              {
+                "ignore": true,
+                "prompt": "c0",
+                "text": "Select",
+                "values": "その他",
+                "child": [
+                  {
+                    "text": "word",
+                    "values": "uncensored",
+                    "child": [],
+                    "level": 4,
+                    "ignore": false,
+                    "prompt": "c0"
+                  },
+                  {
+                    "text": "word",
+                    "values": "multiple boys",
+                    "child": [],
+                    "level": 4,
+                    "ignore": false,
+                    "prompt": "c0"
+                  }
+                ],
+                "expand": false,
+                "level": 3
+              },
+              {
+                "ignore": false,
+                "prompt": "c0",
+                "text": "word",
+                "values": "nsfw",
+                "child": [],
+                "expand": true,
+                "level": 3
+              },
+              {
+                "ignore": false,
+                "prompt": "c0",
+                "text": "word",
+                "values": "rating:explicit",
+                "child": [],
+                "expand": true,
+                "level": 3
+              }
+            ]
+          }
+        ]
       }
     ],
-    "expand": true,
+    "expand": false,
     "level": 0
   },
   {
     "text": "Sequence",
     "prompt": "c1",
     "values": "1キャラクタープロンプト",
-    "expand": true,
+    "expand": false,
     "child": [
       {
         "text": "Select",
@@ -4041,6 +4168,150 @@
         "expand": false,
         "ignore": true,
         "prompt": "c1"
+      },
+      {
+        "ignore": true,
+        "prompt": "c1",
+        "text": "Select",
+        "values": "セリフ(Version 4)",
+        "child": [
+          {
+            "ignore": false,
+            "prompt": "c1",
+            "text": "Sequence",
+            "values": "四角いセリフ枠",
+            "child": [
+              {
+                "text": "word",
+                "values": "dialogue box",
+                "child": [],
+                "level": 3,
+                "ignore": false,
+                "prompt": "c1"
+              },
+              {
+                "text": "word",
+                "values": "text:WTH",
+                "child": [],
+                "level": 3,
+                "ignore": false,
+                "prompt": "c1"
+              }
+            ],
+            "level": 2,
+            "expand": false
+          },
+          {
+            "ignore": false,
+            "prompt": "c1",
+            "text": "Sequence",
+            "values": "恥ずかしい吹き出し",
+            "child": [
+              {
+                "text": "word",
+                "values": "spoken blush",
+                "child": [],
+                "level": 3,
+                "ignore": false,
+                "prompt": "c1"
+              }
+            ],
+            "level": 2,
+            "expand": false
+          },
+          {
+            "ignore": false,
+            "prompt": "c1",
+            "text": "Sequence",
+            "values": "吹き出しの中に入ったハート",
+            "child": [
+              {
+                "text": "word",
+                "values": "spoken heart",
+                "child": [],
+                "level": 3,
+                "ignore": false,
+                "prompt": "c1"
+              }
+            ],
+            "level": 2,
+            "expand": false
+          },
+          {
+            "ignore": false,
+            "prompt": "c1",
+            "text": "Sequence",
+            "values": "吹き出しの中に入ったぐしゃぐしゃ",
+            "child": [
+              {
+                "text": "word",
+                "values": "spoken squiggle",
+                "child": [],
+                "level": 3,
+                "ignore": false,
+                "prompt": "c1"
+              }
+            ],
+            "level": 2,
+            "expand": false
+          },
+          {
+            "ignore": false,
+            "prompt": "c1",
+            "text": "Sequence",
+            "values": "吹き出しの中に入った汗",
+            "child": [
+              {
+                "text": "word",
+                "values": "spoken sweatdrop",
+                "child": [],
+                "level": 3,
+                "ignore": false,
+                "prompt": "c1"
+              }
+            ],
+            "level": 2,
+            "expand": false
+          },
+          {
+            "ignore": false,
+            "prompt": "c1",
+            "text": "Sequence",
+            "values": "ちんもく",
+            "child": [
+              {
+                "text": "word",
+                "values": "spoken ellipsis",
+                "child": [],
+                "level": 3,
+                "ignore": false,
+                "prompt": "c1"
+              }
+            ],
+            "level": 2,
+            "expand": false
+          },
+          {
+            "ignore": false,
+            "prompt": "c1",
+            "text": "Sequence",
+            "values": "はてなマーク",
+            "child": [
+              {
+                "text": "word",
+                "values": "spoken question mark",
+                "child": [],
+                "level": 3,
+                "ignore": false,
+                "prompt": "c1"
+              }
+            ],
+            "level": 2,
+            "expand": false
+          }
+        ],
+        "expand": false,
+        "level": 1
       }
     ],
     "ignore": false,
@@ -4053,7 +4324,7 @@
     "expand": false,
     "child": [
       {
-        "ignore": true,
+        "ignore": false,
         "prompt": "c2",
         "text": "Select",
         "values": "掴む系",
@@ -4101,9 +4372,459 @@
         ],
         "expand": false,
         "level": 1
+      },
+      {
+        "ignore": false,
+        "prompt": "c2",
+        "text": "Select",
+        "values": "めがねキャラ",
+        "child": [
+          {
+            "ignore": false,
+            "prompt": "c2",
+            "text": "Sequence",
+            "values": "丸眼鏡",
+            "child": [
+              {
+                "text": "word",
+                "values": "red rectangle glasses",
+                "child": [],
+                "level": 3,
+                "ignore": false,
+                "prompt": "c2"
+              }
+            ],
+            "level": 2,
+            "expand": false
+          },
+          {
+            "ignore": false,
+            "prompt": "c2",
+            "text": "Sequence",
+            "values": "横長の楕円眼鏡",
+            "child": [
+              {
+                "text": "word",
+                "values": "wide oval glasses",
+                "child": [],
+                "level": 3,
+                "ignore": false,
+                "prompt": "c2"
+              }
+            ],
+            "level": 2,
+            "expand": false
+          },
+          {
+            "ignore": false,
+            "prompt": "c2",
+            "text": "Sequence",
+            "values": "小さいリムレスの楕円眼鏡",
+            "child": [
+              {
+                "text": "word",
+                "values": "small rimless oval glasses",
+                "child": [],
+                "level": 3,
+                "ignore": false,
+                "prompt": "c2"
+              }
+            ],
+            "level": 2,
+            "expand": false
+          },
+          {
+            "ignore": false,
+            "prompt": "c2",
+            "text": "Sequence",
+            "values": "四角形",
+            "child": [
+              {
+                "text": "word",
+                "values": "square glasses",
+                "child": [],
+                "level": 3,
+                "ignore": false,
+                "prompt": "c2"
+              }
+            ],
+            "level": 2,
+            "expand": false
+          },
+          {
+            "ignore": false,
+            "prompt": "c2",
+            "text": "Sequence",
+            "values": "幅狭のリムレス四角眼鏡",
+            "child": [
+              {
+                "text": "word",
+                "values": "Low-profile rimless square glasses",
+                "child": [],
+                "level": 3,
+                "ignore": false,
+                "prompt": "c2"
+              }
+            ],
+            "level": 2,
+            "expand": false
+          },
+          {
+            "ignore": false,
+            "prompt": "c2",
+            "text": "Sequence",
+            "values": "赤い長方形眼鏡",
+            "child": [
+              {
+                "text": "word",
+                "values": "red rectangle glasses",
+                "child": [],
+                "level": 3,
+                "ignore": false,
+                "prompt": "c2"
+              }
+            ],
+            "level": 2,
+            "expand": false
+          },
+          {
+            "ignore": false,
+            "prompt": "c2",
+            "text": "Sequence",
+            "values": "キャットアイ",
+            "child": [
+              {
+                "text": "word",
+                "values": "pink cat-eye glasses",
+                "child": [],
+                "level": 3,
+                "ignore": false,
+                "prompt": "c2"
+              }
+            ],
+            "level": 2,
+            "expand": false
+          },
+          {
+            "ignore": false,
+            "prompt": "c2",
+            "text": "Sequence",
+            "values": "アビエイター",
+            "child": [
+              {
+                "text": "word",
+                "values": "aviator glasses",
+                "child": [],
+                "level": 3,
+                "ignore": false,
+                "prompt": "c2"
+              }
+            ],
+            "level": 2,
+            "expand": false
+          },
+          {
+            "ignore": false,
+            "prompt": "c2",
+            "text": "Sequence",
+            "values": "ウェイファーラー",
+            "child": [
+              {
+                "text": "word",
+                "values": "wayfarer glasses",
+                "child": [],
+                "level": 3,
+                "ignore": false,
+                "prompt": "c2"
+              }
+            ],
+            "level": 2,
+            "expand": false
+          },
+          {
+            "ignore": false,
+            "prompt": "c2",
+            "text": "Sequence",
+            "values": "リムが部分的にしかない眼鏡",
+            "child": [
+              {
+                "text": "word",
+                "values": "semi-rimless glasses",
+                "child": [],
+                "level": 3,
+                "ignore": false,
+                "prompt": "c2"
+              }
+            ],
+            "level": 2,
+            "expand": false
+          },
+          {
+            "ignore": false,
+            "prompt": "c2",
+            "text": "Sequence",
+            "values": "上縁だけの眼鏡",
+            "child": [
+              {
+                "text": "word",
+                "values": "over-rim glasses",
+                "child": [],
+                "level": 3,
+                "ignore": false,
+                "prompt": "c2"
+              }
+            ],
+            "level": 2,
+            "expand": false
+          },
+          {
+            "ignore": false,
+            "prompt": "c2",
+            "text": "Sequence",
+            "values": "オーバーサイズの不透明眼鏡",
+            "child": [
+              {
+                "text": "word",
+                "values": "oversized opaque glasses",
+                "child": [],
+                "level": 3,
+                "ignore": false,
+                "prompt": "c2"
+              }
+            ],
+            "level": 2,
+            "expand": false
+          },
+          {
+            "ignore": false,
+            "prompt": "c2",
+            "text": "Sequence",
+            "values": "細い針金状フレーム",
+            "child": [
+              {
+                "text": "word",
+                "values": "wireframe glasses",
+                "child": [],
+                "level": 3,
+                "ignore": false,
+                "prompt": "c2"
+              }
+            ],
+            "level": 2,
+            "expand": false
+          },
+          {
+            "ignore": false,
+            "prompt": "c2",
+            "text": "Sequence",
+            "values": "プラフレーム",
+            "child": [
+              {
+                "text": "word",
+                "values": "plastic glasses",
+                "child": [],
+                "level": 3,
+                "ignore": false,
+                "prompt": "c2"
+              }
+            ],
+            "level": 2,
+            "expand": false
+          },
+          {
+            "ignore": false,
+            "prompt": "c2",
+            "text": "Sequence",
+            "values": "モノクル",
+            "child": [
+              {
+                "text": "word",
+                "values": "vintage opaque monocle",
+                "child": [],
+                "level": 3,
+                "ignore": false,
+                "prompt": "c2"
+              }
+            ],
+            "level": 2,
+            "expand": false
+          },
+          {
+            "ignore": false,
+            "prompt": "c2",
+            "text": "Sequence",
+            "values": "ハート型のシースルーサングラス",
+            "child": [
+              {
+                "text": "word",
+                "values": "heart-shaped see-through sunglasses",
+                "child": [],
+                "level": 3,
+                "ignore": false,
+                "prompt": "c2"
+              }
+            ],
+            "level": 2,
+            "expand": false
+          },
+          {
+            "ignore": false,
+            "prompt": "c2",
+            "text": "Sequence",
+            "values": "未来的ゴーグル",
+            "child": [
+              {
+                "text": "word",
+                "values": "futuristic wraparound googles",
+                "child": [],
+                "level": 3,
+                "ignore": false,
+                "prompt": "c2"
+              }
+            ],
+            "level": 2,
+            "expand": false
+          },
+          {
+            "ignore": false,
+            "prompt": "c2",
+            "text": "Sequence",
+            "values": "スキーゴーグル",
+            "child": [
+              {
+                "text": "word",
+                "values": "ski goggles",
+                "child": [],
+                "level": 3,
+                "ignore": false,
+                "prompt": "c2"
+              }
+            ],
+            "level": 2,
+            "expand": false
+          },
+          {
+            "ignore": false,
+            "prompt": "c2",
+            "text": "Sequence",
+            "values": "曇るレンズ",
+            "child": [
+              {
+                "text": "word",
+                "values": "fogged glasses",
+                "child": [],
+                "level": 3,
+                "ignore": false,
+                "prompt": "c2"
+              }
+            ],
+            "level": 2,
+            "expand": false
+          },
+          {
+            "ignore": false,
+            "prompt": "c2",
+            "text": "Sequence",
+            "values": "縁無しの瓶底眼鏡",
+            "child": [
+              {
+                "text": "word",
+                "values": "rimless coke-bottle glasses",
+                "child": [],
+                "level": 3,
+                "ignore": false,
+                "prompt": "c2"
+              }
+            ],
+            "level": 2,
+            "expand": false
+          },
+          {
+            "ignore": false,
+            "prompt": "c2",
+            "text": "Sequence",
+            "values": "鼻眼鏡",
+            "child": [
+              {
+                "text": "word",
+                "values": "groucho glasses",
+                "child": [],
+                "level": 3,
+                "ignore": false,
+                "prompt": "c2"
+              }
+            ],
+            "level": 2,
+            "expand": false
+          },
+          {
+            "ignore": false,
+            "prompt": "c2",
+            "text": "Sequence",
+            "values": "左右でレンズの色が違う眼鏡",
+            "child": [
+              {
+                "text": "word",
+                "values": "heterochromatic eyewear",
+                "child": [],
+                "level": 3,
+                "ignore": false,
+                "prompt": "c2"
+              }
+            ],
+            "level": 2,
+            "expand": false
+          },
+          {
+            "ignore": false,
+            "prompt": "c2",
+            "text": "Sequence",
+            "values": "スカウター",
+            "child": [
+              {
+                "text": "word",
+                "values": "scouter",
+                "child": [],
+                "level": 3,
+                "ignore": false,
+                "prompt": "c2"
+              }
+            ],
+            "level": 2,
+            "expand": false
+          },
+          {
+            "ignore": false,
+            "prompt": "c2",
+            "text": "Sequence",
+            "values": "スチームパンク風の太フレーム",
+            "child": [
+              {
+                "text": "word",
+                "values": "thick frame",
+                "child": [],
+                "level": 3,
+                "ignore": false,
+                "prompt": "c2"
+              },
+              {
+                "text": "word",
+                "values": "steampunk glasses",
+                "child": [],
+                "level": 3,
+                "ignore": false,
+                "prompt": "c2"
+              }
+            ],
+            "level": 2,
+            "expand": false
+          }
+        ],
+        "expand": false,
+        "level": 1
       }
     ],
-    "ignore": false,
+    "ignore": true,
     "level": 0
   },
   {
@@ -4115,7 +4836,94 @@
       {
         "text": "word",
         "prompt": "u0",
+        "values": "blurry",
+        "expand": false,
+        "child": [],
+        "ignore": false,
+        "level": 1
+      },
+      {
+        "text": "word",
+        "prompt": "u0",
         "values": "lowres",
+        "expand": false,
+        "child": [],
+        "ignore": false,
+        "level": 1
+      },
+      {
+        "text": "word",
+        "prompt": "u0",
+        "values": "error",
+        "expand": false,
+        "child": [],
+        "ignore": false,
+        "level": 1
+      },
+      {
+        "text": "word",
+        "prompt": "u0",
+        "values": "worst quality",
+        "expand": false,
+        "child": [],
+        "ignore": false,
+        "level": 1
+      },
+      {
+        "ignore": false,
+        "prompt": "u0",
+        "text": "word",
+        "values": "bad quality",
+        "child": [],
+        "level": 1
+      },
+      {
+        "text": "word",
+        "prompt": "u0",
+        "values": "low quality",
+        "expand": false,
+        "child": [],
+        "ignore": false,
+        "level": 1
+      },
+      {
+        "text": "word",
+        "prompt": "u0",
+        "values": "jpeg artifacts",
+        "expand": false,
+        "child": [],
+        "ignore": false,
+        "level": 1
+      },
+      {
+        "ignore": false,
+        "prompt": "u0",
+        "text": "word",
+        "values": "logo",
+        "child": [],
+        "level": 1
+      },
+      {
+        "ignore": false,
+        "prompt": "u0",
+        "text": "word",
+        "values": "dated",
+        "child": [],
+        "level": 1
+      },
+      {
+        "text": "word",
+        "prompt": "u0",
+        "values": "signature",
+        "expand": false,
+        "child": [],
+        "ignore": false,
+        "level": 1
+      },
+      {
+        "text": "word",
+        "prompt": "u0",
+        "values": "username",
         "expand": false,
         "child": [],
         "ignore": false,
@@ -4134,24 +4942,6 @@
         "text": "word",
         "prompt": "u0",
         "values": "bad hands",
-        "expand": false,
-        "child": [],
-        "ignore": false,
-        "level": 1
-      },
-      {
-        "text": "word",
-        "prompt": "u0",
-        "values": "text",
-        "expand": false,
-        "child": [],
-        "ignore": false,
-        "level": 1
-      },
-      {
-        "text": "word",
-        "prompt": "u0",
-        "values": "error",
         "expand": false,
         "child": [],
         "ignore": false,
@@ -4196,70 +4986,7 @@
       {
         "text": "word",
         "prompt": "u0",
-        "values": "worst quality",
-        "expand": false,
-        "child": [],
-        "ignore": false,
-        "level": 1
-      },
-      {
-        "text": "word",
-        "prompt": "u0",
-        "values": "low quality",
-        "expand": false,
-        "child": [],
-        "ignore": false,
-        "level": 1
-      },
-      {
-        "text": "word",
-        "prompt": "u0",
-        "values": "normal quality",
-        "expand": false,
-        "child": [],
-        "ignore": false,
-        "level": 1
-      },
-      {
-        "text": "word",
-        "prompt": "u0",
-        "values": "jpeg artifacts",
-        "expand": false,
-        "child": [],
-        "ignore": false,
-        "level": 1
-      },
-      {
-        "text": "word",
-        "prompt": "u0",
-        "values": "signature",
-        "expand": false,
-        "child": [],
-        "ignore": false,
-        "level": 1
-      },
-      {
-        "text": "word",
-        "prompt": "u0",
         "values": "watermark",
-        "expand": false,
-        "child": [],
-        "ignore": false,
-        "level": 1
-      },
-      {
-        "text": "word",
-        "prompt": "u0",
-        "values": "username",
-        "expand": false,
-        "child": [],
-        "ignore": false,
-        "level": 1
-      },
-      {
-        "text": "word",
-        "prompt": "u0",
-        "values": "blurry",
         "expand": false,
         "child": [],
         "ignore": false,
