@@ -994,14 +994,14 @@
         ]
       }
     ],
-    "expand": false,
+    "expand": true,
     "level": 0
   },
   {
     "text": "Sequence",
     "prompt": "c1",
     "values": "1キャラクタープロンプト",
-    "expand": false,
+    "expand": true,
     "child": [
       {
         "text": "Select",
@@ -1937,14 +1937,6 @@
                           },
                           {
                             "text": "word",
-                            "values": "hand in panties",
-                            "child": [],
-                            "level": 6,
-                            "ignore": false,
-                            "prompt": "c1"
-                          },
-                          {
-                            "text": "word",
                             "values": "holding wrist",
                             "child": [],
                             "level": 6,
@@ -1960,7 +1952,7 @@
                             "prompt": "c1"
                           }
                         ],
-                        "expand": false,
+                        "expand": true,
                         "level": 5,
                         "ignore": false,
                         "prompt": "c1"
@@ -2416,7 +2408,7 @@
                     "prompt": "c1"
                   }
                 ],
-                "level": 2,
+                "level": 3,
                 "expand": false,
                 "ignore": false,
                 "prompt": "c1"
@@ -2435,7 +2427,7 @@
                   }
                 ],
                 "expand": false,
-                "level": 2,
+                "level": 3,
                 "ignore": false,
                 "prompt": "c1"
               },
@@ -2453,7 +2445,7 @@
                   }
                 ],
                 "expand": false,
-                "level": 2,
+                "level": 3,
                 "ignore": false,
                 "prompt": "c1"
               },
@@ -2471,7 +2463,7 @@
                   }
                 ],
                 "expand": false,
-                "level": 2,
+                "level": 3,
                 "ignore": false,
                 "prompt": "c1"
               },
@@ -2489,7 +2481,7 @@
                   }
                 ],
                 "expand": false,
-                "level": 2,
+                "level": 3,
                 "ignore": false,
                 "prompt": "c1"
               },
@@ -2523,7 +2515,7 @@
                   }
                 ],
                 "expand": false,
-                "level": 2,
+                "level": 3,
                 "ignore": false,
                 "prompt": "c1"
               },
@@ -2557,7 +2549,7 @@
                   }
                 ],
                 "expand": false,
-                "level": 2,
+                "level": 3,
                 "ignore": false,
                 "prompt": "c1"
               },
@@ -2575,7 +2567,7 @@
                   }
                 ],
                 "expand": false,
-                "level": 2,
+                "level": 3,
                 "ignore": false,
                 "prompt": "c1"
               },
@@ -2626,7 +2618,7 @@
                     "prompt": "c1"
                   }
                 ],
-                "level": 2,
+                "level": 3,
                 "expand": false,
                 "ignore": false,
                 "prompt": "c1"
@@ -2645,7 +2637,7 @@
                   }
                 ],
                 "expand": false,
-                "level": 2,
+                "level": 3,
                 "ignore": false,
                 "prompt": "c1"
               },
@@ -2663,7 +2655,7 @@
                   }
                 ],
                 "expand": false,
-                "level": 2,
+                "level": 3,
                 "ignore": false,
                 "prompt": "c1"
               },
@@ -2744,7 +2736,7 @@
                     "prompt": "c1"
                   }
                 ],
-                "level": 2,
+                "level": 3,
                 "expand": false,
                 "ignore": false,
                 "prompt": "c1"
@@ -2763,7 +2755,7 @@
                   }
                 ],
                 "expand": false,
-                "level": 2,
+                "level": 3,
                 "ignore": false,
                 "prompt": "c1"
               },
@@ -2775,7 +2767,7 @@
                     "text": "word",
                     "values": "yellow tie",
                     "child": [],
-                    "level": 3,
+                    "level": 4,
                     "ignore": false,
                     "prompt": "c1"
                   },
@@ -2783,7 +2775,7 @@
                     "text": "word",
                     "values": "{{clothing aside}}",
                     "child": [],
-                    "level": 3,
+                    "level": 4,
                     "ignore": false,
                     "prompt": "c1"
                   },
@@ -2791,7 +2783,7 @@
                     "text": "word",
                     "values": "white collared shirt",
                     "child": [],
-                    "level": 3,
+                    "level": 4,
                     "ignore": false,
                     "prompt": "c1"
                   },
@@ -2799,13 +2791,13 @@
                     "text": "word",
                     "values": "denim shorts",
                     "child": [],
-                    "level": 3,
+                    "level": 4,
                     "ignore": false,
                     "prompt": "c1"
                   }
                 ],
-                "level": 2,
-                "expand": false,
+                "level": 3,
+                "expand": true,
                 "ignore": false,
                 "prompt": "c1"
               },
@@ -2823,7 +2815,7 @@
                   }
                 ],
                 "expand": false,
-                "level": 2,
+                "level": 3,
                 "ignore": false,
                 "prompt": "c1"
               },
@@ -2841,7 +2833,7 @@
                   }
                 ],
                 "expand": false,
-                "level": 2,
+                "level": 3,
                 "ignore": false,
                 "prompt": "c1"
               },
@@ -2854,12 +2846,14 @@
                     "values": "tennis uniform",
                     "child": [],
                     "ignore": false,
-                    "prompt": "c1"
+                    "prompt": "c1",
+                    "level": 4
                   }
                 ],
-                "level": 2,
+                "level": 3,
                 "ignore": false,
-                "prompt": "c1"
+                "prompt": "c1",
+                "expand": false
               },
               {
                 "text": "Sequence",
@@ -2875,7 +2869,7 @@
                   }
                 ],
                 "expand": false,
-                "level": 2,
+                "level": 3,
                 "ignore": false,
                 "prompt": "c1"
               },
@@ -2893,7 +2887,7 @@
                   }
                 ],
                 "expand": false,
-                "level": 2,
+                "level": 3,
                 "ignore": false,
                 "prompt": "c1"
               },
@@ -2911,7 +2905,7 @@
                   }
                 ],
                 "expand": false,
-                "level": 2,
+                "level": 3,
                 "ignore": false,
                 "prompt": "c1"
               },
@@ -2929,7 +2923,7 @@
                   }
                 ],
                 "expand": false,
-                "level": 2,
+                "level": 3,
                 "ignore": false,
                 "prompt": "c1"
               },
@@ -2971,7 +2965,7 @@
                   }
                 ],
                 "expand": false,
-                "level": 2,
+                "level": 3,
                 "ignore": false,
                 "prompt": "c1"
               },
@@ -2989,7 +2983,7 @@
                   }
                 ],
                 "expand": false,
-                "level": 2,
+                "level": 3,
                 "ignore": false,
                 "prompt": "c1"
               },
@@ -3014,7 +3008,7 @@
                     "prompt": "c1"
                   }
                 ],
-                "level": 2,
+                "level": 3,
                 "expand": false,
                 "ignore": false,
                 "prompt": "c1"
@@ -3033,7 +3027,7 @@
                   }
                 ],
                 "expand": false,
-                "level": 2,
+                "level": 3,
                 "ignore": false,
                 "prompt": "c1"
               },
@@ -3050,7 +3044,7 @@
                     "prompt": "c1"
                   }
                 ],
-                "level": 2,
+                "level": 3,
                 "expand": false,
                 "ignore": false,
                 "prompt": "c1"
@@ -3069,7 +3063,7 @@
                   }
                 ],
                 "expand": false,
-                "level": 2,
+                "level": 3,
                 "ignore": false,
                 "prompt": "c1"
               },
@@ -3087,7 +3081,7 @@
                   }
                 ],
                 "expand": false,
-                "level": 2,
+                "level": 3,
                 "ignore": false,
                 "prompt": "c1"
               },
@@ -3105,7 +3099,7 @@
                   }
                 ],
                 "expand": false,
-                "level": 2,
+                "level": 3,
                 "ignore": false,
                 "prompt": "c1"
               },
@@ -3123,7 +3117,7 @@
                   }
                 ],
                 "expand": false,
-                "level": 2,
+                "level": 3,
                 "ignore": false,
                 "prompt": "c1"
               },
@@ -3141,7 +3135,7 @@
                   }
                 ],
                 "expand": false,
-                "level": 2,
+                "level": 3,
                 "ignore": false,
                 "prompt": "c1"
               },
@@ -3159,7 +3153,7 @@
                   }
                 ],
                 "expand": false,
-                "level": 2,
+                "level": 3,
                 "ignore": false,
                 "prompt": "c1"
               },
@@ -3177,7 +3171,7 @@
                   }
                 ],
                 "expand": false,
-                "level": 2,
+                "level": 3,
                 "ignore": false,
                 "prompt": "c1"
               },
@@ -3228,7 +3222,7 @@
                     "prompt": "c1"
                   }
                 ],
-                "level": 2,
+                "level": 3,
                 "expand": false,
                 "ignore": false,
                 "prompt": "c1"
@@ -3247,7 +3241,7 @@
                   }
                 ],
                 "expand": false,
-                "level": 2,
+                "level": 3,
                 "ignore": false,
                 "prompt": "c1"
               },
@@ -3260,12 +3254,14 @@
                     "values": "Nun",
                     "child": [],
                     "ignore": false,
-                    "prompt": "c1"
+                    "prompt": "c1",
+                    "level": 4
                   }
                 ],
-                "level": 2,
+                "level": 3,
                 "ignore": false,
-                "prompt": "c1"
+                "prompt": "c1",
+                "expand": false
               },
               {
                 "text": "Sequence",
@@ -3281,7 +3277,7 @@
                   }
                 ],
                 "expand": false,
-                "level": 2,
+                "level": 3,
                 "ignore": false,
                 "prompt": "c1"
               },
@@ -3299,7 +3295,7 @@
                   }
                 ],
                 "expand": false,
-                "level": 2,
+                "level": 3,
                 "ignore": false,
                 "prompt": "c1"
               },
@@ -3348,7 +3344,7 @@
                     "prompt": "c1"
                   }
                 ],
-                "level": 2,
+                "level": 3,
                 "expand": false,
                 "ignore": false,
                 "prompt": "c1"
@@ -3383,7 +3379,7 @@
                   }
                 ],
                 "expand": false,
-                "level": 2,
+                "level": 3,
                 "ignore": false,
                 "prompt": "c1"
               },
@@ -3401,7 +3397,7 @@
                   }
                 ],
                 "expand": false,
-                "level": 2,
+                "level": 3,
                 "ignore": false,
                 "prompt": "c1"
               },
@@ -3419,7 +3415,7 @@
                   }
                 ],
                 "expand": false,
-                "level": 2,
+                "level": 3,
                 "ignore": false,
                 "prompt": "c1"
               },
@@ -3462,7 +3458,7 @@
                     "prompt": "c1"
                   }
                 ],
-                "level": 2,
+                "level": 3,
                 "expand": false,
                 "ignore": false,
                 "prompt": "c1"
@@ -3480,7 +3476,7 @@
                     "prompt": "c1"
                   }
                 ],
-                "level": 2,
+                "level": 3,
                 "expand": false,
                 "ignore": false,
                 "prompt": "c1"
@@ -3498,7 +3494,7 @@
                     "prompt": "c1"
                   }
                 ],
-                "level": 2,
+                "level": 3,
                 "expand": false,
                 "ignore": false,
                 "prompt": "c1"
@@ -3525,7 +3521,7 @@
                   }
                 ],
                 "expand": false,
-                "level": 2,
+                "level": 3,
                 "ignore": false,
                 "prompt": "c1"
               },
@@ -3543,7 +3539,7 @@
                   }
                 ],
                 "expand": false,
-                "level": 2,
+                "level": 3,
                 "ignore": false,
                 "prompt": "c1"
               },
@@ -3569,7 +3565,7 @@
                   }
                 ],
                 "expand": false,
-                "level": 2,
+                "level": 3,
                 "ignore": false,
                 "prompt": "c1"
               },
@@ -3587,7 +3583,7 @@
                   }
                 ],
                 "expand": false,
-                "level": 2,
+                "level": 3,
                 "ignore": false,
                 "prompt": "c1"
               },
@@ -3605,7 +3601,7 @@
                   }
                 ],
                 "expand": false,
-                "level": 2,
+                "level": 3,
                 "ignore": false,
                 "prompt": "c1"
               },
@@ -3623,7 +3619,7 @@
                   }
                 ],
                 "expand": false,
-                "level": 2,
+                "level": 3,
                 "ignore": false,
                 "prompt": "c1"
               }
@@ -3922,6 +3918,474 @@
         "level": 1,
         "ignore": false,
         "prompt": "c1"
+      },
+      {
+        "ignore": true,
+        "prompt": "c1",
+        "text": "Select",
+        "values": "めがねキャラ",
+        "child": [
+          {
+            "ignore": false,
+            "prompt": "c1",
+            "text": "Sequence",
+            "values": "黒メガネ",
+            "child": [
+              {
+                "ignore": false,
+                "prompt": "c1",
+                "text": "word",
+                "values": "black glasses",
+                "child": [],
+                "level": 3
+              }
+            ],
+            "expand": false,
+            "level": 2
+          },
+          {
+            "ignore": false,
+            "prompt": "c1",
+            "text": "Sequence",
+            "values": "丸眼鏡",
+            "child": [
+              {
+                "text": "word",
+                "values": "red rectangle glasses",
+                "child": [],
+                "level": 3,
+                "ignore": false,
+                "prompt": "c1"
+              }
+            ],
+            "level": 2,
+            "expand": false
+          },
+          {
+            "ignore": false,
+            "prompt": "c1",
+            "text": "Sequence",
+            "values": "横長の楕円眼鏡",
+            "child": [
+              {
+                "text": "word",
+                "values": "wide oval glasses",
+                "child": [],
+                "level": 3,
+                "ignore": false,
+                "prompt": "c1"
+              }
+            ],
+            "level": 2,
+            "expand": false
+          },
+          {
+            "ignore": false,
+            "prompt": "c1",
+            "text": "Sequence",
+            "values": "小さいリムレスの楕円眼鏡",
+            "child": [
+              {
+                "text": "word",
+                "values": "small rimless oval glasses",
+                "child": [],
+                "level": 3,
+                "ignore": false,
+                "prompt": "c1"
+              }
+            ],
+            "level": 2,
+            "expand": false
+          },
+          {
+            "ignore": false,
+            "prompt": "c1",
+            "text": "Sequence",
+            "values": "四角形",
+            "child": [
+              {
+                "text": "word",
+                "values": "square glasses",
+                "child": [],
+                "level": 3,
+                "ignore": false,
+                "prompt": "c1"
+              }
+            ],
+            "level": 2,
+            "expand": false
+          },
+          {
+            "ignore": false,
+            "prompt": "c1",
+            "text": "Sequence",
+            "values": "幅狭のリムレス四角眼鏡",
+            "child": [
+              {
+                "text": "word",
+                "values": "Low-profile rimless square glasses",
+                "child": [],
+                "level": 3,
+                "ignore": false,
+                "prompt": "c1"
+              }
+            ],
+            "level": 2,
+            "expand": false
+          },
+          {
+            "ignore": false,
+            "prompt": "c1",
+            "text": "Sequence",
+            "values": "赤い長方形眼鏡",
+            "child": [
+              {
+                "text": "word",
+                "values": "red rectangle glasses",
+                "child": [],
+                "level": 3,
+                "ignore": false,
+                "prompt": "c1"
+              }
+            ],
+            "level": 2,
+            "expand": false
+          },
+          {
+            "ignore": false,
+            "prompt": "c1",
+            "text": "Sequence",
+            "values": "キャットアイ",
+            "child": [
+              {
+                "text": "word",
+                "values": "pink cat-eye glasses",
+                "child": [],
+                "level": 3,
+                "ignore": false,
+                "prompt": "c1"
+              }
+            ],
+            "level": 2,
+            "expand": false
+          },
+          {
+            "ignore": false,
+            "prompt": "c1",
+            "text": "Sequence",
+            "values": "アビエイター",
+            "child": [
+              {
+                "text": "word",
+                "values": "aviator glasses",
+                "child": [],
+                "level": 3,
+                "ignore": false,
+                "prompt": "c1"
+              }
+            ],
+            "level": 2,
+            "expand": false
+          },
+          {
+            "ignore": false,
+            "prompt": "c1",
+            "text": "Sequence",
+            "values": "ウェイファーラー",
+            "child": [
+              {
+                "text": "word",
+                "values": "wayfarer glasses",
+                "child": [],
+                "level": 3,
+                "ignore": false,
+                "prompt": "c1"
+              }
+            ],
+            "level": 2,
+            "expand": false
+          },
+          {
+            "ignore": false,
+            "prompt": "c1",
+            "text": "Sequence",
+            "values": "リムが部分的にしかない眼鏡",
+            "child": [
+              {
+                "text": "word",
+                "values": "semi-rimless glasses",
+                "child": [],
+                "level": 3,
+                "ignore": false,
+                "prompt": "c1"
+              }
+            ],
+            "level": 2,
+            "expand": false
+          },
+          {
+            "ignore": false,
+            "prompt": "c1",
+            "text": "Sequence",
+            "values": "上縁だけの眼鏡",
+            "child": [
+              {
+                "text": "word",
+                "values": "over-rim glasses",
+                "child": [],
+                "level": 3,
+                "ignore": false,
+                "prompt": "c1"
+              }
+            ],
+            "level": 2,
+            "expand": false
+          },
+          {
+            "ignore": false,
+            "prompt": "c1",
+            "text": "Sequence",
+            "values": "オーバーサイズの不透明眼鏡",
+            "child": [
+              {
+                "text": "word",
+                "values": "oversized opaque glasses",
+                "child": [],
+                "level": 3,
+                "ignore": false,
+                "prompt": "c1"
+              }
+            ],
+            "level": 2,
+            "expand": false
+          },
+          {
+            "ignore": false,
+            "prompt": "c1",
+            "text": "Sequence",
+            "values": "細い針金状フレーム",
+            "child": [
+              {
+                "text": "word",
+                "values": "wireframe glasses",
+                "child": [],
+                "level": 3,
+                "ignore": false,
+                "prompt": "c1"
+              }
+            ],
+            "level": 2,
+            "expand": false
+          },
+          {
+            "ignore": false,
+            "prompt": "c1",
+            "text": "Sequence",
+            "values": "プラフレーム",
+            "child": [
+              {
+                "text": "word",
+                "values": "plastic glasses",
+                "child": [],
+                "level": 3,
+                "ignore": false,
+                "prompt": "c1"
+              }
+            ],
+            "level": 2,
+            "expand": false
+          },
+          {
+            "ignore": false,
+            "prompt": "c1",
+            "text": "Sequence",
+            "values": "モノクル",
+            "child": [
+              {
+                "text": "word",
+                "values": "vintage opaque monocle",
+                "child": [],
+                "level": 3,
+                "ignore": false,
+                "prompt": "c1"
+              }
+            ],
+            "level": 2,
+            "expand": false
+          },
+          {
+            "ignore": false,
+            "prompt": "c1",
+            "text": "Sequence",
+            "values": "ハート型のシースルーサングラス",
+            "child": [
+              {
+                "text": "word",
+                "values": "heart-shaped see-through sunglasses",
+                "child": [],
+                "level": 3,
+                "ignore": false,
+                "prompt": "c1"
+              }
+            ],
+            "level": 2,
+            "expand": false
+          },
+          {
+            "ignore": false,
+            "prompt": "c1",
+            "text": "Sequence",
+            "values": "未来的ゴーグル",
+            "child": [
+              {
+                "text": "word",
+                "values": "futuristic wraparound googles",
+                "child": [],
+                "level": 3,
+                "ignore": false,
+                "prompt": "c1"
+              }
+            ],
+            "level": 2,
+            "expand": false
+          },
+          {
+            "ignore": false,
+            "prompt": "c1",
+            "text": "Sequence",
+            "values": "スキーゴーグル",
+            "child": [
+              {
+                "text": "word",
+                "values": "ski goggles",
+                "child": [],
+                "level": 3,
+                "ignore": false,
+                "prompt": "c1"
+              }
+            ],
+            "level": 2,
+            "expand": false
+          },
+          {
+            "ignore": false,
+            "prompt": "c1",
+            "text": "Sequence",
+            "values": "曇るレンズ",
+            "child": [
+              {
+                "text": "word",
+                "values": "fogged glasses",
+                "child": [],
+                "level": 3,
+                "ignore": false,
+                "prompt": "c1"
+              }
+            ],
+            "level": 2,
+            "expand": false
+          },
+          {
+            "ignore": false,
+            "prompt": "c1",
+            "text": "Sequence",
+            "values": "縁無しの瓶底眼鏡",
+            "child": [
+              {
+                "text": "word",
+                "values": "rimless coke-bottle glasses",
+                "child": [],
+                "level": 3,
+                "ignore": false,
+                "prompt": "c1"
+              }
+            ],
+            "level": 2,
+            "expand": false
+          },
+          {
+            "ignore": false,
+            "prompt": "c1",
+            "text": "Sequence",
+            "values": "鼻眼鏡",
+            "child": [
+              {
+                "text": "word",
+                "values": "groucho glasses",
+                "child": [],
+                "level": 3,
+                "ignore": false,
+                "prompt": "c1"
+              }
+            ],
+            "level": 2,
+            "expand": false
+          },
+          {
+            "ignore": false,
+            "prompt": "c1",
+            "text": "Sequence",
+            "values": "左右でレンズの色が違う眼鏡",
+            "child": [
+              {
+                "text": "word",
+                "values": "heterochromatic eyewear",
+                "child": [],
+                "level": 3,
+                "ignore": false,
+                "prompt": "c1"
+              }
+            ],
+            "level": 2,
+            "expand": false
+          },
+          {
+            "ignore": false,
+            "prompt": "c1",
+            "text": "Sequence",
+            "values": "スカウター",
+            "child": [
+              {
+                "text": "word",
+                "values": "scouter",
+                "child": [],
+                "level": 3,
+                "ignore": false,
+                "prompt": "c1"
+              }
+            ],
+            "level": 2,
+            "expand": false
+          },
+          {
+            "ignore": false,
+            "prompt": "c1",
+            "text": "Sequence",
+            "values": "スチームパンク風の太フレーム",
+            "child": [
+              {
+                "text": "word",
+                "values": "thick frame",
+                "child": [],
+                "level": 3,
+                "ignore": false,
+                "prompt": "c1"
+              },
+              {
+                "text": "word",
+                "values": "steampunk glasses",
+                "child": [],
+                "level": 3,
+                "ignore": false,
+                "prompt": "c1"
+              }
+            ],
+            "level": 2,
+            "expand": false
+          }
+        ],
+        "expand": false,
+        "level": 1
       },
       {
         "text": "Select",
@@ -4331,6 +4795,14 @@
         "child": [
           {
             "text": "word",
+            "values": "hand in panties",
+            "child": [],
+            "level": 2,
+            "ignore": false,
+            "prompt": "c2"
+          },
+          {
+            "text": "word",
             "values": "arm_grab",
             "child": [],
             "level": 2,
@@ -4368,456 +4840,6 @@
             "level": 2,
             "ignore": false,
             "prompt": "c2"
-          }
-        ],
-        "expand": false,
-        "level": 1
-      },
-      {
-        "ignore": false,
-        "prompt": "c2",
-        "text": "Select",
-        "values": "めがねキャラ",
-        "child": [
-          {
-            "ignore": false,
-            "prompt": "c2",
-            "text": "Sequence",
-            "values": "丸眼鏡",
-            "child": [
-              {
-                "text": "word",
-                "values": "red rectangle glasses",
-                "child": [],
-                "level": 3,
-                "ignore": false,
-                "prompt": "c2"
-              }
-            ],
-            "level": 2,
-            "expand": false
-          },
-          {
-            "ignore": false,
-            "prompt": "c2",
-            "text": "Sequence",
-            "values": "横長の楕円眼鏡",
-            "child": [
-              {
-                "text": "word",
-                "values": "wide oval glasses",
-                "child": [],
-                "level": 3,
-                "ignore": false,
-                "prompt": "c2"
-              }
-            ],
-            "level": 2,
-            "expand": false
-          },
-          {
-            "ignore": false,
-            "prompt": "c2",
-            "text": "Sequence",
-            "values": "小さいリムレスの楕円眼鏡",
-            "child": [
-              {
-                "text": "word",
-                "values": "small rimless oval glasses",
-                "child": [],
-                "level": 3,
-                "ignore": false,
-                "prompt": "c2"
-              }
-            ],
-            "level": 2,
-            "expand": false
-          },
-          {
-            "ignore": false,
-            "prompt": "c2",
-            "text": "Sequence",
-            "values": "四角形",
-            "child": [
-              {
-                "text": "word",
-                "values": "square glasses",
-                "child": [],
-                "level": 3,
-                "ignore": false,
-                "prompt": "c2"
-              }
-            ],
-            "level": 2,
-            "expand": false
-          },
-          {
-            "ignore": false,
-            "prompt": "c2",
-            "text": "Sequence",
-            "values": "幅狭のリムレス四角眼鏡",
-            "child": [
-              {
-                "text": "word",
-                "values": "Low-profile rimless square glasses",
-                "child": [],
-                "level": 3,
-                "ignore": false,
-                "prompt": "c2"
-              }
-            ],
-            "level": 2,
-            "expand": false
-          },
-          {
-            "ignore": false,
-            "prompt": "c2",
-            "text": "Sequence",
-            "values": "赤い長方形眼鏡",
-            "child": [
-              {
-                "text": "word",
-                "values": "red rectangle glasses",
-                "child": [],
-                "level": 3,
-                "ignore": false,
-                "prompt": "c2"
-              }
-            ],
-            "level": 2,
-            "expand": false
-          },
-          {
-            "ignore": false,
-            "prompt": "c2",
-            "text": "Sequence",
-            "values": "キャットアイ",
-            "child": [
-              {
-                "text": "word",
-                "values": "pink cat-eye glasses",
-                "child": [],
-                "level": 3,
-                "ignore": false,
-                "prompt": "c2"
-              }
-            ],
-            "level": 2,
-            "expand": false
-          },
-          {
-            "ignore": false,
-            "prompt": "c2",
-            "text": "Sequence",
-            "values": "アビエイター",
-            "child": [
-              {
-                "text": "word",
-                "values": "aviator glasses",
-                "child": [],
-                "level": 3,
-                "ignore": false,
-                "prompt": "c2"
-              }
-            ],
-            "level": 2,
-            "expand": false
-          },
-          {
-            "ignore": false,
-            "prompt": "c2",
-            "text": "Sequence",
-            "values": "ウェイファーラー",
-            "child": [
-              {
-                "text": "word",
-                "values": "wayfarer glasses",
-                "child": [],
-                "level": 3,
-                "ignore": false,
-                "prompt": "c2"
-              }
-            ],
-            "level": 2,
-            "expand": false
-          },
-          {
-            "ignore": false,
-            "prompt": "c2",
-            "text": "Sequence",
-            "values": "リムが部分的にしかない眼鏡",
-            "child": [
-              {
-                "text": "word",
-                "values": "semi-rimless glasses",
-                "child": [],
-                "level": 3,
-                "ignore": false,
-                "prompt": "c2"
-              }
-            ],
-            "level": 2,
-            "expand": false
-          },
-          {
-            "ignore": false,
-            "prompt": "c2",
-            "text": "Sequence",
-            "values": "上縁だけの眼鏡",
-            "child": [
-              {
-                "text": "word",
-                "values": "over-rim glasses",
-                "child": [],
-                "level": 3,
-                "ignore": false,
-                "prompt": "c2"
-              }
-            ],
-            "level": 2,
-            "expand": false
-          },
-          {
-            "ignore": false,
-            "prompt": "c2",
-            "text": "Sequence",
-            "values": "オーバーサイズの不透明眼鏡",
-            "child": [
-              {
-                "text": "word",
-                "values": "oversized opaque glasses",
-                "child": [],
-                "level": 3,
-                "ignore": false,
-                "prompt": "c2"
-              }
-            ],
-            "level": 2,
-            "expand": false
-          },
-          {
-            "ignore": false,
-            "prompt": "c2",
-            "text": "Sequence",
-            "values": "細い針金状フレーム",
-            "child": [
-              {
-                "text": "word",
-                "values": "wireframe glasses",
-                "child": [],
-                "level": 3,
-                "ignore": false,
-                "prompt": "c2"
-              }
-            ],
-            "level": 2,
-            "expand": false
-          },
-          {
-            "ignore": false,
-            "prompt": "c2",
-            "text": "Sequence",
-            "values": "プラフレーム",
-            "child": [
-              {
-                "text": "word",
-                "values": "plastic glasses",
-                "child": [],
-                "level": 3,
-                "ignore": false,
-                "prompt": "c2"
-              }
-            ],
-            "level": 2,
-            "expand": false
-          },
-          {
-            "ignore": false,
-            "prompt": "c2",
-            "text": "Sequence",
-            "values": "モノクル",
-            "child": [
-              {
-                "text": "word",
-                "values": "vintage opaque monocle",
-                "child": [],
-                "level": 3,
-                "ignore": false,
-                "prompt": "c2"
-              }
-            ],
-            "level": 2,
-            "expand": false
-          },
-          {
-            "ignore": false,
-            "prompt": "c2",
-            "text": "Sequence",
-            "values": "ハート型のシースルーサングラス",
-            "child": [
-              {
-                "text": "word",
-                "values": "heart-shaped see-through sunglasses",
-                "child": [],
-                "level": 3,
-                "ignore": false,
-                "prompt": "c2"
-              }
-            ],
-            "level": 2,
-            "expand": false
-          },
-          {
-            "ignore": false,
-            "prompt": "c2",
-            "text": "Sequence",
-            "values": "未来的ゴーグル",
-            "child": [
-              {
-                "text": "word",
-                "values": "futuristic wraparound googles",
-                "child": [],
-                "level": 3,
-                "ignore": false,
-                "prompt": "c2"
-              }
-            ],
-            "level": 2,
-            "expand": false
-          },
-          {
-            "ignore": false,
-            "prompt": "c2",
-            "text": "Sequence",
-            "values": "スキーゴーグル",
-            "child": [
-              {
-                "text": "word",
-                "values": "ski goggles",
-                "child": [],
-                "level": 3,
-                "ignore": false,
-                "prompt": "c2"
-              }
-            ],
-            "level": 2,
-            "expand": false
-          },
-          {
-            "ignore": false,
-            "prompt": "c2",
-            "text": "Sequence",
-            "values": "曇るレンズ",
-            "child": [
-              {
-                "text": "word",
-                "values": "fogged glasses",
-                "child": [],
-                "level": 3,
-                "ignore": false,
-                "prompt": "c2"
-              }
-            ],
-            "level": 2,
-            "expand": false
-          },
-          {
-            "ignore": false,
-            "prompt": "c2",
-            "text": "Sequence",
-            "values": "縁無しの瓶底眼鏡",
-            "child": [
-              {
-                "text": "word",
-                "values": "rimless coke-bottle glasses",
-                "child": [],
-                "level": 3,
-                "ignore": false,
-                "prompt": "c2"
-              }
-            ],
-            "level": 2,
-            "expand": false
-          },
-          {
-            "ignore": false,
-            "prompt": "c2",
-            "text": "Sequence",
-            "values": "鼻眼鏡",
-            "child": [
-              {
-                "text": "word",
-                "values": "groucho glasses",
-                "child": [],
-                "level": 3,
-                "ignore": false,
-                "prompt": "c2"
-              }
-            ],
-            "level": 2,
-            "expand": false
-          },
-          {
-            "ignore": false,
-            "prompt": "c2",
-            "text": "Sequence",
-            "values": "左右でレンズの色が違う眼鏡",
-            "child": [
-              {
-                "text": "word",
-                "values": "heterochromatic eyewear",
-                "child": [],
-                "level": 3,
-                "ignore": false,
-                "prompt": "c2"
-              }
-            ],
-            "level": 2,
-            "expand": false
-          },
-          {
-            "ignore": false,
-            "prompt": "c2",
-            "text": "Sequence",
-            "values": "スカウター",
-            "child": [
-              {
-                "text": "word",
-                "values": "scouter",
-                "child": [],
-                "level": 3,
-                "ignore": false,
-                "prompt": "c2"
-              }
-            ],
-            "level": 2,
-            "expand": false
-          },
-          {
-            "ignore": false,
-            "prompt": "c2",
-            "text": "Sequence",
-            "values": "スチームパンク風の太フレーム",
-            "child": [
-              {
-                "text": "word",
-                "values": "thick frame",
-                "child": [],
-                "level": 3,
-                "ignore": false,
-                "prompt": "c2"
-              },
-              {
-                "text": "word",
-                "values": "steampunk glasses",
-                "child": [],
-                "level": 3,
-                "ignore": false,
-                "prompt": "c2"
-              }
-            ],
-            "level": 2,
-            "expand": false
           }
         ],
         "expand": false,

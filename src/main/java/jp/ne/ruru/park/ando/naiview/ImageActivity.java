@@ -171,8 +171,8 @@ public class ImageActivity extends AppCompatActivity {
         } else {
             addText = " (" + a.getSettingWidthXHeight(preferences) + ")";
         }
-        String imageText =  ImageActivity.this.getResources().getString(R.string.generate_image) + addText;
-        String upscaleText = ImageActivity.this.getResources().getString(R.string.upscale)
+        String imageText =  ImageActivity.this.getResources().getString(R.string.generate_image_button) + addText;
+        String upscaleText = ImageActivity.this.getResources().getString(R.string.upscale_button)
                 + " (x" + a.getSettingScale(preferences) + ")";
         final String[] items;
         if ((bitmapX <= MAX_UPSCALE_SIZE) && (bitmapY <= MAX_UPSCALE_SIZE)) {

@@ -987,9 +987,7 @@ public class MyApplication  extends Application {
             if (object instanceof JSONArray) {
                 JSONArray array = (JSONArray) object;
                 Data arrayData = new Data(array);
-                for (JSONObject target : arrayData) {
-                    dictToList(promptType, target, list);
-                }
+                arrayData.forEach(target -> dictToList(promptType, target, list));
                 return;
             } else if (! (object instanceof JSONObject)) {
                 return;
@@ -1125,20 +1123,13 @@ public class MyApplication  extends Application {
      */
     protected String[] deleteTextFromItem(String targets,Object object) {
         List<String> keys = new java.util.ArrayList<>();
-        getAllTextList(object, keys);
+        getBaseKeyListFromPrompt(object, keys);
         keys.sort((a,b)-> a.length() == b.length() ? b.compareTo(a) : b.length() - a.length());
-        String[] targetsArray = targets.split(",");
         StringBuilder resultHit = null;
         StringBuilder resultNoHit = null;
-        for (String target : targetsArray) {
-            boolean hit = false;
-            String targetBreak = changeBaseKey(target);
-            for (String key : keys) {
-                if (targetBreak.equals(key)) {
-                    hit = true;
-                    break;
-                }
-            }
+        for (String target : targets.split(",")) {
+            final String targetBreak = changeBaseKey(target);
+            final boolean hit = keys.stream().anyMatch(targetBreak::equals);
             if (hit) {
                 if (resultHit == null) {
                     resultHit = new StringBuilder();
@@ -1159,15 +1150,13 @@ public class MyApplication  extends Application {
         resultNoHit = (resultNoHit == null) ? new StringBuilder() : resultNoHit;
         return new String[] {resultNoHit.toString(), resultHit.toString()};
     }
-    protected void getAllTextList(Object object, List<String> list) {
+    protected void getBaseKeyListFromPrompt(Object object, List<String> list) {
         if (object == null) {
             return;
         }
         if (object instanceof JSONArray) {
             Data data = new Data(object);
-            for (JSONObject target : data) {
-                getAllTextList(target,list);
-            }
+            data.forEach(target->getBaseKeyListFromPrompt(target,list));
             return;
         }
         if (object instanceof JSONObject) {
@@ -1175,15 +1164,48 @@ public class MyApplication  extends Application {
             if (TextType.WORD.equals(objectData.getTextType())) {
                 String key = objectData.getValue();
                 if (! key.isEmpty()) {
-                    list.add(changeBaseKey(key));
+                    String nextKey = changeBaseKey(key);
+                    if (! list.contains(nextKey)) {
+                        list.add(nextKey);
+                    }
                 }
             }
-            getAllTextList(objectData.getChild(),list);
+            getBaseKeyListFromPrompt(objectData.getChild(),list);
         }
     }
 
+    public static String[] REMOVE_LIST = {
+            "\\b" + "white\\s+",
+            "\\b" + "black\\s+",
+            "\\b" + "red\\s+",
+            "\\b" + "pink\\s+",
+            "\\b" + "blue\\s+",
+            "\\b" + "yellow\\s+",
+            "\\b" + "green\\s+",
+            "\\b" + "blown\\s+",
+            "\\b" + "orange\\s+",
+            "\\b" + "purple\\s+",
+            "\\b" + "gray\\s+",
+            "\\b" + "rainbow\\s+",
+            "\\b" + "light\\s+",
+            "\\b" + "dark\\s+",
+            "\\b" + "pleated\\s+",
+            "\\b" + "covering\\s+",
+            "\\b" + "open\\s+",
+            "\\b" + "close\\s+",
+            "\\b" + "spread\\s+",
+            "\\b" + "small\\s+",
+            "\\b" + "huge\\s+",
+            "\\b" + "big\\s+",
+            "s$",
+            "^artist:\\s*"
+    };
     private String changeBaseKey(String key) {
-        return key.replaceAll("artist:", "").replaceAll("[_{}\\[\\]]"," ").replaceAll("\\s+"," ").trim();
+        key = key.replaceAll("[_{}\\[\\]]"," ").replaceAll("\\s+"," ").trim();
+        for (String string : REMOVE_LIST) {
+            key = key.replaceAll(string,"");
+        }
+        return key.toUpperCase();
     }
 
     /** get subscription

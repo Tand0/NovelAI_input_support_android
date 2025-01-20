@@ -93,7 +93,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
-        android:text="@string/suggest_tags"
+        android:text="@string/suggest_tags_summary"
         tools:ignore="ButtonStyle,RtlHardcoded" />
 
     <ListView

@@ -47,6 +47,8 @@
         android:layout_alignParentEnd="true"
         android:hint="@string/menu_ignore_hint"
         android:text="@string/menu_ignore"
+        android:minWidth="48dp"
+        android:minHeight="48dp"
         style="@style/EyesCheckBox"
         tools:ignore="RelativeOverlap" />
 </RelativeLayout>

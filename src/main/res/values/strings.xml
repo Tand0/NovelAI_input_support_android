@@ -97,15 +97,19 @@
     <string name="menu_nai">Use Novel AI REST API</string>
     <string name="menu_default">Default</string>
     <string name="generate_image">/ai/generate-image</string>
+    <string name="generate_image_button">(NovelAI)Generate image</string>
     <string name="upscale">/ai/upscale</string>
-    <string name="upscale_summary">/ai/upscale x2 or x4</string>
+    <string name="upscale_summary">Upscale: x2 or x4</string>
+    <string name="upscale_button">(NovelAI)Upscale</string>
     <string name="exif">Update prompt</string>
     <string name="exif_summary">Update prompt when loading image</string>
     <string name="i2i">(i2i)Use Image2Image</string>
     <string name="i2i_summary">Use image to image</string>
     <string name="subscription">/user/subscription</string>
+    <string name="subscription_button">(NovelAI)Inspect subscription</string>
     <string name="subscription_summary">Check the status of your subscription</string>
     <string name="suggest_tags">/ai/generate-image/suggest-tags</string>
+    <string name="suggest_tags_summary">Get suggest list</string>
     <string name="title_activity_tree">TreeActivity</string>
     <string name="title_activity_suggest">SuggestActivity</string>
 
@@ -143,20 +147,20 @@
     <string name="title_activity_image">ImageActivity</string>
 
     <!-- prompt long -->
-    <string name="prompt_type_base_ok_long">Prompt</string>
-    <string name="prompt_type_base_ng_long">Negative Prompt</string>
+    <string name="prompt_type_base_ok_long">Base Prompt</string>
+    <string name="prompt_type_base_ng_long">Base Negative Prompt</string>
     <string name="prompt_type_ch1_ok_long">1 Character Prompt</string>
     <string name="prompt_type_ch1_ng_long">1 Character Negative Prompt</string>
     <string name="prompt_type_ch2_ok_long">2 Character Prompt</string>
     <string name="prompt_type_ch2_ng_long">2 Character Negative Prompt</string>
 
     <!-- prompt short -->
-    <string name="prompt_type_base_ok">Prompt</string>
-    <string name="prompt_type_base_ng">Negative</string>
-    <string name="prompt_type_ch1_ok">Char01 Prompt</string>
-    <string name="prompt_type_ch1_ng">Char01 Negative</string>
-    <string name="prompt_type_ch2_ok">Char02 Prompt</string>
-    <string name="prompt_type_ch2_ng">Char02 Negative</string>
+    <string name="prompt_type_base_ok">Base Prompt</string>
+    <string name="prompt_type_base_ng">Base Negative</string>
+    <string name="prompt_type_ch1_ok">01 Prompt</string>
+    <string name="prompt_type_ch1_ng">01 Negative</string>
+    <string name="prompt_type_ch2_ok">02 Prompt</string>
+    <string name="prompt_type_ch2_ng">02 Negative</string>
 
     <!-- prompt x or y -->
     <string name="prompt_location">Character Location</string>

@@ -97,15 +97,19 @@
     <string name="menu_nai">Novel AI REST APIの使用</string>
     <string name="menu_default">デフォルト</string>
     <string name="generate_image">/ai/generate-image</string>
+    <string name="generate_image_button">(NovelAI)画像生成</string>
     <string name="upscale">/ai/upscale</string>
-    <string name="upscale_summary">2倍or4倍</string>
+    <string name="upscale_summary">Upscale:2倍or4倍</string>
+    <string name="upscale_button">(NovelAI)画像拡大</string>
     <string name="exif">プロンプト更新</string>
     <string name="exif_summary">画像ロード時にプロンプトを更新する</string>
     <string name="i2i">(i2i)Image2Image の使用</string>
     <string name="i2i_summary">画像を元に画像を生成する</string>
     <string name="subscription">/user/subscription</string>
+    <string name="subscription_button">(NovelAI)サブスク確認</string>
     <string name="subscription_summary">サブスクの状況を確認します</string>
     <string name="suggest_tags">/ai/generate-image/suggest-tags</string>
+    <string name="suggest_tags_summary">サジェスト(予測)リストを取得</string>
     <string name="title_activity_tree">ツリー</string>
     <string name="title_activity_suggest">入力予測</string>
 
@@ -151,12 +155,12 @@
     <string name="prompt_type_ch2_ng_long">2キャラクターネガティブプロンプト</string>
 
     <!-- prompt short -->
-    <string name="prompt_type_base_ok">プロンプト</string>
-    <string name="prompt_type_base_ng">ネガティブ</string>
-    <string name="prompt_type_ch1_ok">キャラ01 プロンプト</string>
-    <string name="prompt_type_ch1_ng">キャラ01 ネガティブ</string>
-    <string name="prompt_type_ch2_ok">キャラ02 プロンプト</string>
-    <string name="prompt_type_ch2_ng">キャラ02 ネガティブ</string>
+    <string name="prompt_type_base_ok">ベース プロンプト</string>
+    <string name="prompt_type_base_ng">ベース ネガティブ</string>
+    <string name="prompt_type_ch1_ok">01 プロンプト</string>
+    <string name="prompt_type_ch1_ng">01 ネガティブ</string>
+    <string name="prompt_type_ch2_ok">02 プロンプト</string>
+    <string name="prompt_type_ch2_ng">02 ネガティブ</string>
 
     <!-- prompt x or y -->
     <string name="prompt_location">キャラクターの位置</string>
