@@ -734,7 +734,7 @@
             ]
           },
           {
-            "ignore": false,
+            "ignore": true,
             "prompt": "c0",
             "text": "Sequence",
             "values": "お好みで",
@@ -884,7 +884,7 @@
         "level": 1,
         "child": [
           {
-            "ignore": false,
+            "ignore": true,
             "prompt": "c0",
             "text": "Sequence",
             "values": "一般",
@@ -938,7 +938,7 @@
             ]
           },
           {
-            "ignore": true,
+            "ignore": false,
             "prompt": "c0",
             "text": "Sequence",
             "values": "露骨",
@@ -994,14 +994,14 @@
         ]
       }
     ],
-    "expand": true,
+    "expand": false,
     "level": 0
   },
   {
     "text": "Sequence",
     "prompt": "c1",
     "values": "1キャラクタープロンプト",
-    "expand": true,
+    "expand": false,
     "child": [
       {
         "text": "Select",
@@ -1491,15 +1491,7 @@
                 "text": "word",
                 "values": "smug",
                 "child": [],
-                "level": 2,
-                "ignore": false,
-                "prompt": "c1"
-              },
-              {
-                "text": "word",
-                "values": "scared",
-                "child": [],
-                "level": 2,
+                "level": 3,
                 "ignore": false,
                 "prompt": "c1"
               },
@@ -1507,7 +1499,7 @@
                 "text": "word",
                 "values": "smirk",
                 "child": [],
-                "level": 2,
+                "level": 3,
                 "ignore": false,
                 "prompt": "c1"
               },
@@ -1515,7 +1507,7 @@
                 "text": "word",
                 "values": "grin",
                 "child": [],
-                "level": 2,
+                "level": 3,
                 "ignore": false,
                 "prompt": "c1"
               },
@@ -1523,7 +1515,7 @@
                 "text": "word",
                 "values": "happy",
                 "child": [],
-                "level": 2,
+                "level": 3,
                 "ignore": false,
                 "prompt": "c1"
               },
@@ -1531,7 +1523,7 @@
                 "text": "word",
                 "values": "kind smile",
                 "child": [],
-                "level": 2,
+                "level": 3,
                 "ignore": false,
                 "prompt": "c1"
               },
@@ -1539,7 +1531,7 @@
                 "text": "word",
                 "values": "light smile",
                 "child": [],
-                "level": 2,
+                "level": 3,
                 "ignore": false,
                 "prompt": "c1"
               }
@@ -1579,6 +1571,14 @@
             "text": "Select",
             "values": "目の指定",
             "child": [
+              {
+                "ignore": false,
+                "prompt": "c1",
+                "text": "word",
+                "values": "black eyes",
+                "child": [],
+                "level": 3
+              },
               {
                 "text": "word",
                 "values": "half closed eyes",
@@ -1621,14 +1621,6 @@
               },
               {
                 "text": "word",
-                "values": "open mouth",
-                "child": [],
-                "level": 3,
-                "ignore": false,
-                "prompt": "c1"
-              },
-              {
-                "text": "word",
                 "values": "closed eyes",
                 "child": [],
                 "level": 3,
@@ -1655,7 +1647,7 @@
             "child": [
               {
                 "text": "word",
-                "values": ":t",
+                "values": "open mouth",
                 "child": [],
                 "level": 3,
                 "ignore": false,
@@ -1663,7 +1655,7 @@
               },
               {
                 "text": "word",
-                "values": "licking lips",
+                "values": ":t",
                 "child": [],
                 "level": 3,
                 "ignore": false,
@@ -1721,6 +1713,14 @@
             "text": "Sequence",
             "values": "くいしばる",
             "child": [
+              {
+                "text": "word",
+                "values": "scared",
+                "child": [],
+                "level": 3,
+                "ignore": false,
+                "prompt": "c1"
+              },
               {
                 "text": "word",
                 "values": "clenched teeth",
@@ -1915,7 +1915,7 @@
                               }
                             ],
                             "level": 6,
-                            "expand": false,
+                            "expand": true,
                             "ignore": false,
                             "prompt": "c1"
                           },
@@ -1959,13 +1959,13 @@
                       }
                     ],
                     "level": 4,
-                    "expand": false,
+                    "expand": true,
                     "ignore": false,
                     "prompt": "c1"
                   }
                 ],
                 "level": 3,
-                "expand": false,
+                "expand": true,
                 "ignore": false,
                 "prompt": "c1"
               },
@@ -4427,14 +4427,6 @@
         "child": [
           {
             "text": "word",
-            "values": "drooling",
-            "child": [],
-            "level": 2,
-            "ignore": false,
-            "prompt": "c1"
-          },
-          {
-            "text": "word",
             "values": "nose blush",
             "child": [],
             "level": 2,
@@ -4451,7 +4443,7 @@
           },
           {
             "text": "word",
-            "values": "sweat",
+            "values": "sex",
             "child": [],
             "level": 2,
             "ignore": false,
@@ -4486,8 +4478,24 @@
                 "prompt": "c1"
               },
               {
+                "ignore": false,
+                "prompt": "c1",
+                "text": "word",
+                "values": "cum",
+                "child": [],
+                "level": 3
+              },
+              {
                 "text": "word",
                 "values": "cum on pussy",
+                "child": [],
+                "level": 3,
+                "ignore": false,
+                "prompt": "c1"
+              },
+              {
+                "text": "word",
+                "values": "drooling",
                 "child": [],
                 "level": 3,
                 "ignore": false,
@@ -4575,7 +4583,7 @@
               },
               {
                 "text": "word",
-                "values": "sex",
+                "values": "sweat",
                 "child": [],
                 "level": 3,
                 "ignore": false,

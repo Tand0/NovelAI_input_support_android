@@ -7,6 +7,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
@@ -167,19 +168,24 @@ public class Data implements Iterable<JSONObject> {
     private TextType tType = null;
 
     public Data(Object object) {
-        this.object = object;
-        //
-        Boolean iTypeBoolean = containBoolean(object,Data.I_TYPE);
-        if (iTypeBoolean == null) {
-            // for old version
-            String textTypeString = containString(object,Data.T_TYPE);
-            if (textTypeString != null) {
-                setIgnore(textTypeString.contains("Ignore-"));
-                if (textTypeString.contains("uc-")) {
-                    setPromptType(PromptType.P_BASE_NG);
+        if (object == null) {
+            this.object = null;
+        } else if (object instanceof Data) {
+            this.object = ((Data)object).getObject();
+        } else {
+            this.object = object;
+            Boolean iTypeBoolean = containBoolean(object, Data.I_TYPE);
+            if (iTypeBoolean == null) {
+                // for old version
+                String textTypeString = containString(object, Data.T_TYPE);
+                if (textTypeString != null) {
+                    setIgnore(textTypeString.contains("Ignore-"));
+                    if (textTypeString.contains("uc-")) {
+                        setPromptType(PromptType.P_BASE_NG);
+                    }
+                    TextType textType = getTextType();
+                    setTextType(textType);
                 }
-                TextType textType = getTextType();
-                setTextType(textType);
             }
         }
     }
@@ -195,6 +201,9 @@ public class Data implements Iterable<JSONObject> {
                 //
             }
         }
+    }
+    public Object getObject() {
+        return this.object;
     }
     @NonNull
     public PromptType getPromptType() {
@@ -339,6 +348,16 @@ public class Data implements Iterable<JSONObject> {
                 //
             }
         }
+    }
+    public List<Data> getSelectableList() {
+        List<Data> list = new ArrayList<>();
+        for (JSONObject child : this) {
+            Data data = new Data(child);
+            if (!data.getIgnore()) {
+                list.add(data);
+            }
+        }
+        return list;
     }
     public boolean getExpand() {
         Boolean target = containBoolean(object,EXPAND);

@@ -154,15 +154,15 @@ public class JSONListAdapter<T extends JSONObject> extends ArrayAdapter<T> {
             checkBox.setText(value.toString());
             checkBox.setHint(String.format(Locale.ENGLISH, "%d - expand", position));
         }
-        checkBox = view.findViewById(R.id.ignore_cheese);
-        if (checkBox != null) {
-            if (checkBox.isChecked() != itemData.getIgnore()) {
-                checkBox.setOnCheckedChangeListener(null);
-                checkBox.setChecked(itemData.getIgnore());
+        CheckBox ignoreBox = view.findViewById(R.id.ignore_cheese);
+        if (ignoreBox != null) {
+            if (ignoreBox.isChecked() != itemData.getIgnore()) {
+                ignoreBox.setOnCheckedChangeListener(null);
+                ignoreBox.setChecked(itemData.getIgnore());
             }
-            checkBox.setText("");
-            checkBox.setHint("");
-            checkBox.setOnCheckedChangeListener((buttonView, isChecked) -> ignoreButton(position, isChecked));
+            ignoreBox.setText("");
+            ignoreBox.setHint("");
+            ignoreBox.setOnCheckedChangeListener((buttonView, isChecked) -> ignoreButton(position, isChecked));
         }
         return view;
     }

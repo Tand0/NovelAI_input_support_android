@@ -7,6 +7,7 @@ import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Handler;
 import android.widget.Toast;
 
@@ -1016,22 +1017,26 @@ public class MyApplication  extends Application {
                     break;
                 case SELECT:
                     JSONArray childArray = jsonData.getChild();
-                    max = childArray.length();
-                    if (max != 0) {
+                    Data childData = new Data(childArray);
+                    List<Data> dataList = childData.getSelectableList();
+                    max = dataList.size();
+                    if (0 < max) {
                         Random rand = new Random();
                         int index = rand.nextInt(max);
-                        dictToList(promptType, childArray.get(index), list);
+                        dictToList(promptType, dataList.get(index).getObject(), list);
                     }
                     break;
                 case WEIGHT:
                     JSONArray weightArray = jsonData.getChild();
-                    max = weightArray.length();
+                    Data weightData = new Data(weightArray);
+                    List<Data> weightList = weightData.getSelectableList();
+                    max = weightList.size();
                     if (0 < max) {
                         Random rand = new Random();
                         boolean flag = true;
                         for (int i = 0; i < max; i++) {
                             if (rand.nextInt(100) < 60) {
-                                dictToList(promptType, weightArray.get(i), list);
+                                dictToList(promptType, weightList.get(i).getObject(), list);
                                 flag = false;
                                 break;
                             }
