@@ -1,6 +1,8 @@
 package jp.ne.ruru.park.ando.naiview;
 
 import android.content.Intent;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
 
@@ -44,6 +46,16 @@ public class MainActivity extends AppCompatActivity {
         // load to the top
         MyApplication a = (MyApplication) this.getApplication();
         a.loadInternal(this);
+        //
+        // version information
+        try {
+            String name = this.getPackageName();
+            PackageManager pm = this.getPackageManager();
+            PackageInfo info = pm.getPackageInfo(name, PackageManager.GET_META_DATA);
+            a.appendLog(this, "Version:" + info.versionCode + " / " + info.versionName);
+        } catch (PackageManager.NameNotFoundException e) {
+            a.appendLog(this, e.getMessage());
+        }
 
         // Get intent, action and MIME type
         Intent intent = getIntent();

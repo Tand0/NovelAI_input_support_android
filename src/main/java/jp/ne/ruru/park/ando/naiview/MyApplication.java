@@ -7,7 +7,6 @@ import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Handler;
 import android.widget.Toast;
 
@@ -66,7 +65,7 @@ public class MyApplication  extends Application {
     }
 
     /**
-     * novelai toppage
+     * novelai top page
      */
     public static final String CREATE_ACCOUNT_URL = "https://novelai.net/";
 
@@ -91,7 +90,12 @@ public class MyApplication  extends Application {
     public String getLog() {
         return this.log;
     }
-
+    /**
+     * setter for log
+     */
+    public void setLog(String log) {
+        this.log = log;
+    }
     /**
      * append log
      *
@@ -359,7 +363,7 @@ public class MyApplication  extends Application {
         values = (values == null) ? "" : values;
         if (isPromptModelV4(preferences)) {
             values = values.replaceAll("_"," ");
-            values = values.replaceAll("\\^\\\\s+\\^","^_^");
+            values = values.replace("([\\^@])\\\\s+([\\^@])","$1_$2");
         }
         return values;
     }
@@ -1179,38 +1183,26 @@ public class MyApplication  extends Application {
         }
     }
 
-    public static String[] REMOVE_LIST = {
-            "\\b" + "white\\s+",
-            "\\b" + "black\\s+",
-            "\\b" + "red\\s+",
-            "\\b" + "pink\\s+",
-            "\\b" + "blue\\s+",
-            "\\b" + "yellow\\s+",
-            "\\b" + "green\\s+",
-            "\\b" + "blown\\s+",
-            "\\b" + "orange\\s+",
-            "\\b" + "purple\\s+",
-            "\\b" + "gray\\s+",
-            "\\b" + "rainbow\\s+",
-            "\\b" + "light\\s+",
-            "\\b" + "dark\\s+",
-            "\\b" + "pleated\\s+",
-            "\\b" + "covering\\s+",
-            "\\b" + "open\\s+",
-            "\\b" + "close\\s+",
-            "\\b" + "spread\\s+",
-            "\\b" + "small\\s+",
-            "\\b" + "huge\\s+",
-            "\\b" + "big\\s+",
-            "s$",
-            "^artist:\\s*"
+    private final static String[] REMOVE_LIST = {
+            "^(artist|copyright|character|rating):\\s*",
+            "(s|ing)$",
+            "\\b("
+                    + "white|black|red|pink|blue" + "|"
+                    + "yellow|green|blown|blonde" + "|"
+                    + "orange|purple|rainbow" + "|"
+                    + "light|gray|dark" + "|"
+                    + "pleated|covering|spread" + "|"
+                    + "open|close|small|big|huge" + ")\\s+",
     };
     private String changeBaseKey(String key) {
-        key = key.replaceAll("[_{}\\[\\]]"," ").replaceAll("\\s+"," ").trim();
+        key = key.toLowerCase()
+                .replaceAll("[_{}\\[\\]]"," ")
+                .replaceAll("\\s+"," ")
+                .trim();
         for (String string : REMOVE_LIST) {
             key = key.replaceAll(string,"");
         }
-        return key.toUpperCase();
+        return key;
     }
 
     /** get subscription

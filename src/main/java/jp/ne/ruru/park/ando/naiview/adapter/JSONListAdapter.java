@@ -4,6 +4,8 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
+import android.text.SpannableString;
+import android.text.style.ForegroundColorSpan;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -181,14 +183,18 @@ public class JSONListAdapter<T extends JSONObject> extends ArrayAdapter<T> {
         MyApplication a =
                 ((MyApplication) ((AppCompatActivity) this.getContext()).getApplication());
         //
+        MenuItem pastItem = menu.findItem(R.id.menu_past);
+        pastItem.setVisible(a.getCut() != null);
+        //
         MenuItem titleItem = menu.findItem(R.id.menu_prompt_type);
         Data positionData = new Data(this.getItem(position));
         int id = positionData.getPromptType().getIdLong();
         String title = a.getResources().getString(id);
-        titleItem.setTitle(title);
+        SpannableString s = new SpannableString(title);
+        s.setSpan(new ForegroundColorSpan(Color.RED), 0, s.length(), 0);
+        titleItem.setTitle(s);
         //
-        MenuItem pastItem = menu.findItem(R.id.menu_past);
-        pastItem.setVisible(a.getCut() != null);
+        //
         //
         popup.show();
         popup.setOnMenuItemClickListener(item -> {

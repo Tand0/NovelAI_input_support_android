@@ -10,6 +10,7 @@ import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.graphics.Matrix;
 import android.net.Uri;
 import android.os.Build;
@@ -17,11 +18,13 @@ import android.os.Bundle;
 import android.provider.MediaStore;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
+import android.view.ScaleGestureDetector;
 import android.view.View;
 
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SwitchCompat;
 import androidx.preference.PreferenceManager;
@@ -40,32 +43,38 @@ import jp.ne.ruru.park.ando.naiview.databinding.ActivityImageBinding;
  */
 public class ImageActivity extends AppCompatActivity {
 
+    /** enum swipe flag */
+    private enum SWIPE_FLAG {
+        NONE,
+        MOVE_BACK,
+        MOVE_FORWARD,
+        IMAGE_LIST,
+        SAVE,
+        EXPAND
+    }
+
+    /** swipe flag */
+    private SWIPE_FLAG swipeFlag = SWIPE_FLAG.NONE;
+
     /** max upscale size */
-    public static final int MAX_UPSCALE_SIZE = 768;
+    private static final int MAX_UPSCALE_SIZE = 768;
+
+    /** detector for scale */
+    private ScaleGestureDetector scaleGestureDetector;
 
     /** detector for click */
-    GestureDetector gestureDetector;
+    private GestureDetector gestureDetector;
 
     /** binding */
     private ActivityImageBinding binding;
 
-    /**
-     * intent call back method.
-     * Used by Storage Access Framework
-     */
-    ActivityResultLauncher<Intent> resultLauncherSave = registerForActivityResult(
-            new ActivityResultContracts.StartActivityForResult(),
-            result -> {
-                if (result.getResultCode() == Activity.RESULT_OK) {
-                    Intent resultData  = result.getData();
-                    if (resultData  != null) {
-                        Uri uri = resultData.getData();
-                        if (uri != null) {
-                            ImageActivity.this.saveForASFResult(uri);
-                        }
-                    }
-                }
-            });
+    /** bitmap width */
+    private int bitmapX = 0;
+
+    /** bitmap height */
+    private int bitmapY = 0;
+
+    private float[] matrixBaseValue = null;
 
     /**
      * create views
@@ -79,29 +88,16 @@ public class ImageActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding = ActivityImageBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-        gestureDetector = new GestureDetector(this,listener);
+        scaleGestureDetector = new ScaleGestureDetector(this, mScaleGestureDetector);
+        gestureDetector = new GestureDetector(this, mSimpleOnGestureListener);
     }
 
-    /**
-     * intent call back method.
-     * Used by Storage Access Framework
-     */
-    ActivityResultLauncher<Intent> resultLauncher = registerForActivityResult(
-            new ActivityResultContracts.StartActivityForResult(),
-            result -> {
-                if (result.getResultCode() == Activity.RESULT_OK) {
-                    loadForASFResult();
-                }
-            });
     /** on resume */
     @Override
     public void onResume() {
         super.onResume();
         this.onMyResume();
     }
-
-    public int bitmapX = 0;
-    public int bitmapY = 0;
 
     /** repaint data */
     public void onMyResume() {
@@ -128,15 +124,76 @@ public class ImageActivity extends AppCompatActivity {
                     bitmap = Bitmap.createBitmap(bitmap,0,0,bitmapX,bitmapY,m,true);
                 }
             }
+            binding.imageView.setBackgroundColor(Color.BLACK);
             binding.imageView.setImageBitmap(bitmap);
+            //
+            // clear
+            matrixBaseValue = null;
+            //
         } catch (Exception e) {
             a.appendLog(this, this.getClass().getName() + " onMyResume() failed");
             a.appendLog(this, e.getMessage());
         }
     }
+    /**
+     * on touch event
+     * @param event The touch screen event being processed.
+     *
+     * @return if used then true
+     */
+    @Override
+    public boolean onTouchEvent(MotionEvent event) {
+        boolean flag1 = gestureDetector.onTouchEvent(event);
+        boolean flag2 = scaleGestureDetector.onTouchEvent(event);
+        return flag1 || flag2 || super.onTouchEvent(event);
+    }
+
+    private void createMatrixBaseValue(Matrix matrix) {
+        matrixBaseValue = new float[9];
+        matrix.getValues(matrixBaseValue);
+    }
+    private void imageViewScale(float lastScaleFactor,float touchPointX,float touchPointY) {
+        Matrix matrix = binding.imageView.getImageMatrix();
+        if (matrixBaseValue == null) {
+            createMatrixBaseValue(matrix);
+        }
+        float[] matrixLocalValue = new float[9];
+        matrix.getValues(matrixLocalValue);
+        float baseScale = matrixBaseValue[Matrix.MSCALE_X];
+        float localScale = matrixLocalValue[Matrix.MSCALE_X];
+        float result = localScale/baseScale;
+        if (((result < 0.75f) && (lastScaleFactor < 1.0f)) || ((4.0f < result) && (1.0f < lastScaleFactor))) {
+            return;
+        }
+        matrix.postScale(lastScaleFactor, lastScaleFactor, touchPointX, touchPointY);
+        binding.imageView.setBackgroundColor(Color.WHITE);
+        binding.imageView.invalidate();
+    }
+    private boolean imageViewMove(float x, float y) {
+        if ((x == 0.0f) && (y == 0.0f)) {
+            return false;
+        }
+        Matrix matrix = binding.imageView.getImageMatrix();
+        if (matrixBaseValue == null) {
+            createMatrixBaseValue(matrix);
+        }
+        float[] matrixLocalValue = new float[9];
+        matrix.getValues(matrixLocalValue);
+        float baseScale = matrixBaseValue[Matrix.MSCALE_X];
+        float localScale = matrixLocalValue[Matrix.MSCALE_X];
+        if (0 != localScale) {
+            x = x * localScale / baseScale;
+            y = y * localScale / baseScale;
+            matrix.postTranslate(-x,-y);
+            binding.imageView.invalidate();
+        } else {
+            return false;
+        }
+        return true;
+    }
 
     /** generate image */
-    public void generateImage() {
+    public void doGenerateImage() {
         final MyApplication a =
                 ((MyApplication)ImageActivity.this.getApplication());
         a.execution(ImageActivity.this, MyNASI.REST_TYPE.IMAGE,bitmapX,bitmapY,null);
@@ -209,7 +266,7 @@ public class ImageActivity extends AppCompatActivity {
                     if (which == 0) {
                         finish();
                     } else if (which == 1) {
-                        generateImage();
+                        doGenerateImage();
                     } else if (which == 2) {
                         doUpscale();
                     }
@@ -219,14 +276,83 @@ public class ImageActivity extends AppCompatActivity {
                 .show();
     }
 
+
+    public ScaleGestureDetector.SimpleOnScaleGestureListener mScaleGestureDetector = new ScaleGestureDetector.SimpleOnScaleGestureListener() {
+        private float touchPointX = 0;
+        private float touchPointY = 0;
+
+        @Override
+        public boolean onScaleBegin(ScaleGestureDetector detector) {
+            swipeFlag = SWIPE_FLAG.EXPAND;
+            touchPointX = detector.getFocusX();
+            touchPointY = detector.getFocusY();
+            return super.onScaleBegin(detector);
+        }
+        @Override
+        public void onScaleEnd(@NonNull ScaleGestureDetector detector) {
+            super.onScaleEnd(detector);
+        }
+        @Override
+        public boolean onScale(@NonNull ScaleGestureDetector detector) {
+            super.onScale(detector);
+            float lastScaleFactor = detector.getScaleFactor();
+            imageViewScale(lastScaleFactor, touchPointX, touchPointY);
+            return true;
+        }
+    };
+
     /** detector for click */
-    public GestureDetector.SimpleOnGestureListener listener = new GestureDetector.SimpleOnGestureListener() {
+    public GestureDetector.SimpleOnGestureListener mSimpleOnGestureListener = new GestureDetector.SimpleOnGestureListener() {
+        final float SWIPE_DISTANCE = 45.0f * 45.0f;
+        private int directionFlag = 0;
+        @Override
+        public boolean onDown(@NonNull MotionEvent e) {
+            if (swipeFlag == SWIPE_FLAG.EXPAND) {
+                return super.onDown(e);
+            }
+            return imageViewReset();
+        }
+        @Override
+        public boolean onScroll(@Nullable MotionEvent e1, @NonNull MotionEvent e2,
+                                float distanceX, float distanceY) {
+            if (swipeFlag == SWIPE_FLAG.EXPAND) {
+                directionFlag = 0;
+            } else {
+                if (matrixBaseValue == null) {
+                    directionFlag = 0;
+                }
+                if (directionFlag == 0) {
+                    float dx = distanceX * distanceX;
+                    float dy = distanceY * distanceY;
+                    if (dx < dy) {
+                        directionFlag = -1;
+                    } else {
+                        directionFlag = 1;
+                    }
+                }
+                if (directionFlag < 0) {
+                    distanceX = 0;
+                } else {
+                    distanceY = 0;
+                }
+            }
+            return imageViewMove(distanceX,distanceY);
+        }
         @Override
         public boolean onSingleTapUp(@NonNull MotionEvent event) {
+            if (swipeFlag == SWIPE_FLAG.EXPAND) {
+                return super.onSingleTapUp(event);
+            }
+            imageViewReset();
             onSaveDialogMenu();
-            return super.onSingleTapUp(event);
-        }
+            return true;
 
+        }
+        @Override
+        public boolean onDoubleTap(@NonNull MotionEvent e) {
+            swipeFlag = SWIPE_FLAG.NONE;
+            return imageViewReset();
+        }
         /**
          * on fling
          * @param e1 The first down motion event that started the fling.
@@ -237,32 +363,57 @@ public class ImageActivity extends AppCompatActivity {
          *              along the y axis.
          * @return if used then true
          */
-        public boolean onFling(MotionEvent e1, @NonNull MotionEvent e2, float velocityX,
+        @Override
+        public boolean onFling(@Nullable MotionEvent e1, @NonNull MotionEvent e2, float velocityX,
                                float velocityY) {
-            if (e1 == null) {
+            if ((e1 == null) || (swipeFlag == SWIPE_FLAG.EXPAND)) {
                 return super.onFling(null, e2, velocityX, velocityY);
             }
-            float dx = (e1.getX() - e2.getX());
-            dx = dx * dx;
+            float dx = e1.getX() - e2.getX();
             float dy = e1.getY() - e2.getY();
+            dx = dx * dx;
             dy = dy * dy;
-            final float SWIPE_DISTANCE = 45 * 45;
             if ((dy < SWIPE_DISTANCE)
                 && (dx < SWIPE_DISTANCE)) {
-                return super.onFling(null, e2, velocityX, velocityY);
-            } else if (dx < dy) {
-                swipeFlag = 2;
-                onMyFling();
-                return true;
-            } else if (e1.getX() < e2.getX()) {
-                swipeFlag = 0;
-                onMyFling();
-                return true;
-            } else {
-                swipeFlag = 1;
-                onMyFling();
-                return true;
+                return imageViewReset();
             }
+            jump(dx < dy,e1.getX() - e2.getX() < 0);
+            return true;
+        }
+        private void jump(boolean isImageList,boolean isBack) {
+            final MyApplication a =
+                    ((MyApplication)ImageActivity.this.getApplication());
+            if (a.getDownloadFlag()) {
+                imageViewReset();
+                swipeFlag = SWIPE_FLAG.SAVE;
+                onMyFling();
+                return ;
+            }
+            if (isImageList) {
+                swipeFlag = SWIPE_FLAG.IMAGE_LIST;
+                onMyFling();
+                return ;
+            }
+            if (isBack) {
+                swipeFlag = SWIPE_FLAG.MOVE_BACK;
+                onMyFling();
+                return ;
+            }
+            //if (e1.getX() > e2.getX())
+            swipeFlag = SWIPE_FLAG.MOVE_FORWARD;
+            onMyFling();
+        }
+        private boolean imageViewReset() {
+            if (matrixBaseValue == null) {
+                return false;
+            }
+            Matrix matrix = binding.imageView.getImageMatrix();
+            matrix.reset();
+            matrix.setValues(matrixBaseValue);
+            binding.imageView.setBackgroundColor(Color.BLACK);
+            binding.imageView.invalidate();
+            matrixBaseValue = null;
+            return true;
         }
     };
     public void onMyFling() {
@@ -277,18 +428,18 @@ public class ImageActivity extends AppCompatActivity {
             onMyNextFling();
         }
     }
-
-    public int swipeFlag = -1;
+    ActivityResultLauncher<String> readImagesPermissionLauncher = registerForActivityResult(
+            new ActivityResultContracts.RequestPermission(),
+            result -> {
+                if (result) {
+                    onMyNextFling();
+                }
+            });
     public void onMyNextFling() {
-        final MyApplication a =
-                ((MyApplication)ImageActivity.this.getApplication());
-        if (a.getDownloadFlag()) {
+        if (swipeFlag == SWIPE_FLAG.SAVE) {
             onSaveDialogMenu();
-        } else {
-            onMyNextNextFling();
+            return;
         }
-    }
-    public void onMyNextNextFling() {
         final MyApplication a =
                 ((MyApplication)ImageActivity.this.getApplication());
         a.setDownloadFlag(false);
@@ -333,15 +484,15 @@ public class ImageActivity extends AppCompatActivity {
             a.setImagePosition(-1);
             return;
         }
-        if (swipeFlag == 0) {
+        if (swipeFlag == SWIPE_FLAG.MOVE_BACK) {
             int index = a.getImagePosition() - 1;
             a.setImagePosition(index);
             loadForASFResult();
-        } else if (swipeFlag == 1) {
+        } else if (swipeFlag == SWIPE_FLAG.MOVE_FORWARD) {
             int index = Math.min(max, a.getImagePosition() + 1);
             a.setImagePosition(index);
             loadForASFResult();
-        } else {
+        } else if (swipeFlag == SWIPE_FLAG.IMAGE_LIST) {
             int index = Math.max(0,Math.min(max, a.getImagePosition()));
             a.setImagePosition(index);
             a.appendLog(this,"Action: ImageList");
@@ -349,26 +500,18 @@ public class ImageActivity extends AppCompatActivity {
             resultLauncher.launch(intent);
         }
     }
-    ActivityResultLauncher<String> readImagesPermissionLauncher = registerForActivityResult(
-            new ActivityResultContracts.RequestPermission(),
+    /**
+     * intent call back method.
+     * Used by Storage Access Framework
+     */
+    ActivityResultLauncher<Intent> resultLauncher = registerForActivityResult(
+            new ActivityResultContracts.StartActivityForResult(),
             result -> {
-                if (result) {
-                    onMyNextFling();
+                if (result.getResultCode() == Activity.RESULT_OK) {
+                    loadForASFResult();
                 }
             });
 
-
-    /**
-     * on touch event
-     * @param event The touch screen event being processed.
-     *
-     * @return if used then true
-     */
-    @Override
-    public boolean onTouchEvent(MotionEvent event) {
-        gestureDetector.onTouchEvent(event);
-        return super.onTouchEvent(event);
-    }
 
     /** load for call back.
      * Used by Storage Access Framework
@@ -414,6 +557,24 @@ public class ImageActivity extends AppCompatActivity {
         //
         resultLauncherSave.launch(intent);
     }
+
+    /**
+     * intent call back method.
+     * Used by Storage Access Framework
+     */
+    ActivityResultLauncher<Intent> resultLauncherSave = registerForActivityResult(
+            new ActivityResultContracts.StartActivityForResult(),
+            result -> {
+                if (result.getResultCode() == Activity.RESULT_OK) {
+                    Intent resultData  = result.getData();
+                    if (resultData  != null) {
+                        Uri uri = resultData.getData();
+                        if (uri != null) {
+                            ImageActivity.this.saveForASFResult(uri);
+                        }
+                    }
+                }
+            });
 
     /** save for call back.
      * Used by Storage Access Framework
