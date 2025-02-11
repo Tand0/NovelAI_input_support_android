@@ -39,12 +39,17 @@ import jp.ne.ruru.park.ando.naiview.adapter.UriEtc;
 import jp.ne.ruru.park.ando.naiview.data.Data;
 import jp.ne.ruru.park.ando.naiview.data.PromptType;
 import jp.ne.ruru.park.ando.naiview.data.TextType;
+import jp.ne.ruru.park.ando.naiview.miviewer.MIViewerData;
 
 
 /** application
  * @author T.Ando
  */
 public class MyApplication  extends Application {
+    private final MIViewerData data = new MIViewerData();
+    public MIViewerData getMIViewerData() {
+        return this.data;
+    }
 
     /**
      * Prevent multiple events from running at the same time
@@ -89,12 +94,6 @@ public class MyApplication  extends Application {
      */
     public String getLog() {
         return this.log;
-    }
-    /**
-     * setter for log
-     */
-    public void setLog(String log) {
-        this.log = log;
     }
     /**
      * append log
@@ -785,7 +784,7 @@ public class MyApplication  extends Application {
      * @param imageUri image uri, if null then use resources
      * @param mime mime type
      */
-    protected void updateImageBuffer(Context context,Uri imageUri,String mime) {
+    public void updateImageBuffer(Context context,Uri imageUri,String mime) {
         if (mime == null) {
             mime = MyNASI.IMAGE_PNG;
         }

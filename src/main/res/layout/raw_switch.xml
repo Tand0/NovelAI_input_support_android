@@ -5,11 +5,30 @@
     android:minHeight="30sp"
     android:orientation="vertical">
 
+    <Button
+        android:id="@+id/action_back"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/action_back"
+        />
+    <Button
+        android:id="@+id/generate_image_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/generate_image_button"
+        />
+    <Button
+        android:id="@+id/upscale_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/upscale_button"
+        />
+
     <androidx.appcompat.widget.SwitchCompat
         android:id="@+id/setting_use_tree"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:minHeight="32dp"
+        android:minHeight="48dp"
         android:text="@string/setting_use_tree" />
 
     <androidx.appcompat.widget.SwitchCompat

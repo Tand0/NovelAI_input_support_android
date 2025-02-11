@@ -5,13 +5,13 @@
     android:orientation="vertical"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:fitsSystemWindows="false">
-    <ImageView
+    <jp.ne.ruru.park.ando.naiview.miviewer.MISurfaceView
         android:id="@+id/image_view"
         android:scaleType="fitCenter"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:contentDescription="@string/img_description1"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
+
 </LinearLayout>

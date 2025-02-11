@@ -80,8 +80,6 @@ public class JSONListAdapter<T extends JSONObject> extends ArrayAdapter<T> {
         boolean expand;
         StringBuilder value = new StringBuilder();
         StringBuilder folderString = new StringBuilder();
-        MyApplication a =
-                ((MyApplication) ((AppCompatActivity) this.getContext()).getApplication());
         //
         Data itemData = new Data(item);
         expand = itemData.getExpand();
@@ -109,12 +107,7 @@ public class JSONListAdapter<T extends JSONObject> extends ArrayAdapter<T> {
             }
             checkBox.setOnCheckedChangeListener((buttonView, isChecked) -> expand(position, isChecked));
             checkBox.setEnabled(isNotWord);
-            boolean darkFlag = false;
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
-                if (a.getResources().getConfiguration().isNightModeActive()) {
-                    darkFlag = true;
-                }
-            }
+            boolean darkFlag = this.getDarkFlag();
             int backgroundColor;
             int textColor;
             int baseColor;
@@ -169,6 +162,16 @@ public class JSONListAdapter<T extends JSONObject> extends ArrayAdapter<T> {
         return view;
     }
 
+    public boolean getDarkFlag() {
+        boolean darkFlag = false;
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+            if (this.getContext().getResources().getConfiguration().isNightModeActive()) {
+                darkFlag = true;
+            }
+        }
+        return darkFlag;
+    }
+
     /**
      * execute button
      *
@@ -191,7 +194,8 @@ public class JSONListAdapter<T extends JSONObject> extends ArrayAdapter<T> {
         int id = positionData.getPromptType().getIdLong();
         String title = a.getResources().getString(id);
         SpannableString s = new SpannableString(title);
-        s.setSpan(new ForegroundColorSpan(Color.RED), 0, s.length(), 0);
+        int color = this.getDarkFlag() ? 0xFFFF8080: 0xFFF00000;
+        s.setSpan(new ForegroundColorSpan(color), 0, s.length(), 0);
         titleItem.setTitle(s);
         //
         //

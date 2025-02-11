@@ -216,6 +216,4 @@
     </PreferenceCategory>
 
 
-    <PreferenceCategory android:title="@string/dummy">
-    </PreferenceCategory>
 </PreferenceScreen>

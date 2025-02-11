@@ -71,7 +71,7 @@
     <string name="action_ok_prompt">〇プロンプト</string>
     <string name="action_uc_prompt">ｘプロンプト</string>
     <string name="action_tree">ツリー</string>
-    <string name="action_image">画像</string>
+    <string name="action_image">画像モード</string>
     <string name="action_image_summary">画像内をタップすると次の画像を生成します</string>
     <string name="action_image_list">画像リスト</string>
     <string name="action_save_internal">内部にセーブ</string>
@@ -168,4 +168,28 @@
     <string name="prompt_location_ch1_y">01 キャラクターの位置 Y(default:0.5)</string>
     <string name="prompt_location_ch2_x">02 キャラクターの位置 X(default:0.5)</string>
     <string name="prompt_location_ch2_y">02 キャラクターの位置 Y(default:0.5)</string>
+
+
+    <string name="mi_moving">ムービング</string>
+    <string name="mi_moving_mode">ムービングモード</string>
+    <string name="mi_moving_mode_settings">ムービングモード設定</string>
+    <string name="mi_finish">戻り</string>
+    <string name="mi_back_text">ムービングモードを終了します</string>
+    <string name="mi_reposition">位置変更モード</string>
+    <string name="mi_reposition_text">移動や拡大をします</string>
+    <string name="mi_learning_mode">学習モード</string>
+    <string name="mi_learning_mode_text">移動や拡大を学習します</string>
+    <string name="mi_vibration_type">揺れの種類</string>
+    <string name="mi_vibration_speed">揺れの速度</string>
+    <string name="mi_vibration_loop">ループする</string>
+    <string name="mi_ai_box">箱追加</string>
+    <string name="mi_ai_box_text">白塗り/黒塗りを追加します</string>
+    <string name="mi_ai_box_color">箱の色</string>
+    <string name="mi_ai_mesh">メッシュを表示する</string>
+    <string name="mi_ai_mesh_moving">メッシュを揺らす</string>
+    <string name="mi_ai_mesh_moving_len">メッシュの揺れの長さ</string>
+    <string name="mi_color_filter_switch">カラーフィルタ</string>
+    <string name="mi_color_filter_text">カラーフィルタの色選択</string>
+    <string name="mi_color_filter_alpha">アルファ値の補正</string>
+    <string name="mi_ai_reset">リセット</string>
 </resources>

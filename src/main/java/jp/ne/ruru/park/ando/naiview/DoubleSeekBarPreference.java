@@ -28,17 +28,6 @@ public class DoubleSeekBarPreference extends Preference {
         init(context, attrs, defStyleAttr, defStyleRes);
     }
 
-    public DoubleSeekBarPreference(Context context, AttributeSet attrs, int defStyleAttr) {
-        this(context, attrs, defStyleAttr, 0);
-    }
-
-    public DoubleSeekBarPreference(Context context, AttributeSet attrs) {
-        this(context, attrs, 0);
-    }
-    public DoubleSeekBarPreference(Context context) {
-        this(context, null);
-    }
-
     private void init(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
         try (TypedArray ta = context.obtainStyledAttributes(
                 attrs, R.styleable.Double_SeekBar_attrs, defStyleAttr, defStyleRes)) {

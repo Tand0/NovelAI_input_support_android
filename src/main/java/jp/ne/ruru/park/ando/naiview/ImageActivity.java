@@ -20,7 +20,10 @@ import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.ScaleGestureDetector;
 import android.view.View;
+import android.widget.Button;
+import android.widget.Toast;
 
+import androidx.activity.EdgeToEdge;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
@@ -37,6 +40,7 @@ import java.util.Locale;
 
 import jp.ne.ruru.park.ando.naiview.adapter.UriEtc;
 import jp.ne.ruru.park.ando.naiview.databinding.ActivityImageBinding;
+import jp.ne.ruru.park.ando.naiview.miviewer.MIViewerActivity;
 
 /** image activity
  * @author T.Ando
@@ -50,7 +54,8 @@ public class ImageActivity extends AppCompatActivity {
         MOVE_FORWARD,
         IMAGE_LIST,
         SAVE,
-        EXPAND
+        EXPAND,
+        MOVING_MODE
     }
 
     /** swipe flag */
@@ -85,6 +90,7 @@ public class ImageActivity extends AppCompatActivity {
      */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        EdgeToEdge.enable(this);
         super.onCreate(savedInstanceState);
         binding = ActivityImageBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
@@ -143,9 +149,13 @@ public class ImageActivity extends AppCompatActivity {
      */
     @Override
     public boolean onTouchEvent(MotionEvent event) {
-        boolean flag1 = gestureDetector.onTouchEvent(event);
-        boolean flag2 = scaleGestureDetector.onTouchEvent(event);
-        return flag1 || flag2 || super.onTouchEvent(event);
+        boolean flag1 = false;
+        if ((event.getAction() & MotionEvent.ACTION_MASK) == MotionEvent.ACTION_UP) {
+            flag1 = mSimpleOnGestureListener.onUp(event);
+        }
+        boolean flag2 = gestureDetector.onTouchEvent(event);
+        boolean flag3 = scaleGestureDetector.onTouchEvent(event);
+        return flag1 || flag2 || flag3 || super.onTouchEvent(event);
     }
 
     private void createMatrixBaseValue(Matrix matrix) {
@@ -161,7 +171,7 @@ public class ImageActivity extends AppCompatActivity {
         matrix.getValues(matrixLocalValue);
         float baseScale = matrixBaseValue[Matrix.MSCALE_X];
         float localScale = matrixLocalValue[Matrix.MSCALE_X];
-        float result = localScale/baseScale;
+        float result = localScale / baseScale;
         if (((result < 0.75f) && (lastScaleFactor < 1.0f)) || ((4.0f < result) && (1.0f < lastScaleFactor))) {
             return;
         }
@@ -222,29 +232,17 @@ public class ImageActivity extends AppCompatActivity {
             title = String.format(Locale.ENGLISH, "%s (anlas: %d)", title, anlas);
         }
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
-        String addText;
-        if (a.isSettingI2i(preferences)) {
-            addText = " (i2i)";
-        } else {
-            addText = " (" + a.getSettingWidthXHeight(preferences) + ")";
-        }
-        String imageText =  ImageActivity.this.getResources().getString(R.string.generate_image_button) + addText;
+        View dialogView = this.getLayoutInflater().inflate(R.layout.raw_switch, null);
+        Button actionBackButton = dialogView.findViewById(R.id.action_back);
+        Button generateImageButton = dialogView.findViewById(R.id.generate_image_button);
+        Button upscaleButton = dialogView.findViewById(R.id.upscale_button);
+        String imageText = ImageActivity.this.getResources().getString(R.string.generate_image_button)
+                + (a.isSettingI2i(preferences) ? " (i2i)" : " (" + a.getSettingWidthXHeight(preferences) + ")");
+        generateImageButton.setText(imageText);
         String upscaleText = ImageActivity.this.getResources().getString(R.string.upscale_button)
                 + " (x" + a.getSettingScale(preferences) + ")";
-        final String[] items;
-        if ((bitmapX <= MAX_UPSCALE_SIZE) && (bitmapY <= MAX_UPSCALE_SIZE)) {
-            items = new String[] {
-                    ImageActivity.this.getResources().getString(R.string.action_back),
-                    imageText,
-                    upscaleText // add
-            };
-        } else {
-            items = new String[] {
-                    ImageActivity.this.getResources().getString(R.string.action_back),
-                    imageText
-            };
-        }
-        View dialogView = this.getLayoutInflater().inflate(R.layout.raw_switch, null);
+        upscaleButton.setText(upscaleText);
+        upscaleButton.setEnabled((bitmapX <= MAX_UPSCALE_SIZE) && (bitmapY <= MAX_UPSCALE_SIZE));
         //
         SwitchCompat isUseTree = dialogView.findViewById(R.id.setting_use_tree);
         if (a.getChangePartItem() != null) {
@@ -255,29 +253,23 @@ public class ImageActivity extends AppCompatActivity {
         isUseTree.setChecked(a.isUseTree(preferences));
         isUseTree.setOnCheckedChangeListener((v,checked)-> a.setUseTree(preferences,checked));
         //
+        //
         SwitchCompat isPromptFixedSeed = dialogView.findViewById(R.id.prompt_fixed_seed);
         isPromptFixedSeed.setChecked(a.isPromptFixedSeed(preferences));
         isPromptFixedSeed.setOnCheckedChangeListener((v,checked)-> a.setPromptFixedSeed(preferences,checked));
         a.appendLog(this, title);
-        new AlertDialog.Builder(ImageActivity.this)
+        AlertDialog alertDialog = new AlertDialog.Builder(ImageActivity.this)
                 .setTitle(title)
                 .setView(dialogView)
-                .setItems(items, (dialog,which)-> {
-                    if (which == 0) {
-                        finish();
-                    } else if (which == 1) {
-                        doGenerateImage();
-                    } else if (which == 2) {
-                        doUpscale();
-                    }
-                })
                 .setPositiveButton(R.string.action_save_external,(dialog,which)-> saveForASF())
                 .setNeutralButton(R.string.menu_cancel,(dialog,which)-> a.setDownloadFlag(false))
-                .show();
+                .create();
+        actionBackButton.setOnClickListener((v)-> {alertDialog.dismiss(); finish();});
+        generateImageButton.setOnClickListener((v)-> {alertDialog.dismiss(); doGenerateImage();});
+        upscaleButton.setOnClickListener((v)-> {alertDialog.dismiss(); doUpscale();});
+        alertDialog.show();
     }
-
-
-    public ScaleGestureDetector.SimpleOnScaleGestureListener mScaleGestureDetector = new ScaleGestureDetector.SimpleOnScaleGestureListener() {
+    public ScaleGestureDetector.OnScaleGestureListener mScaleGestureDetector = new ScaleGestureDetector.OnScaleGestureListener() {
         private float touchPointX = 0;
         private float touchPointY = 0;
 
@@ -286,122 +278,148 @@ public class ImageActivity extends AppCompatActivity {
             swipeFlag = SWIPE_FLAG.EXPAND;
             touchPointX = detector.getFocusX();
             touchPointY = detector.getFocusY();
-            return super.onScaleBegin(detector);
+            return true;
         }
         @Override
         public void onScaleEnd(@NonNull ScaleGestureDetector detector) {
-            super.onScaleEnd(detector);
+            //EMPTY
         }
         @Override
         public boolean onScale(@NonNull ScaleGestureDetector detector) {
-            super.onScale(detector);
             float lastScaleFactor = detector.getScaleFactor();
             imageViewScale(lastScaleFactor, touchPointX, touchPointY);
             return true;
         }
     };
+    public interface OnGestureListener extends GestureDetector.OnGestureListener, GestureDetector.OnDoubleTapListener {
+        boolean onUp(@NonNull MotionEvent e);
+    }
 
     /** detector for click */
-    public GestureDetector.SimpleOnGestureListener mSimpleOnGestureListener = new GestureDetector.SimpleOnGestureListener() {
+    public OnGestureListener mSimpleOnGestureListener = new OnGestureListener() {
         final float SWIPE_DISTANCE = 45.0f * 45.0f;
-        private int directionFlag = 0;
+        private float directionX = 0;
+        private float directionY = 0;
         @Override
         public boolean onDown(@NonNull MotionEvent e) {
             if (swipeFlag == SWIPE_FLAG.EXPAND) {
-                return super.onDown(e);
+                return false;
             }
-            return imageViewReset();
+            directionX = 0;
+            directionY = 0;
+            return true;
+        }
+        @Override
+        public void onShowPress(@NonNull MotionEvent e) {
+        }
+        @Override
+        public void onLongPress(@NonNull MotionEvent e) {
         }
         @Override
         public boolean onScroll(@Nullable MotionEvent e1, @NonNull MotionEvent e2,
                                 float distanceX, float distanceY) {
             if (swipeFlag == SWIPE_FLAG.EXPAND) {
-                directionFlag = 0;
+                directionX = 0;
+                directionY = 0;
             } else {
-                if (matrixBaseValue == null) {
-                    directionFlag = 0;
-                }
-                if (directionFlag == 0) {
+                if ((directionX == 0) && (directionY == 0)) {
                     float dx = distanceX * distanceX;
                     float dy = distanceY * distanceY;
                     if (dx < dy) {
-                        directionFlag = -1;
+                        distanceX = 0;
+                        directionY = distanceY;
                     } else {
-                        directionFlag = 1;
+                        directionX = distanceX;
+                        distanceY = 0;
                     }
-                }
-                if (directionFlag < 0) {
-                    distanceX = 0;
                 } else {
-                    distanceY = 0;
+                    if (directionX != 0) {
+                        directionX += distanceX;
+                        distanceY = 0;
+                    } else {
+                        distanceX = 0;
+                        directionY += distanceY;
+                    }
                 }
             }
             return imageViewMove(distanceX,distanceY);
         }
-        @Override
-        public boolean onSingleTapUp(@NonNull MotionEvent event) {
+        public boolean onUp(@NonNull MotionEvent e) {
             if (swipeFlag == SWIPE_FLAG.EXPAND) {
-                return super.onSingleTapUp(event);
+                return false; // Use onDoubleTapEvent() instead
             }
-            imageViewReset();
-            onSaveDialogMenu();
-            return true;
-
-        }
-        @Override
-        public boolean onDoubleTap(@NonNull MotionEvent e) {
-            swipeFlag = SWIPE_FLAG.NONE;
-            return imageViewReset();
-        }
-        /**
-         * on fling
-         * @param e1 The first down motion event that started the fling.
-         * @param e2 The move motion event that triggered the current onFling.
-         * @param velocityX The velocity of this fling measured in pixels per second
-         *              along the x axis.
-         * @param velocityY The velocity of this fling measured in pixels per second
-         *              along the y axis.
-         * @return if used then true
-         */
-        @Override
-        public boolean onFling(@Nullable MotionEvent e1, @NonNull MotionEvent e2, float velocityX,
-                               float velocityY) {
-            if ((e1 == null) || (swipeFlag == SWIPE_FLAG.EXPAND)) {
-                return super.onFling(null, e2, velocityX, velocityY);
-            }
-            float dx = e1.getX() - e2.getX();
-            float dy = e1.getY() - e2.getY();
+            float dx = directionX;
+            float dy = directionY;
             dx = dx * dx;
             dy = dy * dy;
             if ((dy < SWIPE_DISTANCE)
-                && (dx < SWIPE_DISTANCE)) {
-                return imageViewReset();
+                    && (dx < SWIPE_DISTANCE)) {
+                jump(SWIPE_FLAG.SAVE);
+                return true;
             }
-            jump(dx < dy,e1.getX() - e2.getX() < 0);
+            SWIPE_FLAG state = dx < dy ?
+                    (directionY < 0 ? SWIPE_FLAG.IMAGE_LIST : SWIPE_FLAG.MOVING_MODE):
+                    (directionX < 0 ? SWIPE_FLAG.MOVE_BACK : SWIPE_FLAG.MOVE_FORWARD);
+            jump(state);
             return true;
         }
-        private void jump(boolean isImageList,boolean isBack) {
+        @Override
+        public boolean onSingleTapUp(@NonNull MotionEvent event) {
+            return false; // Use onUp() instead
+        }
+        @Override
+        public boolean onFling(@Nullable MotionEvent e1, @NonNull MotionEvent e2, float velocityX,
+                               float velocityY) {
+            return false; // Use onUp() instead
+        }
+        @Override
+        public boolean onDoubleTap(@NonNull MotionEvent e) {
+            if (swipeFlag != SWIPE_FLAG.EXPAND) {
+                return false; // Use onUp() instead
+            }
+            swipeFlag = SWIPE_FLAG.NONE;
+            return imageViewReset();
+        }
+        @Override
+        public boolean onSingleTapConfirmed(@NonNull MotionEvent e) {
+            return false; // Use onUp() instead
+        }
+        @Override
+        public boolean onDoubleTapEvent(@NonNull MotionEvent e) {
+            return false; // Use onUp() instead
+        }
+
+        private void jump(SWIPE_FLAG x) {
             final MyApplication a =
                     ((MyApplication)ImageActivity.this.getApplication());
             if (a.getDownloadFlag()) {
-                imageViewReset();
-                swipeFlag = SWIPE_FLAG.SAVE;
-                onMyFling();
-                return ;
+                x = SWIPE_FLAG.SAVE;
             }
-            if (isImageList) {
-                swipeFlag = SWIPE_FLAG.IMAGE_LIST;
-                onMyFling();
-                return ;
+            switch (x) {
+                case SAVE:
+                    imageViewReset();
+                    swipeFlag = x;
+                    onMyFling();
+                    break;
+                case IMAGE_LIST:
+                case MOVE_BACK:
+                case MOVE_FORWARD:
+                    swipeFlag = x;
+                    onMyFling();
+                    break;
+                case MOVING_MODE:
+                    swipeFlag = SWIPE_FLAG.NONE;
+                    String movingModeText = "Action: " + ImageActivity.this.getResources().getString(R.string.mi_moving_mode);
+                    a.appendLog(ImageActivity.this,movingModeText);
+                    Toast.makeText(ImageActivity.this,R.string.mi_moving_mode,Toast.LENGTH_LONG).show();
+                    //
+                    Intent intent = new Intent(ImageActivity.this, MIViewerActivity.class);
+                    ImageActivity.this.startActivity( intent );
+                    //
+                    break;
+                default:
+                    break;
             }
-            if (isBack) {
-                swipeFlag = SWIPE_FLAG.MOVE_BACK;
-                onMyFling();
-                return ;
-            }
-            //if (e1.getX() > e2.getX())
-            swipeFlag = SWIPE_FLAG.MOVE_FORWARD;
-            onMyFling();
         }
         private boolean imageViewReset() {
             if (matrixBaseValue == null) {
@@ -496,6 +514,7 @@ public class ImageActivity extends AppCompatActivity {
             int index = Math.max(0,Math.min(max, a.getImagePosition()));
             a.setImagePosition(index);
             a.appendLog(this,"Action: ImageList");
+            Toast.makeText(this,R.string.action_image_list,Toast.LENGTH_LONG).show();
             Intent intent = new Intent(this, ImageListActivity.class);
             resultLauncher.launch(intent);
         }

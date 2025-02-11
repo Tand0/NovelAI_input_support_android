@@ -71,7 +71,7 @@
     <string name="action_ok_prompt">-- prompt</string>
     <string name="action_uc_prompt">Uc Prompt</string>
     <string name="action_tree">Tree</string>
-    <string name="action_image">Image</string>
+    <string name="action_image">Image mode</string>
     <string name="action_image_summary">Tap within Image to generate a next image</string>
     <string name="action_image_list">Image list</string>
     <string name="action_save_internal">Save internal</string>
@@ -168,4 +168,29 @@
     <string name="prompt_location_ch1_y">01 Character Location Y(default:0.5)</string>
     <string name="prompt_location_ch2_x">02 Character Location X(default:0.5)</string>
     <string name="prompt_location_ch2_y">02 Character Location Y(default:0.5)</string>
+
+
+    <string name="mi_moving">Moving</string>
+    <string name="mi_moving_mode">Moving Mode</string>
+    <string name="mi_moving_mode_settings">Moving Mode Settings</string>
+    <string name="mi_finish">Back</string>
+    <string name="mi_back_text">Finish Moving Mode</string>
+    <string name="mi_reposition">Reposition mode</string>
+    <string name="mi_reposition_text">Move and scale</string>
+    <string name="mi_learning_mode">Learning mode</string>
+    <string name="mi_learning_mode_text">Learn to move and scale</string>
+    <string name="mi_vibration_type">Type of vibration</string>
+    <string name="mi_vibration_speed">Speed of vibration</string>
+    <string name="mi_vibration_loop">Loop</string>
+    <string name="mi_ai_box">Add box mode</string>
+    <string name="mi_ai_box_text">Add white or black box paint</string>
+    <string name="mi_ai_box_color">Box color</string>
+    <string name="mi_ai_mesh">Display the mesh</string>
+    <string name="mi_ai_mesh_moving">Shake the mesh</string>
+    <string name="mi_ai_mesh_moving_len">Mesh shake length</string>
+    <string name="mi_color_filter_switch">Color filter</string>
+    <string name="mi_color_filter_text">Select of color filter</string>
+    <string name="mi_color_filter_alpha">Alpha correction</string>
+    <string name="mi_ai_reset">Reset</string>
+
 </resources>

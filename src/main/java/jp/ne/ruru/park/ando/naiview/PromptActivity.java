@@ -41,7 +41,6 @@ public class PromptActivity extends AppCompatActivity {
         binding = ActivityPromptBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         setSupportActionBar(binding.toolbar);
-        binding.toolbar.setTitle(this.getResources().getString(PromptType.P_BASE_OK.getIdShort()));
         ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
             actionBar.setDisplayHomeAsUpEnabled(true);

@@ -80,6 +80,11 @@
                 <data android:mimeType="image/*" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".miviewer.MIViewerActivity"
+            android:exported="true"
+            android:label="@string/mi_moving_mode"
+            android:theme="@style/Theme.NAIView" />
     </application>
 
 </manifest>
