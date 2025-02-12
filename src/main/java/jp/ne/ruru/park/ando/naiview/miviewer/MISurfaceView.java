@@ -52,8 +52,6 @@ public class MISurfaceView extends SurfaceView {
 
     private Bitmap bitmapBase = null;
 
-    private final float[] matrixBaseFloat = new float[9];
-    private final float[] matrixMoveBaseFloat = new float[9];
     private long timeMoveBase = 0;
 
     private Matrix matrixNow = null;
@@ -338,18 +336,26 @@ public class MISurfaceView extends SurfaceView {
             nextStateId = 0; // moving
         }
         if (nextStateId == R.id.mi_reset) {
-            matrixNow.setValues(matrixBaseFloat);
-            matrixNow.getValues(matrixMoveBaseFloat);
+            matrixNow.setValues(settingData.baseFloat);
+            matrixNow.getValues(settingData.baseMovingFloat);
             settingData.getPlotList().clear();
             settingData.reset();
             settingData.getBoxList().clear();
             nextStateId = 0; //  moving
         }
         if (nextStateId == R.id.mi_reposition) {
-            matrixNow.setValues(matrixMoveBaseFloat);
+            matrixNow.setValues(settingData.baseMovingFloat);
+            plotIndex = -1;
+            timeMoveBase = 0;
+            speedX = 0;
+            speedY = 0;
             scheduleStateFlag = STATE.REPOSITION;
         } else if (nextStateId == 0) { // moving
-            matrixNow.setValues(matrixMoveBaseFloat);
+            matrixNow.setValues(settingData.baseMovingFloat);
+            plotIndex = -1;
+            timeMoveBase = 0;
+            speedX = 0;
+            speedY = 0;
             timeMoveBase = System.currentTimeMillis();
             scheduleStateFlag = STATE.MOVING;
             createDefaultPlot();
@@ -359,12 +365,18 @@ public class MISurfaceView extends SurfaceView {
             //
         } else if (nextStateId == R.id.mi_learning_mode) {
             settingData.getPlotList().clear();
+            matrixNow.setValues(settingData.baseMovingFloat);
+            plotIndex = -1;
             timeMoveBase = 0;
-            matrixNow.setValues(matrixMoveBaseFloat);
+            speedX = 0;
+            speedY = 0;
             scheduleStateFlag = STATE.VIBRATION;
-        } else if (nextStateId == R.id.mi_box) {
+        } else if (nextStateId == R.id.mi_add_box) {
+            matrixNow.setValues(settingData.baseMovingFloat);
+            plotIndex = -1;
             timeMoveBase = 0;
-            matrixNow.setValues(matrixMoveBaseFloat);
+            speedX = 0;
+            speedY = 0;
             setInitialMesh();
             scheduleStateFlag = STATE.BOX;
         }
@@ -409,10 +421,10 @@ public class MISurfaceView extends SurfaceView {
                 }
             }
             if (settingData.getBoxList().isEmpty()) {
-                int isX = meshXMax / 5;
-                int isY = meshYMax / 5;
-                int ieX = meshXMax * 4 / 5;
-                int ieY = meshYMax * 4 / 5;
+                int isX = meshXMax / 10;
+                int isY = meshYMax / 10;
+                int ieX = meshXMax * 9 / 10;
+                int ieY = meshYMax * 9 / 10;
                 updateMeshArrayForBox(isX,isY,ieX,ieY);
             } else {
                 for (Box box : settingData.getBoxList()) {
@@ -462,7 +474,7 @@ public class MISurfaceView extends SurfaceView {
             }
             //
             if (scheduleStateFlag == STATE.REPOSITION) {
-                matrixNow.getValues(matrixMoveBaseFloat);
+                matrixNow.getValues(settingData.baseMovingFloat);
             }
             if ((scheduleStateFlag == STATE.REPOSITION)
                     || (scheduleStateFlag == STATE.VIBRATION)) {
@@ -740,11 +752,11 @@ public class MISurfaceView extends SurfaceView {
             long nowTime = System.currentTimeMillis();
             if (plotIndex < 0) {
                 invalidate = true;
-                timeMoveBase = nowTime;
+                matrixNow.setValues(settingData.baseMovingFloat);
                 plotIndex = 0;
+                timeMoveBase = nowTime;
                 speedX = 0;
                 speedY = 0;
-                matrixNow.setValues(matrixMoveBaseFloat);
             } else {
                 Plot plot = settingData.getPlotList().get(plotIndex);
                 if (plot.time + timeMoveBase < nowTime) {
@@ -789,7 +801,8 @@ public class MISurfaceView extends SurfaceView {
                                 +  (rX - (y - isY) * rate)*(rX - (y -isY) * rate));
                 distance = distance /root2;
                 distance = 1.0f - distance;
-                distance = (0.5f < distance) ? 1.0f : distance * 2f;
+                float flexibility = 1.0f - (settingData.getMeshMovingFlexibility()/100f);
+                distance = (flexibility <= distance) ? 1.0f : distance / flexibility;
                 int pos = (y * (meshXMax + 1) + x) * 2;
                 meshArray[pos] += addedX * distance;
                 meshArray[pos + 1] += addedY * distance;
@@ -815,8 +828,6 @@ public class MISurfaceView extends SurfaceView {
             bitmapBase = Bitmap.createBitmap(bitmapBase,0,0,bitmapX,bitmapY,m,true);
         }
     }
-    private int oldWidth = -1;
-    private int oldHeight = -1;
     public void changeMatrixBase() {
         this.matrixNow = new Matrix();
         if (bitmapBase == null) {
@@ -837,21 +848,17 @@ public class MISurfaceView extends SurfaceView {
         // same check
         float[] next = new float[9];
         matrixNow.getValues(next);
-        if ((bitmapX != oldWidth)
-                || (bitmapY != oldHeight)
-                || (next[Matrix.MSCALE_X] != matrixBaseFloat[Matrix.MSCALE_X])
-                || (next[Matrix.MSKEW_X]  != matrixBaseFloat[Matrix.MSKEW_X])
-                || (next[Matrix.MTRANS_X] != matrixBaseFloat[Matrix.MTRANS_X])
-                || (next[Matrix.MSKEW_Y]  != matrixBaseFloat[Matrix.MSKEW_Y])
-                || (next[Matrix.MSCALE_Y] != matrixBaseFloat[Matrix.MSCALE_Y])
-                || (next[Matrix.MTRANS_Y] != matrixBaseFloat[Matrix.MTRANS_Y])
-                || (next[Matrix.MPERSP_0] != matrixBaseFloat[Matrix.MPERSP_0])
-                || (next[Matrix.MPERSP_1] != matrixBaseFloat[Matrix.MPERSP_1])
-                || (next[Matrix.MPERSP_2] != matrixBaseFloat[Matrix.MPERSP_2])) {
-            oldWidth = bitmapX;
-            oldHeight = bitmapY;
-            matrixNow.getValues(matrixBaseFloat);
-            matrixNow.getValues(matrixMoveBaseFloat);
+        if ((next[Matrix.MSCALE_X] != settingData.baseFloat[Matrix.MSCALE_X])
+                || (next[Matrix.MSKEW_X]  != settingData.baseFloat[Matrix.MSKEW_X])
+                || (next[Matrix.MTRANS_X] != settingData.baseFloat[Matrix.MTRANS_X])
+                || (next[Matrix.MSKEW_Y]  != settingData.baseFloat[Matrix.MSKEW_Y])
+                || (next[Matrix.MSCALE_Y] != settingData.baseFloat[Matrix.MSCALE_Y])
+                || (next[Matrix.MTRANS_Y] != settingData.baseFloat[Matrix.MTRANS_Y])
+                || (next[Matrix.MPERSP_0] != settingData.baseFloat[Matrix.MPERSP_0])
+                || (next[Matrix.MPERSP_1] != settingData.baseFloat[Matrix.MPERSP_1])
+                || (next[Matrix.MPERSP_2] != settingData.baseFloat[Matrix.MPERSP_2])) {
+            matrixNow.getValues(settingData.baseFloat);
+            matrixNow.getValues(settingData.baseMovingFloat);
         }
     }
     private void imageViewScale(float lastScaleFactor,float touchPointX,float touchPointY) {
@@ -869,7 +876,7 @@ public class MISurfaceView extends SurfaceView {
         }
         float[] matrixNowFloat = new float[9];
         matrixNow.getValues(matrixNowFloat);
-        float scaleBase = matrixBaseFloat[Matrix.MSCALE_X];
+        float scaleBase = settingData.baseFloat[Matrix.MSCALE_X];
         float scaleNow = matrixNowFloat[Matrix.MSCALE_X];
         x = x * scaleNow / scaleBase;
         y = y * scaleNow / scaleBase;

@@ -116,25 +116,26 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="horizontal">
+
             <Button
-                android:id="@+id/mi_box"
+                android:id="@+id/mi_add_box"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/mi_ai_box"
-                />
+                android:text="@string/mi_add_box" />
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/mi_ai_box_text" />
+                android:text="@string/mi_box_text" />
+
         </LinearLayout>
         <TextView
-            android:id="@+id/mi_ai_box_text"
+            android:id="@+id/mi_box_text"
             android:layout_marginStart="25sp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/mi_ai_box_color" />
+            android:text="@string/mi_box_color" />
         <SeekBar
-            android:id="@+id/mi_ai_box_color"
+            android:id="@+id/mi_box_color"
             android:layout_marginStart="25sp"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
@@ -142,31 +143,38 @@
             android:max="9"
             android:progress="0"
             />
+        <Button
+            android:id="@+id/mi_reset_box"
+            android:layout_marginStart="25sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/mi_rest_box"
+            />
 
         <com.google.android.material.switchmaterial.SwitchMaterial
-            android:id="@+id/mi_ai_mesh"
+            android:id="@+id/mi_mesh"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="25sp"
             android:checked="false"
             android:minHeight="48dp"
-            android:text="@string/mi_ai_mesh" />
+            android:text="@string/mi_mesh" />
 
         <com.google.android.material.switchmaterial.SwitchMaterial
-            android:id="@+id/mi_ai_mesh_moving_flag"
+            android:id="@+id/mi_mesh_moving_flag"
             android:layout_marginStart="25sp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:checked = "false"
             android:minHeight="48dp"
-            android:text="@string/mi_ai_mesh_moving" />
+            android:text="@string/mi_mesh_moving" />
         <TextView
             android:layout_marginStart="25sp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/mi_ai_mesh_moving_len" />
+            android:text="@string/mi_mesh_moving_len" />
         <SeekBar
-            android:id="@+id/mi_ai_mesh_moving_len"
+            android:id="@+id/mi_mesh_moving_len"
             android:layout_marginStart="25sp"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
@@ -174,7 +182,20 @@
             android:max="100"
             android:progress="10"
             />
-
+        <TextView
+            android:layout_marginStart="25sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/mi_mesh_moving_flexibility" />
+        <SeekBar
+            android:id="@+id/mi_mesh_moving_flexibility"
+            android:layout_marginStart="25sp"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:min="10"
+            android:max="100"
+            android:progress="10"
+            />
         <View
             android:layout_marginStart="30sp"
             android:layout_marginEnd="30sp"
@@ -242,7 +263,7 @@
             android:id="@+id/mi_reset"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/mi_ai_reset"
+            android:text="@string/mi_reset"
             />
     </LinearLayout>
 </ScrollView>

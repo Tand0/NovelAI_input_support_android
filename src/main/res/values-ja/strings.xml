@@ -182,14 +182,16 @@
     <string name="mi_vibration_type">揺れの種類</string>
     <string name="mi_vibration_speed">揺れの速度</string>
     <string name="mi_vibration_loop">ループする</string>
-    <string name="mi_ai_box">箱追加</string>
-    <string name="mi_ai_box_text">白塗り/黒塗りを追加します</string>
-    <string name="mi_ai_box_color">箱の色</string>
-    <string name="mi_ai_mesh">メッシュを表示する</string>
-    <string name="mi_ai_mesh_moving">メッシュを揺らす</string>
-    <string name="mi_ai_mesh_moving_len">メッシュの揺れの長さ</string>
+    <string name="mi_add_box">箱追加</string>
+    <string name="mi_rest_box">箱リセット</string>
+    <string name="mi_box_text">白塗り/黒塗りを追加します</string>
+    <string name="mi_box_color">箱の色</string>
+    <string name="mi_mesh">メッシュを表示する</string>
+    <string name="mi_mesh_moving">メッシュを揺らす</string>
+    <string name="mi_mesh_moving_len">メッシュの揺れの長さ</string>
+    <string name="mi_mesh_moving_flexibility">箱の固さ</string>
     <string name="mi_color_filter_switch">カラーフィルタ</string>
     <string name="mi_color_filter_text">カラーフィルタの色選択</string>
     <string name="mi_color_filter_alpha">アルファ値の補正</string>
-    <string name="mi_ai_reset">リセット</string>
+    <string name="mi_reset">リセット</string>
 </resources>

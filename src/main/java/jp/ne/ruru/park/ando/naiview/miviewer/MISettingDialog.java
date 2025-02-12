@@ -81,23 +81,28 @@ public class MISettingDialog extends DialogFragment {
         });
         onCreateSeekBar(R.id.mi_color_filter_alpha, settingData::setColorFilterAlpha);
         //
-        buttonSetting(R.id.mi_box);
+        buttonSetting(R.id.mi_add_box);
+        customDialogView.findViewById(R.id.mi_reset_box).setOnClickListener(v -> {
+            settingData.getBoxList().clear();
+        });
         //
-        onCreateSeekBar(R.id.mi_ai_box_color,(progress) -> {
+        onCreateSeekBar(R.id.mi_box_color,(progress) -> {
             settingData.setBoxColorProgress(progress);
-            TextView tv = customDialogView.findViewById(R.id.mi_ai_box_text);
+            TextView tv = customDialogView.findViewById(R.id.mi_box_text);
             tv.setTextColor(settingData.getBoxColorColor());
             tv.setBackgroundColor(settingData.getBoxColorColor() ^ 0x00FFFFFF);
         });
-        ((SwitchMaterial)customDialogView.findViewById(R.id.mi_ai_mesh))
+        ((SwitchMaterial)customDialogView.findViewById(R.id.mi_mesh))
                 .setOnCheckedChangeListener(
                         (buttonView,isChecked) -> settingData.setMeshFlag(isChecked));
-        ((SwitchMaterial)customDialogView.findViewById(R.id.mi_ai_mesh_moving_flag))
+        ((SwitchMaterial)customDialogView.findViewById(R.id.mi_mesh_moving_flag))
                 .setOnCheckedChangeListener((buttonView,isChecked) -> {
                     settingData.setMeshMovingFlag(isChecked);
-                    customDialogView.findViewById(R.id.mi_ai_mesh_moving_len).setEnabled(isChecked);
+                    customDialogView.findViewById(R.id.mi_mesh_moving_len).setEnabled(isChecked);
+                    customDialogView.findViewById(R.id.mi_mesh_moving_flexibility).setEnabled(isChecked);
                 });
-        onCreateSeekBar(R.id.mi_ai_mesh_moving_len, settingData::setMeshMovingProgress);
+        onCreateSeekBar(R.id.mi_mesh_moving_len, settingData::setMeshMovingProgress);
+        onCreateSeekBar(R.id.mi_mesh_moving_flexibility, settingData::setMeshMovingFlexibility);
         //
         buttonSetting(R.id.mi_reset);
     }
@@ -121,22 +126,25 @@ public class MISettingDialog extends DialogFragment {
         sb = customDialogView.findViewById(R.id.mi_vibration_speed);
         sb.setProgress(settingData.getVibrationSpeed());
         //
-        sb = customDialogView.findViewById(R.id.mi_ai_box_color);
+        sb = customDialogView.findViewById(R.id.mi_box_color);
         sb.setProgress(settingData.getBoxColorProgress());
         //
-        TextView tv = customDialogView.findViewById(R.id.mi_ai_box_text);
+        TextView tv = customDialogView.findViewById(R.id.mi_box_text);
         tv.setTextColor(settingData.getBoxColorColor());
         tv.setBackgroundColor(settingData.getBoxColorColor() ^ 0x00FFFFFF);
         //
         sw = customDialogView.findViewById(R.id.mi_color_filter_flag);
         sw.setChecked(settingData.getColorFilterFlag());
         //
-        sw = customDialogView.findViewById(R.id.mi_ai_mesh);
+        sw = customDialogView.findViewById(R.id.mi_mesh);
         sw.setChecked(settingData.getMeshFlag());
-        sw = customDialogView.findViewById(R.id.mi_ai_mesh_moving_flag);
+        sw = customDialogView.findViewById(R.id.mi_mesh_moving_flag);
         sw.setChecked(settingData.getMeshMovingFlag());
-        sb = customDialogView.findViewById(R.id.mi_ai_mesh_moving_len);
+        sb = customDialogView.findViewById(R.id.mi_mesh_moving_len);
         sb.setProgress(settingData.getMeshMovingProgress());
+        sb.setEnabled(settingData.getMeshMovingFlag());
+        sb = customDialogView.findViewById(R.id.mi_mesh_moving_flexibility);
+        sb.setProgress(settingData.getMeshMovingFlexibility());
         sb.setEnabled(settingData.getMeshMovingFlag());
         //
         tv = customDialogView.findViewById(R.id.mi_color_filter_text);

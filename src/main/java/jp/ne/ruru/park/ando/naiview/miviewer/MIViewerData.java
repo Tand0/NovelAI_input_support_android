@@ -13,6 +13,7 @@ public class MIViewerData {
         meshFlag = false;
         meshMovingFlag = false;
         meshMovingProgress = 50;
+        meshMovingFlexibility = 50;
         vibrationType = 1;
         vibrationSpeed = 100;
         vibrationLoop = true;
@@ -64,6 +65,13 @@ public class MIViewerData {
     }
     public void setMeshMovingProgress(int x) {
         this.meshMovingProgress = x;
+    }
+    private int meshMovingFlexibility;
+    public int getMeshMovingFlexibility() {
+        return this.meshMovingFlexibility;
+    }
+    public void setMeshMovingFlexibility(int x) {
+        this.meshMovingFlexibility = x;
     }
 
     private int vibrationType;
@@ -122,5 +130,7 @@ public class MIViewerData {
     public LinkedList<Box> getBoxList() {
         return this.boxList;
     }
+    public final float[] baseFloat = new float[9];
+    public final float[] baseMovingFloat = new float[9];
 
 }

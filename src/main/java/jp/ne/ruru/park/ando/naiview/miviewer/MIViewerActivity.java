@@ -16,7 +16,6 @@ import androidx.fragment.app.FragmentManager;
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 
-import jp.ne.ruru.park.ando.naiview.ImageActivity;
 import jp.ne.ruru.park.ando.naiview.MyApplication;
 import jp.ne.ruru.park.ando.naiview.R;
 

@@ -182,15 +182,17 @@
     <string name="mi_vibration_type">Type of vibration</string>
     <string name="mi_vibration_speed">Speed of vibration</string>
     <string name="mi_vibration_loop">Loop</string>
-    <string name="mi_ai_box">Add box mode</string>
-    <string name="mi_ai_box_text">Add white or black box paint</string>
-    <string name="mi_ai_box_color">Box color</string>
-    <string name="mi_ai_mesh">Display the mesh</string>
-    <string name="mi_ai_mesh_moving">Shake the mesh</string>
-    <string name="mi_ai_mesh_moving_len">Mesh shake length</string>
+    <string name="mi_add_box">Add box mode</string>
+    <string name="mi_rest_box">Reset Box</string>
+    <string name="mi_box_text">Add white or black box paint</string>
+    <string name="mi_box_color">Box color</string>
+    <string name="mi_mesh">Display the mesh</string>
+    <string name="mi_mesh_moving">Shake the mesh</string>
+    <string name="mi_mesh_moving_len">Mesh shake length</string>
+    <string name="mi_mesh_moving_flexibility">Flexibility of the box</string>
     <string name="mi_color_filter_switch">Color filter</string>
     <string name="mi_color_filter_text">Select of color filter</string>
     <string name="mi_color_filter_alpha">Alpha correction</string>
-    <string name="mi_ai_reset">Reset</string>
+    <string name="mi_reset">Reset</string>
 
 </resources>
