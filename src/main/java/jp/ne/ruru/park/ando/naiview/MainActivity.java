@@ -93,7 +93,7 @@ public class MainActivity extends AppCompatActivity {
             finish();
             return true;
         } else if (buttonId == R.id.action_settings) {
-            Intent intent = new Intent(this, SettingsActivity.class);
+            Intent intent = new Intent(this, Setting2Activity.class);
             this.startActivity( intent );
             return true;
         }

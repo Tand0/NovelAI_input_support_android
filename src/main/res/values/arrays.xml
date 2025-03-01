@@ -1,5 +1,5 @@
 <resources>
-    <declare-styleable name="Double_SeekBar_attrs">
+    <declare-styleable name="DoubleSeekBarView">
         <attr name="np_minValue" format="integer"/>
         <attr name="np_maxValue" format="integer"/>
         <attr name="np_defaultValue" format="integer"/>

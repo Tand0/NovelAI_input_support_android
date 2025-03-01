@@ -3,10 +3,6 @@
     <!-- Strings used for fragments for navigation -->
     <string name="img_description1">画像エリア</string>
     <string name="img_position">0/0</string>
-    <string name="title_activity_settings">設定</string>
-
-    <string name="title_activity_prompt">プロンプト</string>
-    <string name="title_activity_uc">ｘプロンプト</string>
 
     <!-- Preference Titles -->
     <string name="messages_header">メッセージ</string>
@@ -44,6 +40,7 @@
     <string name="prompt_sm">sm</string>
     <string name="prompt_sm_dyn">sm_dyn</string>
     <string name="prompt_variety">多様性</string>
+    <string name="dynamic_thresholding">Decrisp</string>
     <string name="prompt_fixed_seed">シード固定</string>
     <string name="prompt_fixed_seed_summary">画像生成時にシードを固定する</string>
     <string name="prompt_noise_schedule">ノイズ設定</string>
@@ -110,8 +107,12 @@
     <string name="subscription_summary">サブスクの状況を確認します</string>
     <string name="suggest_tags">/ai/generate-image/suggest-tags</string>
     <string name="suggest_tags_summary">サジェスト(予測)リストを取得</string>
+    <string name="title_activity_setting">設定</string>
+    <string name="title_activity_prompt">プロンプト</string>
+    <string name="title_activity_uc">ｘプロンプト</string>
     <string name="title_activity_tree">ツリー</string>
     <string name="title_activity_suggest">入力予測</string>
+    <string name="title_activity_image">画像</string>
 
     <!-- tree tab information -->
     <string name="menu_edit">編集</string>
@@ -144,7 +145,6 @@
     <!-- tree -->
     <string name="input_word">プロンプトかｘプロンプトを入力</string>
     <string name="input_word_hint">プロンプトかｘプロンプトを入力してください</string>
-    <string name="title_activity_image">画像</string>
 
     <!-- prompt long -->
     <string name="prompt_type_base_ok_long">プロンプト</string>
@@ -193,5 +193,26 @@
     <string name="mi_color_filter_switch">カラーフィルタ</string>
     <string name="mi_color_filter_text">カラーフィルタの色選択</string>
     <string name="mi_color_filter_alpha">アルファ値の補正</string>
+
+    <string name="mi_concentrated_flag">集中線</string>
+    <string name="mi_concentrated_state">集中線の位置</string>
+    <string name="mi_concentrated_count">集中線の数</string>
+    <string name="mi_concentrated_random_angle">集中線の揺れ(ランダム)</string>
+    <string name="mi_concentrated_random_line">中心からの距離(ランダム)</string>
+    <string name="mi_concentrated_line_len">中心からの距離</string>
+    <string name="mi_concentrated_wide">集中線の広がり</string>
+    <string name="mi_concentrated_color">集中線の色</string>
+    <string name="mi_concentrated_alpha">集中線の色アルファ値</string>
+
+
+    <string name="mi_sparkling_flag">輝き</string>
+    <string name="mi_sparkling_plot">輝きのプロット</string>
+    <string name="mi_sparkling_plot_reset">輝きのプロットクリア</string>
+    <string name="mi_sparkling_color">輝きの色</string>
+    <string name="mi_sparkling_alpha">輝きの色アルファ値</string>
+    <string name="mi_sparkling_count">輝きの数</string>
+    <string name="mi_sparkling_len">輝きの半径</string>
+    <string name="mi_sparkling_random_len">輝きの中心からの距離(ランダム)</string>
+
     <string name="mi_reset">リセット</string>
 </resources>

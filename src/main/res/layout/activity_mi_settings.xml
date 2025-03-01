@@ -1,5 +1,6 @@
 <ScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
@@ -65,34 +66,32 @@
                 android:layout_height="wrap_content"
                 android:text="@string/mi_learning_mode_text" />
         </LinearLayout>
-        <TextView
+        <jp.ne.ruru.park.ando.naiview.DoubleSeekBarView
+            android:layout_width="fill_parent"
+            android:layout_height="match_parent"
             android:layout_marginStart="25sp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/mi_vibration_type" />
-        <SeekBar
             android:id="@+id/mi_vibration_type"
-            android:layout_marginStart="25sp"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:min="0"
-            android:max="10"
-            android:progress="1"
+            app:np_title="@string/mi_vibration_type"
+            app:np_minValue="0"
+            app:np_maxValue="11"
+            app:np_defaultValue="1"
+            app:np_step="1"
+            app:np_digit="0"
             />
-        <TextView
+
+        <jp.ne.ruru.park.ando.naiview.DoubleSeekBarView
+            android:layout_width="fill_parent"
+            android:layout_height="match_parent"
             android:layout_marginStart="25sp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/mi_vibration_speed" />
-        <SeekBar
             android:id="@+id/mi_vibration_speed"
-            android:layout_marginStart="25sp"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:min="10"
-            android:max="2000"
-            android:progress="1000"
+            app:np_title="@string/mi_vibration_speed"
+            app:np_minValue="10"
+            app:np_maxValue="2000"
+            app:np_defaultValue="1000"
+            app:np_step="1"
+            app:np_digit="0"
             />
+
         <com.google.android.material.switchmaterial.SwitchMaterial
             android:id="@+id/mi_vibration_loop"
             android:layout_marginStart="25sp"
@@ -128,21 +127,20 @@
                 android:text="@string/mi_box_text" />
 
         </LinearLayout>
-        <TextView
-            android:id="@+id/mi_box_text"
-            android:layout_marginStart="25sp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/mi_box_color" />
-        <SeekBar
-            android:id="@+id/mi_box_color"
-            android:layout_marginStart="25sp"
+
+        <jp.ne.ruru.park.ando.naiview.DoubleSeekBarView
             android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:min="0"
-            android:max="9"
-            android:progress="0"
+            android:layout_height="match_parent"
+            android:layout_marginStart="25sp"
+            android:id="@+id/mi_box_color"
+            app:np_title="@string/mi_box_color"
+            app:np_minValue="0"
+            app:np_maxValue="9"
+            app:np_defaultValue="0"
+            app:np_step="1"
+            app:np_digit="0"
             />
+
         <Button
             android:id="@+id/mi_reset_box"
             android:layout_marginStart="25sp"
@@ -168,33 +166,30 @@
             android:checked = "false"
             android:minHeight="48dp"
             android:text="@string/mi_mesh_moving" />
-        <TextView
+        <jp.ne.ruru.park.ando.naiview.DoubleSeekBarView
+            android:layout_width="fill_parent"
+            android:layout_height="match_parent"
             android:layout_marginStart="25sp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/mi_mesh_moving_len" />
-        <SeekBar
             android:id="@+id/mi_mesh_moving_len"
-            android:layout_marginStart="25sp"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:min="10"
-            android:max="100"
-            android:progress="10"
+            app:np_title="@string/mi_mesh_moving_len"
+            app:np_minValue="10"
+            app:np_maxValue="100"
+            app:np_defaultValue="10"
+            app:np_step="1"
+            app:np_digit="0"
             />
-        <TextView
-            android:layout_marginStart="25sp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/mi_mesh_moving_flexibility" />
-        <SeekBar
-            android:id="@+id/mi_mesh_moving_flexibility"
-            android:layout_marginStart="25sp"
+
+        <jp.ne.ruru.park.ando.naiview.DoubleSeekBarView
             android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:min="10"
-            android:max="100"
-            android:progress="10"
+            android:layout_height="match_parent"
+            android:layout_marginStart="25sp"
+            android:id="@+id/mi_mesh_moving_flexibility"
+            app:np_title="@string/mi_mesh_moving_flexibility"
+            app:np_minValue="10"
+            app:np_maxValue="100"
+            app:np_defaultValue="10"
+            app:np_step="1"
+            app:np_digit="2"
             />
         <View
             android:layout_marginStart="30sp"
@@ -221,39 +216,237 @@
                 android:layout_height="wrap_content"
                 android:text="@string/mi_color_filter_switch" />
         </LinearLayout>
-        <TextView
-            android:id="@+id/mi_color_filter_text"
+
+        <jp.ne.ruru.park.ando.naiview.DoubleSeekBarView
+            android:layout_width="fill_parent"
+            android:layout_height="match_parent"
             android:layout_marginStart="25sp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/mi_color_filter_text" />
-        <SeekBar
             android:id="@+id/mi_color_filter"
-            android:layout_marginStart="25sp"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:min="0"
-            android:max="9"
-            android:progress="0"
+            app:np_title="@string/mi_color_filter_text"
+            app:np_minValue="0"
+            app:np_maxValue="9"
+            app:np_defaultValue="0"
+            app:np_step="1"
+            app:np_digit="0"
             />
-        <TextView
-            android:layout_marginStart="25sp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/mi_color_filter_alpha" />
-        <SeekBar
-            android:id="@+id/mi_color_filter_alpha"
-            android:layout_marginStart="25sp"
+        <jp.ne.ruru.park.ando.naiview.DoubleSeekBarView
             android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:min="10"
-            android:max="220"
-            android:progress="220"
+            android:layout_height="match_parent"
+            android:layout_marginStart="25sp"
+            android:id="@+id/mi_color_filter_alpha"
+            app:np_title="@string/mi_color_filter_alpha"
+            app:np_minValue="10"
+            app:np_maxValue="220"
+            app:np_defaultValue="220"
+            app:np_step="1"
+            app:np_digit="0"
             />
         <View
             android:layout_marginTop="25sp"
             android:layout_marginStart="30sp"
             android:layout_marginEnd="30sp"
+            android:layout_width="match_parent"
+            android:layout_height="3dp"
+            android:background="@color/gray"
+            />
+
+        <com.google.android.material.switchmaterial.SwitchMaterial
+            android:id="@+id/mi_concentrated_flag"
+            android:text="@string/mi_concentrated_flag"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:checked="false"
+            android:minHeight="48dp"
+            />
+        <Button
+            android:id="@+id/mi_concentrated_state"
+            android:text="@string/mi_concentrated_state"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="25sp"
+            />
+        <jp.ne.ruru.park.ando.naiview.DoubleSeekBarView
+            android:layout_width="fill_parent"
+            android:layout_height="match_parent"
+            android:layout_marginStart="25sp"
+            android:id="@+id/mi_concentrated_color"
+            app:np_title="@string/mi_concentrated_color"
+            app:np_minValue="0"
+            app:np_maxValue="9"
+            app:np_defaultValue="0"
+            app:np_step="1"
+            app:np_digit="0"
+            />
+        <jp.ne.ruru.park.ando.naiview.DoubleSeekBarView
+            android:layout_width="fill_parent"
+            android:layout_height="match_parent"
+            android:layout_marginStart="25sp"
+            android:id="@+id/mi_concentrated_alpha"
+            app:np_title="@string/mi_concentrated_alpha"
+            app:np_minValue="10"
+            app:np_maxValue="220"
+            app:np_defaultValue="50"
+            app:np_step="1"
+            app:np_digit="0"
+            />
+        <jp.ne.ruru.park.ando.naiview.DoubleSeekBarView
+            android:layout_width="fill_parent"
+            android:layout_height="match_parent"
+            android:layout_marginStart="25sp"
+            android:id="@+id/mi_concentrated_count"
+            app:np_title="@string/mi_concentrated_count"
+            app:np_minValue="5"
+            app:np_maxValue="100"
+            app:np_defaultValue="20"
+            app:np_step="1"
+            app:np_digit="0"
+            />
+        <jp.ne.ruru.park.ando.naiview.DoubleSeekBarView
+            android:layout_width="fill_parent"
+            android:layout_height="match_parent"
+            android:layout_marginStart="25sp"
+            android:id="@+id/mi_concentrated_random_angle"
+            app:np_title="@string/mi_concentrated_random_angle"
+            app:np_minValue="0"
+            app:np_maxValue="40"
+            app:np_defaultValue="20"
+            app:np_step="1"
+            app:np_digit="0"
+            />
+        <jp.ne.ruru.park.ando.naiview.DoubleSeekBarView
+            android:layout_width="fill_parent"
+            android:layout_height="match_parent"
+            android:layout_marginStart="25sp"
+            android:id="@+id/mi_concentrated_random_line"
+            app:np_title="@string/mi_concentrated_random_line"
+            app:np_minValue="0"
+            app:np_maxValue="400"
+            app:np_defaultValue="200"
+            app:np_step="1"
+            app:np_digit="0"
+            />
+        <jp.ne.ruru.park.ando.naiview.DoubleSeekBarView
+            android:layout_width="fill_parent"
+            android:layout_height="match_parent"
+            android:layout_marginStart="25sp"
+            android:id="@+id/mi_concentrated_line_len"
+            app:np_title="@string/mi_concentrated_line_len"
+            app:np_minValue="10"
+            app:np_maxValue="800"
+            app:np_defaultValue="80"
+            app:np_step="1"
+            app:np_digit="0"
+            />
+        <jp.ne.ruru.park.ando.naiview.DoubleSeekBarView
+            android:layout_width="fill_parent"
+            android:layout_height="match_parent"
+            android:layout_marginStart="25sp"
+            android:id="@+id/mi_concentrated_wide"
+            app:np_title="@string/mi_concentrated_wide"
+            app:np_minValue="2"
+            app:np_maxValue="40"
+            app:np_defaultValue="2"
+            app:np_step="1"
+            app:np_digit="0"
+            />
+
+        <View
+            android:layout_marginStart="30sp"
+            android:layout_marginEnd="30sp"
+            android:layout_marginTop="25dp"
+            android:layout_width="match_parent"
+            android:layout_height="3dp"
+            android:background="@color/gray"
+            />
+
+
+        <com.google.android.material.switchmaterial.SwitchMaterial
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/mi_sparkling_flag"
+            android:text="@string/mi_sparkling_flag"
+            android:checked="false"
+            android:minHeight="48dp"
+            />
+        <Button
+            android:id="@+id/mi_sparkling_plot"
+            android:text="@string/mi_sparkling_plot"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="25sp"
+            />
+        <Button
+            android:id="@+id/mi_sparkling_plot_reset"
+            android:layout_marginStart="25sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/mi_sparkling_plot_reset"
+            />
+        <jp.ne.ruru.park.ando.naiview.DoubleSeekBarView
+            android:layout_width="fill_parent"
+            android:layout_height="match_parent"
+            android:layout_marginStart="25sp"
+            android:id="@+id/mi_sparkling_color"
+            app:np_title="@string/mi_sparkling_color"
+            app:np_minValue="0"
+            app:np_maxValue="9"
+            app:np_defaultValue="0"
+            app:np_step="1"
+            app:np_digit="0"
+            />
+        <jp.ne.ruru.park.ando.naiview.DoubleSeekBarView
+            android:layout_width="fill_parent"
+            android:layout_height="match_parent"
+            android:layout_marginStart="25sp"
+            android:id="@+id/mi_sparkling_alpha"
+            app:np_title="@string/mi_sparkling_alpha"
+            app:np_minValue="10"
+            app:np_maxValue="220"
+            app:np_defaultValue="50"
+            app:np_step="1"
+            app:np_digit="0"
+            />
+        <jp.ne.ruru.park.ando.naiview.DoubleSeekBarView
+            android:layout_width="fill_parent"
+            android:layout_height="match_parent"
+            android:layout_marginStart="25sp"
+            android:id="@+id/mi_sparkling_count"
+            app:np_title="@string/mi_sparkling_count"
+            app:np_minValue="1"
+            app:np_maxValue="100"
+            app:np_defaultValue="10"
+            app:np_step="1"
+            app:np_digit="0"
+            />
+        <jp.ne.ruru.park.ando.naiview.DoubleSeekBarView
+            android:layout_width="fill_parent"
+            android:layout_height="match_parent"
+            android:layout_marginStart="25sp"
+            android:id="@+id/mi_sparkling_len"
+            app:np_title="@string/mi_sparkling_len"
+            app:np_minValue="1"
+            app:np_maxValue="400"
+            app:np_defaultValue="4"
+            app:np_step="1"
+            app:np_digit="0"
+            />
+        <jp.ne.ruru.park.ando.naiview.DoubleSeekBarView
+            android:layout_width="fill_parent"
+            android:layout_height="match_parent"
+            android:layout_marginStart="25sp"
+            android:id="@+id/mi_sparkling_random_len"
+            app:np_title="@string/mi_sparkling_random_len"
+            app:np_minValue="0"
+            app:np_maxValue="600"
+            app:np_defaultValue="50"
+            app:np_step="1"
+            app:np_digit="0"
+            />
+
+        <View
+            android:layout_marginStart="30sp"
+            android:layout_marginEnd="30sp"
+            android:layout_marginTop="25dp"
             android:layout_width="match_parent"
             android:layout_height="3dp"
             android:background="@color/gray"

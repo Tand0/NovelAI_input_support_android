@@ -190,8 +190,7 @@ public class TreeActivity extends AppCompatActivity {
     public void saveInternal() {
         MyApplication a = (MyApplication) this.getApplication();
         a.saveInternal(this);
-        String message = this.getResources().getString(R.string.action_save_internal);
-        Toast.makeText(this , message, Toast.LENGTH_SHORT).show();
+        Toast.makeText(this , R.string.action_save_internal, Toast.LENGTH_SHORT).show();
     }
 
     /** save for callback */

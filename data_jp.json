@@ -298,6 +298,14 @@
             "prompt": "c0"
           },
           {
+            "ignore": false,
+            "prompt": "c0",
+            "text": "word",
+            "values": "artist:narusawa_sora",
+            "child": [],
+            "level": 2
+          },
+          {
             "text": "word",
             "values": "artist:nishi_iori",
             "child": [],
@@ -1154,6 +1162,14 @@
             "prompt": "c1"
           },
           {
+            "ignore": false,
+            "prompt": "c1",
+            "text": "word",
+            "values": "character:arima_kana",
+            "child": [],
+            "level": 2
+          },
+          {
             "text": "word",
             "values": "character:amae_koromo",
             "child": [],
@@ -1232,6 +1248,14 @@
             "level": 2,
             "ignore": false,
             "prompt": "c1"
+          },
+          {
+            "ignore": false,
+            "prompt": "c1",
+            "text": "word",
+            "values": "character:hibari_(senran_kagura)",
+            "child": [],
+            "level": 2
           },
           {
             "text": "word",
@@ -1647,6 +1671,32 @@
                 "text": "word",
                 "values": "head tilt",
                 "child": [],
+                "level": 3
+              },
+              {
+                "ignore": false,
+                "prompt": "c1",
+                "text": "Select",
+                "values": "looking away nervously",
+                "child": [
+                  {
+                    "ignore": false,
+                    "prompt": "c1",
+                    "text": "word",
+                    "values": "looking away nervously",
+                    "child": [],
+                    "level": 4
+                  },
+                  {
+                    "ignore": false,
+                    "prompt": "c1",
+                    "text": "word",
+                    "values": "",
+                    "child": [],
+                    "level": 4
+                  }
+                ],
+                "expand": true,
                 "level": 3
               }
             ],
@@ -3671,7 +3721,7 @@
                   },
                   {
                     "text": "word",
-                    "values": "pleated skirt",
+                    "values": "long sleeves",
                     "child": [],
                     "level": 4,
                     "ignore": false,
@@ -3679,7 +3729,7 @@
                   },
                   {
                     "text": "word",
-                    "values": "long sleeves",
+                    "values": "pleated skirt",
                     "child": [],
                     "level": 4,
                     "ignore": false,
@@ -3695,7 +3745,7 @@
                   }
                 ],
                 "level": 3,
-                "expand": true,
+                "expand": false,
                 "ignore": false,
                 "prompt": "c1"
               },
@@ -3870,7 +3920,7 @@
                     "prompt": "c1"
                   }
                 ],
-                "expand": true,
+                "expand": false,
                 "level": 3,
                 "ignore": false,
                 "prompt": "c1"
@@ -3972,6 +4022,32 @@
                 "level": 3,
                 "ignore": false,
                 "prompt": "c1"
+              },
+              {
+                "ignore": false,
+                "prompt": "c1",
+                "text": "Sequence",
+                "values": "トップレス",
+                "child": [
+                  {
+                    "ignore": false,
+                    "prompt": "c1",
+                    "text": "word",
+                    "values": "skirt",
+                    "child": [],
+                    "level": 4
+                  },
+                  {
+                    "ignore": false,
+                    "prompt": "c1",
+                    "text": "word",
+                    "values": "topless",
+                    "child": [],
+                    "level": 4
+                  }
+                ],
+                "expand": false,
+                "level": 3
               }
             ],
             "level": 2,

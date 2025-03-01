@@ -3,9 +3,12 @@
     <!-- Strings used for fragments for navigation -->
     <string name="img_description1">Image area</string>
     <string name="img_position">0/0</string>
-    <string name="title_activity_settings">SettingsActivity</string>
+    <string name="title_activity_setting">SettingActivity</string>
     <string name="title_activity_prompt">PromptActivity</string>
     <string name="title_activity_uc">UcActivity</string>
+    <string name="title_activity_tree">TreeActivity</string>
+    <string name="title_activity_suggest">SuggestActivity</string>
+    <string name="title_activity_image">ImageActivity</string>
 
 
     <!-- Preference Titles -->
@@ -44,6 +47,7 @@
     <string name="prompt_sm">sm</string>
     <string name="prompt_sm_dyn">sm_dyn</string>
     <string name="prompt_variety">Variety</string>
+    <string name="dynamic_thresholding">Decrisp</string>
     <string name="prompt_fixed_seed">Fixed seed</string>
     <string name="prompt_fixed_seed_summary">Fixed seed when generate image</string>
     <string name="prompt_noise_schedule">noise schedule</string>
@@ -110,8 +114,6 @@
     <string name="subscription_summary">Check the status of your subscription</string>
     <string name="suggest_tags">/ai/generate-image/suggest-tags</string>
     <string name="suggest_tags_summary">Get suggest list</string>
-    <string name="title_activity_tree">TreeActivity</string>
-    <string name="title_activity_suggest">SuggestActivity</string>
 
     <!-- tree tab information -->
     <string name="menu_edit">Edit</string>
@@ -144,7 +146,6 @@
     <!-- tree -->
     <string name="input_word">Input word for prompt/uc</string>
     <string name="input_word_hint">Please input word for prompt/uc</string>
-    <string name="title_activity_image">ImageActivity</string>
 
     <!-- prompt long -->
     <string name="prompt_type_base_ok_long">Base Prompt</string>
@@ -193,6 +194,28 @@
     <string name="mi_color_filter_switch">Color filter</string>
     <string name="mi_color_filter_text">Select of color filter</string>
     <string name="mi_color_filter_alpha">Alpha correction</string>
+
+    <string name="mi_concentrated_flag">Concentrated line</string>
+    <string name="mi_concentrated_state">Concentrated line location</string>
+    <string name="mi_concentrated_count">Number of concentrated line</string>
+    <string name="mi_concentrated_random_angle">Vibrate of concentrated line (Random)</string>
+    <string name="mi_concentrated_random_line">Concentrated line length (Random)</string>
+    <string name="mi_concentrated_line_len">Concentrated line length </string>
+    <string name="mi_concentrated_wide">Concentrated line wide</string>
+
+    <string name="mi_concentrated_color">Concentrated line color</string>
+    <string name="mi_concentrated_alpha">Concentrated line color alpha</string>
+
+
+    <string name="mi_sparkling_flag">Sparkling</string>
+    <string name="mi_sparkling_plot">Plot of sparkling</string>
+    <string name="mi_sparkling_plot_reset">Reset plot of sparkling</string>
+    <string name="mi_sparkling_color">Select of sparkling color</string>
+    <string name="mi_sparkling_alpha">Alpha correction of sparkling color</string>
+    <string name="mi_sparkling_count">Number of sparkling</string>
+    <string name="mi_sparkling_len">Radius of sparkling</string>
+    <string name="mi_sparkling_random_len">Concentrated line length of sparkling  (Random)</string>
+
     <string name="mi_reset">Reset</string>
 
 </resources>

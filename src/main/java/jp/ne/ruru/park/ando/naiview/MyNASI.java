@@ -109,6 +109,7 @@ public class MyNASI {
          * @param sm              sm
          * @param sm_dyn          sm_dyn
          * @param variety          variety
+         * @param dynamicThresholding dynamic_thresholding
          * @param negative_prompt uc
          * @param seed            seed
          * @param noise_schedule  noise schedule
@@ -134,6 +135,7 @@ public class MyNASI {
                 boolean sm,
                 boolean sm_dyn,
                 boolean variety,
+                boolean dynamicThresholding,
                 String negative_prompt,
                 int seed,
                 String noise_schedule,
@@ -156,6 +158,7 @@ public class MyNASI {
             this.sm = sm;
             this.sm_dyn = sm_dyn;
             this.variety = variety;
+            this.dynamicThresholding = dynamicThresholding;
             this.negative_prompt = negative_prompt;
             this.seed = seed;
             this.noise_schedule = noise_schedule;
@@ -179,6 +182,7 @@ public class MyNASI {
         public final boolean sm;
         public final boolean sm_dyn;
         public final boolean variety;
+        public final boolean dynamicThresholding;
         public final String negative_prompt;
 
         public final int seed;
@@ -448,7 +452,7 @@ public class MyNASI {
                 p.put("sm", request.sm);
                 p.put("sm_dyn", request.sm_dyn);
             }
-            p.put("dynamic_thresholding",false);
+            p.put("dynamic_thresholding", request.variety);
             p.put("controlnet_strength",1);
             p.put("legacy",false);
             p.put("add_original_image",true);

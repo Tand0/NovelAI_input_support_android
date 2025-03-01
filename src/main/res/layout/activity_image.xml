@@ -5,7 +5,7 @@
     android:orientation="vertical"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:fitsSystemWindows="false">
-    <ImageView
+    <jp.ne.ruru.park.ando.naiview.ImageMyView
         android:id="@+id/image_view"
         android:scaleType="fitCenter"
         android:layout_width="match_parent"

@@ -103,7 +103,7 @@ public class MyApplication  extends Application {
      */
     public void appendLog(Context context, String message) {
         final int len = 10000;
-        this.log = this.log + "\n\n" + message;
+        this.log = this.log + "\n" + message;
         if (len < this.log.length()) {
             this.log = this.log.substring(this.log.length() - len);
         }
@@ -472,7 +472,7 @@ public class MyApplication  extends Application {
      */
     public boolean action(Context context, int id) {
         if (id == R.id.action_settings) {
-            Intent intent = new Intent(context, SettingsActivity.class);
+            Intent intent = new Intent(context, Setting2Activity.class);
             context.startActivity( intent );
             return true;
         } else if (id == R.id.action_prompt) {
@@ -600,6 +600,10 @@ public class MyApplication  extends Application {
                             targetBoolean = Data.containBoolean(item,"variety");
                             if (targetBoolean != null) {
                                 editor.putBoolean("prompt_variety",targetBoolean);
+                            }
+                            targetBoolean = Data.containBoolean(item,"dynamic_thresholding");
+                            if (targetBoolean != null) {
+                                editor.putBoolean("dynamic_thresholding",targetBoolean);
                             }
                             integer = Data.containInt(item,"seed");
                             if (integer != null) {
@@ -1195,7 +1199,7 @@ public class MyApplication  extends Application {
     };
     private String changeBaseKey(String key) {
         key = key.toLowerCase()
-                .replaceAll("[_{}\\[\\]]"," ")
+                .replaceAll("[-_{}\\[\\]]"," ")
                 .replaceAll("\\s+"," ")
                 .trim();
         for (String string : REMOVE_LIST) {
@@ -1209,6 +1213,16 @@ public class MyApplication  extends Application {
      */
     public void subscription(Context context) {
         execution(context, MyNASI.REST_TYPE.SUBSCRIPTION,-1,-1,null);
+    }
+
+    /**
+     * Queries if this lock is held by NovelAI thread.
+     * This method is designed for use in monitoring of the system state,
+     * not for synchronization control.
+     * @return true if any thread holds this lock and false otherwise
+     */
+    public boolean isUnlocked() {
+        return !lock.isLocked();
     }
 
     /** send data fo Novel AI Support Interface
@@ -1237,9 +1251,9 @@ public class MyApplication  extends Application {
                     getSettingScale(preferences),
                     this.imageBuffer);
         } else if (type == MyNASI.REST_TYPE.IMAGE) {
-            String message = context.getResources().getString(R.string.generate_image);
             boolean isI2i = isSettingI2i(preferences);
-            Toast.makeText(this, message, Toast.LENGTH_LONG).show();
+            Toast.makeText(this, R.string.generate_image, Toast.LENGTH_SHORT).show();
+            String message = context.getResources().getString(R.string.generate_image);
             appendLog(context, message);
             if (isUseTree(preferences)) {
                 fromTreeToPrompt();
@@ -1349,6 +1363,12 @@ public class MyApplication  extends Application {
             } catch (ClassCastException e) {
                 variety = false;
             }
+            boolean dynamicThresholding;
+            try {
+                dynamicThresholding = preferences.getBoolean("dynamic_thresholding", false);
+            } catch (ClassCastException e) {
+                dynamicThresholding = false;
+            }
             boolean fixed_seed;
             try {
                 fixed_seed = isPromptFixedSeed(preferences);
@@ -1379,6 +1399,7 @@ public class MyApplication  extends Application {
                     sm,
                     sm_dyn,
                     variety,
+                    dynamicThresholding,
                     uc,
                     seed,
                     noise_schedule,
@@ -1517,23 +1538,23 @@ public class MyApplication  extends Application {
                 buf.append("requestBody:{\n");
                 appendJSONObject(buf,2, m);
             }
+            String message;
             if (res.statusCode == 200) {
                 setImageBuffer(res.imageBuffer);
                 setImageMimeType(res.mimeType);
                 setDownloadFlag(true);
                 setAnlas(res.anlas);
                 if (context instanceof ImageActivity) {
-                    ((ImageActivity) context).onMyResume();
+                    ((ImageActivity) context).onMyLoadBitmap();
                 } else {
                     Intent intent = new Intent(context, ImageActivity.class);
                     context.startActivity(intent);
                 }
-                String message = "OK";
-                Toast.makeText(context, message, Toast.LENGTH_LONG).show();
+                message = "OK";
             } else {
-                String message = "NG";
-                Toast.makeText(context, message, Toast.LENGTH_LONG).show();
+                message = "NG";
             }
+            Toast.makeText(context, message, Toast.LENGTH_LONG).show();
         } else if (res.type == MyNASI.REST_TYPE.SUGGEST_TAGS) {
             if (res.statusCode == 200) {
                 if (context instanceof SuggestActivity) {

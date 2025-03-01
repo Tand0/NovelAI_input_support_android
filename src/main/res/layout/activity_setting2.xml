@@ -1,0 +1,394 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:fitsSystemWindows="true"
+    android:theme="@style/Theme.MaterialComponents.DayNight" >
+
+    <com.google.android.material.appbar.MaterialToolbar
+        android:id="@+id/setting_nai"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:title="@string/setting_nai"
+        app:titleTextColor="@color/design_default_color_primary" />
+
+    <ScrollView
+        android:orientation="vertical"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        >
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/setting_login" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="25sp"
+                android:text="@string/setting_login_email" />
+            <EditText
+                android:layout_marginStart="25sp"
+                android:id="@+id/setting_login_email"
+                android:layout_width="fill_parent"
+                android:layout_height="match_parent"
+                android:autofillHints="@string/setting_login_email_hint"
+                android:hint="@string/setting_login_email_hint"
+                android:inputType="textEmailAddress"
+                app:defaultValue="xxx@yyy.zzz"
+                app:title="@string/setting_login_email"
+                app:useSimpleSummaryProvider="true"
+                android:minHeight="48dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="25sp"
+                android:text="@string/setting_login_password" />
+            <EditText
+                android:layout_marginStart="25sp"
+                android:id="@+id/setting_login_password"
+                android:layout_width="fill_parent"
+                android:layout_height="match_parent"
+                app:title="@string/setting_login_password"
+                android:hint="@string/setting_login_password_hint"
+                android:autofillHints="@string/setting_login_password_hint"
+                android:inputType="textPassword"
+                app:defaultValue=""
+                app:useSimpleSummaryProvider="false"
+                android:minHeight="48dp" />
+
+            <View
+                android:layout_marginStart="30sp"
+                android:layout_marginEnd="30sp"
+                android:layout_marginTop="25dp"
+                android:layout_width="match_parent"
+                android:layout_height="3dp"
+                android:background="@color/gray"
+                />
+
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/setting_device" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="25sp"
+                android:text="@string/exif_summary" />
+            <com.google.android.material.switchmaterial.SwitchMaterial
+                android:id="@+id/setting_exif"
+                app:title="@string/exif"
+                android:text="@string/exif"
+                app:summary="@string/exif_summary"
+                android:layout_marginStart="25sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checked="true"
+                android:minHeight="48dp" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="25sp"
+                android:text="@string/upscale_summary" />
+            <com.google.android.material.switchmaterial.SwitchMaterial
+                android:id="@+id/setting_scale"
+                app:title="@string/upscale"
+                android:text="@string/upscale"
+                android:checked="true"
+                android:layout_marginStart="25sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:minHeight="48dp" />
+
+
+            <View
+                android:layout_marginStart="30sp"
+                android:layout_marginEnd="30sp"
+                android:layout_marginTop="25dp"
+                android:layout_width="match_parent"
+                android:layout_height="3dp"
+                android:background="@color/gray"
+                />
+
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/setting_nai" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="25sp"
+                android:text="@string/setting_width_x_height" />
+            <Spinner
+                android:id="@+id/setting_width_x_height"
+                android:title="@string/setting_width_x_height"
+                android:layout_marginStart="25sp"
+                android:defaultValue="832x1216"
+                android:summary="@string/setting_width_x_height_summary"
+                android:dialogTitle="@string/setting_width_x_height_summary"
+                android:entries="@array/width_list"
+                android:entryValues="@array/width_list"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:minHeight="48dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="25sp"
+                android:id="@+id/prompt_model_text"
+                android:text="@string/prompt_model" />
+            <Spinner
+                android:id="@+id/prompt_model"
+                android:title="@string/prompt_model"
+                android:layout_marginStart="25sp"
+                android:defaultValue="nai-diffusion-3"
+                android:summary="@string/prompt_model_summary"
+                android:dialogTitle="@string/prompt_model_summary"
+                android:entries="@array/model_list"
+                android:entryValues="@array/model_list"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:minHeight="48dp" />
+
+
+            <jp.ne.ruru.park.ando.naiview.DoubleSeekBarView
+                android:layout_width="fill_parent"
+                android:layout_height="match_parent"
+                android:layout_marginStart="25sp"
+                android:id="@+id/prompt_int_number_steps"
+                app:np_title="@string/prompt_steps"
+                app:np_defaultValue="23"
+                app:np_minValue="1"
+                app:np_maxValue="50"
+                app:np_step="1"
+                app:np_digit="0"
+                />
+
+            <jp.ne.ruru.park.ando.naiview.DoubleSeekBarView
+                android:layout_width="fill_parent"
+                android:layout_height="match_parent"
+                android:layout_marginStart="25sp"
+                android:id="@+id/prompt_int_number_scale"
+                app:np_title="@string/prompt_scale"
+                app:np_defaultValue="5"
+                app:np_minValue="0"
+                app:np_maxValue="25"
+                app:np_step="1"
+                app:np_digit="0"
+                />
+
+            <jp.ne.ruru.park.ando.naiview.DoubleSeekBarView
+                android:layout_width="fill_parent"
+                android:layout_height="match_parent"
+                android:layout_marginStart="25sp"
+                android:id="@+id/prompt_int_cfg_rescale"
+                app:np_title="@string/prompt_cfg_rescale"
+                app:np_defaultValue="100"
+                app:np_minValue="0"
+                app:np_maxValue="150"
+                app:np_step="1"
+                app:np_digit="2"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="25sp"
+                android:text="@string/prompt_sampler" />
+            <Spinner
+                android:id="@+id/prompt_sampler"
+                android:title="@string/prompt_sampler"
+                android:layout_marginStart="25sp"
+                android:defaultValue="k_euler_ancestral"
+                android:summary="@string/prompt_sampler_summary"
+                android:dialogTitle="@string/prompt_sampler_summary"
+                android:entries="@array/sampler_list"
+                android:entryValues="@array/sampler_list"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:minHeight="48dp" />
+
+            <com.google.android.material.switchmaterial.SwitchMaterial
+                android:id="@+id/prompt_sm"
+                app:title="@string/prompt_sm"
+                android:text="@string/prompt_sm"
+                android:checked="false"
+                android:layout_marginStart="25sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:minHeight="48dp" />
+
+            <com.google.android.material.switchmaterial.SwitchMaterial
+                android:id="@+id/prompt_sm_dyn"
+                app:title="@string/prompt_sm_dyn"
+                android:text="@string/prompt_sm_dyn"
+                android:checked="false"
+                android:layout_marginStart="25sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:minHeight="48dp" />
+
+            <com.google.android.material.switchmaterial.SwitchMaterial
+                android:id="@+id/prompt_variety"
+                app:title="@string/prompt_variety"
+                android:text="@string/prompt_variety"
+                android:checked="false"
+                android:layout_marginStart="25sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:minHeight="48dp" />
+            <com.google.android.material.switchmaterial.SwitchMaterial
+                android:id="@+id/dynamic_thresholding"
+                app:title="@string/dynamic_thresholding"
+                android:text="@string/dynamic_thresholding"
+                android:checked="false"
+                android:layout_marginStart="25sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:minHeight="48dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="25sp"
+                android:text="@string/prompt_noise_schedule" />
+            <Spinner
+                android:id="@+id/prompt_noise_schedule"
+                android:title="@string/prompt_noise_schedule"
+                android:defaultValue="karras"
+                android:summary="@string/prompt_noise_schedule_summary"
+                android:dialogTitle="@string/prompt_noise_schedule_summary"
+                android:entries="@array/noise_schedule_list"
+                android:entryValues="@array/noise_schedule_list"
+                android:layout_marginStart="25sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:minHeight="48dp" />
+
+
+            <View
+                android:layout_marginStart="30sp"
+                android:layout_marginEnd="30sp"
+                android:layout_marginTop="25dp"
+                android:layout_width="match_parent"
+                android:layout_height="3dp"
+                android:background="@color/gray"
+                />
+
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/prompt_location" />
+
+            <jp.ne.ruru.park.ando.naiview.DoubleSeekBarView
+                android:layout_width="fill_parent"
+                android:layout_height="match_parent"
+                android:layout_marginStart="25sp"
+                android:id="@+id/prompt_int_location_ch1_x"
+                app:np_title="@string/prompt_location_ch1_x"
+                app:np_minValue="1"
+                app:np_maxValue="9"
+                app:np_defaultValue="5"
+                app:np_step="2"
+                app:np_digit="1"
+                />
+            <jp.ne.ruru.park.ando.naiview.DoubleSeekBarView
+                android:layout_width="fill_parent"
+                android:layout_height="match_parent"
+                android:layout_marginStart="25sp"
+                android:id="@+id/prompt_int_location_ch1_y"
+                app:np_title="@string/prompt_location_ch1_y"
+                app:np_minValue="1"
+                app:np_maxValue="9"
+                app:np_defaultValue="5"
+                app:np_step="2"
+                app:np_digit="1"
+                />
+
+            <jp.ne.ruru.park.ando.naiview.DoubleSeekBarView
+                android:layout_width="fill_parent"
+                android:layout_height="match_parent"
+                android:layout_marginStart="25sp"
+                android:id="@+id/prompt_int_location_ch2_x"
+                app:np_title="@string/prompt_location_ch2_x"
+                app:np_minValue="1"
+                app:np_maxValue="9"
+                app:np_defaultValue="5"
+                app:np_step="2"
+                app:np_digit="1"
+                />
+            <jp.ne.ruru.park.ando.naiview.DoubleSeekBarView
+                android:layout_width="fill_parent"
+                android:layout_height="match_parent"
+                android:layout_marginStart="25sp"
+                android:id="@+id/prompt_int_location_ch2_y"
+                app:np_title="@string/prompt_location_ch2_y"
+                app:np_minValue="1"
+                app:np_maxValue="9"
+                app:np_defaultValue="5"
+                app:np_step="2"
+                app:np_digit="1"
+                />
+
+
+            <View
+                android:layout_marginStart="30sp"
+                android:layout_marginEnd="30sp"
+                android:layout_marginTop="25dp"
+                android:layout_width="match_parent"
+                android:layout_height="3dp"
+                android:background="@color/gray"
+                />
+
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/i2i_summary" />
+
+            <com.google.android.material.switchmaterial.SwitchMaterial
+                android:id="@+id/setting_i2i"
+                app:title="@string/i2i_summary"
+                android:text="@string/i2i_summary"
+                android:checked="false"
+                android:layout_marginStart="25sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:minHeight="48dp" />
+            <jp.ne.ruru.park.ando.naiview.DoubleSeekBarView
+                android:layout_width="fill_parent"
+                android:layout_height="match_parent"
+                android:layout_marginStart="25sp"
+                android:id="@+id/prompt_int_strength"
+                app:np_title="@string/prompt_strength"
+                app:np_defaultValue="10"
+                app:np_minValue="0"
+                app:np_maxValue="99"
+                app:np_step="1"
+                app:np_digit="0"
+                />
+            <jp.ne.ruru.park.ando.naiview.DoubleSeekBarView
+                android:layout_width="fill_parent"
+                android:layout_height="match_parent"
+                android:layout_marginStart="25sp"
+                android:id="@+id/prompt_int_noise"
+                app:np_title="@string/prompt_noise"
+                app:np_defaultValue="0"
+                app:np_minValue="0"
+                app:np_maxValue="99"
+                app:np_step="1"
+                app:np_digit="0"
+                />
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>
