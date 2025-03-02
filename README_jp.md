@@ -39,6 +39,8 @@ https://play.google.com/store/apps/details?id=jp.ne.ruru.park.ando.naiview
 - さらに気に入ったらセーブで保存します
 - キャンセルで画面に戻ると左右スクロールで前後の画像が、上下スクロールで画像のリストがでます
   - 画像がNovelAIの画像の場合、設定を読み込んでプロンプトに渡します
+- サンプルにNovelAIバージョン4のサンプル画像を用意しました。
+  - https://github.com/Tand0/NovelAI_input_support_android/blob/main/2025_03_02_13_08_59_376.png
 - Enjoy!
 
 
