@@ -1,5 +1,6 @@
 package jp.ne.ruru.park.ando.naiview;
 
+import android.app.Activity;
 import android.app.Application;
 import android.content.Context;
 import android.content.Intent;
@@ -388,6 +389,12 @@ public class MyApplication  extends Application {
     public boolean getSettingExif(SharedPreferences preferences) {
         return preferences.getBoolean("setting_exif", true);
     }
+    public boolean getUpdateNAISetting(SharedPreferences preferences) {
+        return preferences.getBoolean("setting_update", true);
+    }
+    public boolean getUpdateNAISeed(SharedPreferences preferences) {
+        return preferences.getBoolean("setting_update_seed", true);
+    }
     public String getSettingWidthXHeight(SharedPreferences preferences) {
         return preferences.getString("setting_width_x_height", "832x1216");
     }
@@ -471,7 +478,22 @@ public class MyApplication  extends Application {
      * @return if used then true
      */
     public boolean action(Context context, int id) {
-        if (id == R.id.action_settings) {
+        if (id == android.R.id.home) {
+            if (context instanceof Activity) {
+                ((Activity) context).finish();
+                return true;
+            }
+        } else if (id == R.id.action_login) {
+            Intent intent = new Intent(context, SettingLoginActivity.class);
+            context.startActivity( intent );
+            return true;
+        } else if (id == R.id.action_report) {
+            String privacyPolicyUrl = this.getResources().getString(R.string.privacy_report_url);
+            Intent intent = new Intent(Intent.ACTION_VIEW);
+            intent.setData(Uri.parse(privacyPolicyUrl));
+            context.startActivity(intent);
+            return true;
+        } else if (id == R.id.action_settings) {
             Intent intent = new Intent(context, Setting2Activity.class);
             context.startActivity( intent );
             return true;
@@ -518,137 +540,145 @@ public class MyApplication  extends Application {
      * @param mime mime type
      */
     public void load(Context context,Uri imageUri,String mime) {
-        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
-        final SharedPreferences.Editor editor = preferences.edit();
-        String file;
-        StringBuilder text = new StringBuilder();
         if (mime == null) {
             mime = MyNASI.IMAGE_PNG;
-        }
-        if ((imageUri == null) || mime.contains("png")) {
-            file = "x.png";
-        } else {
-            file = "x.jpg";
         }
         //
         updateImageBuffer(context,imageUri,mime);
         if ((imageBuffer == null) || (imageBuffer.length == 0)) {
             return;
         }
-        if (getSettingExif(preferences)) {
-            //
-            try (InputStream is = new ByteArrayInputStream(this.getImageBuffer())) {
-                ImageMetadata data = Imaging.getMetadata(is,file);
-                if (data == null) {
-                    throw new ImageReadException("ImageMetadata null");
-                }
-                boolean commentFlag = false;
-                for(ImageMetadata.ImageMetadataItem x :data.getItems()) {
-                    text.append(x.getClass().getName());
-                    text.append(" : ");
-                    text.append(x);
-                    text.append("\n\n");
-                    if (x.toString().toLowerCase().startsWith(COMMENT)) {
-                        commentFlag = true;
-                        String comment = x.toString().substring(COMMENT.length());
-                        try {
-                            JSONObject item = new JSONObject(comment);
+        updateSetting(context, imageUri, mime);
+        //
+        if (!(context instanceof ImageActivity)) {
+            Intent intent = new Intent(context, ImageActivity.class);
+            context.startActivity(intent);
+        }
+    }
+    protected void updateSetting(Context context,Uri imageUri,String mime) {
+        final SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
+        final boolean settingExif = getSettingExif(preferences);
+        final boolean settingUpdate = getUpdateNAISetting(preferences);
+        final boolean settingUpdateSeed = getUpdateNAISeed(preferences);
+        if ((!settingExif) && (!settingUpdate) && (!settingUpdateSeed)) {
+            this.appendLog(context,"Not update image prompt");
+            return;
+        }
+        final SharedPreferences.Editor editor = preferences.edit();
+        final StringBuilder text = new StringBuilder();
+        final String file = ((imageUri == null) || mime.contains("png")) ? "x.png" : "x.jpg";
+        try (InputStream is = new ByteArrayInputStream(this.getImageBuffer())) {
+            ImageMetadata data = Imaging.getMetadata(is,file);
+            if (data == null) {
+                throw new ImageReadException("ImageMetadata null");
+            }
+            boolean commentFlag = false;
+            for(ImageMetadata.ImageMetadataItem x :data.getItems()) {
+                text.append(x.getClass().getName());
+                text.append(" : ");
+                text.append(x);
+                text.append("\n\n");
+                if (x.toString().toLowerCase().startsWith(COMMENT)) {
+                    commentFlag = true;
+                    String comment = x.toString().substring(COMMENT.length());
+                    try {
+                        JSONObject item = new JSONObject(comment);
                             JSONObject v4Prompt = Data.containJSONObject(item, "v4_prompt");
                             if (v4Prompt == null) { // for v3
-                                String string = Data.containString(item,"prompt");
-                                separateV3Prompt(true, string);
+                                String string = Data.containString(item, "prompt");
+                                if (settingExif) separateV3Prompt(true, string);
                             } else { // for v4
                                 String[] strings = this.getCharCaption(v4Prompt);
-                                separateV4Prompt(true, strings);
+                                if (settingExif) separateV4Prompt(true, strings);
                                 //
-                                int[] locations = this.getLocation(v4Prompt);
-                                setLocations(preferences,locations);
+                                if (settingUpdate) {
+                                    int[] locations = this.getLocation(v4Prompt);
+                                    setLocations(preferences, locations);
+                                }
                             }
                             v4Prompt = Data.containJSONObject(item, "v4_negative_prompt");
                             if (v4Prompt == null) { // for v3
-                                String string = Data.containString(item,"uc");
-                                separateV3Prompt(false, string);
+                                String string = Data.containString(item, "uc");
+                                if (settingExif) separateV3Prompt(false, string);
                             } else { // for v4
                                 String[] strings = this.getCharCaption(v4Prompt);
-                                separateV4Prompt(false, strings);
+                                if (settingExif) separateV4Prompt(false, strings);
                             }
-                            Integer integer = Data.containInt(item,"steps");
+                        if (settingUpdate) {
+                            Integer integer = Data.containInt(item, "steps");
                             if (integer != null) {
-                                editor.putInt("prompt_int_number_steps",integer);
+                                editor.putInt("prompt_int_number_steps", integer);
                             }
-                            integer = Data.containInt(item,"scale");
+                            integer = Data.containInt(item, "scale");
                             if (integer != null) {
-                                editor.putInt("prompt_int_number_scale",integer);
+                                editor.putInt("prompt_int_number_scale", integer);
                             }
-                            Double doubleX = Data.containDouble(item,"cfg_rescale");
+                            Double doubleX = Data.containDouble(item, "cfg_rescale");
                             if ((doubleX != null) && (doubleX != 0)) {
-                                editor.putInt("prompt_int_cfg_rescale",(int)(doubleX*100));
+                                editor.putInt("prompt_int_cfg_rescale", (int) (doubleX * 100));
                             }
                             String string;
-                            string = Data.containString(item,"sampler");
+                            string = Data.containString(item, "sampler");
                             if (string != null) {
-                                editor.putString("prompt_sampler",string);
+                                editor.putString("prompt_sampler", string);
                             }
-                            Boolean targetBoolean = Data.containBoolean(item,"sm");
+                            Boolean targetBoolean = Data.containBoolean(item, "sm");
                             if (targetBoolean != null) {
-                                editor.putBoolean("prompt_sm",targetBoolean);
+                                editor.putBoolean("prompt_sm", targetBoolean);
                             }
-                            targetBoolean = Data.containBoolean(item,"sm_dyn");
+                            targetBoolean = Data.containBoolean(item, "sm_dyn");
                             if (targetBoolean != null) {
-                                editor.putBoolean("prompt_sm_dyn",targetBoolean);
+                                editor.putBoolean("prompt_sm_dyn", targetBoolean);
                             }
-                            targetBoolean = Data.containBoolean(item,"variety");
+                            targetBoolean = Data.containBoolean(item, "variety");
                             if (targetBoolean != null) {
-                                editor.putBoolean("prompt_variety",targetBoolean);
+                                editor.putBoolean("prompt_variety", targetBoolean);
                             }
-                            targetBoolean = Data.containBoolean(item,"dynamic_thresholding");
+                            targetBoolean = Data.containBoolean(item, "dynamic_thresholding");
                             if (targetBoolean != null) {
-                                editor.putBoolean("dynamic_thresholding",targetBoolean);
+                                editor.putBoolean("dynamic_thresholding", targetBoolean);
                             }
-                            integer = Data.containInt(item,"seed");
+                            string = Data.containString(item, "noise_schedule");
+                            if (string != null) {
+                                editor.putString("noise_schedule", string);
+                            }
+                        }
+                        if (settingUpdateSeed) {
+                            Integer integer = Data.containInt(item, "seed");
                             if (integer != null) {
                                 this.setSeed(integer);
                             }
-                            string = Data.containString(item,"noise_schedule");
-                            if (string != null) {
-                                editor.putString("noise_schedule",string);
-                            }
-                            editor.apply();
-                        } catch (JSONException e) {
-                            text.append(e.getMessage());
                         }
-                    } else if (! commentFlag) {
+                        editor.apply();
+                    } catch (JSONException e) {
+                        text.append(e.getMessage());
+                    }
+                } else if (! commentFlag) {
+                    if (settingExif) {
                         if (x.toString().toLowerCase().startsWith(PARAM)) {
                             String prompt = x.toString();
                             int index = prompt.indexOf(PARAM);
                             if (0 <= index) {
                                 prompt = prompt.substring(0, index);
                             }
-                            this.setPromptValue(PromptType.P_BASE_OK,prompt);
+                            this.setPromptValue(PromptType.P_BASE_OK, prompt);
                         } else if (x.toString().toLowerCase().startsWith(NEGATIVE_PARAM)) {
                             String uc = x.toString();
                             int index = uc.indexOf(PARAM);
                             if (0 <= index) {
                                 uc = uc.substring(0, index);
                             }
-                            this.setPromptValue(PromptType.P_BASE_OK,uc);
+                            this.setPromptValue(PromptType.P_BASE_OK, uc);
                         }
                     }
                 }
-            } catch (ImageReadException | IOException e) {
-                text.append(e.getClass().getName());
-                text.append("\n");
-                text.append(e.getMessage());
             }
-            this.appendLog(context,text.toString());
-        } else {
-            this.appendLog(context,"Not update image prompt");
+        } catch (ImageReadException | IOException e) {
+            text.append(e.getClass().getName());
+            text.append("\n");
+            text.append(e.getMessage());
         }
-        //
-        if (!(context instanceof ImageActivity)) {
-            Intent intent = new Intent(context, ImageActivity.class);
-            context.startActivity(intent);
-        }
+        this.appendLog(context,text.toString());
     }
     protected void separateV3Prompt(boolean ok, String string) {
         if (string == null) {

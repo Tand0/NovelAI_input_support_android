@@ -50,22 +50,10 @@
             android:background="@color/gray"
             />
 
-        <LinearLayout
-            android:layout_marginTop="25dp"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="horizontal">
-            <Button
-                android:id="@+id/mi_learning_mode"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/mi_learning_mode"
-                />
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/mi_learning_mode_text" />
-        </LinearLayout>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/mi_learning_mode_text" />
         <jp.ne.ruru.park.ando.naiview.DoubleSeekBarView
             android:layout_width="fill_parent"
             android:layout_height="match_parent"
@@ -78,7 +66,13 @@
             app:np_step="1"
             app:np_digit="0"
             />
-
+        <Button
+            android:id="@+id/mi_learning_mode"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="30sp"
+            android:text="@string/mi_learning_mode"
+            />
         <jp.ne.ruru.park.ando.naiview.DoubleSeekBarView
             android:layout_width="fill_parent"
             android:layout_height="match_parent"
@@ -110,24 +104,24 @@
             android:background="@color/gray"
             />
 
-        <LinearLayout
-            android:layout_marginTop="25dp"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="horizontal">
-
-            <Button
-                android:id="@+id/mi_add_box"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/mi_add_box" />
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/mi_box_text" />
-
-        </LinearLayout>
-
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/mi_box_text" />
+        <Button
+            android:id="@+id/mi_add_box"
+            android:text="@string/mi_add_box"
+            android:layout_marginStart="25sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            />
+        <Button
+            android:id="@+id/mi_reset_box"
+            android:text="@string/mi_rest_box"
+            android:layout_marginStart="25sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            />
         <jp.ne.ruru.park.ando.naiview.DoubleSeekBarView
             android:layout_width="fill_parent"
             android:layout_height="match_parent"
@@ -140,15 +134,6 @@
             app:np_step="1"
             app:np_digit="0"
             />
-
-        <Button
-            android:id="@+id/mi_reset_box"
-            android:layout_marginStart="25sp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/mi_rest_box"
-            />
-
         <com.google.android.material.switchmaterial.SwitchMaterial
             android:id="@+id/mi_mesh"
             android:layout_width="wrap_content"
@@ -200,22 +185,13 @@
             android:background="@color/gray"
             />
 
-        <LinearLayout
-            android:layout_marginTop="25dp"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="horizontal">
-            <com.google.android.material.switchmaterial.SwitchMaterial
-                android:id="@+id/mi_color_filter_flag"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:checked = "false"
-                android:minHeight="48dp" />
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/mi_color_filter_switch" />
-        </LinearLayout>
+        <com.google.android.material.switchmaterial.SwitchMaterial
+            android:id="@+id/mi_color_filter_flag"
+            android:text="@string/mi_color_filter_switch"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:checked = "false"
+            android:minHeight="48dp" />
 
         <jp.ne.ruru.park.ando.naiview.DoubleSeekBarView
             android:layout_width="fill_parent"

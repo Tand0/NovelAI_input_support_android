@@ -15,6 +15,8 @@
 
     <!-- Sync Preferences -->
     <string name="setting_login">ログイン設定</string>
+    <string name="action_report">Issues report</string>
+    <string name="action_report_hint">AI を使用してコンテンツを生成するアプリには、ユーザーがアプリを終了せずにデベロッパーに不適切なコンテンツを報告または通報できるアプリ内ユーザー レポート機能が用意されていなければなりません。</string>
     <string name="setting_login_email_hint">Novel AIのメールアドレス</string>
     <string name="setting_login_email">メール</string>
     <string name="setting_login_password">パスワード</string>
@@ -80,6 +82,7 @@
     <string name="action_back">戻る</string>
     <string name="action_clear">クリア</string>
     <string name="privacy_policy_url">https://github.com/Tand0/NovelAI_input_support_android/blob/main/README_jp.md</string>
+    <string name="privacy_report_url">https://github.com/Tand0/NovelAI_input_support_android/issues</string>
 
     <string name="menu_move">実行</string>
     <string name="menu_save">画像を保存</string>
@@ -99,7 +102,11 @@
     <string name="upscale_summary">Upscale:2倍or4倍</string>
     <string name="upscale_button">(NovelAI)画像拡大</string>
     <string name="exif">プロンプト更新</string>
-    <string name="exif_summary">画像ロード時にプロンプトを更新する</string>
+    <string name="exif_summary">画像ロード時に prompt を更新する</string>
+    <string name="setting_update">NovelAI設定更新</string>
+    <string name="setting_update_summary">画像ロード時に NovelAI 設定を更新する</string>
+    <string name="setting_update_seed">NovelAI seed 更新</string>
+    <string name="setting_update_seed_summary">画像ロード時に NovelAI seed を更新する</string>
     <string name="i2i">(i2i)Image2Image の使用</string>
     <string name="i2i_summary">画像を元に画像を生成する</string>
     <string name="subscription">/user/subscription</string>

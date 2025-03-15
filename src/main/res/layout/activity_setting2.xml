@@ -27,56 +27,6 @@
             <TextView
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/setting_login" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="25sp"
-                android:text="@string/setting_login_email" />
-            <EditText
-                android:layout_marginStart="25sp"
-                android:id="@+id/setting_login_email"
-                android:layout_width="fill_parent"
-                android:layout_height="match_parent"
-                android:autofillHints="@string/setting_login_email_hint"
-                android:hint="@string/setting_login_email_hint"
-                android:inputType="textEmailAddress"
-                app:defaultValue="xxx@yyy.zzz"
-                app:title="@string/setting_login_email"
-                app:useSimpleSummaryProvider="true"
-                android:minHeight="48dp" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="25sp"
-                android:text="@string/setting_login_password" />
-            <EditText
-                android:layout_marginStart="25sp"
-                android:id="@+id/setting_login_password"
-                android:layout_width="fill_parent"
-                android:layout_height="match_parent"
-                app:title="@string/setting_login_password"
-                android:hint="@string/setting_login_password_hint"
-                android:autofillHints="@string/setting_login_password_hint"
-                android:inputType="textPassword"
-                app:defaultValue=""
-                app:useSimpleSummaryProvider="false"
-                android:minHeight="48dp" />
-
-            <View
-                android:layout_marginStart="30sp"
-                android:layout_marginEnd="30sp"
-                android:layout_marginTop="25dp"
-                android:layout_width="match_parent"
-                android:layout_height="3dp"
-                android:background="@color/gray"
-                />
-
-            <TextView
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
                 android:text="@string/setting_device" />
 
             <TextView
@@ -89,7 +39,37 @@
                 app:title="@string/exif"
                 android:text="@string/exif"
                 app:summary="@string/exif_summary"
+                android:layout_marginStart="35sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checked="true"
+                android:minHeight="48dp" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_marginStart="25sp"
+                android:text="@string/setting_update_summary" />
+            <com.google.android.material.switchmaterial.SwitchMaterial
+                android:id="@+id/setting_update"
+                app:title="@string/setting_update"
+                android:text="@string/setting_update"
+                app:summary="@string/setting_update_summary"
+                android:layout_marginStart="35sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checked="true"
+                android:minHeight="48dp" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="25sp"
+                android:text="@string/setting_update_seed_summary" />
+            <com.google.android.material.switchmaterial.SwitchMaterial
+                android:id="@+id/setting_update_seed"
+                app:title="@string/setting_update_seed"
+                android:text="@string/setting_update_seed"
+                app:summary="@string/setting_update_seed_summary"
+                android:layout_marginStart="35sp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:checked="true"
@@ -104,7 +84,7 @@
                 app:title="@string/upscale"
                 android:text="@string/upscale"
                 android:checked="true"
-                android:layout_marginStart="25sp"
+                android:layout_marginStart="35sp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:minHeight="48dp" />
@@ -132,7 +112,7 @@
             <Spinner
                 android:id="@+id/setting_width_x_height"
                 android:title="@string/setting_width_x_height"
-                android:layout_marginStart="25sp"
+                android:layout_marginStart="35sp"
                 android:defaultValue="832x1216"
                 android:summary="@string/setting_width_x_height_summary"
                 android:dialogTitle="@string/setting_width_x_height_summary"
@@ -151,7 +131,7 @@
             <Spinner
                 android:id="@+id/prompt_model"
                 android:title="@string/prompt_model"
-                android:layout_marginStart="25sp"
+                android:layout_marginStart="35sp"
                 android:defaultValue="nai-diffusion-3"
                 android:summary="@string/prompt_model_summary"
                 android:dialogTitle="@string/prompt_model_summary"
@@ -209,7 +189,7 @@
             <Spinner
                 android:id="@+id/prompt_sampler"
                 android:title="@string/prompt_sampler"
-                android:layout_marginStart="25sp"
+                android:layout_marginStart="35sp"
                 android:defaultValue="k_euler_ancestral"
                 android:summary="@string/prompt_sampler_summary"
                 android:dialogTitle="@string/prompt_sampler_summary"
@@ -271,7 +251,7 @@
                 android:dialogTitle="@string/prompt_noise_schedule_summary"
                 android:entries="@array/noise_schedule_list"
                 android:entryValues="@array/noise_schedule_list"
-                android:layout_marginStart="25sp"
+                android:layout_marginStart="35sp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:minHeight="48dp" />

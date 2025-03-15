@@ -36,6 +36,11 @@
         android:theme="@style/Theme.Material3.DayNight.NoActionBar"
         tools:targetApi="tiramisu">
         <activity
+            android:name=".SettingLoginActivity"
+            android:exported="false"
+            android:label="@string/title_activity_setting"
+            android:theme="@style/Theme.NAIView" />
+        <activity
             android:name=".Setting2Activity"
             android:exported="false"
             android:label="@string/title_activity_setting"

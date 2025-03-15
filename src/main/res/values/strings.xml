@@ -22,6 +22,9 @@
 
     <!-- Sync Preferences -->
     <string name="setting_login">Login setting</string>
+    <string name="action_report">Issues report</string>
+    <string name="action_report_hint">Apps that use AI to generate content must offer an in-app user reporting feature that allows users to report or flag inappropriate content to the developer without having to leave the app.
+</string>
     <string name="setting_login_email_hint">Login e-mail for Novel AI REST API</string>
     <string name="setting_login_email">Login e-mail</string>
     <string name="setting_login_password">Login password</string>
@@ -87,6 +90,7 @@
     <string name="action_back">&lt;-</string>
     <string name="action_clear">Clear</string>
     <string name="privacy_policy_url">https://github.com/Tand0/NovelAI_input_support_android/blob/main/README.md</string>
+    <string name="privacy_report_url">https://github.com/Tand0/NovelAI_input_support_android/issues</string>
 
     <string name="menu_move">Action</string>
     <string name="menu_save">Save this image?</string>
@@ -107,6 +111,10 @@
     <string name="upscale_button">(NovelAI)Upscale</string>
     <string name="exif">Update prompt</string>
     <string name="exif_summary">Update prompt when loading image</string>
+    <string name="setting_update">Update NovelAI setting</string>
+    <string name="setting_update_summary">Update NovelAI setting when loading image</string>
+    <string name="setting_update_seed">Update NovelAI seed</string>
+    <string name="setting_update_seed_summary">Update NovelAI seed when loading image</string>
     <string name="i2i">(i2i)Use Image2Image</string>
     <string name="i2i_summary">Use image to image</string>
     <string name="subscription">/user/subscription</string>

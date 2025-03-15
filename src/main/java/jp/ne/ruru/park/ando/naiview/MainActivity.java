@@ -14,6 +14,7 @@ import jp.ne.ruru.park.ando.naiview.databinding.ActivityMainBinding;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 
 /** main activity
@@ -61,16 +62,9 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = getIntent();
         String action = intent.getAction();
         String type = intent.getType();
-
         //
-        binding.actionSettings.setOnClickListener(this::myAction);
-        binding.actionPrompt.setOnClickListener(this::myAction);
-        binding.actionTree.setOnClickListener(this::myAction);
-        binding.actionPolicy.setOnClickListener(this::myAction);
-        binding.actionImage.setOnClickListener(this::myAction);
-        //
-        binding.subscription.setOnClickListener(this::myAction);
-        binding.actionCreateAccount.setOnClickListener(this::myAction);
+        ViewGroup viewGroup = (ViewGroup) ((ViewGroup) this.findViewById(android.R.id.content)).getChildAt(0);
+        addButton(viewGroup);
         //
         //
         if ((action != null) && (type != null)
@@ -81,6 +75,16 @@ public class MainActivity extends AppCompatActivity {
         }
 
     }
+    public void addButton(View view) {
+        if (view instanceof Button) {
+            view.setOnClickListener(this::myAction);
+        } else if (view instanceof ViewGroup) {
+            ViewGroup vg = (ViewGroup)view;
+            for (int i = 0 ; i < vg.getChildCount() ; i++) {
+                addButton(vg.getChildAt(i));
+            }
+        }
+    }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_main, menu);
@@ -89,15 +93,8 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem menuButton){
         int buttonId = menuButton.getItemId();
-        if (buttonId == android.R.id.home) {
-            finish();
-            return true;
-        } else if (buttonId == R.id.action_settings) {
-            Intent intent = new Intent(this, Setting2Activity.class);
-            this.startActivity( intent );
-            return true;
-        }
-        return  super.onOptionsItemSelected(menuButton);
+        MyApplication a = (MyApplication) this.getApplication();
+        return a.action(this, buttonId) || super.onOptionsItemSelected(menuButton);
     }
 
     /**

@@ -339,7 +339,7 @@
           },
           {
             "text": "word",
-            "values": "artist:ruroo",
+            "values": "[[[by ruroo]]]",
             "child": [],
             "level": 2,
             "ignore": false,
@@ -809,6 +809,40 @@
             "ignore": false,
             "prompt": "c0",
             "text": "Sequence",
+            "values": "コーチ",
+            "child": [
+              {
+                "ignore": false,
+                "prompt": "c0",
+                "text": "word",
+                "values": "curtains",
+                "child": [],
+                "level": 3
+              },
+              {
+                "ignore": false,
+                "prompt": "c0",
+                "text": "word",
+                "values": "window",
+                "child": [],
+                "level": 3
+              },
+              {
+                "ignore": false,
+                "prompt": "c0",
+                "text": "word",
+                "values": "red couch",
+                "child": [],
+                "level": 3
+              }
+            ],
+            "expand": false,
+            "level": 2
+          },
+          {
+            "ignore": false,
+            "prompt": "c0",
+            "text": "Sequence",
             "values": "トイレ",
             "child": [
               {
@@ -868,8 +902,42 @@
                 "level": 3,
                 "ignore": false,
                 "prompt": "c0"
+              },
+              {
+                "ignore": false,
+                "prompt": "c0",
+                "text": "word",
+                "values": "digital illustration",
+                "child": [],
+                "level": 3
               }
             ]
+          },
+          {
+            "ignore": true,
+            "prompt": "c0",
+            "text": "Sequence",
+            "values": "儚げな",
+            "child": [
+              {
+                "ignore": false,
+                "prompt": "c0",
+                "text": "word",
+                "values": "low contrast",
+                "child": [],
+                "level": 3
+              },
+              {
+                "ignore": false,
+                "prompt": "c0",
+                "text": "word",
+                "values": "muted color",
+                "child": [],
+                "level": 3
+              }
+            ],
+            "expand": false,
+            "level": 2
           },
           {
             "ignore": true,
@@ -1194,6 +1262,14 @@
             "prompt": "c1"
           },
           {
+            "ignore": false,
+            "prompt": "c1",
+            "text": "word",
+            "values": "character:asashio_(kantai_collection)",
+            "child": [],
+            "level": 2
+          },
+          {
             "text": "word",
             "values": "character:atelier totori",
             "child": [],
@@ -1312,6 +1388,14 @@
             "level": 2,
             "ignore": false,
             "prompt": "c1"
+          },
+          {
+            "ignore": false,
+            "prompt": "c1",
+            "text": "word",
+            "values": "character:kagamine_rin",
+            "child": [],
+            "level": 2
           },
           {
             "text": "word",
@@ -1663,6 +1747,94 @@
             "ignore": false,
             "prompt": "c1",
             "text": "Sequence",
+            "values": "しかめっ面",
+            "child": [
+              {
+                "ignore": false,
+                "prompt": "c1",
+                "text": "word",
+                "values": "frown",
+                "child": [],
+                "level": 3
+              }
+            ],
+            "expand": false,
+            "level": 2
+          },
+          {
+            "text": "Sequence",
+            "values": "あへ顔①",
+            "child": [
+              {
+                "text": "word",
+                "values": "ahegao",
+                "child": [],
+                "level": 3,
+                "ignore": false,
+                "prompt": "c1"
+              }
+            ],
+            "expand": false,
+            "level": 2,
+            "ignore": false,
+            "prompt": "c1"
+          },
+          {
+            "text": "Sequence",
+            "values": "あへ顔②",
+            "child": [
+              {
+                "text": "word",
+                "values": "pursed lips",
+                "child": [],
+                "level": 3,
+                "ignore": false,
+                "prompt": "c1"
+              },
+              {
+                "text": "word",
+                "values": "chestnut mouth",
+                "child": [],
+                "level": 3,
+                "ignore": false,
+                "prompt": "c1"
+              }
+            ],
+            "expand": false,
+            "level": 2,
+            "ignore": false,
+            "prompt": "c1"
+          },
+          {
+            "text": "Sequence",
+            "values": "おほ顔",
+            "child": [
+              {
+                "text": "word",
+                "values": "fucked silly",
+                "child": [],
+                "level": 3,
+                "ignore": false,
+                "prompt": "c1"
+              },
+              {
+                "text": "word",
+                "values": "moaning",
+                "child": [],
+                "level": 3,
+                "ignore": false,
+                "prompt": "c1"
+              }
+            ],
+            "expand": false,
+            "level": 2,
+            "ignore": false,
+            "prompt": "c1"
+          },
+          {
+            "ignore": false,
+            "prompt": "c1",
+            "text": "Sequence",
             "values": "首をかしげる",
             "child": [
               {
@@ -1696,7 +1868,7 @@
                     "level": 4
                   }
                 ],
-                "expand": true,
+                "expand": false,
                 "level": 3
               }
             ],
@@ -1733,6 +1905,14 @@
             "text": "Select",
             "values": "ニヤリ",
             "child": [
+              {
+                "ignore": false,
+                "prompt": "c1",
+                "text": "word",
+                "values": "tsurime",
+                "child": [],
+                "level": 3
+              },
               {
                 "text": "word",
                 "values": "smug",
@@ -2158,7 +2338,7 @@
                             "prompt": "c1"
                           }
                         ],
-                        "expand": false,
+                        "expand": true,
                         "level": 5,
                         "ignore": false,
                         "prompt": "c1"
@@ -2203,7 +2383,7 @@
                     "text": "word",
                     "values": "suspended congress",
                     "child": [],
-                    "level": 5,
+                    "level": 4,
                     "ignore": false,
                     "prompt": "c1"
                   }
@@ -2264,7 +2444,7 @@
                         "prompt": "c1"
                       }
                     ],
-                    "expand": false,
+                    "expand": true,
                     "level": 4
                   },
                   {
@@ -2747,14 +2927,6 @@
                 "text": "Sequence",
                 "values": "後ろから",
                 "child": [
-                  {
-                    "ignore": false,
-                    "prompt": "c1",
-                    "text": "word",
-                    "values": "grabbing_another's_breast",
-                    "child": [],
-                    "level": 4
-                  },
                   {
                     "text": "word",
                     "values": "sex_from_behind",
@@ -3889,7 +4061,7 @@
                     "text": "word",
                     "values": "maid",
                     "child": [],
-                    "level": 3,
+                    "level": 4,
                     "ignore": false,
                     "prompt": "c1"
                   }
@@ -3933,7 +4105,7 @@
                     "text": "word",
                     "values": "gothic lolita",
                     "child": [],
-                    "level": 3,
+                    "level": 4,
                     "ignore": false,
                     "prompt": "c1"
                   }
@@ -3977,7 +4149,7 @@
                     "text": "word",
                     "values": "roswaal_mansion_maid_uniform",
                     "child": [],
-                    "level": 3,
+                    "level": 4,
                     "ignore": false,
                     "prompt": "c1"
                   }
@@ -4056,7 +4228,7 @@
             "prompt": "c1"
           }
         ],
-        "expand": true,
+        "expand": false,
         "level": 1,
         "ignore": false,
         "prompt": "c1"
@@ -4069,6 +4241,76 @@
             "text": "Select",
             "values": "目元",
             "child": [
+              {
+                "ignore": false,
+                "prompt": "c1",
+                "text": "Select",
+                "values": "空目",
+                "child": [
+                  {
+                    "text": "word",
+                    "values": "empty_eyes",
+                    "child": [],
+                    "level": 4,
+                    "ignore": false,
+                    "prompt": "c1"
+                  }
+                ],
+                "expand": false,
+                "level": 3
+              },
+              {
+                "ignore": false,
+                "prompt": "c1",
+                "text": "Select",
+                "values": "上をみる",
+                "child": [
+                  {
+                    "text": "word",
+                    "values": "looking up",
+                    "child": [],
+                    "level": 4,
+                    "ignore": false,
+                    "prompt": "c1"
+                  },
+                  {
+                    "text": "word",
+                    "values": "rolling eyes",
+                    "child": [],
+                    "level": 4,
+                    "ignore": false,
+                    "prompt": "c1"
+                  }
+                ],
+                "expand": false,
+                "level": 3
+              },
+              {
+                "ignore": false,
+                "prompt": "c1",
+                "text": "Select",
+                "values": "見下す",
+                "child": [
+                  {
+                    "text": "word",
+                    "values": "looking down",
+                    "child": [],
+                    "level": 4,
+                    "ignore": false,
+                    "prompt": "c1"
+                  }
+                ],
+                "expand": false,
+                "level": 3
+              },
+              {
+                "ignore": false,
+                "prompt": "c1",
+                "text": "word",
+                "values": "aqua eyes",
+                "child": [],
+                "level": 3
+              },
               {
                 "ignore": false,
                 "prompt": "c1",
@@ -4111,22 +4353,6 @@
               },
               {
                 "text": "word",
-                "values": "looking up",
-                "child": [],
-                "level": 3,
-                "ignore": false,
-                "prompt": "c1"
-              },
-              {
-                "text": "word",
-                "values": "looking down",
-                "child": [],
-                "level": 3,
-                "ignore": false,
-                "prompt": "c1"
-              },
-              {
-                "text": "word",
                 "values": "sideways_glance",
                 "child": [],
                 "level": 3,
@@ -4140,19 +4366,11 @@
                 "level": 3,
                 "ignore": false,
                 "prompt": "c1"
-              },
-              {
-                "text": "word",
-                "values": "empty_eyes",
-                "child": [],
-                "level": 3,
-                "ignore": false,
-                "prompt": "c1"
               }
             ],
             "expand": false,
             "level": 2,
-            "ignore": true,
+            "ignore": false,
             "prompt": "c1"
           },
           {
@@ -4694,10 +4912,18 @@
             "values": "髪の長さ",
             "child": [
               {
+                "ignore": false,
+                "prompt": "c1",
+                "text": "word",
+                "values": "medium hair",
+                "child": [],
+                "level": 3
+              },
+              {
                 "text": "word",
                 "values": "very long hair",
                 "child": [],
-                "level": 2,
+                "level": 3,
                 "ignore": false,
                 "prompt": "c1"
               },
@@ -4705,7 +4931,7 @@
                 "text": "word",
                 "values": "long hair",
                 "child": [],
-                "level": 2,
+                "level": 3,
                 "ignore": false,
                 "prompt": "c1"
               },
@@ -4713,7 +4939,7 @@
                 "text": "Sequence",
                 "values": "無指定",
                 "child": [],
-                "level": 2,
+                "level": 3,
                 "expand": false,
                 "ignore": false,
                 "prompt": "c1"
@@ -4722,7 +4948,7 @@
                 "text": "Sequence",
                 "values": "無指定",
                 "child": [],
-                "level": 2,
+                "level": 3,
                 "expand": false,
                 "ignore": false,
                 "prompt": "c1"
@@ -4735,7 +4961,7 @@
           },
           {
             "text": "Select",
-            "values": "追加の特徴",
+            "values": "髪の特徴",
             "child": [
               {
                 "text": "word",
@@ -4744,6 +4970,14 @@
                 "level": 3,
                 "ignore": false,
                 "prompt": "c1"
+              },
+              {
+                "ignore": false,
+                "prompt": "c1",
+                "text": "word",
+                "values": "eyebrows visible through hair",
+                "child": [],
+                "level": 3
               },
               {
                 "text": "word",
@@ -4907,6 +5141,14 @@
         "text": "Select",
         "values": "女の子追加指定",
         "child": [
+          {
+            "ignore": false,
+            "prompt": "c1",
+            "text": "word",
+            "values": "mesugaki",
+            "child": [],
+            "level": 2
+          },
           {
             "text": "word",
             "values": "small breasts",
@@ -5102,14 +5344,6 @@
             "prompt": "c1"
           },
           {
-            "text": "word",
-            "values": "sex",
-            "child": [],
-            "level": 2,
-            "ignore": false,
-            "prompt": "c1"
-          },
-          {
             "text": "Select",
             "values": "その他",
             "child": [
@@ -5136,6 +5370,14 @@
                 "level": 3,
                 "ignore": false,
                 "prompt": "c1"
+              },
+              {
+                "ignore": false,
+                "prompt": "c1",
+                "text": "word",
+                "values": "clitoris",
+                "child": [],
+                "level": 3
               },
               {
                 "ignore": false,
@@ -5170,6 +5412,14 @@
                 "prompt": "c1"
               },
               {
+                "ignore": false,
+                "prompt": "c1",
+                "text": "word",
+                "values": "slightly embarrassed expression",
+                "child": [],
+                "level": 3
+              },
+              {
                 "text": "word",
                 "values": "female_orgasm",
                 "child": [],
@@ -5184,6 +5434,14 @@
                 "level": 3,
                 "ignore": false,
                 "prompt": "c1"
+              },
+              {
+                "ignore": false,
+                "prompt": "c1",
+                "text": "word",
+                "values": "invisible penis",
+                "child": [],
+                "level": 3
               },
               {
                 "text": "word",
@@ -5243,6 +5501,14 @@
               },
               {
                 "text": "word",
+                "values": "sex",
+                "child": [],
+                "level": 3,
+                "ignore": false,
+                "prompt": "c1"
+              },
+              {
+                "text": "word",
                 "values": "sweat",
                 "child": [],
                 "level": 3,
@@ -5256,6 +5522,14 @@
                 "level": 3,
                 "ignore": false,
                 "prompt": "c1"
+              },
+              {
+                "ignore": false,
+                "prompt": "c1",
+                "text": "word",
+                "values": "spread pussy",
+                "child": [],
+                "level": 3
               },
               {
                 "text": "word",
@@ -5318,6 +5592,14 @@
         "values": "掴む系",
         "child": [
           {
+            "ignore": false,
+            "prompt": "c2",
+            "text": "word",
+            "values": "grabbing_another's_breast",
+            "child": [],
+            "level": 2
+          },
+          {
             "text": "word",
             "values": "hand in panties",
             "child": [],
@@ -5344,14 +5626,6 @@
           {
             "text": "word",
             "values": "hands_grab",
-            "child": [],
-            "level": 2,
-            "ignore": false,
-            "prompt": "c2"
-          },
-          {
-            "text": "word",
-            "values": "torso_grab",
             "child": [],
             "level": 2,
             "ignore": false,
@@ -5556,7 +5830,42 @@
     "prompt": "u2",
     "values": "2キャラクターネガティブプロンプト",
     "expand": false,
-    "child": [],
+    "child": [
+      {
+        "ignore": false,
+        "prompt": "u2",
+        "text": "Sequence",
+        "values": "掴む系",
+        "child": [
+          {
+            "ignore": false,
+            "prompt": "u2",
+            "text": "word",
+            "values": "foot garb",
+            "child": [],
+            "level": 2
+          },
+          {
+            "ignore": false,
+            "prompt": "u2",
+            "text": "word",
+            "values": "leg_grab",
+            "child": [],
+            "level": 2
+          },
+          {
+            "ignore": false,
+            "prompt": "u2",
+            "text": "word",
+            "values": "torso grab",
+            "child": [],
+            "level": 2
+          }
+        ],
+        "expand": false,
+        "level": 1
+      }
+    ],
     "ignore": true,
     "level": 0
   }
