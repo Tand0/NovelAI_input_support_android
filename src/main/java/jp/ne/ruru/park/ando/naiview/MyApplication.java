@@ -14,7 +14,6 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.preference.PreferenceManager;
 
-import org.apache.commons.imaging.ImageReadException;
 import org.apache.commons.imaging.Imaging;
 import org.apache.commons.imaging.common.ImageMetadata;
 import org.json.JSONArray;
@@ -30,6 +29,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Locale;
 import java.util.Random;
 import java.util.concurrent.Executors;
 import java.util.concurrent.locks.ReentrantLock;
@@ -497,6 +497,10 @@ public class MyApplication  extends Application {
             Intent intent = new Intent(context, Setting2Activity.class);
             context.startActivity( intent );
             return true;
+        } else if (id == R.id.action_main_settings) {
+            Intent intent = new Intent(context, MainSettingActivity.class);
+            context.startActivity( intent );
+            return true;
         } else if (id == R.id.action_prompt) {
             Intent intent = new Intent(context, PromptActivity.class);
             context.startActivity( intent );
@@ -570,7 +574,7 @@ public class MyApplication  extends Application {
         try (InputStream is = new ByteArrayInputStream(this.getImageBuffer())) {
             ImageMetadata data = Imaging.getMetadata(is,file);
             if (data == null) {
-                throw new ImageReadException("ImageMetadata null");
+                throw new IOException("ImageMetadata null");
             }
             boolean commentFlag = false;
             for(ImageMetadata.ImageMetadataItem x :data.getItems()) {
@@ -673,7 +677,7 @@ public class MyApplication  extends Application {
                     }
                 }
             }
-        } catch (ImageReadException | IOException e) {
+        } catch (IOException e) {
             text.append(e.getClass().getName());
             text.append("\n");
             text.append(e.getMessage());
@@ -828,6 +832,9 @@ public class MyApplication  extends Application {
             if (imageUri != null) {
                 is = this.getContentResolver().openInputStream(imageUri);
             } else {
+                if (context == null) {
+                    throw new IOException("Null context");
+                }
                 is = context.getResources().openRawResource(R.raw.solo);
             }
             if (is != null) {
@@ -903,59 +910,52 @@ public class MyApplication  extends Application {
             appendLog(context,"Internal save data not fond");
         }
     }
-    /**
-     * create parse the characters
-     * @param word original word
-     * @return shaped word
-     */
-    protected String createName(String word) {
-        word = word.trim();
-        word = word.replaceAll("\\s+", " ");
-        int posX = getEnhancePos(word);
-        word = getEnhanceText(word, posX);
-        String wordRaw = word
-                .replace("{", "")
-                .replace("}", "")
-                .replace("[", "")
-                .replace("]", "")
-                .trim();
-        wordRaw = wordRaw.replaceAll("\\s+", " ").trim();
-        Pattern pattern = Pattern.compile("(.*)\\s*[\\s:](\\d+(\\.\\d+)?)\\s*$");
-        Matcher result = pattern.matcher(wordRaw);
-        if (result.find()) {
-            word = result.group(1);
-            if (word == null) {
-                word = wordRaw;
-            }
-            String group2 = result.group(2);
-            if (group2 != null) {
-                double pos = Double.parseDouble(group2);
-                double now = 1.0;
-                int index = 0;
-                if (pos < 1.0) {
-                    for (int i = 0; i < 10; i++) {
-                        now = now / 1.1;
-                        index--;
-                        if (now < pos) {
-                            break;
-                        }
-                    }
-                } else {
-                    for (int i = 0; i < 10; i++) {
-                        index++;
-                        now = now * 1.1;
-                        if (now > pos) {
-                            break;
-                        }
-                    }
-                }
-                word = this.getEnhanceText(word,index);
-            }
-        } else {
-            word = word.replace(":", " ").trim();
-        }
-        return word;
-    }
+
+    public static final String ENHANCE_POSS_PATTERN = "(\\d+(\\.\\d+)?)\\s*::";
+    public static final double[] ENHANCE_POSS_PLUS = {
+            1.05,
+            1.10,
+            1.16,
+            1.22,
+            1.28,
+            1.34,
+            1.41,
+            1.48,
+            1.55,
+            1.63,
+            1.71,
+            1.80,
+            1.89,
+            1.98,
+            2.08,
+            2.18,
+            2.29,
+            2.41,
+            2.53,
+            2.65
+    };
+    public static final double[] ENHANCE_POSS_MINUS = {
+            0.95,
+            0.91,
+            0.86,
+            0.82,
+            0.78,
+            0.75,
+            0.71,
+            0.68,
+            0.64,
+            0.61,
+            0.58,
+            0.56,
+            0.53,
+            0.51,
+            0.48,
+            0.46,
+            0.44,
+            0.42,
+            0.40,
+            0.38
+    };
 
     /**
      * get enhance index from word
@@ -972,6 +972,33 @@ public class MyApplication  extends Application {
                 count--;
             }
         }
+        Pattern p = Pattern.compile(ENHANCE_POSS_PATTERN);
+        Matcher m = p.matcher(string);
+        if (m.find()) {
+            String resultString = m.group(1);
+            if (resultString != null) {
+                count = 0;
+                double result;
+                try {
+                    result = Double.parseDouble(resultString);
+                } catch (NumberFormatException e) {
+                    result = 1.0;
+                }
+                if (result <= 1.0) {
+                    for (; (- count) < ENHANCE_POSS_MINUS.length; count--) {
+                        if (ENHANCE_POSS_MINUS[- count] < result) {
+                            break;
+                        }
+                    }
+                } else {
+                    for (; count < ENHANCE_POSS_PLUS.length ; count++) {
+                        if (result < ENHANCE_POSS_PLUS[count]) {
+                            break;
+                        }
+                    }
+                }
+            }
+        }
         return count;
     }
 
@@ -982,33 +1009,44 @@ public class MyApplication  extends Application {
      * @return shaped word
      */
     public String getEnhanceText(String string,int index) {
-        string = string
-                .replace("{", "")
-                .replace("}", "")
-                .replace("[", "")
-                .replace("]", "")
-                .trim();
+        string = string.replaceAll("\\{", "");
+        string = string.replaceAll("\\}", "");
+        string = string.replaceAll("\\[", "");
+        string = string.replaceAll("]", "");
+        string = string.replaceAll(ENHANCE_POSS_PATTERN, "");
+        string = string.replaceAll("::", "");
+        string = string.trim();
         StringBuilder body = new StringBuilder();
         if (index == 0) {
             body.append(string);
-        } else if (index < 0) {
-            for (int i = 0; i < (-index) ; i++) {
-                body.append("[");
-            }
-            body.append(string);
-            for (int i = 0 ; i < (-index) ; i++) {
-                body.append("]");
-            }
         } else {
-            for (int i = 0 ; i < index ; i++) {
-                body.append("{");
-            }
+            double result = getEnhanceIndex(index);
+            body.append(String.format(Locale.ENGLISH,"%.2f", result));
+            body.append("::");
             body.append(string);
-            for (int i = 0 ; i < index ; i++) {
-                body.append("}");
-            }
+            body.append(" ::");
         }
         return body.toString();
+    }
+
+    private static double getEnhanceIndex(int index) {
+        double result;
+        if (index == 0) {
+            result = 0.0;
+        } else if (index < 0) {
+            if ((-1 - index) < ENHANCE_POSS_MINUS.length) {
+                result = ENHANCE_POSS_MINUS[-1 - index];
+            } else {
+                result = ENHANCE_POSS_MINUS[ENHANCE_POSS_MINUS.length - 1];
+            }
+        } else {
+            if ((index - 1) < ENHANCE_POSS_PLUS.length) {
+                result = ENHANCE_POSS_PLUS[index - 1];
+            } else {
+                result = ENHANCE_POSS_PLUS[ENHANCE_POSS_PLUS.length - 1];
+            }
+        }
+        return result;
     }
 
     /**
@@ -1220,6 +1258,8 @@ public class MyApplication  extends Application {
             "^(artist|copyright|character|rating):\\s*",
             "(s|ing)$",
             "\\b("
+                    + "\\d+(\\.\\d+)?" + "|"
+                    + "::" + "|"
                     + "white|black|red|pink|blue" + "|"
                     + "yellow|green|blown|blonde" + "|"
                     + "orange|purple|rainbow" + "|"

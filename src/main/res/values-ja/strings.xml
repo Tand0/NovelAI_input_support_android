@@ -15,6 +15,8 @@
 
     <!-- Sync Preferences -->
     <string name="setting_login">ログイン設定</string>
+    <string name="setting_login_hint">NovelAIのアカウントを入力してください</string>
+    <string name="action_create_account_hint">画像を生成するにはNovelAIのアカウントが必要です</string>
     <string name="action_report">Issues report</string>
     <string name="action_report_hint">AI を使用してコンテンツを生成するアプリには、ユーザーがアプリを終了せずにデベロッパーに不適切なコンテンツを報告または通報できるアプリ内ユーザー レポート機能が用意されていなければなりません。</string>
     <string name="setting_login_email_hint">Novel AIのメールアドレス</string>
@@ -65,6 +67,7 @@
     <string name="menu_arrow2">----&gt;</string>
     <string name="menu_arrow3">--------&gt;</string>
     <string name="action_settings">設定</string>
+    <string name="action_main_settings">アカウント設定</string>
     <string name="action_prompt">プロンプト</string>
     <string name="action_prompt_layout">プロンプトレイアウト</string>
     <string name="action_ok_prompt">〇プロンプト</string>
@@ -111,7 +114,7 @@
     <string name="i2i_summary">画像を元に画像を生成する</string>
     <string name="subscription">/user/subscription</string>
     <string name="subscription_button">(NovelAI)サブスク確認</string>
-    <string name="subscription_summary">サブスクの状況を確認します</string>
+    <string name="subscription_summary">サブスクの状況を確認します\n結果はメインアクティビテイのログに表示されます。</string>
     <string name="suggest_tags">/ai/generate-image/suggest-tags</string>
     <string name="suggest_tags_summary">サジェスト(予測)リストを取得</string>
     <string name="title_activity_setting">設定</string>

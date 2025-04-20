@@ -22,6 +22,8 @@
 
     <!-- Sync Preferences -->
     <string name="setting_login">Login setting</string>
+    <string name="setting_login_hint">Please enter your NovelAI account.</string>
+    <string name="action_create_account_hint">You need a NovelAI account to generate images.</string>
     <string name="action_report">Issues report</string>
     <string name="action_report_hint">Apps that use AI to generate content must offer an in-app user reporting feature that allows users to report or flag inappropriate content to the developer without having to leave the app.
 </string>
@@ -73,6 +75,7 @@
     <string name="menu_arrow2">----&gt;</string>
     <string name="menu_arrow3">--------&gt;</string>
     <string name="action_settings">Settings</string>
+    <string name="action_main_settings">Account settings</string>
     <string name="action_prompt">Prompt</string>
     <string name="action_prompt_layout">Prompt layout</string>
     <string name="action_ok_prompt">-- prompt</string>
@@ -119,7 +122,7 @@
     <string name="i2i_summary">Use image to image</string>
     <string name="subscription">/user/subscription</string>
     <string name="subscription_button">(NovelAI)Inspect subscription</string>
-    <string name="subscription_summary">Check the status of your subscription</string>
+    <string name="subscription_summary">Check the status of your subscription.\nThe results will be displayed in the main activity log.</string>
     <string name="suggest_tags">/ai/generate-image/suggest-tags</string>
     <string name="suggest_tags_summary">Get suggest list</string>
 

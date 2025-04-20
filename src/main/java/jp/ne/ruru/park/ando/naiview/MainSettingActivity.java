@@ -1,30 +1,22 @@
 package jp.ne.ruru.park.ando.naiview;
 
-import android.content.Intent;
-import android.content.pm.PackageInfo;
-import android.content.pm.PackageManager;
-import android.net.Uri;
 import android.os.Bundle;
-
-import androidx.appcompat.app.ActionBar;
-import androidx.appcompat.app.AppCompatActivity;
-
-import jp.ne.ruru.park.ando.naiview.databinding.ActivityMainBinding;
-
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.EditText;
+
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AppCompatActivity;
+
+import jp.ne.ruru.park.ando.naiview.databinding.ActivityMainSettingBinding;
 
 /** main activity
  * @author T.Ando
  */
-public class MainActivity extends AppCompatActivity {
+public class MainSettingActivity extends AppCompatActivity {
 
-    /** binding */
-    private ActivityMainBinding binding;
 
     /**
      * on create
@@ -37,7 +29,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         //
-        binding = ActivityMainBinding.inflate(getLayoutInflater());
+        ActivityMainSettingBinding binding = ActivityMainSettingBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         setSupportActionBar(binding.toolbar);
         ActionBar actionBar = getSupportActionBar();
@@ -45,36 +37,9 @@ public class MainActivity extends AppCompatActivity {
             actionBar.setDisplayHomeAsUpEnabled(true);
         }
         //
-        // load to the top
-        MyApplication a = (MyApplication) this.getApplication();
-        a.loadInternal(this);
-        //
-        // version information
-        try {
-            String name = this.getPackageName();
-            PackageManager pm = this.getPackageManager();
-            PackageInfo info = pm.getPackageInfo(name, PackageManager.GET_META_DATA);
-            a.appendLog(this, "Version:" + info.versionCode + " / " + info.versionName);
-        } catch (PackageManager.NameNotFoundException e) {
-            a.appendLog(this, e.getMessage());
-        }
-
-        // Get intent, action and MIME type
-        Intent intent = getIntent();
-        String action = intent.getAction();
-        String type = intent.getType();
-        //
         ViewGroup viewGroup = (ViewGroup) ((ViewGroup) this.findViewById(android.R.id.content)).getChildAt(0);
         addButton(viewGroup);
         //
-        //
-        if ((action != null) && (type != null)
-                && type.startsWith("image/") ) {
-            if (Intent.ACTION_SEND.equals(action)) {
-                handleSendImage(intent);
-            }
-        }
-
     }
     public void addButton(View view) {
         if (view instanceof Button) {
@@ -104,7 +69,7 @@ public class MainActivity extends AppCompatActivity {
      */
     public void myAction(View v) {
         MyApplication a = (MyApplication) this.getApplication();
-        if (a.action(MainActivity.this,v.getId())) {
+        if (a.action(MainSettingActivity.this,v.getId())) {
             if (v instanceof Button) {
                 String text = ((Button)v).getText().toString();
                 a.appendLog(this,"Action: " + text);
@@ -112,18 +77,6 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    /**
-     * event for other application
-     * @param intent intent
-     */
-    private void handleSendImage(Intent intent) {
-        Uri imageUri = intent.getParcelableExtra(Intent.EXTRA_STREAM);
-        String mime = intent.getType();
-        if (imageUri != null) {
-            MyApplication a = (MyApplication) this.getApplication();
-            a.load(this,imageUri,mime);
-        }
-    }
 
     /**
      * on resume
@@ -131,15 +84,6 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public void onResume() {
         super.onResume();
-        this.onMyResume();
     }
 
-    /**
-     * repaint data
-     */
-    public void onMyResume() {
-        MyApplication application = (MyApplication) this.getApplication();
-        binding.textLog.setText(application.getLog());
-        binding.scrollView.fullScroll(View.FOCUS_DOWN);
-    }
 }

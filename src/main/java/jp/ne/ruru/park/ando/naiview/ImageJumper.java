@@ -29,6 +29,7 @@ public class ImageJumper {
     public final float SWIPE_DISTANCE = 45.0f * 45.0f;
     private final ActivityResultLauncher<Intent> resultImageListLauncher;
     private final ActivityResultLauncher<Intent> resultLauncherSave;
+    private final ActivityResultLauncher<String> readImagesPermissionLauncher;
 
     /** enum swipe flag */
     public enum SWIPE_FLAG {
@@ -66,6 +67,14 @@ public class ImageJumper {
                                 this.saveForASFResult(uri);
                             }
                         }
+                    }
+                });
+
+        readImagesPermissionLauncher = activity.registerForActivityResult(
+                new ActivityResultContracts.RequestPermission(),
+                result -> {
+                    if (result) {
+                        onMyNextFling();
                     }
                 });
     }
@@ -120,14 +129,13 @@ public class ImageJumper {
                         : android.Manifest.permission.READ_EXTERNAL_STORAGE;
         if (activity.checkSelfPermission(android.Manifest.permission.READ_MEDIA_IMAGES)!=
                 PackageManager.PERMISSION_GRANTED) {
-            ActivityResultLauncher<String> readImagesPermissionLauncher = activity.registerForActivityResult(
-                    new ActivityResultContracts.RequestPermission(),
-                    result -> {
-                        if (result) {
-                            onMyNextFling();
-                        }
-                    });
-            readImagesPermissionLauncher.launch(readImagesPermission);
+            try {
+                readImagesPermissionLauncher.launch(readImagesPermission);
+            } catch (IllegalStateException e) {
+                final MyApplication a =
+                        ((MyApplication)activity.getApplication());
+                a.appendLog(activity,e.getMessage());
+            }
         } else {
             onMyNextFling();
         }
@@ -253,4 +261,5 @@ public class ImageJumper {
         a.getUriEtcList().clear();
         a.setDownloadFlag(false);
     }
+
 }

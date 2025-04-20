@@ -147,8 +147,9 @@ public class SuggestActivity extends AppCompatActivity {
                 .replace("}", "")
                 .replace("[", "")
                 .replace("]", "")
-                .trim()
-                .replaceFirst("\\s*:\\d+\\s*$","");
+                .replace("\\d+(\\.\\d+)?\\s*::", "")
+                .replace("::", "")
+                .trim();
         if (wordRaw.isEmpty()) {
             a.appendLog(this,"suggest==null");
             return;
