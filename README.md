@@ -9,8 +9,6 @@
 ### Mp4
 https://github.com/Tand0/NovelAI_input_support_android/assets/17945245/45ad02ff-7493-4847-bd6c-7fa1d719ae28
 
-## Google play site
-https://play.google.com/store/apps/details?id=jp.ne.ruru.park.ando.naiview
 
 ## This privacy policy
   - Free (GNU LESSER GENERAL PUBLIC LICENSE)
@@ -26,8 +24,5 @@ https://play.google.com/store/apps/details?id=jp.ne.ruru.park.ando.naiview
   - No ads.
   - Personal information other than the above is not used.
 
-## Reference
-- data.json can also be created on Windows
-  - https://github.com/Tand0/NovelAI_input_support_tool
 
 

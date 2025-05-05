@@ -3,10 +3,8 @@
 
 ## オーバービュー
 
-このツール群は実際に動くもので Google play に登録されています
+このツール群は実際に動くものです
 
-## Google play へのリンクは以下になります
-https://play.google.com/store/apps/details?id=jp.ne.ruru.park.ando.naiview
 
 ## このプライバシーポリシー
 - フリーです (GNU LESSER GENERAL PUBLIC LICENSE)
