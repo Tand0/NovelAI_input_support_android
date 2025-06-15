@@ -31,7 +31,7 @@
     <string name="setting_width_x_height_summary">サイズ</string>
 
     <string name="setting_nai">NAIの設定</string>
-    <string name="prompt_model">モデル(default:nai-diffusion-4-curated-preview)</string>
+    <string name="prompt_model">モデル(default:nai-diffusion-4-5-curated)</string>
     <string name="prompt_model_summary">model data</string>
     <string name="prompt_steps">ステップ</string>
     <string name="prompt_steps_summary">steps(default:23)</string>

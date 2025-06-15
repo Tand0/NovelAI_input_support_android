@@ -132,7 +132,7 @@
                 android:id="@+id/prompt_model"
                 android:title="@string/prompt_model"
                 android:layout_marginStart="35sp"
-                android:defaultValue="nai-diffusion-4-curated-preview"
+                android:defaultValue="nai-diffusion-4-5-curated"
                 android:summary="@string/prompt_model_summary"
                 android:dialogTitle="@string/prompt_model_summary"
                 android:entries="@array/model_list"

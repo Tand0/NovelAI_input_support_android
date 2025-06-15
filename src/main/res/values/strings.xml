@@ -39,7 +39,7 @@
     <string name="setting_width_x_height_summary">Size</string>
 
     <string name="setting_nai">Setting NAI</string>
-    <string name="prompt_model">model(default:nai-diffusion-4-curated-preview)</string>
+    <string name="prompt_model">model(default:nai-diffusion-4-5-curated)</string>
     <string name="prompt_model_summary">model data</string>
     <string name="prompt_steps">steps(default:23)</string>
     <string name="prompt_steps_summary">steps(default:23)</string>
