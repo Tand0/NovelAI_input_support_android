@@ -44,8 +44,7 @@ public class MainSettingActivity extends AppCompatActivity {
     public void addButton(View view) {
         if (view instanceof Button) {
             view.setOnClickListener(this::myAction);
-        } else if (view instanceof ViewGroup) {
-            ViewGroup vg = (ViewGroup)view;
+        } else if (view instanceof ViewGroup vg) {
             for (int i = 0 ; i < vg.getChildCount() ; i++) {
                 addButton(vg.getChildAt(i));
             }

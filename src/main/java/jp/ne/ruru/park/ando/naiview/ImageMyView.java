@@ -310,12 +310,19 @@ public class ImageMyView extends androidx.appcompat.widget.AppCompatImageView im
             title = String.format(Locale.ENGLISH, "%s (anlas: %d)", title, anlas);
         }
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(activity);
+        String special;
+        if (a.isSettingI2i(preferences)) {
+            special = " (i2i)";
+        } else if (a.isCharacterReferenceImage(preferences)) {
+                special = " (CRI)";
+        } else {
+            special = " (" + a.getSettingWidthXHeight(preferences) + ")";
+        }
         View dialogView = activity.getLayoutInflater().inflate(R.layout.raw_switch, null);
         Button actionBackButton = dialogView.findViewById(R.id.action_back);
         Button generateImageButton = dialogView.findViewById(R.id.generate_image_button);
         Button upscaleButton = dialogView.findViewById(R.id.upscale_button);
-        String imageText = activity.getResources().getString(R.string.generate_image_button)
-                + (a.isSettingI2i(preferences) ? " (i2i)" : " (" + a.getSettingWidthXHeight(preferences) + ")");
+        String imageText = activity.getResources().getString(R.string.generate_image_button) + special;
         generateImageButton.setText(imageText);
         String upscaleText = activity.getResources().getString(R.string.upscale_button)
                 + " (x" + a.getSettingScale(preferences) + ")";

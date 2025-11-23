@@ -369,6 +369,32 @@
                 app:np_step="1"
                 app:np_digit="0"
                 />
+
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/character_reference_image_summary" />
+            <com.google.android.material.switchmaterial.SwitchMaterial
+                android:id="@+id/character_reference_image"
+                app:title="@string/character_reference_image"
+                android:text="@string/character_reference_image"
+                android:checked="false"
+                android:layout_marginStart="25sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:minHeight="48dp" />
+            <jp.ne.ruru.park.ando.naiview.DoubleSeekBarView
+                android:layout_width="fill_parent"
+                android:layout_height="match_parent"
+                android:layout_marginStart="25sp"
+                android:id="@+id/character_reference_image_fidelity"
+                app:np_title="@string/character_reference_image_fidelity"
+                app:np_defaultValue="0"
+                app:np_minValue="0"
+                app:np_maxValue="100"
+                app:np_step="5"
+                app:np_digit="2"
+                />
         </LinearLayout>
     </ScrollView>
 </LinearLayout>

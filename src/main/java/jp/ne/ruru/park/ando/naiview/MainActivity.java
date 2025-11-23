@@ -16,7 +16,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.EditText;
 
 /** main activity
  * @author T.Ando
@@ -54,7 +53,7 @@ public class MainActivity extends AppCompatActivity {
             String name = this.getPackageName();
             PackageManager pm = this.getPackageManager();
             PackageInfo info = pm.getPackageInfo(name, PackageManager.GET_META_DATA);
-            a.appendLog(this, "Version:" + info.versionCode + " / " + info.versionName);
+            a.appendLog(this, "Version:" + info.versionName);
         } catch (PackageManager.NameNotFoundException e) {
             a.appendLog(this, e.getMessage());
         }
@@ -79,10 +78,9 @@ public class MainActivity extends AppCompatActivity {
     public void addButton(View view) {
         if (view instanceof Button) {
             view.setOnClickListener(this::myAction);
-        } else if (view instanceof ViewGroup) {
-            ViewGroup vg = (ViewGroup)view;
-            for (int i = 0 ; i < vg.getChildCount() ; i++) {
-                addButton(vg.getChildAt(i));
+        } else if (view instanceof ViewGroup viewGroup) {
+            for (int i = 0 ; i < viewGroup.getChildCount() ; i++) {
+                addButton(viewGroup.getChildAt(i));
             }
         }
     }
@@ -117,7 +115,7 @@ public class MainActivity extends AppCompatActivity {
      * @param intent intent
      */
     private void handleSendImage(Intent intent) {
-        Uri imageUri = intent.getParcelableExtra(Intent.EXTRA_STREAM);
+        Uri imageUri = intent.getParcelableExtra(Intent.EXTRA_STREAM, Uri.class);
         String mime = intent.getType();
         if (imageUri != null) {
             MyApplication a = (MyApplication) this.getApplication();

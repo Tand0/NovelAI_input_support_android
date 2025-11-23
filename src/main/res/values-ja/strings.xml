@@ -53,6 +53,9 @@
     <string name="prompt_strength_summary">(i2i)strength(default:70%)</string>
     <string name="prompt_noise">(i2i)ノイズ</string>
     <string name="prompt_noise_summary">(i2i)noise(default:10%)</string>
+    <string name="character_reference_image_summary">キャラクター参照イメージ</string>
+    <string name="character_reference_image_fidelity">Fidelity(default:0.0)</string>
+    <string name="character_reference_image">キャラクタ参照イメージを使用する</string>
 
     <!-- Prompt activiti -->
     <string name="text_prompt_hint">プロンプトを入力</string>

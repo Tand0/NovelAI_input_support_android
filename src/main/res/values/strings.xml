@@ -61,8 +61,11 @@
     <string name="prompt_strength_summary">(i2i)strength(default:70%)</string>
     <string name="prompt_noise">(i2i)noise(default:10%)</string>
     <string name="prompt_noise_summary">(i2i)noise(default:10%)</string>
+    <string name="character_reference_image_summary">Character Reference Image</string>
+    <string name="character_reference_image_fidelity">Fidelity(default:0.0)</string>
+    <string name="character_reference_image">Use Character Reference Image</string>
 
-    <!-- Prompt activiti -->
+    <!-- Prompt activity -->
     <string name="text_prompt_hint">Please input prompt</string>
     <string name="text_prompt_uc_hint">Please input uc</string>
 

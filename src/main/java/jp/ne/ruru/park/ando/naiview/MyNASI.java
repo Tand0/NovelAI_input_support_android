@@ -16,7 +16,6 @@ import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.UnsupportedEncodingException;
 import java.net.URL;
 import java.net.URLEncoder;
 import java.nio.charset.Charset;
@@ -108,7 +107,7 @@ public class MyNASI {
          * @param sampler         sampler
          * @param sm              sm
          * @param sm_dyn          sm_dyn
-         * @param variety          variety
+         * @param variety         variety
          * @param dynamicThresholding dynamic_thresholding
          * @param negative_prompt uc
          * @param seed            seed
@@ -117,7 +116,10 @@ public class MyNASI {
          * @param strength        strength for image2image
          * @param noise           noise for image2image
          * @param characters      cha01_Ok, cha01_NG, ch02_Ok, ch02_NG
-         * @param locations        character locations
+         * @param locations       character locations
+         * @param isI2i           use image to image
+         * @param isCri           use character_reference_image
+         * @param criFidelity     character_reference_image_fidelity
          */
         Allin1RequestImage(
                 boolean isV4,
@@ -143,7 +145,10 @@ public class MyNASI {
                 int strength,
                 int noise,
                 String[] characters,
-                int[] locations
+                int[] locations,
+                boolean isI2i,
+                boolean isCri,
+                int criFidelity
         ) {
             super(type,email,password);
             this.isV4 = isV4;
@@ -167,6 +172,9 @@ public class MyNASI {
             this.noise = noise;
             this.characters = characters;
             this.locations = locations;
+            this.isI2i = isI2i;
+            this.isCri = isCri;
+            this.criFidelity = criFidelity;
         }
         public final boolean isV4;
         public final String model;
@@ -198,6 +206,10 @@ public class MyNASI {
         public final String[] characters;
 
         public final int[] locations;
+
+        public final boolean isI2i;
+        public final boolean isCri;
+        public final int criFidelity;
     }
     /**
      * all in 1 request data.
@@ -444,11 +456,15 @@ public class MyNASI {
             p.put("scale",request.scale);
             p.put("sampler",request.sampler);
             p.put("steps",request.steps);
-            p.put("seed",request.seed);
+            if (!request.isV4) {
+                p.put("seed", request.seed);
+            }
             p.put("n_samples",1);
             p.put("ucPreset", 0);
             p.put("qualityToggle",true);
-            if (! request.isV4) {
+            if (request.isV4) {
+                p.put("autoSmea", request.sm);
+            } else {
                 p.put("sm", request.sm);
                 p.put("sm_dyn", request.sm_dyn);
             }
@@ -460,29 +476,64 @@ public class MyNASI {
             p.put("noise_schedule",request.noise_schedule);
             p.put("legacy_v3_extend", false);
             if (request.variety) {
-                p.put("skip_cfg_above_sigma", 19);
+                p.put("skip_cfg_above_sigma", 58);
             } else {
                 p.put("skip_cfg_above_sigma", null);
             }
             if (request.isV4) {
-                p.put("use_coords",true);
+                p.put("use_coords", false);
+                //
+                p.put("legacy_uc", false);
+                p.put("normalize_reference_strength_multiple", true);
+                p.put("inpaintImg2ImgStrength", 1);
+                p.put("seed",request.seed);
+                //
                 JSONArray characterPrompts = new JSONArray();
-                p.put("characterPrompts",characterPrompts);
                 //character 01
-                if (! request.characters[0].isEmpty()) {
+                if (!request.characters[0].isEmpty()) {
                     String ok = request.characters[0];
                     String ng = request.characters[1];
                     int x = request.locations[0];
                     int y = request.locations[1];
                     characterPrompts.put(createCharacterPrompts(ok, ng, x, y));
                 }
-                if (! request.characters[2].isEmpty()) {
+                if (!request.characters[2].isEmpty()) {
                     String ok = request.characters[2];
                     String ng = request.characters[3];
                     int x = request.locations[2];
                     int y = request.locations[3];
                     characterPrompts.put(createCharacterPrompts(ok, ng, x, y));
                 }
+                p.put("characterPrompts", characterPrompts);
+            }
+            if (request.isCri && (request.imageBuffer != null)) {
+                p.put("director_reference_images", 1);
+                String image = Base64.getEncoder().encodeToString(request.imageBuffer);
+                JSONArray array = new JSONArray();
+                array.put(image);
+                p.put("director_reference_images", array);
+                //
+                array = new JSONArray();
+                p.put("director_reference_descriptions",array);
+                JSONObject caption = new JSONObject();
+                array.put(caption);
+                JSONObject baseCaption = new JSONObject();
+                baseCaption.put("base_caption", "character&style");
+                baseCaption.put("char_captions", new JSONArray());
+                caption.put("caption",baseCaption);
+                caption.put("legacy_uc",false);
+                //
+                array = new JSONArray();
+                array.put(1);
+                p.put("director_reference_information_extracted",array);
+                array = new JSONArray();
+                array.put(1);
+                p.put("director_reference_strength_values",array);
+                array = new JSONArray();
+                array.put(request.criFidelity / 100.0);
+                p.put("director_reference_secondary_strength_values",array);
+            }
+            if (request.isV4) {
                 //
                 JSONObject v4Prompt = new JSONObject();
                 p.put("v4_prompt",v4Prompt);
@@ -490,17 +541,22 @@ public class MyNASI {
                 v4Prompt.put("use_coords", true);
                 v4Prompt.put("use_order", true);
                 JSONObject v4NegativePrompt = new JSONObject();
-                p.put("v4_negative_prompt",v4NegativePrompt);
-                v4NegativePrompt.put("caption",createCaption(request,false));
+                p.put("v4_negative_prompt", v4NegativePrompt);
+                v4NegativePrompt.put("caption", createCaption(request,false));
+                v4NegativePrompt.put("legacy_uc", false);
             }
             p.put("negative_prompt",ngInput);
-            JSONArray noArray = new JSONArray();
-            p.put("reference_image_multiple",noArray);
-            p.put("reference_information_extracted_multiple",noArray);
-            p.put("reference_strength_multiple",noArray);
-            p.put("deliberate_euler_ancestral_bug",false);
-            p.put("prefer_brownian",true);
-            if (request.imageBuffer != null) {
+            /*
+             * this is old setting
+             * JSONArray noArray = new JSONArray();
+             * p.put("reference_image_multiple",noArray);
+             * p.put("reference_information_extracted_multiple",noArray);
+             * p.put("reference_strength_multiple",noArray);
+             * p.put("deliberate_euler_ancestral_bug",false);
+             * p.put("prefer_brownian",true);
+             */
+            p.put("stream", "msgpack");
+            if (request.isI2i && (request.imageBuffer != null)) {
                 // for image2image
                 String image = Base64.getEncoder().encodeToString(request.imageBuffer);
                 p.put("image", image);
@@ -512,14 +568,15 @@ public class MyNASI {
             JSONObject m = new JSONObject();
             m.put("input",okInput);
             m.put("model",request.model);
-            if (request.imageBuffer == null) {
-                // for generate image
-                m.put("action", "generate");
-            } else {
+            if (request.isI2i && (request.imageBuffer != null)) {
                 // for img2img
                 m.put("action", "img2img");
+            } else {
+                // for generate image
+                m.put("action", "generate");
             }
-            m.put("parameters",p);
+            m.put("parameters", p);
+            m.put("use_new_shared_trial", true);
             //
             res = this.getConnection(request.type,IMAGE_URL,m);
             //
@@ -559,6 +616,7 @@ public class MyNASI {
         target.put("prompt",ok);
         target.put("uc",ng);
         target.put("center", createCenter(x, y));
+        target.put("enabled", true);
         return target;
     }
     public JSONObject createCenter(int x, int y) throws JSONException {
@@ -679,19 +737,11 @@ public class MyNASI {
         }
         //
         String model;
-        try {
-            model = URLEncoder.encode(request.model,"utf-8");
-        } catch (UnsupportedEncodingException e) {
-            model = request.model;
-        }
+        model = URLEncoder.encode(request.model, StandardCharsets.UTF_8);
         String prompt;
-        try {
-            boolean isJp = containsJapanese(request.prompt);
-            prompt = URLEncoder.encode(request.prompt, "utf-8")
-                    + (isJp? "&lang=jp": "");
-        } catch (UnsupportedEncodingException e) {
-            prompt = request.prompt;
-        }
+        boolean isJp = containsJapanese(request.prompt);
+        prompt = URLEncoder.encode(request.prompt, StandardCharsets.UTF_8)
+                + (isJp? "&lang=jp": "");
         String url = SUGGEST_TAGS_URL + "?model=" + model + "&prompt=" + prompt;
         Allin1Response res;
         try {

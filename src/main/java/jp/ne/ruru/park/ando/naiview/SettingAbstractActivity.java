@@ -65,26 +65,24 @@ public abstract class SettingAbstractActivity extends AppCompatActivity {
         onMyResume();
     }
     public void load(MyApplication a, SharedPreferences preferences, View view) {
-        if (view instanceof DoubleSeekBarView) {
-            DoubleSeekBarView sb = (DoubleSeekBarView) view;
+        if (view instanceof DoubleSeekBarView seekBarView) {
             String idString = getIdString(a, view);
             if (idString == null) {
                 return;
             }
-            int progress = sb.getValue();
+            int progress = seekBarView.getValue();
             try {
                 progress = preferences.getInt(idString, progress);
-                sb.setValue(progress);
-                a.appendLog(this, "load:" + idString + ": " + progress + " : " + sb.getDisplayValue());
+                seekBarView.setValue(progress);
+                a.appendLog(this, "load:" + idString + ": " + progress + " : " + seekBarView.getDisplayValue());
             } catch(ClassCastException e) {
                 a.appendLog(this, e.getMessage());
             }
-        } else if (view instanceof EditText) {
+        } else if (view instanceof EditText editText) {
             String idString = getIdString(a, view);
             if (idString == null) {
                 return;
             }
-            EditText editText = (EditText)view;
             String text = editText.getText().toString();
             int inputType = editText.getInputType();
             try {
@@ -97,12 +95,11 @@ public abstract class SettingAbstractActivity extends AppCompatActivity {
             } catch(ClassCastException e) {
                 a.appendLog(this, e.getMessage());
             }
-        } else if (view instanceof SwitchCompat) {
+        } else if (view instanceof SwitchCompat sm) {
             String idString = getIdString(a, view);
             if (idString == null) {
                 return;
             }
-            SwitchCompat sm = (SwitchCompat)view;
             boolean checked = sm.isChecked();
             try {
                 checked = preferences.getBoolean(idString, checked);
@@ -111,12 +108,11 @@ public abstract class SettingAbstractActivity extends AppCompatActivity {
             } catch(ClassCastException e) {
                 a.appendLog(this, e.getMessage());
             }
-        } else if (view instanceof Spinner) {
+        } else if (view instanceof Spinner sm) {
             String idString = getIdString(a, view);
             if (idString == null) {
                 return;
             }
-            Spinner sm = (Spinner)view;
             Object item = sm.getSelectedItem();
             SpinnerAdapter sa = sm.getAdapter();
             if ((item == null) || (sa == null)) {
@@ -135,8 +131,7 @@ public abstract class SettingAbstractActivity extends AppCompatActivity {
             } catch(ClassCastException e) {
                 a.appendLog(this, e.getMessage());
             }
-        } else if (view instanceof ViewGroup) {
-            ViewGroup vg = (ViewGroup)view;
+        } else if (view instanceof ViewGroup vg) {
             for (int i = 0 ; i < vg.getChildCount() ; i++) {
                 load(a, preferences, vg.getChildAt(i));
             }
@@ -155,8 +150,7 @@ public abstract class SettingAbstractActivity extends AppCompatActivity {
         editor.apply();
     }
     public void save(MyApplication a,SharedPreferences.Editor editor, View view) {
-        if (view instanceof DoubleSeekBarView) {
-            DoubleSeekBarView sb = (DoubleSeekBarView) view;
+        if (view instanceof DoubleSeekBarView sb) {
             String idString = getIdString(a, view);
             if (idString == null) {
                 return;
@@ -164,12 +158,11 @@ public abstract class SettingAbstractActivity extends AppCompatActivity {
             int progress = sb.getValue();
             editor.putInt(idString, progress);
             a.appendLog(this, "save:" + idString + ": " + progress + " : " + sb.getDisplayValue());
-        } else if (view instanceof EditText) {
+        } else if (view instanceof EditText editText) {
             String idString = getIdString(a, view);
             if (idString == null) {
                 return;
             }
-            EditText editText = (EditText)view;
             int inputType = editText.getInputType();
             String text = editText.getText().toString();
             editor.putString(idString, text);
@@ -177,29 +170,26 @@ public abstract class SettingAbstractActivity extends AppCompatActivity {
                 text = "***";
             }
             a.appendLog(this, "save:" + idString + ": " + text);
-        } else if (view instanceof SwitchCompat) {
+        } else if (view instanceof SwitchCompat sm) {
             String idString = getIdString(a, view);
             if (idString == null) {
                 return;
             }
-            SwitchCompat sm = (SwitchCompat)view;
             boolean checked = sm.isChecked();
             editor.putBoolean(idString, checked);
             a.appendLog(this, "save:" + idString + ": " + checked);
-        } else if (view instanceof Spinner) {
+        } else if (view instanceof Spinner sm) {
             String idString = getIdString(a, view);
             if (idString == null) {
                 return;
             }
-            Spinner sm = (Spinner)view;
             Object item = sm.getSelectedItem();
             if (item == null) {
                 return;
             }
             editor.putString(idString, item.toString());
             a.appendLog(this, "save:" + idString + ": " + item);
-        } else if (view instanceof ViewGroup) {
-            ViewGroup vg = (ViewGroup)view;
+        } else if (view instanceof ViewGroup vg) {
             for (int i = 0 ; i < vg.getChildCount() ; i++) {
                 save(a,editor, vg.getChildAt(i));
             }

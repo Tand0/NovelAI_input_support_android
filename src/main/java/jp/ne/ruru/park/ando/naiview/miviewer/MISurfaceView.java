@@ -176,17 +176,10 @@ public class MISurfaceView extends SurfaceView {
             }
             //
             //
-            switch (scheduleStateFlag) {
-                case CONCENTRATED:
-                case VIBRATION:
-                case BOX:
-                    return true;
-                case REPOSITION:
-                case SPARK:
-                default:
-                    break;
-            }
-            return super.onScaleBegin(detector);
+            return switch (scheduleStateFlag) {
+                case CONCENTRATED, VIBRATION, BOX -> true;
+                default -> super.onScaleBegin(detector);
+            };
         }
         @Override
         public boolean onScale(@NonNull ScaleGestureDetector detector) {
@@ -602,17 +595,15 @@ public class MISurfaceView extends SurfaceView {
                 float x = getWidth() / 2.0f;
                 float y = getHeight() / 2.0f;
                 for (Plot plotNow: data.getPlot().getPlotList()) {
-                    if (plotNow instanceof PlotDistance) {
+                    if (plotNow instanceof PlotDistance plot) {
                         p.setColor(Color.RED);
-                        PlotDistance plot = (PlotDistance) plotNow;
                         float dx = x + plot.distanceX;
                         float dy = y + plot.distanceY;
                         c.drawLine(x, y, dx, dy, p);
                         x = dx;
                         y = dy;
-                    } else if (plotNow instanceof PlotScale) {
+                    } else if (plotNow instanceof PlotScale plot) {
                         p.setColor(Color.GREEN);
-                        PlotScale plot = (PlotScale) plotNow;
                         float dx = plot.touchPointX;
                         float dy = plot.touchPointY;
                         c.drawLine(x, y, dx, dy, p);
@@ -925,13 +916,11 @@ public class MISurfaceView extends SurfaceView {
             if (plot.time + plotIndex.getTimeMoveBase() < nowTime) {
                 invalidate = true;
                 //
-                if (plot instanceof PlotDistance) {
-                    PlotDistance pd = (PlotDistance) plot;
+                if (plot instanceof PlotDistance pd) {
                     speedX += pd.distanceX;
                     speedY += pd.distanceY;
                     imageViewMove(pd.distanceX, pd.distanceY);
-                } else if (plot instanceof PlotScale) {
-                    PlotScale ps = (PlotScale) plot;
+                } else if (plot instanceof PlotScale ps) {
                     imageViewScale(ps.lastScaleFactor,ps.touchPointX,ps.touchPointY);
                 }
                 //

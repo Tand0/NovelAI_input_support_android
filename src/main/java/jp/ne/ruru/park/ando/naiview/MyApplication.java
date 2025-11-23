@@ -1,5 +1,7 @@
 package jp.ne.ruru.park.ando.naiview;
 
+import static java.util.concurrent.Executors.newSingleThreadExecutor;
+
 import android.app.Activity;
 import android.app.Application;
 import android.content.Context;
@@ -9,6 +11,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Handler;
+import android.os.Looper;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -31,7 +34,6 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Locale;
 import java.util.Random;
-import java.util.concurrent.Executors;
 import java.util.concurrent.locks.ReentrantLock;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -60,7 +62,7 @@ public class MyApplication  extends Application {
     /**
      * handle to return for android thread
      */
-    public final Handler mHandler = new Handler();
+    public final Handler mHandler = new Handler(Looper.getMainLooper());
 
     /**
      * this is constructor
@@ -451,6 +453,13 @@ public class MyApplication  extends Application {
     public boolean isSettingI2i(SharedPreferences preferences) {
         try {
             return preferences.getBoolean("setting_i2i", false);
+        } catch(ClassCastException e) {
+            return false;
+        }
+    }
+    public boolean isCharacterReferenceImage(SharedPreferences preferences) {
+        try {
+            return preferences.getBoolean("character_reference_image", false);
         } catch(ClassCastException e) {
             return false;
         }
@@ -1061,8 +1070,7 @@ public class MyApplication  extends Application {
         }
         try {
             if (object instanceof JSONArray) {
-                JSONArray array = (JSONArray) object;
-                Data arrayData = new Data(array);
+                Data arrayData = new Data(object);
                 arrayData.forEach(target -> dictToList(promptType, target, list));
                 return;
             } else if (! (object instanceof JSONObject)) {
@@ -1322,6 +1330,7 @@ public class MyApplication  extends Application {
                     this.imageBuffer);
         } else if (type == MyNASI.REST_TYPE.IMAGE) {
             boolean isI2i = isSettingI2i(preferences);
+            boolean isCri = isCharacterReferenceImage(preferences);
             Toast.makeText(this, R.string.generate_image, Toast.LENGTH_SHORT).show();
             String message = context.getResources().getString(R.string.generate_image);
             appendLog(context, message);
@@ -1336,20 +1345,20 @@ public class MyApplication  extends Application {
             byte[] targetBuffer;
             int strength = preferences.getInt("prompt_int_strength", 70);
             int noise = preferences.getInt("prompt_int_noise", 10);
-            if (isI2i) {
+            if (isI2i || isCri) {
                 try (InputStream stream = new ByteArrayInputStream(this.imageBuffer);
-                     ByteArrayOutputStream baos = new ByteArrayOutputStream()){
+                     ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream()){
                     Bitmap bitmap = BitmapFactory.decodeStream(stream);
                     bitmapX = bitmap.getWidth();
                     bitmapY = bitmap.getHeight();
                     if ((bitmapX <= 0) || (bitmapY <= 0)) {
                         throw new IOException("bitmap size is 0");
                     }
-                    final int max1 = 512;
+                    final int max1 = 1024;
                     final int max2 = max1 * 3 / 2;
                     if (bitmapX == bitmapY) {
                         // re-scale (1:1)
-                        final int max3 = 640;
+                        final int max3 = 1472;
                         bitmap = Bitmap.createScaledBitmap(bitmap, max3, max3, true);
                     } else {
                         int maxWidth;
@@ -1396,8 +1405,8 @@ public class MyApplication  extends Application {
                     }
                     width = bitmap.getWidth();
                     height = bitmap.getHeight();
-                    bitmap.compress(Bitmap.CompressFormat.PNG, 100, baos);
-                    targetBuffer = baos.toByteArray();
+                    bitmap.compress(Bitmap.CompressFormat.PNG, 100, byteArrayOutputStream);
+                    targetBuffer = byteArrayOutputStream.toByteArray();
                     this.imageBuffer = targetBuffer;
                 } catch (IllegalArgumentException | IOException e) {
                     this.appendLog(context,"Changed i2i image exception");
@@ -1453,6 +1462,7 @@ public class MyApplication  extends Application {
             String noise_schedule = preferences.getString("prompt_noise_schedule", "karras").trim();
             String[] characters = this.getCharacters();
             int[] locations = this.getLocations(preferences);
+            int criFidelity = preferences.getInt("character_reference_image_fidelity", 100);
             request = new MyNASI.Allin1RequestImage(
                     isPromptModelV4(preferences),
                     MyNASI.REST_TYPE.IMAGE,
@@ -1477,7 +1487,10 @@ public class MyApplication  extends Application {
                     strength,
                     noise,
                     characters,
-                    locations);
+                    locations,
+                    isI2i,
+                    isCri,
+                    criFidelity);
         } else if (type == MyNASI.REST_TYPE.SUGGEST_TAGS) {
             String model = getPromptModel(preferences);
             String target = (String) option;
@@ -1499,11 +1512,11 @@ public class MyApplication  extends Application {
                 try {
                     final MyNASI.Allin1Response res;
                     MyNASI nasi = this.getMyNASI();
-                    if (request.type == MyNASI.REST_TYPE.UPSCALE) {
+                    if (request instanceof MyNASI.Allin1RequestUpscale) {
                         res = nasi.upscale((MyNASI.Allin1RequestUpscale)request);
-                    } else if (request.type == MyNASI.REST_TYPE.IMAGE) {
+                    } else if (request instanceof MyNASI.Allin1RequestImage) {
                         res = nasi.downloadImage((MyNASI.Allin1RequestImage)request);
-                    } else if (request.type == MyNASI.REST_TYPE.SUGGEST_TAGS) {
+                    } else if (request instanceof MyNASI.Allin1RequestSuggestTags) {
                         res = nasi.suggestTags((MyNASI.Allin1RequestSuggestTags)request);
                     } else {
                         res = nasi.subscription(request);
@@ -1515,7 +1528,7 @@ public class MyApplication  extends Application {
                 }
             }
         };
-        Executors.newSingleThreadExecutor().execute(runnable);
+        newSingleThreadExecutor().execute(runnable);
     }
 
     protected void appendJSONObject(StringBuilder buf,int index, JSONObject m) {
@@ -1526,7 +1539,7 @@ public class MyApplication  extends Application {
                 buf.append("\"");
                 buf.append(key);
                 buf.append("\"");
-                if (key.equals("image")) {
+                if (key.equals("image") || key.equals("director_reference_images")) {
                     buf.append("*image*\n");
                     continue;
                 }
