@@ -7,7 +7,6 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.net.Uri;
-import android.os.Build;
 import android.provider.MediaStore;
 import android.widget.Toast;
 
@@ -124,9 +123,7 @@ public class ImageJumper {
     }
     private void onMyFling() {
         String readImagesPermission =
-                (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) ?
-                        android.Manifest.permission.READ_MEDIA_IMAGES
-                        : android.Manifest.permission.READ_EXTERNAL_STORAGE;
+                android.Manifest.permission.READ_MEDIA_IMAGES;
         if (activity.checkSelfPermission(android.Manifest.permission.READ_MEDIA_IMAGES)!=
                 PackageManager.PERMISSION_GRANTED) {
             try {

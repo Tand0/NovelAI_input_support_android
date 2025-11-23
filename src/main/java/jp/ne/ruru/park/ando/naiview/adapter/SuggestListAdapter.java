@@ -59,7 +59,7 @@ public class SuggestListAdapter<T extends SuggestList> extends ArrayAdapter<T> {
         }
         Button button = view.findViewById(R.id.list_suggest_p3);
         if (button != null) {
-            button.setText(suggestList.tag);
+            button.setText(suggestList.tag());
             button.setOnClickListener(x->{
                 String text = ((TextView)x).getText().toString();
                 ((SuggestActivity)this.getContext()).update(text);

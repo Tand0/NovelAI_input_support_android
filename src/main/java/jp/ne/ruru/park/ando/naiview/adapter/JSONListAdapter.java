@@ -3,7 +3,6 @@ package jp.ne.ruru.park.ando.naiview.adapter;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.os.Build;
 import android.text.SpannableString;
 import android.text.style.ForegroundColorSpan;
 import android.view.LayoutInflater;
@@ -163,13 +162,7 @@ public class JSONListAdapter<T extends JSONObject> extends ArrayAdapter<T> {
     }
 
     public boolean getDarkFlag() {
-        boolean darkFlag = false;
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
-            if (this.getContext().getResources().getConfiguration().isNightModeActive()) {
-                darkFlag = true;
-            }
-        }
-        return darkFlag;
+        return this.getContext().getResources().getConfiguration().isNightModeActive();
     }
 
     /**
@@ -607,17 +600,11 @@ public class JSONListAdapter<T extends JSONObject> extends ArrayAdapter<T> {
             targetData.setValue(defaultString);
             targetData.setExpand(true);
             targetData.setChild(childArray);
-            String[] strings;
-            switch (promptType) {
-                case P_BASE_OK:
-                    strings = MyNASI.DEFAULT_PROMPT.split(",");
-                    break;
-                case P_BASE_NG:
-                    strings = MyNASI.DEFAULT_PROMPT_UC.split(",");
-                    break;
-                default:
-                    strings = new String[]{};
-            }
+            String[] strings = switch (promptType) {
+                case P_BASE_OK -> MyNASI.DEFAULT_PROMPT.split(",");
+                case P_BASE_NG -> MyNASI.DEFAULT_PROMPT_UC.split(",");
+                default -> new String[]{};
+            };
             for (String split : strings) {
                 JSONObject child = new JSONObject();
                 Data childData = new Data(child);

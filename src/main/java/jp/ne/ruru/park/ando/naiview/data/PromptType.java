@@ -27,55 +27,34 @@ public enum PromptType {
         return name;
     }
     public String toStringJson() {
-        switch (this) {
-            case P_BASE_NG:
-                return "u0";
-            case P_CH01_OK:
-                return "c1";
-            case P_CH01_NG:
-                return "u1";
-            case P_CH02_OK:
-                return "c2";
-            case P_CH02_NG:
-                return "u2";
-            case P_BASE_OK:
-            default:
-        }
-        return "c0";
+        return switch (this) {
+            case P_BASE_NG -> "u0";
+            case P_CH01_OK -> "c1";
+            case P_CH01_NG -> "u1";
+            case P_CH02_OK -> "c2";
+            case P_CH02_NG -> "u2";
+            default -> "c0";
+        };
     }
     public int getIdShort() {
-        switch (this) {
-            case P_BASE_NG:
-                return R.string.prompt_type_base_ng;
-            case P_CH01_OK:
-                return R.string.prompt_type_ch1_ok;
-            case P_CH01_NG:
-                return R.string.prompt_type_ch1_ng;
-            case P_CH02_OK:
-                return R.string.prompt_type_ch2_ok;
-            case P_CH02_NG:
-                return R.string.prompt_type_ch2_ng;
-            case P_BASE_OK:
-            default:
-        }
-        return R.string.prompt_type_base_ok;
+        return switch (this) {
+            case P_BASE_NG -> R.string.prompt_type_base_ng;
+            case P_CH01_OK -> R.string.prompt_type_ch1_ok;
+            case P_CH01_NG -> R.string.prompt_type_ch1_ng;
+            case P_CH02_OK -> R.string.prompt_type_ch2_ok;
+            case P_CH02_NG -> R.string.prompt_type_ch2_ng;
+            default -> R.string.prompt_type_base_ok;
+        };
     }
     public int getIdLong() {
-        switch (this) {
-            case P_BASE_NG:
-                return R.string.prompt_type_base_ng_long;
-            case P_CH01_OK:
-                return R.string.prompt_type_ch1_ok_long;
-            case P_CH01_NG:
-                return R.string.prompt_type_ch1_ng_long;
-            case P_CH02_OK:
-                return R.string.prompt_type_ch2_ok_long;
-            case P_CH02_NG:
-                return R.string.prompt_type_ch2_ng_long;
-            case P_BASE_OK:
-            default:
-        }
-        return R.string.prompt_type_base_ok_long;
+        return switch (this) {
+            case P_BASE_NG -> R.string.prompt_type_base_ng_long;
+            case P_CH01_OK -> R.string.prompt_type_ch1_ok_long;
+            case P_CH01_NG -> R.string.prompt_type_ch1_ng_long;
+            case P_CH02_OK -> R.string.prompt_type_ch2_ok_long;
+            case P_CH02_NG -> R.string.prompt_type_ch2_ng_long;
+            default -> R.string.prompt_type_base_ok_long;
+        };
     }
     public boolean contains(String key) {
         if (key == null) {
@@ -92,20 +71,13 @@ public enum PromptType {
             }
             return P_BASE_OK;
         }
-        switch (pType) {
-            case "u0":
-                return P_BASE_NG;
-            case "c1":
-                return P_CH01_OK;
-            case "u1":
-                return P_CH01_NG;
-            case "c2":
-                return P_CH02_OK;
-            case "u2":
-                return P_CH02_NG;
-            case "c0":
-            default:
-        }
-        return P_BASE_OK;
+        return switch (pType) {
+            case "u0" -> P_BASE_NG;
+            case "c1" -> P_CH01_OK;
+            case "u1" -> P_CH01_NG;
+            case "c2" -> P_CH02_OK;
+            case "u2" -> P_CH02_NG;
+            default -> P_BASE_OK;
+        };
     }
 }

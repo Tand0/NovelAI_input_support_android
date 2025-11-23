@@ -4,7 +4,6 @@ import android.content.ContentResolver;
 import android.content.Context;
 import android.database.Cursor;
 import android.graphics.Bitmap;
-import android.os.Build;
 import android.provider.MediaStore;
 import android.util.Size;
 import android.view.LayoutInflater;
@@ -104,18 +103,10 @@ public class ImagesListAdapter<T extends UriEtc> extends ArrayAdapter<T> {
                         long height = cursor.getLong(heightColumn);
                         subTitle.append(" / ").append(width).append("x").append(height);
                     }
-                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
-                        try {
-                            result = cr.loadThumbnail(etc.uri, new Size(96, 96), null);
-                        } catch (IOException e) {
-                            // NONE
-                        }
-                    } else {
-                        int idColumn = cursor.getColumnIndex(MediaStore.Images.Media._ID);
-                        long id = idColumn < 0 ? -1 : cursor.getLong(idColumn);
-                        if (0 < id) {
-                            result = MediaStore.Images.Thumbnails.getThumbnail(cr, id, MediaStore.Images.Thumbnails.MICRO_KIND, null);
-                        }
+                    try {
+                        result = cr.loadThumbnail(etc.uri, new Size(96, 96), null);
+                    } catch (IOException e) {
+                        // NONE
                     }
                     int dataColumn = cursor.getColumnIndex(MediaStore.Images.Media.DATA);
                     if (dataColumn < 0) {

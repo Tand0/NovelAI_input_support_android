@@ -38,55 +38,26 @@ public class PromptFragmentAdapter extends FragmentStateAdapter {
     @NonNull
     @Override
     public Fragment createFragment(int position) {
-        PromptAbstractFragment target;
-        switch (position) {
-            case 1:
-                target = new PromptCh01OkFragment();
-                break;
-            case 2:
-                target = new PromptCh02OkFragment();
-                break;
-            case 3:
-                target = new PromptBaseNgFragment();
-                break;
-            case 4:
-                target = new PromptCh01NgFragment();
-                break;
-            case 5:
-                target = new PromptCh02NgFragment();
-                break;
-            case 0:
-            default:
-                target = new PromptBaseOkFragment();
-                break;
-        }
+        PromptAbstractFragment target = switch (position) {
+            case 1 -> new PromptCh01OkFragment();
+            case 2 -> new PromptCh02OkFragment();
+            case 3 -> new PromptBaseNgFragment();
+            case 4 -> new PromptCh01NgFragment();
+            case 5 -> new PromptCh02NgFragment();
+            default -> new PromptBaseOkFragment();
+        };
         promptAbstractFragment[position] = target;
         return target;
     }
     public static PromptType getPositionToPromptType(int position) {
-        PromptType target;
-        switch (position) {
-            case 1:
-                target = PromptType.P_CH01_OK;
-                break;
-            case 2:
-                target = PromptType.P_CH02_OK;
-                break;
-            case 3:
-                target = PromptType.P_BASE_NG;
-                break;
-            case 4:
-                target = PromptType.P_CH01_NG;
-                break;
-            case 5:
-                target = PromptType.P_CH02_NG;
-                break;
-            case 0:
-            default:
-                target =  PromptType.P_BASE_OK;
-                break;
-        }
-        return target;
+        return switch (position) {
+            case 1 -> PromptType.P_CH01_OK;
+            case 2 -> PromptType.P_CH02_OK;
+            case 3 -> PromptType.P_BASE_NG;
+            case 4 -> PromptType.P_CH01_NG;
+            case 5 -> PromptType.P_CH02_NG;
+            default -> PromptType.P_BASE_OK;
+        };
     }
 
 
