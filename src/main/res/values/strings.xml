@@ -64,6 +64,7 @@
     <string name="character_reference_image_summary">Character Reference Image</string>
     <string name="character_reference_image_fidelity">Fidelity(default:0.0)</string>
     <string name="character_reference_image">Use Character Reference Image</string>
+    <string name="style_aware">Style Aware</string>
 
     <!-- Prompt activity -->
     <string name="text_prompt_hint">Please input prompt</string>

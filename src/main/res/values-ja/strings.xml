@@ -56,6 +56,7 @@
     <string name="character_reference_image_summary">キャラクター参照イメージ</string>
     <string name="character_reference_image_fidelity">Fidelity(default:0.0)</string>
     <string name="character_reference_image">キャラクタ参照イメージを使用する</string>
+    <string name="style_aware">スタイルも意識(Style Aware)</string>
 
     <!-- Prompt activiti -->
     <string name="text_prompt_hint">プロンプトを入力</string>

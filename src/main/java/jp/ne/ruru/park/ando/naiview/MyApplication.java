@@ -1463,6 +1463,7 @@ public class MyApplication  extends Application {
             String[] characters = this.getCharacters();
             int[] locations = this.getLocations(preferences);
             int criFidelity = preferences.getInt("character_reference_image_fidelity", 100);
+            boolean styleAware = preferences.getBoolean("style_aware", true);
             request = new MyNASI.Allin1RequestImage(
                     isPromptModelV4(preferences),
                     MyNASI.REST_TYPE.IMAGE,
@@ -1490,6 +1491,7 @@ public class MyApplication  extends Application {
                     locations,
                     isI2i,
                     isCri,
+                    styleAware,
                     criFidelity);
         } else if (type == MyNASI.REST_TYPE.SUGGEST_TAGS) {
             String model = getPromptModel(preferences);

@@ -383,6 +383,15 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:minHeight="48dp" />
+            <com.google.android.material.switchmaterial.SwitchMaterial
+                android:id="@+id/style_aware"
+                app:title="@string/style_aware"
+                android:text="@string/style_aware"
+                android:checked="false"
+                android:layout_marginStart="25sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:minHeight="48dp" />
             <jp.ne.ruru.park.ando.naiview.DoubleSeekBarView
                 android:layout_width="fill_parent"
                 android:layout_height="match_parent"

@@ -119,6 +119,7 @@ public class MyNASI {
          * @param locations       character locations
          * @param isI2i           use image to image
          * @param isCri           use character_reference_image
+         * @param styleAware      Style Aware for CIR
          * @param criFidelity     character_reference_image_fidelity
          */
         Allin1RequestImage(
@@ -148,6 +149,7 @@ public class MyNASI {
                 int[] locations,
                 boolean isI2i,
                 boolean isCri,
+                boolean styleAware,
                 int criFidelity
         ) {
             super(type,email,password);
@@ -174,6 +176,7 @@ public class MyNASI {
             this.locations = locations;
             this.isI2i = isI2i;
             this.isCri = isCri;
+            this.styleAware = styleAware;
             this.criFidelity = criFidelity;
         }
         public final boolean isV4;
@@ -209,6 +212,7 @@ public class MyNASI {
 
         public final boolean isI2i;
         public final boolean isCri;
+        public final boolean styleAware;
         public final int criFidelity;
     }
     /**
@@ -518,7 +522,11 @@ public class MyNASI {
                 JSONObject caption = new JSONObject();
                 array.put(caption);
                 JSONObject baseCaption = new JSONObject();
-                baseCaption.put("base_caption", "character&style");
+                if (request.styleAware) {
+                    baseCaption.put("base_caption", "character&style");
+                } else {
+                    baseCaption.put("base_caption", "character");
+                }
                 baseCaption.put("char_captions", new JSONArray());
                 caption.put("caption",baseCaption);
                 caption.put("legacy_uc",false);

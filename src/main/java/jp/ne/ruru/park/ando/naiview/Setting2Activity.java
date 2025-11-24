@@ -57,6 +57,7 @@ public class Setting2Activity extends SettingAbstractActivity {
         findViewById(R.id.character_reference_image).setEnabled(! checked);
     }
     public void changeCharacterReferenceImage(boolean checked) {
+        findViewById(R.id.style_aware).setEnabled(checked);
         findViewById(R.id.character_reference_image_fidelity).setEnabled(checked);
         // onのときi2iは打てない
         findViewById(R.id.setting_i2i).setEnabled(! checked);
