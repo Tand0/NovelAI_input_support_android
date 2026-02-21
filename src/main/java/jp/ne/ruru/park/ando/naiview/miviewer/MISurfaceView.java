@@ -676,10 +676,10 @@ public class MISurfaceView extends SurfaceView {
                         PlotBitmap plot = (PlotBitmap)plotIndex.getPlotList().get(plotIndex.getIndex());
                         for (int i = 0; i < data.getSparklingCount(); i++) {
                             float radius = data.getSparklingLen();
-                            float ramdomDx = ((float)Math.random() - 0.5f) * data.getSparklingRandom();
-                            float ramdomDy = ((float)Math.random() - 0.5f) * data.getSparklingRandom();
-                            float dx = getBitmapXYtoDisplayXY(plot.bitmapX + ramdomDx, matrixTransX, scaleX);
-                            float dy = getBitmapXYtoDisplayXY(plot.bitmapY + ramdomDy, matrixTransY, scaleY);
+                            float randomDx = ((float)Math.random() - 0.5f) * data.getSparklingRandom();
+                            float randomDy = ((float)Math.random() - 0.5f) * data.getSparklingRandom();
+                            float dx = getBitmapXYtoDisplayXY(plot.bitmapX + randomDx, matrixTransX, scaleX);
+                            float dy = getBitmapXYtoDisplayXY(plot.bitmapY + randomDy, matrixTransY, scaleY);
                             c.drawCircle(dx, dy, radius, p);
                         }
                     }

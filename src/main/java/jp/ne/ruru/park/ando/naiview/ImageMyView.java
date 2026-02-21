@@ -313,8 +313,8 @@ public class ImageMyView extends androidx.appcompat.widget.AppCompatImageView im
         String special;
         if (a.isSettingI2i(preferences)) {
             special = " (i2i)";
-        } else if (a.isCharacterReferenceImage(preferences)) {
-                special = " (CRI)";
+        } else if (a.isPreciseReferenceImage(preferences)) {
+                special = " (PRI)";
         } else {
             special = " (" + a.getSettingWidthXHeight(preferences) + ")";
         }

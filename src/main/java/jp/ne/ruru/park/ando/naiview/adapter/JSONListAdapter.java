@@ -269,7 +269,7 @@ public class JSONListAdapter<T extends JSONObject> extends ArrayAdapter<T> {
     }
 
     /**
-     * insert or change text to json object
+     * insert or change text to JSON object
      *
      * @param item           json object
      * @param text           insert or change text

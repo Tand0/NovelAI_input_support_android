@@ -297,16 +297,11 @@ public class Data implements Iterable<JSONObject> {
     @Override
     @NonNull
     public Iterator<JSONObject> iterator() {
-        JSONArray target;
-        if (object == null) {
-            target = null;
-        } else if (object instanceof JSONArray) {
-            target = (JSONArray) object;
-        } else if (object instanceof JSONObject) {
-            target = containJSONArray(object, CHILD);
-        } else {
-            target = null;
-        }
+        JSONArray target = switch (object) {
+            case JSONArray jsonArray -> jsonArray;
+            case JSONObject ignored -> containJSONArray(object, CHILD);
+            case null, default -> null;
+        };
         List<JSONObject> targetArray = new LinkedList<>();
         if (target != null) {
             for (int i = 0; i < target.length() ; i++) {
@@ -325,18 +320,16 @@ public class Data implements Iterable<JSONObject> {
     @NonNull
     public JSONArray getChild() {
         JSONArray target;
-        if (object == null) {
-            target = new JSONArray();
-        } else if (object instanceof JSONArray) {
-            target = (JSONArray)object;
-        } else if (object instanceof JSONObject) {
-            try {
-                target = ((JSONObject)object).getJSONArray(CHILD);
-            } catch (JSONException e) {
-                target = new JSONArray();
+        switch (object) {
+            case JSONArray jsonArray -> target = jsonArray;
+            case JSONObject jsonObject -> {
+                try {
+                    target = jsonObject.getJSONArray(CHILD);
+                } catch (JSONException e) {
+                    target = new JSONArray();
+                }
             }
-        } else {
-            target = new JSONArray();
+            case null, default -> target = new JSONArray();
         }
         return target;
     }

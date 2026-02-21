@@ -31,7 +31,7 @@
     <string name="setting_width_x_height_summary">サイズ</string>
 
     <string name="setting_nai">NAIの設定</string>
-    <string name="prompt_model">モデル(default:nai-diffusion-4-5-curated)</string>
+    <string name="prompt_model">モデル(default:nai–diffusion–4-5-curated)</string>
     <string name="prompt_model_summary">model data</string>
     <string name="prompt_steps">ステップ</string>
     <string name="prompt_steps_summary">steps(default:23)</string>
@@ -53,10 +53,12 @@
     <string name="prompt_strength_summary">(i2i)strength(default:70%)</string>
     <string name="prompt_noise">(i2i)ノイズ</string>
     <string name="prompt_noise_summary">(i2i)noise(default:10%)</string>
-    <string name="character_reference_image_summary">キャラクター参照イメージ</string>
-    <string name="character_reference_image_fidelity">Fidelity(default:0.0)</string>
-    <string name="character_reference_image">キャラクタ参照イメージを使用する</string>
-    <string name="style_aware">スタイルも意識(Style Aware)</string>
+    <string name="precise_reference_image_summary">精密参照イメージ</string>
+    <string name="director_reference_strength_values">強度(default:1.0)</string>
+    <string name="director_reference_secondary_strength_values">忠誠度(default:1.0)</string>
+    <string name="precise_reference_image">精密参照イメージを使用する</string>
+    <string name="style_aware_spinner">スタイルも意識(Style Aware)</string>
+    <string name="style_aware_summary">スタイルも意識(Style Aware)</string>
 
     <!-- Prompt activiti -->
     <string name="text_prompt_hint">プロンプトを入力</string>

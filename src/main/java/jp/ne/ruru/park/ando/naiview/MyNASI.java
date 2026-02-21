@@ -41,9 +41,9 @@ public class MyNASI {
      */
     public static final String DEFAULT_PROMPT_UC = "lowres, bad anatomy, bad hands, text, error, missing fingers, extra digit, fewer digits, cropped, worst quality, low quality, normal quality, jpeg artifacts, signature, watermark, username, blurry";
 
-    /** mime type gif */
+    /** mime type GIF */
     public static final String IMAGE_PNG = "image/png";
-    /** mime type png */
+    /** mime type PNG */
     public static final String IMAGE_GIF = "image/gif";
 
     /** data area */
@@ -112,15 +112,16 @@ public class MyNASI {
          * @param negative_prompt uc
          * @param seed            seed
          * @param noise_schedule  noise schedule
-         * @param imageBuffer     base image for image2image
-         * @param strength        strength for image2image
-         * @param noise           noise for image2image
+         * @param imageBuffer     base image for Image2Image
+         * @param strength        strength for Image2Image
+         * @param noise           noise for Image2Image
          * @param characters      cha01_Ok, cha01_NG, ch02_Ok, ch02_NG
          * @param locations       character locations
          * @param isI2i           use image to image
-         * @param isCri           use character_reference_image
+         * @param isPri           use precise_reference_image
          * @param styleAware      Style Aware for CIR
-         * @param criFidelity     character_reference_image_fidelity
+         * @param drStrength      director_reference_strength_values
+         * @param drSecondaryStrength director_reference_secondary_strength_values
          */
         Allin1RequestImage(
                 boolean isV4,
@@ -148,9 +149,10 @@ public class MyNASI {
                 String[] characters,
                 int[] locations,
                 boolean isI2i,
-                boolean isCri,
-                boolean styleAware,
-                int criFidelity
+                boolean isPri,
+                String styleAware,
+                int drStrength,
+                int drSecondaryStrength
         ) {
             super(type,email,password);
             this.isV4 = isV4;
@@ -175,9 +177,10 @@ public class MyNASI {
             this.characters = characters;
             this.locations = locations;
             this.isI2i = isI2i;
-            this.isCri = isCri;
+            this.isPri = isPri;
             this.styleAware = styleAware;
-            this.criFidelity = criFidelity;
+            this.drStrength = drStrength;
+            this.drSecondaryStrength = drSecondaryStrength;
         }
         public final boolean isV4;
         public final String model;
@@ -211,9 +214,10 @@ public class MyNASI {
         public final int[] locations;
 
         public final boolean isI2i;
-        public final boolean isCri;
-        public final boolean styleAware;
-        public final int criFidelity;
+        public final boolean isPri;
+        public final String styleAware;
+        public final int drStrength;
+        public final int drSecondaryStrength;
     }
     /**
      * all in 1 request data.
@@ -510,7 +514,7 @@ public class MyNASI {
                 }
                 p.put("characterPrompts", characterPrompts);
             }
-            if (request.isCri && (request.imageBuffer != null)) {
+            if (request.isPri && (request.imageBuffer != null)) {
                 p.put("director_reference_images", 1);
                 String image = Base64.getEncoder().encodeToString(request.imageBuffer);
                 JSONArray array = new JSONArray();
@@ -522,11 +526,7 @@ public class MyNASI {
                 JSONObject caption = new JSONObject();
                 array.put(caption);
                 JSONObject baseCaption = new JSONObject();
-                if (request.styleAware) {
-                    baseCaption.put("base_caption", "character&style");
-                } else {
-                    baseCaption.put("base_caption", "character");
-                }
+                baseCaption.put("base_caption", request.styleAware);
                 baseCaption.put("char_captions", new JSONArray());
                 caption.put("caption",baseCaption);
                 caption.put("legacy_uc",false);
@@ -535,10 +535,10 @@ public class MyNASI {
                 array.put(1);
                 p.put("director_reference_information_extracted",array);
                 array = new JSONArray();
-                array.put(1);
+                array.put(request.drStrength / 100.0);
                 p.put("director_reference_strength_values",array);
                 array = new JSONArray();
-                array.put(request.criFidelity / 100.0);
+                array.put(1.0 - (request.drSecondaryStrength / 100.0));
                 p.put("director_reference_secondary_strength_values",array);
             }
             if (request.isV4) {

@@ -43,4 +43,9 @@
         <item>Insert</item>
         <item>Change</item>
     </string-array>
+    <string-array name="style_aware_spinner">
+        <item>character&amp;style</item>
+        <item>character</item>
+        <item>style</item>
+    </string-array>
 </resources>

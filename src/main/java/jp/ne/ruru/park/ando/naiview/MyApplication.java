@@ -457,9 +457,9 @@ public class MyApplication  extends Application {
             return false;
         }
     }
-    public boolean isCharacterReferenceImage(SharedPreferences preferences) {
+    public boolean isPreciseReferenceImage(SharedPreferences preferences) {
         try {
-            return preferences.getBoolean("character_reference_image", false);
+            return preferences.getBoolean("precise_reference_image", false);
         } catch(ClassCastException e) {
             return false;
         }
@@ -1239,26 +1239,26 @@ public class MyApplication  extends Application {
         return new String[] {resultNoHit.toString(), resultHit.toString()};
     }
     protected void getBaseKeyListFromPrompt(Object object, List<String> list) {
-        if (object == null) {
-            return;
-        }
-        if (object instanceof JSONArray) {
-            Data data = new Data(object);
-            data.forEach(target->getBaseKeyListFromPrompt(target,list));
-            return;
-        }
-        if (object instanceof JSONObject) {
-            Data objectData = new Data(object);
-            if (TextType.WORD.equals(objectData.getTextType())) {
-                String key = objectData.getValue();
-                if (! key.isEmpty()) {
-                    String nextKey = changeBaseKey(key);
-                    if (! list.contains(nextKey)) {
-                        list.add(nextKey);
+        switch (object) {
+            case JSONArray ignored -> {
+                Data data = new Data(object);
+                data.forEach(target -> getBaseKeyListFromPrompt(target, list));
+            }
+            case JSONObject ignored -> {
+                Data objectData = new Data(object);
+                if (TextType.WORD.equals(objectData.getTextType())) {
+                    String key = objectData.getValue();
+                    if (!key.isEmpty()) {
+                        String nextKey = changeBaseKey(key);
+                        if (!list.contains(nextKey)) {
+                            list.add(nextKey);
+                        }
                     }
                 }
+                getBaseKeyListFromPrompt(objectData.getChild(), list);
             }
-            getBaseKeyListFromPrompt(objectData.getChild(),list);
+            case null, default -> {
+            }
         }
     }
 
@@ -1330,7 +1330,7 @@ public class MyApplication  extends Application {
                     this.imageBuffer);
         } else if (type == MyNASI.REST_TYPE.IMAGE) {
             boolean isI2i = isSettingI2i(preferences);
-            boolean isCri = isCharacterReferenceImage(preferences);
+            boolean isPri = isPreciseReferenceImage(preferences);
             Toast.makeText(this, R.string.generate_image, Toast.LENGTH_SHORT).show();
             String message = context.getResources().getString(R.string.generate_image);
             appendLog(context, message);
@@ -1345,7 +1345,7 @@ public class MyApplication  extends Application {
             byte[] targetBuffer;
             int strength = preferences.getInt("prompt_int_strength", 70);
             int noise = preferences.getInt("prompt_int_noise", 10);
-            if (isI2i || isCri) {
+            if (isI2i || isPri) {
                 try (InputStream stream = new ByteArrayInputStream(this.imageBuffer);
                      ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream()){
                     Bitmap bitmap = BitmapFactory.decodeStream(stream);
@@ -1462,8 +1462,9 @@ public class MyApplication  extends Application {
             String noise_schedule = preferences.getString("prompt_noise_schedule", "karras").trim();
             String[] characters = this.getCharacters();
             int[] locations = this.getLocations(preferences);
-            int criFidelity = preferences.getInt("character_reference_image_fidelity", 100);
-            boolean styleAware = preferences.getBoolean("style_aware", true);
+            int drStrength = preferences.getInt("director_reference_strength_values", 100);
+            int drSecondaryStrength = preferences.getInt("director_reference_secondary_strength_values", 100);
+            String styleAware = preferences.getString("style_aware_spinner", "Character&Style");
             request = new MyNASI.Allin1RequestImage(
                     isPromptModelV4(preferences),
                     MyNASI.REST_TYPE.IMAGE,
@@ -1490,9 +1491,10 @@ public class MyApplication  extends Application {
                     characters,
                     locations,
                     isI2i,
-                    isCri,
+                    isPri,
                     styleAware,
-                    criFidelity);
+                    drStrength,
+                    drSecondaryStrength);
         } else if (type == MyNASI.REST_TYPE.SUGGEST_TAGS) {
             String model = getPromptModel(preferences);
             String target = (String) option;
@@ -1514,15 +1516,15 @@ public class MyApplication  extends Application {
                 try {
                     final MyNASI.Allin1Response res;
                     MyNASI nasi = this.getMyNASI();
-                    if (request instanceof MyNASI.Allin1RequestUpscale) {
-                        res = nasi.upscale((MyNASI.Allin1RequestUpscale)request);
-                    } else if (request instanceof MyNASI.Allin1RequestImage) {
-                        res = nasi.downloadImage((MyNASI.Allin1RequestImage)request);
-                    } else if (request instanceof MyNASI.Allin1RequestSuggestTags) {
-                        res = nasi.suggestTags((MyNASI.Allin1RequestSuggestTags)request);
-                    } else {
-                        res = nasi.subscription(request);
-                    }
+                    res = switch (request) {
+                        case MyNASI.Allin1RequestUpscale allin1RequestUpscale ->
+                                nasi.upscale(allin1RequestUpscale);
+                        case MyNASI.Allin1RequestImage allin1RequestImage ->
+                                nasi.downloadImage(allin1RequestImage);
+                        case MyNASI.Allin1RequestSuggestTags allin1RequestSuggestTags ->
+                                nasi.suggestTags(allin1RequestSuggestTags);
+                        default -> nasi.subscription(request);
+                    };
                     //
                     mHandler.post(()->postSubscription(context,res));
                 } finally {
@@ -1546,20 +1548,25 @@ public class MyApplication  extends Application {
                     continue;
                 }
                 Object nextData = m.get(key);
-                if (nextData instanceof JSONObject) {
-                    buf.append(":{\n");
-                    appendJSONObject(buf, index + 2, (JSONObject) nextData);
-                } else if (nextData instanceof JSONArray) {
-                    buf.append(":[\n");
-                    appendJSONObject(buf, index + 2, (JSONArray) nextData);
-                } else if (nextData instanceof String) {
-                    buf.append(":\"");
-                    buf.append(nextData);
-                    buf.append("\"\n");
-                } else {
-                    buf.append(":");
-                    buf.append(nextData);
-                    buf.append("\n");
+                switch (nextData) {
+                    case JSONObject jsonObject -> {
+                        buf.append(":{\n");
+                        appendJSONObject(buf, index + 2, jsonObject);
+                    }
+                    case JSONArray jsonArray -> {
+                        buf.append(":[\n");
+                        appendJSONObject(buf, index + 2, jsonArray);
+                    }
+                    case String ignored -> {
+                        buf.append(":\"");
+                        buf.append(nextData);
+                        buf.append("\"\n");
+                    }
+                    default -> {
+                        buf.append(":");
+                        buf.append(nextData);
+                        buf.append("\n");
+                    }
                 }
             }
         } catch (JSONException e) {
@@ -1573,19 +1580,24 @@ public class MyApplication  extends Application {
             for (int i = 0; i < m.length() ; i++) {
                 Object nextData = m.get(i);
                 appendIndexToSpace(buf, index);
-                if (nextData instanceof JSONObject) {
-                    buf.append("{\n");
-                    appendJSONObject(buf, index + 2, (JSONObject) nextData);
-                } else if (nextData instanceof JSONArray) {
-                    buf.append("[\n");
-                    appendJSONObject(buf, index + 2, (JSONArray) nextData);
-                } else if (nextData instanceof String) {
-                    buf.append(":\"");
-                    buf.append(nextData);
-                    buf.append("\"\n");
-                } else {
-                    buf.append(nextData);
-                    buf.append("\n");
+                switch (nextData) {
+                    case JSONObject jsonObject -> {
+                        buf.append("{\n");
+                        appendJSONObject(buf, index + 2, jsonObject);
+                    }
+                    case JSONArray jsonArray -> {
+                        buf.append("[\n");
+                        appendJSONObject(buf, index + 2, jsonArray);
+                    }
+                    case String ignored -> {
+                        buf.append(":\"");
+                        buf.append(nextData);
+                        buf.append("\"\n");
+                    }
+                    case null, default -> {
+                        buf.append(nextData);
+                        buf.append("\n");
+                    }
                 }
             }
         } catch (JSONException e) {

@@ -2,7 +2,10 @@ package jp.ne.ruru.park.ando.naiview.adapter;
 
 import android.net.Uri;
 
-
+/**
+ * URI etc
+ * @author T.Ando
+ */
 public class UriEtc {
     public UriEtc(Uri uri, String mime) {
         this.uri = uri;
