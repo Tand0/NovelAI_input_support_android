@@ -355,6 +355,7 @@ public class ImageMyView extends androidx.appcompat.widget.AppCompatImageView im
         generateImageButton.setOnClickListener((v)-> {alertDialog.dismiss(); doGenerateImage();});
         upscaleButton.setOnClickListener((v)-> {alertDialog.dismiss(); doUpscale();});
         alertDialog.show();
+        alertDialog.getButton(AlertDialog.BUTTON_POSITIVE).setEnabled(a.getDownloadFlag());
     }
 
     public interface OnGestureListener extends GestureDetector.OnGestureListener, GestureDetector.OnDoubleTapListener {

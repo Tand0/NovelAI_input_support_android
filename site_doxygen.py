@@ -1,6 +1,36 @@
 import re
 import sys
 
+
+def add_clsdata(clsdata, strs):
+    strs = strs.split('.')
+    for str in strs:
+        if str not in clsdata:
+            clsdata[str] = {}
+        clsdata = clsdata[str]
+
+
+def write_clsdata(f, index, index2, clsdata):
+    old = -1
+    for k, v in clsdata.items():
+        index2 = index2 + 1
+        if len(v) == 0:
+            f.write(" " * index * 4)
+            f.write("node" + str(index2) + " [label=\"{" + k + "}\", shape=record];\n")
+            if 0 <= old:
+                f.write(f"node{old}->node{index2}[style=invis]\n")
+            old = index2
+        else:
+            f.write(" " * index * 4)
+            f.write("subgraph cluster_" + str(index2) + " {\n")
+            f.write(" " * (index + 1) * 4)
+            f.write(f"label = \"{k}\"\n")
+            index2 = write_clsdata(f, index + 1, index2, v)
+            f.write(" " * index * 4)
+            f.write("}\n")
+    return index2
+
+
 base = None
 project_name = ""
 with open('site_doxygen.yml', 'r', encoding='utf-8') as f:
@@ -25,11 +55,15 @@ with open(uml, 'r', encoding='utf-8') as f:
             urls.append(match.group(2))
 
 imgs = []
+clsdata = {}
 for url in urls:
     url = base + "/html/" + url
     with open(url, 'r', encoding='utf-8') as f:
         title = ""
         for line in f:
+            match = re.search('<div\\s+class=\"title\">([^<>&\\s]+)', line)
+            if match:
+                add_clsdata(clsdata, match.group(1))
             match = re.search('^(Inheritance|Collaboration)\\s+[^<>]+', line)
             if match:
                 title = match.group()
@@ -52,5 +86,12 @@ with open(uml, mode='w', encoding="utf-8") as f:
         f.write("<mbp:pagebreak/>\n")
     f.write("</body>\n")
     f.write("</html>\n")
+
+
+uml = base + "/html/index.dot"
+with open(uml, mode='w', encoding="utf-8") as f:
+    f.write("digraph G {\n")
+    write_clsdata(f, 1, 0, clsdata)
+    f.write("}\n")
 
 #

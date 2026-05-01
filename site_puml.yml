@@ -1,0 +1,65 @@
+- hosts: localhost
+  vars:
+    # プロジェクトのソースパスとドキュメント出力先を指定
+    project_source_dir: "./src/main/java"
+    project_output_dir: "./doc_puml"
+    project_name: "Doxygen Project"
+    puml_name: plantuml-mit-1.2026.2.jar
+
+  tasks:
+    - name: Javaが存在するかチェック
+      shell: command -v java
+      register: java_exists
+      failed_when: false
+      changed_when: false
+    - name: Javaの状態を表示
+      debug:
+        var: java_exists
+    - name: Javaが存在していなければインストール
+      apt:
+        name:
+          - default-jre
+        state: present
+      become: "{{java_exists.rc != 0 | bool}}"
+      when: "{{java_exists.rc != 0 | bool}}"
+
+    - name: ドキュメント出力ディレクトリを作成
+      ansible.builtin.file:
+        path: "{{ project_output_dir }}"
+        state: directory
+        mode: '0755'
+
+    - name: PlantUMLがあるかチェックする
+      ansible.builtin.stat:
+        path: "{{ project_output_dir }}/{{puml_name}}"
+      register: puml_status
+    - name: PluntUMLが存在していなかったらインストール
+      ansible.builtin.get_url:
+        url: "https://github.com/plantuml/plantuml/releases/download/v1.2026.2/{{puml_name}}"
+        dest: "{{ project_output_dir }}"
+        mode: '0644'
+      when: not puml_status.stat.exists
+
+    - name: java2plantuml を取得
+      git:
+        repo: 'https://github.com/mirajp1/java2plantuml.git'
+        dest: "{{ project_output_dir }}/java2plantuml"
+        update: false
+
+    - find:
+        path: "{{project_source_dir}}"
+        file_type: directory
+        recurse: Yes
+      register: java_packages
+
+    - name: コマンドの表示
+      debug:
+        msg: "java -jar {{ project_output_dir }}/java2plantuml/java2plantuml.jar {{item.path}}"
+      loop: "{{java_packages.files}}"
+
+#    - name: packagごとに .pumlファイルを生成
+#      command: "java -jar {{ project_output_dir }}/java2plantuml/java2plantuml.jar {{item.path}}"
+#      loop: "{{java_packages.files}}"
+#      register: parser_output
+
+

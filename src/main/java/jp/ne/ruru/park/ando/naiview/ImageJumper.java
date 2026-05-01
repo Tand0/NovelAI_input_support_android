@@ -196,7 +196,7 @@ public class ImageJumper {
             a.setImagePosition(index);
             loadForASFResult();
         } else if (swipeFlag == SWIPE_FLAG.IMAGE_LIST) {
-            int index = Math.max(0,Math.min(max, a.getImagePosition()));
+            int index = Math.clamp(max, 0, a.getImagePosition());
             a.setImagePosition(index);
             a.appendLog(activity,"Action: ImageList");
             Toast.makeText(activity,R.string.action_image_list,Toast.LENGTH_SHORT).show();

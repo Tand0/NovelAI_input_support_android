@@ -6,12 +6,32 @@
     project_name: "Doxygen Project"
 
   tasks:
-    - apt:
+    - name: doxygenの存在をチェック
+      shell: command -v doxygen
+      register: doxygen_exists
+      failed_when: false
+      changed_when: false
+    - name: graphvizの存在をチェック
+      shell: command -v dot
+      register: dot_exists
+      failed_when: false
+      changed_when: false
+    - name: Javaの状態を表示
+      debug:
+        msg: dot_exists
+
+    - name: 存在してなかったらインストール
+      apt:
         name:
           - doxygen
           - graphviz
         state: present
-      become: Yes
+      become:
+        - "{{doxygen_exists.rc != 0 | bool}}"
+        - "{{dot_exists.rc != 0 | bool}}"
+      when:
+        - "{{doxygen_exists.rc != 0 | bool}}"
+        - "{{dot_exists.rc != 0 | bool}}"
 
     - name: ドキュメント出力ディレクトリを作成
       ansible.builtin.file:
