@@ -1,12 +1,17 @@
 
 # NovelAI_input_support_android
 
+## 注意
+
+- 本ソフトウェアは公開していましたが、「えっちなのはいけないと思います」と google play console さんに言われて非公開となりました
+- そのため開発を中止します
+
 ## オーバービュー
 
 このツール群は実際に動くものです
 
-
 ## このプライバシーポリシー
+
 - フリーです (GNU LESSER GENERAL PUBLIC LICENSE)
     - このソフトウェアの使用はご自身の責任において使用してください
 - Novel AI の REST API を使用しています
@@ -27,26 +32,21 @@
 - Novel AI でアカウントを作成します
 - トップ画面の「設定」ボタンをクリックして表示される「NAIの設定」から「メール」と「パスワード」を入力します
 - 以下のプロンプト用データをダウンロードします
-  - https://github.com/Tand0/NovelAI_input_support_android/blob/main/data_jp.json
+    - https://github.com/Tand0/NovelAI_input_support_android/blob/main/data_jp.json
 - トップ画面の「ツリー」をクリックして表示される「ツリー」から「ロード」ボタンを押して data_jp.json を読み込みます
-  - グレーアウト(ignore)されている項目は右側のチェックボタンで解除できます
+    - グレーアウト(ignore)されている項目は右側のチェックボタンで解除できます
 - トップ画面の「画像」をクリックしてデフォルトの画面表示を出します
 - タップするとメニューが出てくるので「ツリーの使用」をONに変更します
 - 「/ai/generate-image」 を押してしばらく待ちます
 - 気に入ったら「/ai/upscale」を押してしばらく待ちます
 - さらに気に入ったらセーブで保存します
 - キャンセルで画面に戻ると左右スクロールで前後の画像が、上下スクロールで画像のリストがでます
-  - 画像がNovelAIの画像の場合、設定を読み込んでプロンプトに渡します
+    - 画像がNovelAIの画像の場合、設定を読み込んでプロンプトに渡します
 - サンプルにNovelAIバージョン4のサンプル画像を用意しました。
-  - https://github.com/Tand0/NovelAI_input_support_android/blob/main/2025_03_02_13_08_59_376.png
+    - https://github.com/Tand0/NovelAI_input_support_android/blob/main/2025_03_02_13_08_59_376.png
 - Enjoy!
-
 
 ## もっと知りたい場合
 
 - こちらを参照してください。
-  - https://amzn.to/4f4QVje
-
-
-
-
+    - https://amzn.to/4f4QVje
