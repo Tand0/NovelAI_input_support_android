@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string-array name="width_list">
+        <item>512x768</item>
+        <item>768x512</item>
+        <item>640x640</item>
+        <item>832x1216</item>
+        <item>1216x832</item>
+        <item>1024x1024</item>
+        <item>1024x1536</item>
+        <item>1536x1024</item>
+        <item>1088x1920</item>
+        <item>1920x1088</item>
+    </string-array>
+    <string-array name="sampler_list">
+        <item>k_euler</item>
+        <item>k_euler_ancestral</item>
+        <item>k_dpmpp_2s_ancestral</item>
+        <item>k_dpmpp_2m</item>
+    </string-array>
+    <string-array name="model_list">
+        <item>nai-diffusion-furry-3</item>
+        <item>nai-diffusion-3</item>
+        <item>nai-diffusion-4-curated-preview</item>
+        <item>nai-diffusion-4-full</item>
+        <item>nai-diffusion-4-5-curated</item>
+        <item>nai-diffusion-4-5-full</item>
+    </string-array>
+    <string-array name="noise_schedule_list">
+        <item>native</item>
+        <item>karras</item>
+        <item>exponential</item>
+        <item>polyexponential</item>
+    </string-array>
+    <string-array name="edit_type_list">
+        <item>@string/menu_add_text_detail</item>
+        <item>@string/menu_add_sequence_detail</item>
+        <item>@string/menu_add_select_detail</item>
+        <item>@string/menu_add_weight_detail</item>
+    </string-array>
+    <string-array name="word_edit_insert">
+        <item>Insert</item>
+        <item>Change</item>
+    </string-array>
+    <string-array name="style_aware_spinner">
+        <item>character&amp;style</item>
+        <item>character</item>
+        <item>style</item>
+    </string-array>
+</resources>

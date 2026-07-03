@@ -1,0 +1,62 @@
+
+
+plugins {
+    alias(libs.plugins.android.application)
+    id "org.jetbrains.kotlin.android" apply false
+}
+
+android {
+    namespace 'com.github.tand0.naiview'
+    compileSdkVersion 'android-37.1-beta3'
+
+    defaultConfig {
+        applicationId "com.github.tand0.naiview"
+        minSdk 35
+        targetSdk 36
+        versionCode 122
+        versionName "1.0.122"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_21
+        targetCompatibility JavaVersion.VERSION_21
+    }
+    buildFeatures {
+        viewBinding true
+    }
+    packaging {
+        resources.excludes.add("META-INF/versions/9/OSGI-INF/MANIFEST.MF")
+    }
+    testOptions {
+        unitTests.returnDefaultValues = true
+    }
+    buildToolsVersion = '36.0.0'
+    ndkVersion = '29.0.13599879 rc2'
+}
+
+dependencies {
+    // https://mvnrepository.com/artifact/org.jspecify/jspecify
+    implementation(libs.jspecify)
+
+    // https://mvnrepository.com/artifact/org.apache.commons/commons-imaging
+    implementation(libs.commons.imaging)
+
+    // https://mvnrepository.com/artifact/org.bouncycastle/bcprov-jdk18on
+    implementation(libs.bcprov.jdk18on)
+
+    implementation libs.androidx.preference.ktx
+    implementation libs.androidx.core.ktx
+    implementation libs.androidx.appcompat
+    implementation libs.material
+    testImplementation libs.junit
+    androidTestImplementation libs.androidx.junit
+    androidTestImplementation libs.androidx.espresso.core
+}
